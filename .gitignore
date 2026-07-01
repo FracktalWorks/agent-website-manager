@@ -34,3 +34,5 @@ logs/
 
 # Keep .vscode/ settings
 !.vscode/
+# ...except mcp.json — it holds a live MCP auth header (WordPress app password)
+.vscode/mcp.json
