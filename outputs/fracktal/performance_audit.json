@@ -1,0 +1,67 @@
+{
+  "speed": {
+    "total_size_kb": 1024.1,
+    "ttfb_seconds": 1.589,
+    "total_load_seconds": 1.69,
+    "http_status": 200,
+    "resources": {
+      "css_files": 1,
+      "js_files": 9,
+      "images": 164,
+      "inline_css_blocks": 12,
+      "inline_js_blocks": 24,
+      "external_fonts": 0
+    },
+    "render_blocking_css": 1,
+    "async_defer_scripts": 3,
+    "sync_blocking_scripts": 6,
+    "lazy_loaded_images": 150,
+    "compression": "br",
+    "cache_control": "no-store, no-cache, must-revalidate",
+    "total_img_tags": 164,
+    "webp_usage": 40,
+    "png_usage": 105,
+    "jpg_usage": 76,
+    "preconnects": 0,
+    "preloads": 1,
+    "dom_elements": 2631
+  },
+  "seo": {
+    "h1_count": 0,
+    "h1_texts": [],
+    "h2_count": 85,
+    "h3_count": 100,
+    "h4_count": 2,
+    "images_missing_alt": 124,
+    "images_total": 164,
+    "internal_links": 290,
+    "external_links": 24,
+    "nofollow_links": 0,
+    "sitemap_in_robots": true,
+    "ssl_active": true,
+    "www_redirects": "https://fracktal.in/"
+  },
+  "llm": {
+    "schema_types": [
+      "['WebPage', 'ItemPage']",
+      "ImageObject",
+      "BreadcrumbList",
+      "WebSite",
+      "Organization"
+    ],
+    "llms_txt": false,
+    "ai_bot_directives": false,
+    "word_count": 15751,
+    "meta_description_length": 153,
+    "meta_description": "Professional 3D printing services and trusted 3D printing manufacturers offering custom prototypes, low-volume production, and rapid turnaround in India.",
+    "has_faq_schema": true,
+    "has_howto_schema": false,
+    "last_modified_header": "unknown",
+    "article_modified_time": "2026-06-30T07:19:29+00:00",
+    "title": "3D Printing Services &amp; Additive Manufacturers in India | Fracktal",
+    "title_length": 69
+  },
+  "opportunities": [
+    "Convert 105 PNG images to WebP for ~30% size reduction"
+  ]
+}

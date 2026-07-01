@@ -1,0 +1,35 @@
+# Fracktal Works
+> India's premier manufacturer of industrial and desktop 3D printers, additive manufacturing solutions, and 3D printing services.
+
+## About
+Fracktal Works specializes in designing and manufacturing advanced 3D printers including the Snowflake (high-precision desktop), Twin Dragon (dual-extrusion), Apollo SLS (production-grade SLS), and PrintStick adhesion solutions. Based in India, serving global markets.
+
+## Products
+- **Snowflake**: High-precision desktop 3D printer for engineering and prototyping | https://fracktal.in/snowflake/
+- **Twin Dragon**: Speed and dual-material excellence for industrial applications | https://fracktal.in/twindragon/
+- **Apollo SLS**: Production-grade Selective Laser Sintering for manufacturing | https://fracktal.in/apollo-sls-landing-page/
+- **PrintStick**: Innovative bed adhesion solution for consistent prints | https://fracktal.in/printstick/
+- **Julia**: Advanced 3D printing platform | https://fracktal.in/julia/
+- **Fracktal Care**: Maintenance and support services | https://fracktal.in/fracktal-care/
+
+## Services
+- Custom 3D printing and prototyping
+- Low-volume manufacturing
+- Additive manufacturing consulting
+- Technical support and maintenance
+
+## Key Pages
+- Blog: https://fracktal.in/blog/
+- Shop: https://fracktal.in/shop/
+- Contact: https://fracktal.in/contact-us/
+- About: https://fracktal.in/about-us/
+- Careers: https://fracktal.in/careers/
+
+## Industries
+Aerospace, Automotive, Medical, Education, Jewelry, Consumer Products, Manufacturing
+
+## Contact
+- Website: https://fracktal.in
+- Email: vjvarada@fracktal.in
+- Location: India
+- Social: @fracktalworks on Twitter/X, Instagram, Facebook, LinkedIn, YouTube

@@ -1,0 +1,46 @@
+/* Fracktal Media Folders — Admin CSS */
+#fracktal-folder-tree {
+  background: #fff;
+  border: 1px solid #c3c4c7;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 12px 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+#fracktal-folder-tree .folder-item {
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+#fracktal-folder-tree .folder-item:hover {
+  background: #f0f0f1;
+}
+#fracktal-folder-tree .folder-item.active {
+  background: #2271b1;
+  color: #fff;
+}
+#fracktal-folder-tree .folder-item .dashicons {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+#fracktal-folder-tree .folder-children {
+  padding-left: 16px;
+}
+.fracktal-folder-count {
+  margin-left: auto;
+  font-size: 11px;
+  color: #8c8f94;
+  background: #f0f0f1;
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+.folder-item.active .fracktal-folder-count {
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+}

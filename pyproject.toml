@@ -1,0 +1,35 @@
+[project]
+name = "agent-website-manager"
+version = "0.1.0"
+description = "WordPress website development & management agent — Hostinger MCP + WordPress REST API + Elementor"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp",
+    "anthropic",
+    "beautifulsoup4",
+    "google-api-python-client",
+    "google-auth-httplib2",
+    "google-auth-oauthlib",
+    "httpx",
+    "lxml",
+    "lxml_html_clean",
+    "markdown",
+    "openai",
+    "Pillow",
+    "python-dotenv",
+    "requests",
+    "rich",
+    "tabulate",
+    "wordpress-api",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.24"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

@@ -1,0 +1,36 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Setup Agent Environment",
+      "type": "shell",
+      "command": ".\\setup.ps1",
+      "windows": {
+        "command": "powershell",
+        "args": [
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          ".\\setup.ps1"
+        ]
+      },
+      "linux": {
+        "command": "bash",
+        "args": [
+          "./setup.sh"
+        ]
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    }
+  ]
+}

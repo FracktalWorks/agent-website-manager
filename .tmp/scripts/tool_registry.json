@@ -1,0 +1,674 @@
+{
+  "version": "1.0",
+  "description": "DOE Framework Tool Registry — Formal schemas for all execution scripts",
+  "tools": [
+    {
+      "name": "scrape_google_maps",
+      "script": "execution/scrape_google_maps.py",
+      "description": "Scrape business listings from Google Maps via Apify",
+      "category": "lead_generation",
+      "tags": ["scraping", "google-maps", "leads"],
+      "parameters": {
+        "search": {"type": "string", "required": true, "description": "Search query (e.g., 'plumbers in Austin TX')"},
+        "limit": {"type": "integer", "required": false, "default": 10, "description": "Max results to scrape"},
+        "location": {"type": "string", "required": false, "description": "Location to focus search"},
+        "language": {"type": "string", "required": false, "default": "en", "description": "Language code"},
+        "output": {"type": "string", "required": false, "default": "gmaps", "description": "Output file prefix"},
+        "json": {"type": "boolean", "required": false, "default": false, "description": "Output as JSON to stdout"}
+      },
+      "returns": "JSON array of business objects with name, address, phone, website, rating, reviews",
+      "env_vars": ["APIFY_API_TOKEN"],
+      "cost_estimate": "~$.01/lead via Apify",
+      "side_effects": ["Apify API call (uses credits)"],
+      "requires_confirmation": false
+    },
+    {
+      "name": "gmaps_lead_pipeline",
+      "script": "execution/gmaps_lead_pipeline.py",
+      "description": "Full pipeline: scrape Google Maps + enrich contacts + save to Google Sheets",
+      "category": "lead_generation",
+      "tags": ["pipeline", "scraping", "enrichment", "google-sheets"],
+      "parameters": {
+        "search": {"type": "string", "required": true, "description": "Search query for Google Maps"},
+        "limit": {"type": "integer", "required": false, "default": 10, "description": "Max results to scrape"},
+        "location": {"type": "string", "required": false, "description": "Location to focus search"},
+        "sheet-url": {"type": "string", "required": false, "description": "Existing Google Sheet URL to append to"},
+        "sheet-name": {"type": "string", "required": false, "description": "Name for new sheet"},
+        "workers": {"type": "integer", "required": false, "default": 3, "description": "Parallel workers for enrichment"},
+        "no-intermediate": {"type": "boolean", "required": false, "default": false, "description": "Skip intermediate JSON files"},
+        "json": {"type": "boolean", "required": false, "default": false, "description": "Output as JSON"}
+      },
+      "returns": "Google Sheet URL with enriched leads (36 fields per lead)",
+      "env_vars": ["APIFY_API_TOKEN", "ANTHROPIC_API_KEY"],
+      "cost_estimate": "~$.10-0.50 per 50 leads (Apify + Claude enrichment)",
+      "side_effects": ["Apify API call", "Claude API call", "Google Sheets write"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "gmaps_parallel_pipeline",
+      "script": "execution/gmaps_parallel_pipeline.py",
+      "description": "Parallel Google Maps pipeline for high-volume scraping",
+      "category": "lead_generation",
+      "tags": ["pipeline", "scraping", "parallel", "high-volume"],
+      "parameters": {
+        "search": {"type": "string", "required": true, "description": "Search query for Google Maps"},
+        "limit": {"type": "integer", "required": false, "default": 10, "description": "Max results"},
+        "workers": {"type": "integer", "required": false, "default": 5, "description": "Parallel workers"}
+      },
+      "returns": "JSON array of enriched leads",
+      "env_vars": ["APIFY_API_TOKEN", "ANTHROPIC_API_KEY"],
+      "cost_estimate": "~$.10-0.50 per 50 leads",
+      "side_effects": ["Apify API call", "Claude API call"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "enrich_emails",
+      "script": "execution/enrich_emails.py",
+      "description": "Enrich missing emails in a Google Sheet using AnyMailFinder",
+      "category": "lead_generation",
+      "tags": ["enrichment", "email", "google-sheets"],
+      "parameters": {
+        "sheet_url": {"type": "string", "required": true, "description": "Google Sheet URL to enrich"}
+      },
+      "returns": "Updated Google Sheet with enriched email addresses",
+      "env_vars": ["ANYMAILFINDER_API_KEY", "GOOGLE_SHEETS_CREDENTIALS_FILE"],
+      "cost_estimate": "~$.01/email via AnyMailFinder",
+      "side_effects": ["AnyMailFinder API call", "Google Sheets write"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "scrape_apify",
+      "script": "execution/scrape_apify.py",
+      "description": "Generic Apify actor runner for web scraping",
+      "category": "lead_generation",
+      "tags": ["scraping", "apify"],
+      "parameters": {
+        "actor": {"type": "string", "required": true, "description": "Apify actor ID"},
+        "input": {"type": "string", "required": true, "description": "JSON input for the actor"}
+      },
+      "returns": "JSON results from Apify actor",
+      "env_vars": ["APIFY_API_TOKEN"],
+      "cost_estimate": "Varies by actor",
+      "side_effects": ["Apify API call"],
+      "requires_confirmation": false
+    },
+    {
+      "name": "scrape_apify_parallel",
+      "script": "execution/scrape_apify_parallel.py",
+      "description": "Run multiple Apify actors in parallel",
+      "category": "lead_generation",
+      "tags": ["scraping", "apify", "parallel"],
+      "parameters": {
+        "config": {"type": "string", "required": true, "description": "JSON config file with actor inputs"}
+      },
+      "returns": "Combined JSON results from all actors",
+      "env_vars": ["APIFY_API_TOKEN"],
+      "cost_estimate": "Varies by actors",
+      "side_effects": ["Apify API calls"],
+      "requires_confirmation": false
+    },
+    {
+      "name": "read_sheet",
+      "script": "execution/read_sheet.py",
+      "description": "Read data from a Google Sheet",
+      "category": "google_sheets",
+      "tags": ["google-sheets", "read"],
+      "parameters": {
+        "sheet_url": {"type": "string", "required": true, "description": "Google Sheet URL"},
+        "range": {"type": "string", "required": false, "default": "Sheet1", "description": "Sheet range (e.g., Sheet1!A1:Z100)"},
+        "json": {"type": "boolean", "required": false, "default": false, "description": "Output as JSON"}
+      },
+      "returns": "Sheet data as JSON array of rows",
+      "env_vars": ["GOOGLE_SHEETS_CREDENTIALS_FILE"],
+      "cost_estimate": "Free (Google API)",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "append_to_sheet",
+      "script": "execution/append_to_sheet.py",
+      "description": "Append rows to a Google Sheet",
+      "category": "google_sheets",
+      "tags": ["google-sheets", "write"],
+      "parameters": {
+        "sheet_url": {"type": "string", "required": true, "description": "Google Sheet URL"},
+        "data": {"type": "string", "required": true, "description": "JSON file or JSON string with row data"},
+        "sheet_name": {"type": "string", "required": false, "default": "Sheet1", "description": "Target sheet name"}
+      },
+      "returns": "Number of rows appended",
+      "env_vars": ["GOOGLE_SHEETS_CREDENTIALS_FILE"],
+      "cost_estimate": "Free (Google API)",
+      "side_effects": ["Google Sheets write"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "update_sheet",
+      "script": "execution/update_sheet.py",
+      "description": "Update specific cells in a Google Sheet",
+      "category": "google_sheets",
+      "tags": ["google-sheets", "write", "update"],
+      "parameters": {
+        "sheet_url": {"type": "string", "required": true, "description": "Google Sheet URL"},
+        "range": {"type": "string", "required": true, "description": "Cell range to update"},
+        "data": {"type": "string", "required": true, "description": "JSON data to write"}
+      },
+      "returns": "Update confirmation",
+      "env_vars": ["GOOGLE_SHEETS_CREDENTIALS_FILE"],
+      "cost_estimate": "Free (Google API)",
+      "side_effects": ["Google Sheets write"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "instantly_autoreply",
+      "script": "execution/instantly_autoreply.py",
+      "description": "AI-powered auto-reply for Instantly.ai email campaigns",
+      "category": "email",
+      "tags": ["email", "instantly", "auto-reply"],
+      "parameters": {},
+      "returns": "Reply status and count",
+      "env_vars": ["INSTANTLY_API_KEY", "OPENAI_API_KEY"],
+      "cost_estimate": "~$.01/reply (OpenAI)",
+      "side_effects": ["Sends emails via Instantly"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "instantly_create_campaigns",
+      "script": "execution/instantly_create_campaigns.py",
+      "description": "Create email campaigns in Instantly.ai",
+      "category": "email",
+      "tags": ["email", "instantly", "campaigns"],
+      "parameters": {
+        "config": {"type": "string", "required": true, "description": "Campaign config JSON file"}
+      },
+      "returns": "Campaign creation status",
+      "env_vars": ["INSTANTLY_API_KEY"],
+      "cost_estimate": "Free (Instantly API)",
+      "side_effects": ["Creates email campaigns"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "welcome_client_emails",
+      "script": "execution/welcome_client_emails.py",
+      "description": "Send welcome/onboarding emails to new clients",
+      "category": "email",
+      "tags": ["email", "onboarding", "welcome"],
+      "parameters": {},
+      "returns": "Send status",
+      "env_vars": ["INSTANTLY_API_KEY"],
+      "cost_estimate": "Free",
+      "side_effects": ["Sends emails"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "upwork_scraper",
+      "script": "execution/upwork_scraper.py",
+      "description": "Scrape Upwork job listings",
+      "category": "freelance",
+      "tags": ["upwork", "scraping", "jobs"],
+      "parameters": {
+        "query": {"type": "string", "required": true, "description": "Upwork search query"},
+        "limit": {"type": "integer", "required": false, "default": 20, "description": "Max jobs to fetch"}
+      },
+      "returns": "JSON array of job listings",
+      "env_vars": ["APIFY_API_TOKEN"],
+      "cost_estimate": "~$.01 via Apify",
+      "side_effects": ["Apify API call"],
+      "requires_confirmation": false
+    },
+    {
+      "name": "upwork_apify_scraper",
+      "script": "execution/upwork_apify_scraper.py",
+      "description": "Scrape Upwork via Apify actor",
+      "category": "freelance",
+      "tags": ["upwork", "scraping", "apify"],
+      "parameters": {
+        "query": {"type": "string", "required": true, "description": "Search query"},
+        "limit": {"type": "integer", "required": false, "default": 20, "description": "Max jobs"}
+      },
+      "returns": "JSON array of job listings",
+      "env_vars": ["APIFY_API_TOKEN"],
+      "cost_estimate": "~$.01 via Apify",
+      "side_effects": ["Apify API call"],
+      "requires_confirmation": false
+    },
+    {
+      "name": "upwork_proposal_generator",
+      "script": "execution/upwork_proposal_generator.py",
+      "description": "Generate AI-powered proposals for Upwork jobs",
+      "category": "freelance",
+      "tags": ["upwork", "proposals", "ai-generation"],
+      "parameters": {
+        "job_url": {"type": "string", "required": true, "description": "Upwork job URL or JSON file"},
+        "profile": {"type": "string", "required": false, "description": "Freelancer profile JSON"}
+      },
+      "returns": "Generated proposal text",
+      "env_vars": ["OPENAI_API_KEY"],
+      "cost_estimate": "~$.02/proposal (OpenAI)",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "video_editor_pipeline",
+      "script": "execution/video_editor_pipeline.py",
+      "description": "Full video editing pipeline: silence removal, jump cuts, transitions, smart naming",
+      "category": "video",
+      "tags": ["video", "editing", "silence-removal", "transcription"],
+      "parameters": {
+        "input": {"type": "string", "required": true, "description": "Input video file path"},
+        "output": {"type": "string", "required": false, "description": "Output video file path"},
+        "output-dir": {"type": "string", "required": false, "default": ".tmp", "description": "Output directory"},
+        "min-silence": {"type": "number", "required": false, "default": 0.5, "description": "Min silence gap to cut (seconds)"},
+        "min-speech": {"type": "number", "required": false, "default": 0.25, "description": "Min speech duration to keep"},
+        "padding": {"type": "integer", "required": false, "default": 100, "description": "Padding around speech (ms)"},
+        "enhance-audio": {"type": "boolean", "required": false, "default": false, "description": "Apply audio enhancement"},
+        "add-transitions": {"type": "boolean", "required": false, "default": false, "description": "Add crossfade transitions"}
+      },
+      "returns": "Path to edited video file + transcript",
+      "env_vars": ["OPENAI_API_KEY"],
+      "cost_estimate": "~$.10/min of video (Whisper transcription)",
+      "side_effects": ["Creates output files"],
+      "requires_confirmation": false
+    },
+    {
+      "name": "jump_cut_vad_singlepass",
+      "script": "execution/jump_cut_vad_singlepass.py",
+      "description": "Remove silences from video using VAD (Voice Activity Detection)",
+      "category": "video",
+      "tags": ["video", "vad", "silence-removal"],
+      "parameters": {
+        "input": {"type": "string", "required": true, "description": "Input video file"},
+        "output": {"type": "string", "required": false, "description": "Output file path"}
+      },
+      "returns": "Path to processed video",
+      "env_vars": [],
+      "cost_estimate": "Free (local processing)",
+      "side_effects": ["Creates output file"],
+      "requires_confirmation": false
+    },
+    {
+      "name": "insert_3d_transition",
+      "script": "execution/insert_3d_transition.py",
+      "description": "Add 3D swivel transitions between video cuts",
+      "category": "video",
+      "tags": ["video", "transitions", "3d"],
+      "parameters": {
+        "input": {"type": "string", "required": true, "description": "Input video file"},
+        "output": {"type": "string", "required": false, "description": "Output file path"}
+      },
+      "returns": "Path to video with transitions",
+      "env_vars": [],
+      "cost_estimate": "Free (local processing)",
+      "side_effects": ["Creates output file"],
+      "requires_confirmation": false
+    },
+    {
+      "name": "transcribe_audio",
+      "script": "execution/transcribe_audio.py",
+      "description": "Transcribe audio/video using OpenAI Whisper",
+      "category": "audio",
+      "tags": ["transcription", "whisper", "audio"],
+      "parameters": {
+        "input": {"type": "string", "required": true, "description": "Audio or video file path"}
+      },
+      "returns": "Transcript text",
+      "env_vars": ["OPENAI_API_KEY"],
+      "cost_estimate": "~$.006/min",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "search_papers",
+      "script": "execution/search_papers.py",
+      "description": "Search academic papers via Semantic Scholar, arXiv, or Google Scholar",
+      "category": "research",
+      "tags": ["papers", "academic", "search"],
+      "parameters": {
+        "query": {"type": "string", "required": true, "description": "Search query"},
+        "source": {"type": "string", "required": false, "default": "semantic_scholar", "description": "Search source", "enum": ["semantic_scholar", "arxiv", "google_scholar"]},
+        "limit": {"type": "integer", "required": false, "default": 10, "description": "Max results"}
+      },
+      "returns": "JSON array of paper metadata (title, authors, abstract, URL)",
+      "env_vars": [],
+      "cost_estimate": "Free",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "fetch_paper",
+      "script": "execution/fetch_paper.py",
+      "description": "Download and extract text from an academic paper",
+      "category": "research",
+      "tags": ["papers", "download", "pdf"],
+      "parameters": {
+        "url": {"type": "string", "required": true, "description": "Paper URL or DOI"}
+      },
+      "returns": "Extracted paper text",
+      "env_vars": [],
+      "cost_estimate": "Free",
+      "side_effects": ["Downloads PDF to .tmp/"],
+      "requires_confirmation": false
+    },
+    {
+      "name": "compile_review_paper",
+      "script": "execution/compile_review_paper.py",
+      "description": "Compile a review/survey paper from multiple sources",
+      "category": "research",
+      "tags": ["papers", "review", "compilation"],
+      "parameters": {
+        "config": {"type": "string", "required": true, "description": "Review config JSON file"}
+      },
+      "returns": "Compiled review paper in Markdown",
+      "env_vars": ["OPENAI_API_KEY"],
+      "cost_estimate": "~$.50/paper (OpenAI)",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "web_research",
+      "script": "execution/web_research.py",
+      "description": "Research a topic using web search (SerpAPI/Google)",
+      "category": "research",
+      "tags": ["web", "search", "research"],
+      "parameters": {
+        "query": {"type": "string", "required": true, "description": "Research query"},
+        "depth": {"type": "string", "required": false, "default": "medium", "description": "Research depth", "enum": ["shallow", "medium", "deep"]}
+      },
+      "returns": "Research findings as JSON",
+      "env_vars": ["SERPAPI_API_KEY"],
+      "cost_estimate": "~$.01/search (SerpAPI)",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "serp_market_research",
+      "script": "execution/serp_market_research.py",
+      "description": "Market research using Google SERP results",
+      "category": "research",
+      "tags": ["market-research", "serp", "google"],
+      "parameters": {
+        "query": {"type": "string", "required": true, "description": "Market research query"},
+        "location": {"type": "string", "required": false, "description": "Target location"}
+      },
+      "returns": "Market research report JSON",
+      "env_vars": ["SERPAPI_API_KEY"],
+      "cost_estimate": "~$.01/search",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "pdf_to_markdown",
+      "script": "execution/pdf_to_markdown.py",
+      "description": "Convert PDF files to Markdown text",
+      "category": "document",
+      "tags": ["pdf", "markdown", "conversion"],
+      "parameters": {
+        "input": {"type": "string", "required": true, "description": "PDF file path"},
+        "output": {"type": "string", "required": false, "description": "Output Markdown file path"}
+      },
+      "returns": "Markdown text",
+      "env_vars": [],
+      "cost_estimate": "Free (local processing)",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "create_google_doc",
+      "script": "execution/create_google_doc.py",
+      "description": "Create a new Google Doc with content",
+      "category": "document",
+      "tags": ["google-docs", "create"],
+      "parameters": {
+        "title": {"type": "string", "required": true, "description": "Document title"},
+        "content": {"type": "string", "required": true, "description": "Markdown or plain text content"}
+      },
+      "returns": "Google Doc URL",
+      "env_vars": ["GOOGLE_SHEETS_CREDENTIALS_FILE"],
+      "cost_estimate": "Free (Google API)",
+      "side_effects": ["Creates Google Doc"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "update_google_doc",
+      "script": "execution/update_google_doc.py",
+      "description": "Update content in an existing Google Doc",
+      "category": "document",
+      "tags": ["google-docs", "update"],
+      "parameters": {
+        "doc_url": {"type": "string", "required": true, "description": "Google Doc URL"},
+        "content": {"type": "string", "required": true, "description": "New content"}
+      },
+      "returns": "Update confirmation",
+      "env_vars": ["GOOGLE_SHEETS_CREDENTIALS_FILE"],
+      "cost_estimate": "Free",
+      "side_effects": ["Google Doc write"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "create_proposal",
+      "script": "execution/create_proposal.py",
+      "description": "Create a proposal document via PandaDoc",
+      "category": "document",
+      "tags": ["pandadoc", "proposal", "template"],
+      "parameters": {
+        "template_id": {"type": "string", "required": true, "description": "PandaDoc template ID"},
+        "recipients": {"type": "string", "required": true, "description": "JSON array of recipients"},
+        "tokens": {"type": "string", "required": false, "description": "JSON object of template tokens"}
+      },
+      "returns": "PandaDoc document URL",
+      "env_vars": ["PANDADOC_API_KEY"],
+      "cost_estimate": "PandaDoc plan pricing",
+      "side_effects": ["Creates PandaDoc document"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "generate_business_plan",
+      "script": "execution/generate_business_plan.py",
+      "description": "Generate a comprehensive business plan document",
+      "category": "planning",
+      "tags": ["business-plan", "generation"],
+      "parameters": {
+        "name": {"type": "string", "required": true, "description": "Business name"},
+        "description": {"type": "string", "required": true, "description": "Business description"},
+        "output": {"type": "string", "required": false, "description": "Output file path"}
+      },
+      "returns": "Business plan document path",
+      "env_vars": ["OPENAI_API_KEY"],
+      "cost_estimate": "~$.20 (OpenAI)",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "generate_project_plan",
+      "script": "execution/generate_project_plan.py",
+      "description": "Generate a technical project plan with Gantt charts and WBS",
+      "category": "planning",
+      "tags": ["project-plan", "gantt", "wbs"],
+      "parameters": {
+        "name": {"type": "string", "required": true, "description": "Project name"},
+        "requirements": {"type": "string", "required": true, "description": "Project requirements"},
+        "output_dir": {"type": "string", "required": false, "description": "Output directory"}
+      },
+      "returns": "Project plan documents (plan, architecture, Gantt, WBS, risks)",
+      "env_vars": ["SERPAPI_API_KEY"],
+      "cost_estimate": "~$.10 (SerpAPI searches)",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "generate_meeting_minutes",
+      "script": "execution/generate_meeting_minutes.py",
+      "description": "Generate meeting minutes from audio/transcript",
+      "category": "meetings",
+      "tags": ["meetings", "minutes", "transcription"],
+      "parameters": {
+        "input": {"type": "string", "required": true, "description": "Audio file or transcript"},
+        "output": {"type": "string", "required": false, "description": "Output file path"}
+      },
+      "returns": "Meeting minutes document",
+      "env_vars": ["OPENAI_API_KEY"],
+      "cost_estimate": "~$.05/meeting",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "compliance_checker",
+      "script": "execution/compliance_checker.py",
+      "description": "Check documents for Indian legal compliance",
+      "category": "legal",
+      "tags": ["compliance", "legal", "india"],
+      "parameters": {
+        "input": {"type": "string", "required": true, "description": "Document to check"},
+        "regulations": {"type": "string", "required": false, "description": "Specific regulations to check against"}
+      },
+      "returns": "Compliance report",
+      "env_vars": [],
+      "cost_estimate": "Free",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "compliance_tracker",
+      "script": "execution/compliance_tracker.py",
+      "description": "Track compliance status across documents",
+      "category": "legal",
+      "tags": ["compliance", "tracking"],
+      "parameters": {},
+      "returns": "Compliance status report",
+      "env_vars": [],
+      "cost_estimate": "Free",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "legal_doc_generator",
+      "script": "execution/legal_doc_generator.py",
+      "description": "Generate legal documents from templates",
+      "category": "legal",
+      "tags": ["legal", "documents", "generation"],
+      "parameters": {
+        "template": {"type": "string", "required": true, "description": "Template type or file"},
+        "data": {"type": "string", "required": true, "description": "JSON data for template"}
+      },
+      "returns": "Generated legal document",
+      "env_vars": [],
+      "cost_estimate": "Free",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "legal_research",
+      "script": "execution/legal_research.py",
+      "description": "Research Indian legal cases and regulations",
+      "category": "legal",
+      "tags": ["legal", "research", "india"],
+      "parameters": {
+        "query": {"type": "string", "required": true, "description": "Legal research query"}
+      },
+      "returns": "Research findings",
+      "env_vars": ["SERPAPI_API_KEY"],
+      "cost_estimate": "~$.01/search",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "casualize_batch",
+      "script": "execution/casualize_batch.py",
+      "description": "Casualize/humanize text fields in batch using AI",
+      "category": "data_processing",
+      "tags": ["casualize", "batch", "ai"],
+      "parameters": {
+        "sheet_url": {"type": "string", "required": true, "description": "Google Sheet URL"},
+        "column": {"type": "string", "required": true, "description": "Column to casualize"}
+      },
+      "returns": "Updated sheet with casualized text",
+      "env_vars": ["OPENAI_API_KEY", "GOOGLE_SHEETS_CREDENTIALS_FILE"],
+      "cost_estimate": "~$.01/batch (OpenAI)",
+      "side_effects": ["Google Sheets write"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "casualize_city_names_batch",
+      "script": "execution/casualize_city_names_batch.py",
+      "description": "Casualize city names in a Google Sheet column",
+      "category": "data_processing",
+      "tags": ["casualize", "cities", "batch"],
+      "parameters": {
+        "sheet_url": {"type": "string", "required": true, "description": "Google Sheet URL"}
+      },
+      "returns": "Updated sheet",
+      "env_vars": ["OPENAI_API_KEY", "GOOGLE_SHEETS_CREDENTIALS_FILE"],
+      "cost_estimate": "~$.01/batch",
+      "side_effects": ["Google Sheets write"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "casualize_company_names_batch",
+      "script": "execution/casualize_company_names_batch.py",
+      "description": "Casualize company names in a Google Sheet column",
+      "category": "data_processing",
+      "tags": ["casualize", "companies", "batch"],
+      "parameters": {
+        "sheet_url": {"type": "string", "required": true, "description": "Google Sheet URL"}
+      },
+      "returns": "Updated sheet",
+      "env_vars": ["OPENAI_API_KEY", "GOOGLE_SHEETS_CREDENTIALS_FILE"],
+      "cost_estimate": "~$.01/batch",
+      "side_effects": ["Google Sheets write"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "casualize_first_names_batch",
+      "script": "execution/casualize_first_names_batch.py",
+      "description": "Casualize first names in a Google Sheet column",
+      "category": "data_processing",
+      "tags": ["casualize", "names", "batch"],
+      "parameters": {
+        "sheet_url": {"type": "string", "required": true, "description": "Google Sheet URL"}
+      },
+      "returns": "Updated sheet",
+      "env_vars": ["OPENAI_API_KEY", "GOOGLE_SHEETS_CREDENTIALS_FILE"],
+      "cost_estimate": "~$.01/batch",
+      "side_effects": ["Google Sheets write"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "onboarding_post_kickoff",
+      "script": "execution/onboarding_post_kickoff.py",
+      "description": "Post-kickoff onboarding automation",
+      "category": "crm",
+      "tags": ["onboarding", "automation"],
+      "parameters": {},
+      "returns": "Onboarding status",
+      "env_vars": [],
+      "cost_estimate": "Free",
+      "side_effects": ["May send emails or update CRM"],
+      "requires_confirmation": true
+    },
+    {
+      "name": "memory_db",
+      "script": "execution/memory_db.py",
+      "description": "SQLite+FTS5 persistent memory with STM/LTM, search, embeddings, guardrails",
+      "category": "infrastructure",
+      "tags": ["memory", "database", "search"],
+      "parameters": {},
+      "returns": "Various — see memory_db.py --help",
+      "env_vars": [],
+      "cost_estimate": "Free (local SQLite)",
+      "side_effects": [],
+      "requires_confirmation": false
+    },
+    {
+      "name": "tool_registry",
+      "script": "execution/tool_registry.py",
+      "description": "Manage and inspect execution tool schemas",
+      "category": "infrastructure",
+      "tags": ["tools", "registry", "schemas"],
+      "parameters": {},
+      "returns": "Tool information",
+      "env_vars": [],
+      "cost_estimate": "Free",
+      "side_effects": [],
+      "requires_confirmation": false
+    }
+  ]
+}

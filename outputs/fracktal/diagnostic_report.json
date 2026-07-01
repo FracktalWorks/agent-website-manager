@@ -1,0 +1,431 @@
+{
+  "site": {
+    "name": "Fracktal",
+    "description": "3D Printers and Additive Manufacturing Solutions",
+    "url": "https://fracktal.in",
+    "namespaces": [
+      "oembed/1.0",
+      "wc/v3",
+      "wc/v1",
+      "wc/pos/v1/catalog",
+      "elementor-one/v1",
+      "jetpack/v4",
+      "elementor/v1",
+      "elementor-pro/v1",
+      "wc-admin",
+      "wc-analytics",
+      "wc/store",
+      "wc/store/v1",
+      "wc/private",
+      "wc/v2",
+      "elementor-hello-elementor/v1",
+      "elementor/v1/documents",
+      "elementor-ai/v1",
+      "elementor/v1/feedback",
+      "wc-admin-email",
+      "wc-telemetry",
+      "wccom-site/v3",
+      "wp-abilities/v1",
+      "wp/v2",
+      "wp-site-health/v1",
+      "wp-block-editor/v1"
+    ]
+  },
+  "settings": {
+    "hello_elementor_settings_description_meta_tag": "",
+    "hello_elementor_settings_skip_link": "",
+    "hello_elementor_settings_header_footer": "",
+    "hello_elementor_settings_page_title": "",
+    "hello_elementor_settings_hello_style": "",
+    "hello_elementor_settings_hello_theme": "",
+    "title": "Fracktal",
+    "description": "3D Printers and Additive Manufacturing Solutions",
+    "url": "https://fracktal.in",
+    "email": "vjvarada@fracktal.in",
+    "timezone": "",
+    "date_format": "F j, Y",
+    "time_format": "g:i a",
+    "start_of_week": 1,
+    "language": "",
+    "use_smilies": true,
+    "default_category": 1,
+    "default_post_format": "0",
+    "posts_per_page": 10,
+    "show_on_front": "page",
+    "page_on_front": 2309,
+    "page_for_posts": 0,
+    "default_ping_status": "open",
+    "default_comment_status": "open",
+    "site_logo": 23914,
+    "site_icon": 30153,
+    "elementor_one_welcome_screen_completed": true,
+    "elementor_one_dismiss_connect_alert": null,
+    "elementor_one_editor_update_notification_dismissed": null,
+    "pickup_location_settings": {
+      "enabled": "yes",
+      "title": "",
+      "tax_status": "taxable",
+      "cost": ""
+    },
+    "pickup_locations": [
+      {
+        "name": "Fracktal Works Pvt Ltd",
+        "address": {
+          "address_1": "Fracktal Works, No. 3, 50ft Laggere Main Rd",
+          "city": "Bangalore",
+          "state": "KA",
+          "postcode": "560058",
+          "country": "IN"
+        },
+        "details": "",
+        "enabled": true
+      }
+    ],
+    "woocommerce_default_catalog_orderby": "popularity",
+    "woocommerce_checkout_phone_field": "required",
+    "woocommerce_checkout_company_field": "hidden",
+    "woocommerce_checkout_address_2_field": "optional"
+  },
+  "plugins": {
+    "total": 44,
+    "active": 3,
+    "inactive": 41,
+    "items": [
+      {
+        "plugin": "elementor-pro/elementor-pro",
+        "name": "Elementor Pro",
+        "version": "4.0.4",
+        "status": "active"
+      },
+      {
+        "plugin": "elementor/elementor",
+        "name": "Elementor",
+        "version": "4.1.1",
+        "status": "active"
+      },
+      {
+        "plugin": "woocommerce/woocommerce",
+        "name": "WooCommerce",
+        "version": "10.8.1",
+        "status": "active"
+      },
+      {
+        "plugin": "akismet/akismet",
+        "name": "Akismet Anti-spam: Spam Protection",
+        "version": "5.7",
+        "status": "inactive"
+      },
+      {
+        "plugin": "betterdocs/betterdocs",
+        "name": "BetterDocs",
+        "version": "4.2.1",
+        "status": "inactive"
+      },
+      {
+        "plugin": "check-email/check-email",
+        "name": "Check &amp; Log Email - Easy Email Testing &amp; Mail logging",
+        "version": "2.0.9",
+        "status": "inactive"
+      },
+      {
+        "plugin": "core-plugin/core",
+        "name": "Core Wordpres Plugin",
+        "version": "1.8.2",
+        "status": "inactive"
+      },
+      {
+        "plugin": "duplicate-page/duplicatepage",
+        "name": "Duplicate Page",
+        "version": "4.5.9",
+        "status": "inactive"
+      },
+      {
+        "plugin": "elementor-pro-form-widget-zoho-crm-integration/elementor-pro-form-widget-zoho-crm-integration",
+        "name": "Elementor Pro Form Widget - Zoho CRM - Integration",
+        "version": "1.24.0",
+        "status": "inactive"
+      },
+      {
+        "plugin": "elementskit-lite/elementskit-lite",
+        "name": "ElementsKit Lite",
+        "version": "3.9.6",
+        "status": "inactive"
+      },
+      {
+        "plugin": "export-media-library/index",
+        "name": "Export Media Library",
+        "version": "4.0.2",
+        "status": "inactive"
+      },
+      {
+        "plugin": "facebook-for-woocommerce/facebook-for-woocommerce",
+        "name": "Facebook for WooCommerce",
+        "version": "3.5.7",
+        "status": "inactive"
+      },
+      {
+        "plugin": "google-site-kit/google-site-kit",
+        "name": "Site Kit by Google",
+        "version": "1.179.0",
+        "status": "inactive"
+      },
+      {
+        "plugin": "gutenkit-blocks-addon/gutenkit-blocks-addon",
+        "name": "GutenKit Blocks",
+        "version": "2.4.1",
+        "status": "inactive"
+      },
+      {
+        "plugin": "image-optimization/image-optimization",
+        "name": "Image Optimizer - Compress, Resize and Optimize Images",
+        "version": "1.7.4",
+        "status": "inactive"
+      },
+      {
+        "plugin": "jetpack/jetpack",
+        "name": "Jetpack",
+        "version": "15.8",
+        "status": "inactive"
+      },
+      {
+        "plugin": "litespeed-cache/litespeed-cache",
+        "name": "LiteSpeed Cache",
+        "version": "7.8.1",
+        "status": "inactive"
+      },
+      {
+        "plugin": "media-cleaner/media-cleaner",
+        "name": "Media Cleaner",
+        "version": "7.1.1",
+        "status": "inactive"
+      },
+      {
+        "plugin": "megamenu-pro/megamenu-pro",
+        "name": "Max Mega Menu - Pro Addon",
+        "version": "2.4.3",
+        "status": "inactive"
+      },
+      {
+        "plugin": "megamenu/megamenu",
+        "name": "Max Mega Menu",
+        "version": "3.10.4",
+        "status": "inactive"
+      },
+      {
+        "plugin": "order-import-export-for-woocommerce/order-import-export-for-woocommerce",
+        "name": "Order Export &amp; Order Import for WooCommerce",
+        "version": "2.7.4",
+        "status": "inactive"
+      },
+      {
+        "plugin": "pixelyoursite/facebook-pixel-master",
+        "name": "PixelYourSite",
+        "version": "11.1.0",
+        "status": "inactive"
+      },
+      {
+        "plugin": "post-type-switcher/post-type-switcher",
+        "name": "Post Type Switcher",
+        "version": "3.3.1",
+        "status": "inactive"
+      },
+      {
+        "plugin": "really-simple-ssl/rlrsssl-really-simple-ssl",
+        "name": "Really Simple Security",
+        "version": "9.5.11",
+        "status": "inactive"
+      },
+      {
+        "plugin": "shiprocket/class-shiprocket-woocommerce-shipping",
+        "name": "Shiprocket",
+        "version": "2.0.2",
+        "status": "inactive"
+      },
+      {
+        "plugin": "template-kit-import/template-kit-import",
+        "name": "Template Kit Import",
+        "version": "1.0.16",
+        "status": "inactive"
+      },
+      {
+        "plugin": "tutor/tutor",
+        "name": "Tutor LMS",
+        "version": "3.9.11",
+        "status": "inactive"
+      },
+      {
+        "plugin": "users-customers-import-export-for-wp-woocommerce/users-customers-import-export-for-wp-woocommerce",
+        "name": "Export and Import Users and Customers",
+        "version": "2.7.4",
+        "status": "inactive"
+      },
+      {
+        "plugin": "woo-cart-abandonment-recovery/woo-cart-abandonment-recovery",
+        "name": "Cart Abandonment Recovery for WooCommerce",
+        "version": "2.1.1",
+        "status": "inactive"
+      },
+      {
+        "plugin": "woo-checkout-field-editor-pro/checkout-form-designer",
+        "name": "Checkout Field Editor for WooCommerce",
+        "version": "2.1.4",
+        "status": "inactive"
+      },
+      {
+        "plugin": "woo-razorpay/woo-razorpay",
+        "name": "1 Razorpay",
+        "version": "4.8.4",
+        "status": "inactive"
+      },
+      {
+        "plugin": "woo-update-manager/woo-update-manager",
+        "name": "WooCommerce.com Update Manager",
+        "version": "1.0.3",
+        "status": "inactive"
+      },
+      {
+        "plugin": "woocommerce-gateway-stripe/woocommerce-gateway-stripe",
+        "name": "WooCommerce Stripe Gateway",
+        "version": "10.7.0",
+        "status": "inactive"
+      },
+      {
+        "plugin": "woocommerce-legacy-rest-api/woocommerce-legacy-rest-api",
+        "name": "WooCommerce Legacy REST API",
+        "version": "1.0.5",
+        "status": "inactive"
+      },
+      {
+        "plugin": "woocommerce-services/woocommerce-services",
+        "name": "WooCommerce Tax",
+        "version": "3.6.3",
+        "status": "inactive"
+      },
+      {
+        "plugin": "wordpres-woosc/wcfm-elementor",
+        "name": "Classic Editor",
+        "version": "7.9.0",
+        "status": "inactive"
+      },
+      {
+        "plugin": "wordpres-yastsr/wcfm-elementor",
+        "name": "Classic Editor",
+        "version": "7.9.0",
+        "status": "inactive"
+      },
+      {
+        "plugin": "wordpress-importer/wordpress-importer",
+        "name": "WordPress Importer",
+        "version": "0.9.5",
+        "status": "inactive"
+      },
+      {
+        "plugin": "wordpress-seo-premium/wp-seo-premium",
+        "name": "Yoast SEO Premium",
+        "version": "20.5",
+        "status": "inactive"
+      },
+      {
+        "plugin": "wordpress-seo/wp-seo",
+        "name": "Yoast SEO",
+        "version": "27.7",
+        "status": "inactive"
+      },
+      {
+        "plugin": "wp-console/wp-console",
+        "name": "WP Console",
+        "version": "2.6.0",
+        "status": "inactive"
+      },
+      {
+        "plugin": "wpforms-lite/wpforms",
+        "name": "WPForms Lite",
+        "version": "1.10.1",
+        "status": "inactive"
+      },
+      {
+        "plugin": "wpo365-msgraphmailer/wpo365-msgraphmailer",
+        "name": "WPO365 | MICROSOFT 365 GRAPH MAILER",
+        "version": "5.5",
+        "status": "inactive"
+      },
+      {
+        "plugin": "zoho-salesiq/index",
+        "name": "Zoho SalesIQ",
+        "version": "2.0.5",
+        "status": "inactive"
+      }
+    ]
+  },
+  "themes": {
+    "total": 2,
+    "items": [
+      {
+        "stylesheet": "hello-biz",
+        "name": {
+          "raw": "Hello Biz",
+          "rendered": "Hello Biz"
+        },
+        "version": "1.1.1",
+        "status": "inactive"
+      },
+      {
+        "stylesheet": "hello-elementor",
+        "name": {
+          "raw": "Hello Elementor",
+          "rendered": "Hello Elementor"
+        },
+        "version": "3.4.9",
+        "status": "active"
+      }
+    ]
+  },
+  "users": {
+    "total_admin": 5,
+    "items": [
+      {
+        "id": 3943,
+        "name": "dipasha muhkerji",
+        "slug": "dipasha",
+        "roles": []
+      },
+      {
+        "id": 958,
+        "name": "ishaanpilar",
+        "slug": "ishaanpilar",
+        "roles": []
+      },
+      {
+        "id": 4144,
+        "name": "Kiran Kumar",
+        "slug": "kirankumar",
+        "roles": []
+      },
+      {
+        "id": 1294,
+        "name": "Rohit kumar",
+        "slug": "rohitfracktal",
+        "roles": []
+      },
+      {
+        "id": 2,
+        "name": "Vijay Varada",
+        "slug": "vjvarada",
+        "roles": []
+      }
+    ]
+  },
+  "pages_total": 70,
+  "posts_total": 13,
+  "media_total": 1787,
+  "comments_total": 0,
+  "woocommerce": {
+    "active": true,
+    "version": "10.8.1"
+  },
+  "security": {
+    "xmlrpc": "ENABLED",
+    "user_enum": "EXPOSED",
+    "install_accessible": "YES"
+  }
+}
