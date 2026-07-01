@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "C:\Users\VijayRaghavVarada\Documents\Github\DOE Framework Agentic AI\outputs\agent-website-manager\.tmp\scripts\fetch_analytics.py", line 166, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\VijayRaghavVarada\Documents\Github\DOE Framework Agentic AI\outputs\agent-website-manager\.tmp\scripts\fetch_analytics.py", line 150, in main
+    print(f"\U0001f4ca Fetching GA4 data: {start_date} \u2192 {end_date}")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VijayRaghavVarada\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>

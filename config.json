@@ -1,0 +1,47 @@
+{
+  "name": "agent-website-manager",
+  "description": "WordPress website development & management agent. Connects via Hostinger MCP to control hosting, domains, email, SSL, and files. Manages WordPress pages, posts, Elementor designs, plugins, themes, SEO, backups, and security — all agentically from chat.",
+  "version": "0.1.0",
+  "skill_repos": [],
+  "integrations": [
+    "hostinger",
+    "wordpress-rest-api",
+    "woocommerce"
+  ],
+  "optional_integrations": [
+    "openai",
+    "anthropic",
+    "google-sheets",
+    "google-analytics",
+    "google-search-console",
+    "google-pagespeed-insights"
+  ],
+  "tags": [
+    "wordpress",
+    "hostinger",
+    "website",
+    "elementor",
+    "woocommerce",
+    "hosting",
+    "web-development",
+    "seo",
+    "performance",
+    "caching",
+    "media-optimization",
+    "devops"
+  ],
+  "tool_scope": null,
+  "max_mutation_attempts": 1,
+  "mcp_servers": {
+    "hostinger": {
+      "command": "npx",
+      "args": ["-y", "@hostinger/mcp-server"],
+      "env": {
+        "HOSTINGER_API_TOKEN": "${HOSTINGER_API_TOKEN}"
+      }
+    }
+  },
+  "icon": "Globe",
+  "category": "web",
+  "webhook_routes": []
+}

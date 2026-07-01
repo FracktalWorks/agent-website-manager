@@ -1,0 +1,303 @@
+<style>
+  :root {
+    --red: #F25E50;
+    --dark: #0a0a1a;
+    --card-dark: #111133;
+    --text-dark: #3c3c3c;
+    --text-body: #666666;
+    --text-light: #CFCFCF;
+    --white: #FFFFFF;
+    --light-bg: #f8f8fc;
+    --radius: 8px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Montserrat', sans-serif; }
+
+  /* ── HERO ── */
+  .hero {
+    display: flex;
+    align-items: stretch;
+    min-height: 90vh;
+    background: var(--dark);
+    overflow: hidden;
+  }
+  .hero-content {
+    flex: 1 1 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5% 0 5% 8%;
+  }
+  .hero h1 {
+    color: var(--white);
+    font-size: clamp(26px, 5vw, 48px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .hero p {
+    color: var(--text-light);
+    font-size: clamp(14px, 1.8vw, 16px);
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 30px;
+  }
+  .hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .btn-primary { background: var(--red); color: var(--white); }
+  .btn-primary:hover { background: #d94a3d; }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--red);
+  }
+  .btn-outline:hover { background: rgba(242,94,80,.1); }
+  .btn-white { background: var(--white); color: var(--red); }
+  .btn-white:hover { background: #f0f0f0; }
+  .btn-sm { padding: 10px 20px; font-size: 13px; }
+  .hero-image {
+    flex: 1 1 45%;
+    min-height: 90vh;
+    overflow: hidden;
+  }
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ── SECTION ── */
+  .section { padding: 80px 20px; }
+  .section-dark { background: var(--dark); }
+  .section-light { background: var(--white); }
+  .section-cta { background: var(--red); }
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .section-header h2 {
+    font-size: clamp(22px, 3.5vw, 32px);
+    margin-bottom: 15px;
+  }
+  .section-dark .section-header h2 { color: var(--white); }
+  .section-light .section-header h2 { color: var(--text-dark); }
+  .section-header .divider {
+    width: 60px;
+    height: 3px;
+    background: var(--red);
+    margin: 0 auto 20px;
+  }
+  .section-header p {
+    color: var(--text-body);
+    font-size: 15px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .section-dark .section-header p { color: var(--text-light); }
+
+  /* ── GRID ── */
+  .grid { display: grid; gap: 30px; max-width: 1200px; margin:0 auto; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 { grid-template-columns: 1fr 1fr; align-items: center; gap: 50px; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card-dark);
+    border-radius: var(--radius);
+    padding: 40px 25px;
+    text-align: center;
+  }
+  .card-light {
+    background: var(--light-bg);
+  }
+  .card-light h3 { color: var(--dark); }
+  .card-icon { width: 64px; height: 64px; margin: 0 auto 20px; }
+  .card-icon img { width: 100%; height: 100%; object-fit: contain; }
+  .card h3 {
+    color: var(--red);
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .card p {
+    color: #CCCCCC;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .card-light p { color: var(--text-body); }
+
+  /* ── STORY ── */
+  .story-image img {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  .story-text h2 {
+    color: var(--text-dark);
+    font-size: clamp(20px, 3vw, 28px);
+    margin-bottom: 15px;
+  }
+  .story-text .divider { margin: 0 0 20px 0; }
+  .story-text p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+  }
+
+  /* ── PRODUCT CARD ── */
+  .product-card {
+    background: var(--card-dark);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-align: center;
+  }
+  .product-card img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+  .product-card-body { padding: 25px 20px 30px; }
+  .product-card-body h3 { color: var(--white); font-size: 20px; margin-bottom: 8px; }
+  .product-card-body p { color: var(--text-light); font-size: 14px; line-height: 1.5; margin-bottom: 15px; }
+
+  /* ── CTA ── */
+  .cta-content { text-align: center; max-width: 700px; margin: 0 auto; }
+  .cta-content h2 {
+    color: var(--white);
+    font-size: clamp(20px, 3vw, 28px);
+    margin-bottom: 12px;
+  }
+  .cta-content p {
+    color: rgba(255,255,255,.9);
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { flex-direction: column; }
+    .hero-content { padding: 15% 5% 5% 5%; text-align: center; }
+    .hero-content p { max-width: 100%; }
+    .hero-buttons { justify-content: center; }
+    .hero-image { min-height: 40vh; }
+    .grid-3 { grid-template-columns: 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .section { padding: 60px 16px; }
+  }
+  @media (max-width: 600px) {
+    .hero-buttons { flex-direction: column; align-items: center; }
+    .hero-buttons .btn { width: 100%; text-align: center; }
+  }
+</style>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>India's Premier<br>3D Printer Manufacturer</h1>
+    <p>Fracktal Works designs, engineers, and manufactures industrial and desktop 3D printers in Bangalore, India since 2013. Every machine is indigenously built from the ground up. Original Additive Manufacturer. Make in India.</p>
+    <div class="hero-buttons">
+      <a href="https://fracktal.in/3dprinters/" class="btn btn-primary">Our 3D Printers</a>
+      <a href="https://fracktal.in/home/about-us/" class="btn btn-outline">About Fracktal</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="https://fracktal.in/wp-content/uploads/2025/05/All-Printers-Cover-7-machines-Processed-2048x995-1.webp" alt="Fracktal Works 3D Printer Lineup — Made in India">
+  </div>
+</section>
+
+<!-- ═══ WHY FRACKTAL ═══ -->
+<section class="section section-dark">
+  <div class="section-header">
+    <h2>Why Fracktal is India's Trusted 3D Printer Manufacturer</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="card-icon"><img src="https://fracktal.in/wp-content/uploads/2025/10/3d-printer.png" alt=""></div>
+      <h3>11+ Years of R&D</h3>
+      <p>Since founding in 2013 at Manipal Institute of Technology, every component from motion systems to firmware is developed in-house at our Bangalore facility.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon"><img src="https://fracktal.in/wp-content/uploads/2025/10/3d-printer.png" alt=""></div>
+      <h3>Make in India</h3>
+      <p>Designed, developed, and manufactured entirely within India. From PCB assembly to motion calibration — every step happens at our Bangalore facility.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon"><img src="https://fracktal.in/wp-content/uploads/2025/10/3d-printer.png" alt=""></div>
+      <h3>Original Additive Manufacturer</h3>
+      <p>Unlike resellers who rebadge imports, we conceive, prototype, test, and manufacture every 3D printer ourselves. Direct access to our engineering team.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OUR STORY ═══ -->
+<section class="section section-light">
+  <div class="grid grid-2" style="max-width:1200px; margin:0 auto;">
+    <div class="story-image">
+      <img src="https://fracktal.in/wp-content/uploads/2020/11/1400567_354647701348120_1157476431_o-scaled-e1606386500766.jpg" alt="Fracktal Works founders with first generation Julia 3D Printers">
+    </div>
+    <div class="story-text">
+      <h2>Founded by Engineers,<br>Built for Engineers</h2>
+      <div class="divider" style="width:60px;height:3px;background:var(--red);margin-bottom:20px;"></div>
+      <p>Fracktal Works was founded in 2013 by two engineering students at Manipal Institute of Technology. What started as a quest to build better robots evolved into India's premier 3D printer manufacturing company.</p>
+      <p>Over 11 years, every component, every firmware module, and every manufacturing process has been developed indigenously — proving that world-class additive manufacturing technology can be built in India, by Indians, for the world.</p>
+      <a href="https://fracktal.in/home/about-us/" class="btn btn-primary">Read Our Full Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MADE IN INDIA PRINTERS ═══ -->
+<section class="section section-dark">
+  <div class="section-header">
+    <h2>Made in India 3D Printers</h2>
+    <div class="divider"></div>
+    <p>From compact desktop precision to industrial production systems, every Fracktal 3D printer is designed, engineered, and manufactured in Bangalore.</p>
+  </div>
+  <div class="grid grid-3">
+    <div class="product-card">
+      <img src="https://fracktal.in/wp-content/uploads/2021/11/Snowflake-Menu-Menu-Widgets.93.webp" alt="Snowflake 3D Printer">
+      <div class="product-card-body">
+        <h3>Snowflake</h3>
+        <p>High-precision desktop 3D printing. Engineered for reliability and accuracy in education and professional environments.</p>
+        <a href="https://fracktal.in/snowflake/" class="btn btn-primary btn-sm">Learn More</a>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://fracktal.in/wp-content/uploads/2021/11/Julia-Advanced-squre.96.webp" alt="Julia 3D Printer">
+      <div class="product-card-body">
+        <h3>Julia</h3>
+        <p>Advanced industrial desktop 3D printer. High-temperature capable, multi-material support, built for demanding applications.</p>
+        <a href="https://fracktal.in/julia/" class="btn btn-primary btn-sm">Learn More</a>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://fracktal.in/wp-content/uploads/2021/11/Twin-Dragon-Frontv-v2.106.webp" alt="Twin Dragon 3D Printer">
+      <div class="product-card-body">
+        <h3>Twin Dragon</h3>
+        <p>Speed and dual material excellence. Independent dual extrusion for complex multi-material prints and soluble supports.</p>
+        <a href="https://fracktal.in/twindragon/" class="btn btn-primary btn-sm">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="section section-cta">
+  <div class="cta-content">
+    <h2>Ready to work with India's leading 3D printer manufacturer?</h2>
+    <p>Talk to our Bangalore-based team about your additive manufacturing needs.</p>
+    <a href="https://fracktal.in/contact-us/" class="btn btn-white">Contact Our Team</a>
+  </div>
+</section>

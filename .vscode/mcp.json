@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "emcp-tools": {
+      "type": "http",
+      "url": "https://fracktal.in/wp-json/mcp/emcp-tools-server",
+      "headers": {
+        "Authorization": "Basic dmp2YXJhZGE6ZUJabXNuOW92ak92Y3Z0VzE0YlpQYnN4"
+      }
+    }
+  }
+}

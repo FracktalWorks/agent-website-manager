@@ -1,0 +1,106 @@
+/* Fracktal Media Folders — Admin CSS */
+#fracktal-folder-tree {
+  background: #fff;
+  border: 1px solid #c3c4c7;
+  border-radius: 4px;
+  padding: 0;
+  margin: 0 0 16px 0;
+  max-width: 300px;
+}
+.fracktal-panel-title {
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid #dcdcde;
+  background: #f6f7f7;
+  border-radius: 4px 4px 0 0;
+}
+.fracktal-tree-list {
+  padding: 8px;
+  max-height: 350px;
+  overflow-y: auto;
+}
+.fracktal-empty {
+  color: #8c8f94;
+  font-style: italic;
+  padding: 6px 8px;
+  font-size: 12px;
+}
+#fracktal-folder-tree .folder-item {
+  padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+}
+#fracktal-folder-tree .folder-item:hover {
+  background: #f0f0f1;
+}
+#fracktal-folder-tree .folder-item.active {
+  background: #2271b1;
+  color: #fff;
+}
+#fracktal-folder-tree .folder-item .dashicons {
+  font-size: 15px;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+#fracktal-folder-tree .folder-item .folder-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fracktal-folder-count {
+  margin-left: auto;
+  font-size: 11px;
+  color: #8c8f94;
+  background: #f0f0f1;
+  padding: 1px 6px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.folder-item.active .fracktal-folder-count {
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+}
+.fracktal-delete-btn {
+  display: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #b32d2e;
+  font-size: 14px;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  flex-shrink: 0;
+}
+.folder-item:hover .fracktal-delete-btn {
+  display: inline-block;
+}
+.fracktal-create-row {
+  display: flex;
+  padding: 8px;
+  border-top: 1px solid #dcdcde;
+  gap: 6px;
+  background: #f6f7f7;
+  border-radius: 0 0 4px 4px;
+}
+.fracktal-create-row input {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  padding: 3px 6px;
+  border: 1px solid #8c8f94;
+  border-radius: 3px;
+}
+.fracktal-create-row input:focus {
+  border-color: #2271b1;
+  box-shadow: 0 0 0 1px #2271b1;
+  outline: none;
+}

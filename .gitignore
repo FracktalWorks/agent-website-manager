@@ -1,0 +1,36 @@
+# Secrets
+.env
+.env.local
+credentials.json
+token.json
+*.token_cache.json
+client_secret_*.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+ENV/
+
+# .tmp/ caches — structure tracked, contents not
+.tmp/search_cache/*.json
+.tmp/web_cache/*
+!.tmp/search_cache/README.md
+!.tmp/web_cache/README.md
+# .tmp/scripts/ IS tracked — shared utilities
+!.tmp/scripts/**
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Keep .vscode/ settings
+!.vscode/

@@ -1,0 +1,17 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+  "python.terminal.activateEnvironment": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "python": true
+  },
+  "editor.formatOnSave": true,
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "search.exclude": {
+    "**/.tmp/search_cache": true,
+    "**/.tmp/web_cache": true,
+    "**/__pycache__": true
+  }
+}
