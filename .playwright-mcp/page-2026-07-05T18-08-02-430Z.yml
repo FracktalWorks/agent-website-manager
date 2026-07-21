@@ -1,0 +1,165 @@
+- generic [active] [ref=f128e1]:
+  - generic [ref=f128e2]:
+    - banner [ref=f128e3]:
+      - generic [ref=f128e4]:
+        - generic [ref=f128e5]:
+          - paragraph [ref=f128e7]: Tax & Classification Reference
+          - heading "HSN Code & GST on 3D Printing in India" [level=1] [ref=f128e8]
+          - paragraph [ref=f128e9]: Accurate HSN and SAC classifications and GST rates for 3D printers, filament, and printing services — so procurement and finance teams can invoice, import, and claim input tax credit with confidence.
+          - generic [ref=f128e10]:
+            - generic [ref=f128e11]: 3D Printers · HSN 8443 · 18%
+            - generic [ref=f128e12]: Printing Services · SAC 998920 · 18%
+            - generic [ref=f128e13]: Filament · HSN 3916 · 18%
+        - img "Fracktal Works Twin Dragon 3D printer, a black dual-chamber machine with red and white filament spools, shown at a three-quarter angle on a transparent background" [ref=f128e15]
+    - generic [ref=f128e17]:
+      - generic [ref=f128e18]:
+        - paragraph [ref=f128e19]: Why classification matters
+        - heading "Get the code right before the purchase order goes out" [level=2] [ref=f128e20]
+        - paragraph [ref=f128e21]: HSN and SAC codes determine the GST you pay, the input tax credit you can claim, and whether your invoices and import documents clear without dispute. For 3D printing, the correct code depends on exactly what is being supplied — a machine, a consumable, or a service. Below is how Fracktal Works classifies each, based on the relevant tariff headings.
+      - generic [ref=f128e22]:
+        - generic [ref=f128e24]:
+          - generic [ref=f128e25]: "01"
+          - heading "Import & purchase decisions" [level=3] [ref=f128e26]
+          - paragraph [ref=f128e27]: Machinery, consumables, and spares sit under different tariff headings. The heading sets the GST and any applicable customs duty on landed cost.
+        - generic [ref=f128e29]:
+          - generic [ref=f128e30]: "02"
+          - heading "Invoicing & compliance" [level=3] [ref=f128e31]
+          - paragraph [ref=f128e32]: A wrong HSN or SAC on a tax invoice creates reconciliation issues in GSTR filings and can delay payment from your customers.
+        - generic [ref=f128e34]:
+          - generic [ref=f128e35]: "03"
+          - heading "Input tax credit" [level=3] [ref=f128e36]
+          - paragraph [ref=f128e37]: Correctly booked GST on equipment and services flows into eligible input tax credit — misclassification risks a reversal on audit.
+    - generic [ref=f128e39]:
+      - generic [ref=f128e40]:
+        - paragraph [ref=f128e41]: What’s being classified
+        - heading "Three supplies, three different codes" [level=2] [ref=f128e42]
+      - generic [ref=f128e43]:
+        - generic [ref=f128e45]:
+          - img "Snowflake desktop 3D printer by Fracktal Works, 3/4 studio render" [ref=f128e46]
+          - generic [ref=f128e47]:
+            - generic [ref=f128e48]: HSN 8443 · 18%
+            - heading "3D Printers" [level=3] [ref=f128e49]
+            - paragraph [ref=f128e50]: Complete FDM/SLS printing machines, classified as printing machinery under heading 8443.
+        - generic [ref=f128e52]:
+          - img "Spools of 3D printing filament in multiple colors" [ref=f128e53]
+          - generic [ref=f128e54]:
+            - generic [ref=f128e55]: HSN 3916 · 18%
+            - heading "Filament" [level=3] [ref=f128e56]
+            - paragraph [ref=f128e57]: Plastic monofilament and profile shapes with cross-section over 1 mm — spooled FDM filament.
+        - generic [ref=f128e59]:
+          - img "FDM 3D printed plastic parts" [ref=f128e60]
+          - generic [ref=f128e61]:
+            - generic [ref=f128e62]: SAC 998920 · 18%
+            - heading "Printing Services" [level=3] [ref=f128e63]
+            - paragraph [ref=f128e64]: On-demand FDM manufacturing and job-work, classified as a plastic manufacturing service.
+    - generic [ref=f128e66]:
+      - generic [ref=f128e67]:
+        - paragraph [ref=f128e68]: Reference table
+        - heading "HSN / SAC codes and GST rates" [level=2] [ref=f128e69]
+        - paragraph [ref=f128e70]: Classifications applied by Fracktal Works across 3D printing machinery, consumables, and services in India.
+      - table "HSN = Harmonized System of Nomenclature (goods). SAC = Services Accounting Code (services). Rates are the applicable GST at the time of verification and may be subject to notification changes." [ref=f128e72]:
+        - caption [ref=f128e73]: HSN = Harmonized System of Nomenclature (goods). SAC = Services Accounting Code (services). Rates are the applicable GST at the time of verification and may be subject to notification changes.
+        - rowgroup [ref=f128e74]:
+          - row "Product / Service HSN / SAC Code GST Rate Notes" [ref=f128e75]:
+            - columnheader "Product / Service" [ref=f128e76]
+            - columnheader "HSN / SAC Code" [ref=f128e77]
+            - columnheader "GST Rate" [ref=f128e78]
+            - columnheader "Notes" [ref=f128e79]
+        - rowgroup [ref=f128e80]:
+          - row "3D Printers (FDM machinery) Complete printing machines 8443 HSN 18% Printing machinery used for printing by means of plates, cylinders and other printing components, capable of connecting to an automatic data processing machine or to a network. Excludes multi-function printers/copiers and ink cartridges." [ref=f128e81]:
+            - rowheader "3D Printers (FDM machinery) Complete printing machines" [ref=f128e82]:
+              - text: 3D Printers (FDM machinery)
+              - generic [ref=f128e83]: Complete printing machines
+            - cell "8443 HSN" [ref=f128e84]:
+              - generic [ref=f128e85]:
+                - text: "8443"
+                - generic [ref=f128e86]: HSN
+            - cell "18%" [ref=f128e87]:
+              - generic [ref=f128e88]: 18%
+            - cell "Printing machinery used for printing by means of plates, cylinders and other printing components, capable of connecting to an automatic data processing machine or to a network. Excludes multi-function printers/copiers and ink cartridges." [ref=f128e89]
+          - row "3D Printing / FDM services Moulding, pressing, stamping, extruding & similar plastic manufacturing services 998920 SAC 18% Job-work and on-demand manufacturing of plastic parts by additive/FDM processes is a service, classified under the manufacturing-services heading — not under a goods HSN." [ref=f128e90]:
+            - rowheader "3D Printing / FDM services Moulding, pressing, stamping, extruding & similar plastic manufacturing services" [ref=f128e91]:
+              - text: 3D Printing / FDM services
+              - generic [ref=f128e92]: Moulding, pressing, stamping, extruding & similar plastic manufacturing services
+            - cell "998920 SAC" [ref=f128e93]:
+              - generic [ref=f128e94]:
+                - text: "998920"
+                - generic [ref=f128e95]: SAC
+            - cell "18%" [ref=f128e96]:
+              - generic [ref=f128e97]: 18%
+            - cell "Job-work and on-demand manufacturing of plastic parts by additive/FDM processes is a service, classified under the manufacturing-services heading — not under a goods HSN." [ref=f128e98]
+          - row "3D printer filament Monofilament, rods, sticks & profile shapes of plastics 3916 HSN 18% Plastic monofilament with a cross-sectional dimension greater than 1 mm, and rods, sticks and profile shapes — the tariff heading that covers spooled FDM filament." [ref=f128e99]:
+            - rowheader "3D printer filament Monofilament, rods, sticks & profile shapes of plastics" [ref=f128e100]:
+              - text: 3D printer filament
+              - generic [ref=f128e101]: Monofilament, rods, sticks & profile shapes of plastics
+            - cell "3916 HSN" [ref=f128e102]:
+              - generic [ref=f128e103]:
+                - text: "3916"
+                - generic [ref=f128e104]: HSN
+            - cell "18%" [ref=f128e105]:
+              - generic [ref=f128e106]: 18%
+            - cell "Plastic monofilament with a cross-sectional dimension greater than 1 mm, and rods, sticks and profile shapes — the tariff heading that covers spooled FDM filament." [ref=f128e107]
+          - row "Nozzles / print-heads sold separately Supplied as standalone parts 8443 HSN 28% When sold separately, print-heads fall under the multi-function printer / copier / ink-cartridge classification within heading 8443, which attracts the higher rate. Bundled with a complete machine, they follow the machine’s classification." [ref=f128e108]:
+            - rowheader "Nozzles / print-heads sold separately Supplied as standalone parts" [ref=f128e109]:
+              - text: Nozzles / print-heads sold separately
+              - generic [ref=f128e110]: Supplied as standalone parts
+            - cell "8443 HSN" [ref=f128e111]:
+              - generic [ref=f128e112]:
+                - text: "8443"
+                - generic [ref=f128e113]: HSN
+            - cell "28%" [ref=f128e114]:
+              - generic [ref=f128e115]: 28%
+            - cell "When sold separately, print-heads fall under the multi-function printer / copier / ink-cartridge classification within heading 8443, which attracts the higher rate. Bundled with a complete machine, they follow the machine’s classification." [ref=f128e116]
+      - generic [ref=f128e117]:
+        - generic [ref=f128e118]: Please verify
+        - generic [ref=f128e119]:
+          - paragraph [ref=f128e120]: GST and HSN classification can be nuanced and is subject to periodic notification changes. These codes reflect Fracktal Works’ classification for its own products and services, but the correct treatment for a specific transaction can depend on end-use, bundling, and place of supply. Confirm current rates with your tax advisor or the official GST portal before filing.
+          - generic [ref=f128e121]: Updated as of 5 July 2026 · Verified against Fracktal Works’ published classifications.
+    - generic [ref=f128e123]:
+      - generic [ref=f128e124]:
+        - paragraph [ref=f128e125]: Frequently asked
+        - heading "Common HSN & GST questions on 3D printing" [level=2] [ref=f128e126]
+      - generic [ref=f128e127]:
+        - heading "What is the HSN code for 3D printed parts?" [level=3] [ref=f128e128]
+        - paragraph [ref=f128e129]:
+          - text: It depends on how the parts are supplied. When you commission Fracktal Works to print parts on demand, that is a manufacturing
+          - emphasis [ref=f128e130]: service
+          - text: and is classified under SAC 998920 at 18% GST — not a goods HSN. The finished part itself, if sold as a traded good, would take the HSN of the article it represents. For most procurement of custom FDM parts, the 998920 service code applies.
+      - generic [ref=f128e131]:
+        - heading "What is the GST rate on 3D printed products?" [level=3] [ref=f128e132]
+        - paragraph [ref=f128e133]: "The core 3D printing supplies attract 18% GST — this covers 3D printers (HSN 8443), printing services (SAC 998920), and filament (HSN 3916). One notable exception: nozzles and print-heads sold separately fall under a classification within heading 8443 that attracts 28% GST. Always match the rate to what is actually being invoiced."
+      - generic [ref=f128e134]:
+        - heading "Is there a separate HSN code for 3D printing services vs. 3D printer filament?" [level=3] [ref=f128e135]
+        - paragraph [ref=f128e136]:
+          - text: Yes. They are fundamentally different supplies. 3D printing
+          - emphasis [ref=f128e137]: services
+          - text: use SAC 998920 (a services code for moulding, pressing, extruding and similar plastic manufacturing services). 3D printer
+          - emphasis [ref=f128e138]: filament
+          - text: is a physical good and uses HSN 3916 (plastic monofilament and profile shapes with cross-section greater than 1 mm). Both are taxed at 18%, but the codes are distinct and must be used correctly on the invoice.
+    - generic [ref=f128e140]:
+      - heading "Buying 3D printers or sourcing printed parts?" [level=2] [ref=f128e142]
+      - paragraph [ref=f128e143]: Fracktal Works designs and builds 3D printers in-house in Bangalore and runs a production 3D printing service. If you need the right classification for a purchase order, a bulk filament supply, or an on-demand manufacturing quote, our team can help you get the paperwork and the parts right.
+      - generic [ref=f128e144]:
+        - link "Explore 3D printing services" [ref=f128e145] [cursor=pointer]:
+          - /url: https://www.fracktal.in/3d-printing-services/
+        - link "Talk to our team" [ref=f128e146] [cursor=pointer]:
+          - /url: https://www.fracktal.in/contact-us/
+    - paragraph [ref=f128e147]: This page is a general reference for HSN/SAC classification and GST rates on 3D printing in India. It is not tax advice. Confirm current rates with your tax advisor or the GST portal.
+  - status [ref=f128e148]
+  - generic [ref=f128e151] [cursor=pointer]:
+    - generic [ref=f128e152]: Ask For Help!
+    - emphasis [ref=f128e153]: Connect
+    - text: 
+  - iframe [ref=f128e156] [cursor=pointer]:
+    - generic [active] [ref=f132e1]:
+      - generic "Minimize live chat window" [ref=f132e2] [cursor=pointer]: 
+      - generic [ref=f132e3]:
+        - generic [ref=f132e4]:
+          - generic [ref=f132e5]:
+            - generic [ref=f132e7]: 
+            - generic "Conversation(s)" [ref=f132e9]
+          - text: 
+        - generic [ref=f132e12]:
+          - generic [ref=f132e13]: No ongoing conversation
+          - generic [ref=f132e14] [cursor=pointer]:  Chat Now
+        - text:  

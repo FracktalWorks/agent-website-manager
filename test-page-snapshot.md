@@ -1,0 +1,357 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation "Toolbar":
+      - menu:
+        - group [ref=e3]:
+          - menuitem "About WordPress" [ref=e4] [cursor=pointer]:
+            - generic [ref=e6]: About WordPress
+        - group [ref=e7]:
+          - menuitem "Fracktal" [ref=e8] [cursor=pointer]
+        - group [ref=e9]:
+          - menuitem "Live" [ref=e10] [cursor=pointer]
+        - group [ref=e11]:
+          - menuitem "Customize" [ref=e12] [cursor=pointer]
+        - group [ref=e13]:
+          - menuitem "2 updates available" [ref=e14] [cursor=pointer]:
+            - generic [ref=e16]: "2"
+            - generic [ref=e17]: 2 updates available
+        - group [ref=e18]:
+          - menuitem "1 Comment in moderation" [ref=e19] [cursor=pointer]:
+            - generic [ref=e21]: "1"
+            - generic [ref=e22]: 1 Comment in moderation
+        - group [ref=e23]:
+          - menuitem "New" [ref=e24] [cursor=pointer]:
+            - generic [ref=e26]: New
+        - group [ref=e27]:
+          - menuitem "Edit Page" [ref=e28] [cursor=pointer]
+        - listitem [ref=e29]:
+          - generic [ref=e30]:  Edit with Elementor
+        - group [ref=e31]:
+          - menuitem "" [ref=e32] [cursor=pointer]:
+            - generic [ref=e33]: 
+        - group [ref=e34]:
+          - menuitem "SEO" [ref=e35] [cursor=pointer]:
+            - generic [ref=e37]: SEO
+            - generic [ref=e39]: Focus keyphrase not set
+        - group [ref=e40]:
+          - menuitem "Site Kit" [ref=e41] [cursor=pointer]: Site Kit
+        - group [ref=e43]:
+          - menuitem "Stats" [ref=e44] [cursor=pointer]:
+            - img "Stats" [ref=e46]
+        - group [ref=e47]:
+          - menuitem " Notes" [ref=e48] [cursor=pointer]
+      - menu [ref=e49]:
+        - group [ref=e52]:
+          - menuitem "Howdy, Vijay Varada" [ref=e53] [cursor=pointer]
+        - group [ref=e54]:
+          - menuitem "Search" [ref=e55]:
+            - generic [ref=e56]:
+              - textbox "Search" [ref=e57] [cursor=pointer]
+              - generic [ref=e58]: Search
+  - link "Skip to content" [ref=e59] [cursor=pointer]:
+    - /url: "#content"
+  - banner [ref=e60]:
+    - generic [ref=e62]:
+      - link [ref=e66] [cursor=pointer]:
+        - /url: https://fracktal.in
+      - navigation "Menu" [ref=e70]:
+        - generic "Menu Toggle" [ref=e71]:
+          - list [ref=e72]:
+            - listitem [ref=e73]:
+              - generic [ref=e74]:
+                - generic [ref=e76]: Products
+                - button "Open Products" [ref=e77] [cursor=pointer]:
+                  - generic [ref=e78]:
+                    - img [ref=e79]
+                    - generic [ref=e81]: Open Products
+            - listitem [ref=e82]:
+              - generic [ref=e83]:
+                - generic [ref=e85]: Manufacturing Services
+                - button "Open Manufacturing Services" [ref=e86] [cursor=pointer]:
+                  - generic [ref=e87]:
+                    - img [ref=e88]
+                    - generic [ref=e90]: Open Manufacturing Services
+            - listitem [ref=e91]:
+              - generic [ref=e92]:
+                - generic [ref=e94]: Industries
+                - button "Open Industries" [ref=e95] [cursor=pointer]:
+                  - generic [ref=e96]:
+                    - img [ref=e97]
+                    - generic [ref=e99]: Open Industries
+            - listitem [ref=e100]:
+              - generic [ref=e101]:
+                - generic [ref=e103]: Materials
+                - button "Open Materials" [ref=e104] [cursor=pointer]:
+                  - generic [ref=e105]:
+                    - img [ref=e106]
+                    - generic [ref=e108]: Open Materials
+            - listitem [ref=e109]:
+              - generic [ref=e110]:
+                - generic [ref=e112]: Resources
+                - button "Open Resources" [ref=e113] [cursor=pointer]:
+                  - generic [ref=e114]:
+                    - img [ref=e115]
+                    - generic [ref=e117]: Open Resources
+            - listitem [ref=e118]:
+              - link "Support" [ref=e120] [cursor=pointer]:
+                - /url: https://fracktal.odoo.com/ticket
+                - generic [ref=e121]: Support
+            - listitem [ref=e122]:
+              - link "About Us" [ref=e124] [cursor=pointer]:
+                - /url: http://fracktal.in/about-us
+                - generic [ref=e125]: About Us
+      - link "+916364925434" [ref=e129] [cursor=pointer]:
+        - /url: tel:+916364925434
+        - generic [ref=e131]: "+916364925434"
+      - link "Contact Us" [ref=e135] [cursor=pointer]:
+        - /url: https://fracktal.in/contact-us/
+        - generic [ref=e137]: Contact Us
+  - main [ref=e138]:
+    - heading "Manufacturing Services — Test Page (v4)" [level=1] [ref=e140]
+    - generic [ref=e141]:
+      - paragraph
+      - generic [ref=e143]:
+        - heading "Manufacturing services, built in Bangalore. Shipped worldwide." [level=1] [ref=e144]
+        - paragraph [ref=e145]:
+          - text: From single prototypes to production batches — FDM, SLS, SLA, MJF, and vacuum casting
+          - text: under one roof. No outsourcing. No middlemen. Just parts that meet spec, on time.
+        - generic [ref=e146]:
+          - link "View Services" [ref=e147] [cursor=pointer]:
+            - /url: "#services"
+          - link "Request a Quote" [ref=e148] [cursor=pointer]:
+            - /url: "#contact"
+      - paragraph
+      - generic [ref=e149]:
+        - generic [ref=e150]:
+          - generic [ref=e151]: Capabilities
+          - paragraph
+          - heading "Six processes. One facility." [level=2] [ref=e152]
+          - paragraph [ref=e153]: Every technology we offer runs on machines we built ourselves or validated in our own service bureau. No outsourcing — your parts stay under our quality system from start to finish.
+        - generic [ref=e155]:
+          - generic [ref=e156]:
+            - generic [ref=e157]: FDM
+            - paragraph
+            - heading "Fused Deposition Modeling" [level=3] [ref=e158]
+            - paragraph [ref=e159]: Production-grade thermoplastics — ABS, PC, Nylon, CF-Nylon, ULTEM. Build volume up to 600×600×600 mm. Ideal for functional prototypes, jigs, fixtures, and end-use parts.
+            - paragraph [ref=e160]:
+              - link "Learn More" [ref=e161] [cursor=pointer]:
+                - /url: "#"
+          - generic [ref=e162]:
+            - generic [ref=e163]: SLS
+            - paragraph
+            - heading "Selective Laser Sintering" [level=3] [ref=e164]
+            - paragraph [ref=e165]: Production-grade nylon parts on the Apollo 350 — CO₂ laser, 350×350×420 mm build. No supports needed. Complex geometries, living hinges, and functional assemblies in PA12 and PA11.
+            - paragraph [ref=e166]:
+              - link "Learn More" [ref=e167] [cursor=pointer]:
+                - /url: "#"
+          - generic [ref=e168]:
+            - generic [ref=e169]: SLA
+            - paragraph
+            - heading "Stereolithography" [level=3] [ref=e170]
+            - paragraph [ref=e171]: High-resolution photopolymer parts with surface finish comparable to injection moulding. Tolerances within ±0.1 mm. Ideal for visual prototypes, master patterns, and dental models.
+            - paragraph [ref=e172]:
+              - link "Learn More" [ref=e173] [cursor=pointer]:
+                - /url: "#"
+          - generic [ref=e174]:
+            - generic [ref=e175]: MJF
+            - paragraph
+            - heading "Multi Jet Fusion" [level=3] [ref=e176]
+            - paragraph [ref=e177]: High-productivity nylon printing with isotropic mechanical properties. Faster than SLS for batch production. Consistent part quality across the entire build volume.
+            - paragraph [ref=e178]:
+              - link "Learn More" [ref=e179] [cursor=pointer]:
+                - /url: "#"
+          - generic [ref=e180]:
+            - generic [ref=e181]: Casting
+            - paragraph
+            - heading "Vacuum Casting" [level=3] [ref=e182]
+            - paragraph [ref=e183]: Polyurethane parts from silicone moulds — up to 30 copies per mould. Wide range of shore hardness and colours. The right choice for low-volume production before committing to tooling.
+            - paragraph [ref=e184]:
+              - link "Learn More" [ref=e185] [cursor=pointer]:
+                - /url: "#"
+          - generic [ref=e186]:
+            - generic [ref=e187]: Engineering
+            - paragraph
+            - heading "Design & Consulting" [level=3] [ref=e188]
+            - paragraph [ref=e189]: DFAM reviews, reverse engineering, and application engineering from the team that designs 3D printers. We help you pick the right process before the first part is printed.
+            - paragraph [ref=e190]:
+              - link "Learn More" [ref=e191] [cursor=pointer]:
+                - /url: "#"
+      - paragraph
+      - generic [ref=e193]:
+        - generic [ref=e194]:
+          - generic [ref=e195]: At a Glance
+          - paragraph
+          - heading "Process comparison" [level=2] [ref=e196]
+          - paragraph [ref=e197]: Pick the right technology for your application. All processes run in-house at our Bangalore facility.
+        - table [ref=e199]:
+          - rowgroup [ref=e200]:
+            - row "Process Materials Max Build Typical Tolerance Lead Time" [ref=e201]:
+              - columnheader "Process" [ref=e202]
+              - columnheader "Materials" [ref=e203]
+              - columnheader "Max Build" [ref=e204]
+              - columnheader "Typical Tolerance" [ref=e205]
+              - columnheader "Lead Time" [ref=e206]
+          - rowgroup [ref=e207]:
+            - row "FDM ABS, PC, Nylon, CF-Nylon, ULTEM 600 × 600 × 600 mm ± 0.2 mm 2–5 days" [ref=e208]:
+              - cell "FDM" [ref=e209]:
+                - strong [ref=e210]: FDM
+              - cell "ABS, PC, Nylon, CF-Nylon, ULTEM" [ref=e211]
+              - cell "600 × 600 × 600 mm" [ref=e212]
+              - cell "± 0.2 mm" [ref=e213]
+              - cell "2–5 days" [ref=e214]
+            - row "SLS PA12, PA11, TPU 350 × 350 × 420 mm ± 0.15 mm 3–7 days" [ref=e215]:
+              - cell "SLS" [ref=e216]:
+                - strong [ref=e217]: SLS
+              - cell "PA12, PA11, TPU" [ref=e218]
+              - cell "350 × 350 × 420 mm" [ref=e219]
+              - cell "± 0.15 mm" [ref=e220]
+              - cell "3–7 days" [ref=e221]
+            - row "SLA Photopolymer resins 300 × 300 × 400 mm ± 0.1 mm 2–4 days" [ref=e222]:
+              - cell "SLA" [ref=e223]:
+                - strong [ref=e224]: SLA
+              - cell "Photopolymer resins" [ref=e225]
+              - cell "300 × 300 × 400 mm" [ref=e226]
+              - cell "± 0.1 mm" [ref=e227]
+              - cell "2–4 days" [ref=e228]
+            - row "MJF PA12, PA11 380 × 284 × 380 mm ± 0.2 mm 3–5 days" [ref=e229]:
+              - cell "MJF" [ref=e230]:
+                - strong [ref=e231]: MJF
+              - cell "PA12, PA11" [ref=e232]
+              - cell "380 × 284 × 380 mm" [ref=e233]
+              - cell "± 0.2 mm" [ref=e234]
+              - cell "3–5 days" [ref=e235]
+            - row "Vacuum Casting PU (multiple shore grades) 500 × 500 × 500 mm ± 0.2 mm 5–10 days" [ref=e236]:
+              - cell "Vacuum Casting" [ref=e237]:
+                - strong [ref=e238]: Vacuum Casting
+              - cell "PU (multiple shore grades)" [ref=e239]
+              - cell "500 × 500 × 500 mm" [ref=e240]
+              - cell "± 0.2 mm" [ref=e241]
+              - cell "5–10 days" [ref=e242]
+      - paragraph
+      - generic [ref=e244]:
+        - heading "Ready to get parts made?" [level=2] [ref=e245]
+        - paragraph [ref=e246]: Send us your CAD file or drawing. We’ll recommend the right process and get you a quote within 24 hours.
+        - paragraph [ref=e247]:
+          - link "Request a Quote" [ref=e248] [cursor=pointer]:
+            - /url: "#"
+      - paragraph
+      - generic [ref=e250]:
+        - strong [ref=e251]: Fracktal Works
+        - text: — India’s premier 3D printer manufacturer.
+        - text: Built in Bangalore since 2013.
+  - contentinfo [ref=e252]:
+    - generic [ref=e255]:
+      - generic [ref=e256]:
+        - generic [ref=e257]:
+          - heading "Information" [level=2] [ref=e259]
+          - heading "About Us" [level=2] [ref=e261]:
+            - link "About Us" [ref=e262] [cursor=pointer]:
+              - /url: https://fracktal.in/home/about-us/
+          - heading "Contact Us" [level=2] [ref=e264]:
+            - link "Contact Us" [ref=e265] [cursor=pointer]:
+              - /url: https://fracktal.in/contact-us/
+          - heading "Our Partners" [level=2] [ref=e267]:
+            - link "Our Partners" [ref=e268] [cursor=pointer]:
+              - /url: https://fracktal.in/partners/
+          - heading "Careers" [level=2] [ref=e270]:
+            - link "Careers" [ref=e271] [cursor=pointer]:
+              - /url: https://fracktal.in/careers/
+        - generic [ref=e275]:
+          - heading "Products" [level=2] [ref=e277]
+          - heading "Snowflake" [level=2] [ref=e279]:
+            - link "Snowflake" [ref=e280] [cursor=pointer]:
+              - /url: https://fracktal.in/snowflake/
+          - heading "Julia" [level=2] [ref=e282]:
+            - link "Julia" [ref=e283] [cursor=pointer]:
+              - /url: https://fracktal.in/3dprinters/julia/
+          - heading "Dragon" [level=2] [ref=e285]:
+            - link "Dragon" [ref=e286] [cursor=pointer]:
+              - /url: https://fracktal.in/dragon/
+          - heading "Twin Dragon" [level=2] [ref=e288]:
+            - link "Twin Dragon" [ref=e289] [cursor=pointer]:
+              - /url: https://fracktal.in/twindragon/
+          - heading "Volterra" [level=2] [ref=e291]:
+            - link "Volterra" [ref=e292] [cursor=pointer]:
+              - /url: https://fracktal.in/volterra/
+          - heading "Material Dryer" [level=2] [ref=e294]:
+            - link "Material Dryer" [ref=e295] [cursor=pointer]:
+              - /url: https://fracktal.in/materialdryer
+          - heading "Printstick" [level=2] [ref=e297]:
+            - link "Printstick" [ref=e298] [cursor=pointer]:
+              - /url: https://fracktal.in/printstick-2
+          - heading "Apollo SLS" [level=2] [ref=e300]:
+            - link "Apollo SLS" [ref=e301] [cursor=pointer]:
+              - /url: https://fracktal.in/apollo-sls-landing-page/
+        - generic [ref=e305]:
+          - heading "Solutions" [level=2] [ref=e307]
+          - heading "3D Printing Services" [level=2] [ref=e309]:
+            - link "3D Printing Services" [ref=e310] [cursor=pointer]:
+              - /url: https://fracktal.in/3d-printing-service/
+          - heading "Engneering Services" [level=2] [ref=e312]:
+            - link "Engneering Services" [ref=e313] [cursor=pointer]:
+              - /url: https://fracktal.in/engineering-services/
+        - generic [ref=e317]:
+          - heading "Support" [level=2] [ref=e319]
+          - heading "Knowledge Base" [level=2] [ref=e321]:
+            - link "Knowledge Base" [ref=e322] [cursor=pointer]:
+              - /url: https://care.fracktal.in/portal/en/kb
+          - heading "Raise an Issue" [level=2] [ref=e324]:
+            - link "Raise an Issue" [ref=e325] [cursor=pointer]:
+              - /url: https://care.fracktal.in/portal/en/newticket
+              - text: Raise an Issue
+        - generic [ref=e329]:
+          - heading "Legal" [level=2] [ref=e331]
+          - heading "EULA" [level=2] [ref=e333]:
+            - link "EULA" [ref=e334] [cursor=pointer]:
+              - /url: https://fracktal.in/eula/
+          - heading "Terms & Conditions" [level=2] [ref=e336]:
+            - link "Terms & Conditions" [ref=e337] [cursor=pointer]:
+              - /url: https://fracktal.in/terms-and-conditions/
+          - heading "Privacy Policy" [level=2] [ref=e339]:
+            - link "Privacy Policy" [ref=e340] [cursor=pointer]:
+              - /url: https://fracktal.in/privacypolicy/
+          - heading "Cookie Policy" [level=2] [ref=e342]:
+            - link "Cookie Policy" [ref=e343] [cursor=pointer]:
+              - /url: https://fracktal.in/cookie-policy/
+          - heading "Return & Refund Policy" [level=2] [ref=e345]:
+            - link "Return & Refund Policy" [ref=e346] [cursor=pointer]:
+              - /url: https://fracktal.in/return-refund-policy/
+          - heading "Shipping Policy" [level=2] [ref=e348]:
+            - link "Shipping Policy" [ref=e349] [cursor=pointer]:
+              - /url: https://fracktal.in/shipping-policy/
+      - paragraph [ref=e355]: © 2025 Fracktal Works Pvt. Ltd
+      - list [ref=e357]:
+        - listitem [ref=e358]:
+          - link "Facebook" [ref=e359] [cursor=pointer]:
+            - /url: https://www.facebook.com/FracktalWorks
+            - generic [ref=e360]: Facebook
+            - img [ref=e361]
+        - listitem [ref=e363]:
+          - link "Twitter" [ref=e364] [cursor=pointer]:
+            - /url: https://twitter.com/fracktalworks
+            - generic [ref=e365]: Twitter
+            - img [ref=e366]
+        - listitem [ref=e368]:
+          - link "Youtube" [ref=e369] [cursor=pointer]:
+            - /url: https://www.youtube.com/channel/UC0jc-IxUx_7V07lZnRqtlGg
+            - generic [ref=e370]: Youtube
+            - img [ref=e371]
+        - listitem [ref=e373]:
+          - link "Instagram" [ref=e374] [cursor=pointer]:
+            - /url: https://www.instagram.com/fracktalworks
+            - generic [ref=e375]: Instagram
+            - img [ref=e376]
+        - listitem [ref=e378]:
+          - link "Linkedin" [ref=e379] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/3228893/
+            - generic [ref=e380]: Linkedin
+            - img [ref=e381]
+  - generic [ref=e383]: desktop
+  - status [ref=e384]
+  - generic [ref=e387] [cursor=pointer]:
+    - generic [ref=e388]: Ask For Help!
+    - emphasis [ref=e389]: Connect
+    - text: 
+  - generic:
+    - generic:
+      - iframe

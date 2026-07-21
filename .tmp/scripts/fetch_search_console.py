@@ -26,7 +26,11 @@ from googleapiclient.discovery import build
 
 load_dotenv()
 
-SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"]
+SCOPES = [
+    "https://www.googleapis.com/auth/webmasters.readonly",
+    "https://www.googleapis.com/auth/webmasters",
+    "https://www.googleapis.com/auth/indexing",
+]
 
 # ── Auth ──────────────────────────────────────────────────────────
 
@@ -34,7 +38,11 @@ def get_credentials():
     """OAuth 2.0 flow — reuses token_gsc.json, prompts browser if needed."""
     creds = None
     token_path = os.path.join(os.path.dirname(__file__), "token_gsc.json")
-    creds_path = os.path.join(os.path.dirname(__file__), "credentials.json")
+    creds_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS") or \
+        os.path.join(os.path.dirname(__file__), "credentials.json")
+    if not os.path.isabs(creds_path):
+        creds_path = os.path.join(
+            os.path.dirname(__file__), "..", "..", creds_path)
 
     if os.path.exists(token_path):
         creds = Credentials.from_authorized_user_file(token_path, SCOPES)

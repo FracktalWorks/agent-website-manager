@@ -20,6 +20,10 @@ ENV/
 !.tmp/web_cache/README.md
 # .tmp/scripts/ IS tracked — shared utilities
 !.tmp/scripts/**
+# ...but NOT secrets
+.tmp/scripts/credentials.json
+.tmp/scripts/service-account.json
+.tmp/scripts/token*.json
 
 # OS / IDE
 .DS_Store
@@ -31,6 +35,11 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# Ad-hoc verification/debug screenshots dropped at repo root instead of .tmp/screenshots/
+/*.png
+/*.jpg
+/*.jpeg
 
 # Keep .vscode/ settings
 !.vscode/

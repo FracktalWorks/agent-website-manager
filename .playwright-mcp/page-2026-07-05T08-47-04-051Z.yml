@@ -1,0 +1,173 @@
+- generic [active] [ref=f5e1]:
+  - link "Skip to content" [ref=f5e2] [cursor=pointer]:
+    - /url: "#content"
+  - banner [ref=f5e3]:
+    - generic [ref=f5e5]:
+      - link [ref=f5e9] [cursor=pointer]:
+        - /url: https://fracktal.in
+      - navigation "Menu" [ref=f5e13]:
+        - generic "Menu Toggle" [ref=f5e14]:
+          - list [ref=f5e15]:
+            - listitem [ref=f5e16]:
+              - generic [ref=f5e17]:
+                - generic [ref=f5e19]: Products
+                - button "Open Products" [ref=f5e20] [cursor=pointer]:
+                  - generic [ref=f5e21]:
+                    - img [ref=f5e22]
+                    - generic [ref=f5e24]: Open Products
+            - listitem [ref=f5e25]:
+              - generic [ref=f5e26]:
+                - generic [ref=f5e28]: Manufacturing Services
+                - button "Open Manufacturing Services" [ref=f5e29] [cursor=pointer]:
+                  - generic [ref=f5e30]:
+                    - img [ref=f5e31]
+                    - generic [ref=f5e33]: Open Manufacturing Services
+            - listitem [ref=f5e34]:
+              - generic [ref=f5e35]:
+                - generic [ref=f5e37]: Industries
+                - button "Open Industries" [ref=f5e38] [cursor=pointer]:
+                  - generic [ref=f5e39]:
+                    - img [ref=f5e40]
+                    - generic [ref=f5e42]: Open Industries
+            - listitem [ref=f5e43]:
+              - generic [ref=f5e44]:
+                - generic [ref=f5e46]: Materials
+                - button "Open Materials" [ref=f5e47] [cursor=pointer]:
+                  - generic [ref=f5e48]:
+                    - img [ref=f5e49]
+                    - generic [ref=f5e51]: Open Materials
+            - listitem [ref=f5e52]:
+              - generic [ref=f5e53]:
+                - generic [ref=f5e55]: Resources
+                - button "Open Resources" [ref=f5e56] [cursor=pointer]:
+                  - generic [ref=f5e57]:
+                    - img [ref=f5e58]
+                    - generic [ref=f5e60]: Open Resources
+            - listitem [ref=f5e61]:
+              - link "Support" [ref=f5e63] [cursor=pointer]:
+                - /url: https://fracktal.odoo.com/ticket
+                - generic [ref=f5e64]: Support
+            - listitem [ref=f5e65]:
+              - link "About Us" [ref=f5e67] [cursor=pointer]:
+                - /url: http://fracktal.in/about-us
+                - generic [ref=f5e68]: About Us
+      - link "+916364925434" [ref=f5e72] [cursor=pointer]:
+        - /url: tel:+916364925434
+        - generic [ref=f5e74]: "+916364925434"
+      - link "Contact Us" [ref=f5e78] [cursor=pointer]:
+        - /url: https://fracktal.in/contact-us/
+        - generic [ref=f5e80]: Contact Us
+  - main [ref=f5e81]:
+    - heading "The page can’t be found." [level=1] [ref=f5e83]
+    - paragraph [ref=f5e85]: It looks like nothing was found at this location.
+  - contentinfo [ref=f5e86]:
+    - generic [ref=f5e89]:
+      - generic [ref=f5e90]:
+        - generic [ref=f5e91]:
+          - heading "Information" [level=2] [ref=f5e93]
+          - heading "About Us" [level=2] [ref=f5e95]:
+            - link "About Us" [ref=f5e96] [cursor=pointer]:
+              - /url: https://fracktal.in/home/about-us/
+          - heading "Contact Us" [level=2] [ref=f5e98]:
+            - link "Contact Us" [ref=f5e99] [cursor=pointer]:
+              - /url: https://fracktal.in/contact-us/
+          - heading "Our Partners" [level=2] [ref=f5e101]:
+            - link "Our Partners" [ref=f5e102] [cursor=pointer]:
+              - /url: https://fracktal.in/partners/
+          - heading "Careers" [level=2] [ref=f5e104]:
+            - link "Careers" [ref=f5e105] [cursor=pointer]:
+              - /url: https://fracktal.in/careers/
+        - generic [ref=f5e109]:
+          - heading "Products" [level=2] [ref=f5e111]
+          - heading "Snowflake" [level=2] [ref=f5e113]:
+            - link "Snowflake" [ref=f5e114] [cursor=pointer]:
+              - /url: https://fracktal.in/snowflake/
+          - heading "Julia" [level=2] [ref=f5e116]:
+            - link "Julia" [ref=f5e117] [cursor=pointer]:
+              - /url: https://fracktal.in/3dprinters/julia/
+          - heading "Dragon" [level=2] [ref=f5e119]:
+            - link "Dragon" [ref=f5e120] [cursor=pointer]:
+              - /url: https://fracktal.in/dragon/
+          - heading "Twin Dragon" [level=2] [ref=f5e122]:
+            - link "Twin Dragon" [ref=f5e123] [cursor=pointer]:
+              - /url: https://fracktal.in/twindragon/
+          - heading "Volterra" [level=2] [ref=f5e125]:
+            - link "Volterra" [ref=f5e126] [cursor=pointer]:
+              - /url: https://fracktal.in/volterra/
+          - heading "Material Dryer" [level=2] [ref=f5e128]:
+            - link "Material Dryer" [ref=f5e129] [cursor=pointer]:
+              - /url: https://fracktal.in/materialdryer
+          - heading "Printstick" [level=2] [ref=f5e131]:
+            - link "Printstick" [ref=f5e132] [cursor=pointer]:
+              - /url: https://fracktal.in/printstick-2
+          - heading "Apollo SLS" [level=2] [ref=f5e134]:
+            - link "Apollo SLS" [ref=f5e135] [cursor=pointer]:
+              - /url: https://fracktal.in/apollo-sls-landing-page/
+        - generic [ref=f5e139]:
+          - heading "Solutions" [level=2] [ref=f5e141]
+          - heading "3D Printing Services" [level=2] [ref=f5e143]:
+            - link "3D Printing Services" [ref=f5e144] [cursor=pointer]:
+              - /url: https://fracktal.in/3d-printing-service/
+          - heading "Engneering Services" [level=2] [ref=f5e146]:
+            - link "Engneering Services" [ref=f5e147] [cursor=pointer]:
+              - /url: https://fracktal.in/engineering-services/
+        - generic [ref=f5e151]:
+          - heading "Support" [level=2] [ref=f5e153]
+          - heading "Knowledge Base" [level=2] [ref=f5e155]:
+            - link "Knowledge Base" [ref=f5e156] [cursor=pointer]:
+              - /url: https://care.fracktal.in/portal/en/kb
+          - heading "Raise an Issue" [level=2] [ref=f5e158]:
+            - link "Raise an Issue" [ref=f5e159] [cursor=pointer]:
+              - /url: https://care.fracktal.in/portal/en/newticket
+              - text: Raise an Issue
+        - generic [ref=f5e163]:
+          - heading "Legal" [level=2] [ref=f5e165]
+          - heading "EULA" [level=2] [ref=f5e167]:
+            - link "EULA" [ref=f5e168] [cursor=pointer]:
+              - /url: https://fracktal.in/eula/
+          - heading "Terms & Conditions" [level=2] [ref=f5e170]:
+            - link "Terms & Conditions" [ref=f5e171] [cursor=pointer]:
+              - /url: https://fracktal.in/terms-and-conditions/
+          - heading "Privacy Policy" [level=2] [ref=f5e173]:
+            - link "Privacy Policy" [ref=f5e174] [cursor=pointer]:
+              - /url: https://fracktal.in/privacypolicy/
+          - heading "Cookie Policy" [level=2] [ref=f5e176]:
+            - link "Cookie Policy" [ref=f5e177] [cursor=pointer]:
+              - /url: https://fracktal.in/cookie-policy/
+          - heading "Return & Refund Policy" [level=2] [ref=f5e179]:
+            - link "Return & Refund Policy" [ref=f5e180] [cursor=pointer]:
+              - /url: https://fracktal.in/return-refund-policy/
+          - heading "Shipping Policy" [level=2] [ref=f5e182]:
+            - link "Shipping Policy" [ref=f5e183] [cursor=pointer]:
+              - /url: https://fracktal.in/shipping-policy/
+      - paragraph [ref=f5e189]: © 2025 Fracktal Works Pvt. Ltd
+      - list [ref=f5e191]:
+        - listitem [ref=f5e192]:
+          - link "Facebook" [ref=f5e193] [cursor=pointer]:
+            - /url: https://www.facebook.com/FracktalWorks
+            - generic [ref=f5e194]: Facebook
+            - img [ref=f5e195]
+        - listitem [ref=f5e197]:
+          - link "Twitter" [ref=f5e198] [cursor=pointer]:
+            - /url: https://twitter.com/fracktalworks
+            - generic [ref=f5e199]: Twitter
+            - img [ref=f5e200]
+        - listitem [ref=f5e202]:
+          - link "Youtube" [ref=f5e203] [cursor=pointer]:
+            - /url: https://www.youtube.com/channel/UC0jc-IxUx_7V07lZnRqtlGg
+            - generic [ref=f5e204]: Youtube
+            - img [ref=f5e205]
+        - listitem [ref=f5e207]:
+          - link "Instagram" [ref=f5e208] [cursor=pointer]:
+            - /url: https://www.instagram.com/fracktalworks
+            - generic [ref=f5e209]: Instagram
+            - img [ref=f5e210]
+        - listitem [ref=f5e212]:
+          - link "Linkedin" [ref=f5e213] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/3228893/
+            - generic [ref=f5e214]: Linkedin
+            - img [ref=f5e215]
+  - status [ref=f5e218]
+  - generic [ref=f5e221] [cursor=pointer]:
+    - generic [ref=f5e222]: Ask For Help!
+    - emphasis [ref=f5e223]: Connect

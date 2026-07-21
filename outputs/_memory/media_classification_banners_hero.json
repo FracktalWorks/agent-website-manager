@@ -1,0 +1,2300 @@
+{
+  "generated": "2026-07-02T16:48:28.633576",
+  "total_classified": 207,
+  "counts_by_category": {
+    "Logos and Branding": 150,
+    "Team and Office": 4,
+    "Banners and Hero": 24,
+    "Product Images": 19,
+    "People and Lifestyle": 3,
+    "Uncategorized": 3,
+    "Printed Parts": 1,
+    "Screenshots and UI": 1,
+    "Blog and Editorial": 1,
+    "Icons and Illustrations": 1
+  },
+  "confidence_threshold": 0.35,
+  "items": [
+    {
+      "id": 30213,
+      "title": "cropped-FracktalWorks-Logo-For-white-Background-1.png",
+      "url": "https://fracktal.in/wp-content/uploads/2020/02/cropped-FracktalWorks-Logo-For-white-Background-1.png",
+      "current_folders": [
+        365,
+        362
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.5647,
+      "error": null
+    },
+    {
+      "id": 29267,
+      "title": "team-scaled-e1579869529397.jpg",
+      "url": "https://fracktal.in/wp-content/uploads/2025/07/team-scaled-e1579869529397.jpg",
+      "current_folders": [
+        365,
+        362
+      ],
+      "predicted_category": "Team and Office",
+      "confidence": 0.9837,
+      "error": null
+    },
+    {
+      "id": 29198,
+      "title": "Resturant_Logo.png",
+      "url": "https://fracktal.in/wp-content/uploads/2025/07/Resturant_Logo.png",
+      "current_folders": [
+        365,
+        362
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6485,
+      "error": null
+    },
+    {
+      "id": 28896,
+      "title": "PrintStick — Printstick Solo. 90",
+      "url": "https://fracktal.in/wp-content/uploads/2025/06/Printstick-solo.-90.png",
+      "current_folders": [
+        365,
+        362
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.4511,
+      "error": null
+    },
+    {
+      "id": 28828,
+      "title": "Hero-Print-Stick-1.jpg",
+      "url": "https://fracktal.in/wp-content/uploads/2025/06/Hero-Print-Stick-1.jpg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.4774,
+      "error": null
+    },
+    {
+      "id": 28797,
+      "title": "Hero Print Stick",
+      "url": "https://fracktal.in/wp-content/uploads/2025/05/Hero-Print-Stick-1.jpg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.4774,
+      "error": null
+    },
+    {
+      "id": 28796,
+      "title": "Hero Print Stick",
+      "url": "https://fracktal.in/wp-content/uploads/2025/05/Hero-Print-Stick.jpg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.3676,
+      "error": null
+    },
+    {
+      "id": 28369,
+      "title": "logo",
+      "url": "https://fracktal.in/wp-content/uploads/2025/06/Screenshot-2025-06-06-150309.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7963,
+      "error": null
+    },
+    {
+      "id": 28367,
+      "title": "logo",
+      "url": "https://fracktal.in/wp-content/uploads/2025/06/Screenshot-2025-06-06-151108.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.4746,
+      "error": null
+    },
+    {
+      "id": 27569,
+      "title": "Group-30-1.png",
+      "url": "https://fracktal.in/wp-content/uploads/2025/05/Group-30-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8993,
+      "error": null
+    },
+    {
+      "id": 24993,
+      "title": "Applications Generated_4",
+      "url": "https://fracktal.in/wp-content/uploads/2025/05/Applications-Generated_4.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.8841,
+      "error": null
+    },
+    {
+      "id": 24989,
+      "title": "Applications Generated_3",
+      "url": "https://fracktal.in/wp-content/uploads/2025/05/Applications-Generated_3-scaled.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.9413,
+      "error": null
+    },
+    {
+      "id": 24988,
+      "title": "Applications Generated_2",
+      "url": "https://fracktal.in/wp-content/uploads/2025/05/Applications-Generated_2-scaled.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.9817,
+      "error": null
+    },
+    {
+      "id": 24987,
+      "title": "Applications Generated",
+      "url": "https://fracktal.in/wp-content/uploads/2025/05/Applications-Generated-2-scaled.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.5908,
+      "error": null
+    },
+    {
+      "id": 24986,
+      "title": "Applications Generated",
+      "url": "https://fracktal.in/wp-content/uploads/2025/05/Applications-Generated-1-scaled.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.5908,
+      "error": null
+    },
+    {
+      "id": 24985,
+      "title": "Applications Generated",
+      "url": "https://fracktal.in/wp-content/uploads/2025/05/Applications-Generated-scaled.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.5908,
+      "error": null
+    },
+    {
+      "id": 24967,
+      "title": "What is Idex",
+      "url": "https://fracktal.in/wp-content/uploads/2025/05/What-is-Idex.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.9525,
+      "error": null
+    },
+    {
+      "id": 24848,
+      "title": "Websitesd Header",
+      "url": "https://fracktal.in/wp-content/uploads/2023/01/Websitesd-Header.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.4585,
+      "error": null
+    },
+    {
+      "id": 24697,
+      "title": "Fracktal Text Logo Hi Res",
+      "url": "https://fracktal.in/wp-content/uploads/2025/03/Fracktal-Text-Logo-Hi-Res.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.4289,
+      "error": null
+    },
+    {
+      "id": 23938,
+      "title": "header10.jpg",
+      "url": "https://fracktal.in/wp-content/uploads/2024/11/header10.jpg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "People and Lifestyle",
+      "confidence": 0.3928,
+      "error": null
+    },
+    {
+      "id": 23914,
+      "title": "Website-Header_black-1.png",
+      "url": "https://fracktal.in/wp-content/uploads/2024/09/Website-Header_black-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8442,
+      "error": null
+    },
+    {
+      "id": 23639,
+      "title": "TVS_Motor_Company_Logo",
+      "url": "https://fracktal.in/wp-content/uploads/2024/05/TVS_Motor_Company_Logo.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6096,
+      "error": null
+    },
+    {
+      "id": 23611,
+      "title": "startup-india-logo1-02-1024&#215;265",
+      "url": "https://fracktal.in/wp-content/uploads/2024/05/startup-india-logo1-02-1024x265-1.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.4557,
+      "error": null
+    },
+    {
+      "id": 23610,
+      "title": "Startup Karnataka",
+      "url": "https://fracktal.in/wp-content/uploads/2024/05/Startup-Karnataka.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8595,
+      "error": null
+    },
+    {
+      "id": 23609,
+      "title": "Ministry_of_Heavy_Industries_India.svg",
+      "url": "https://fracktal.in/wp-content/uploads/2024/05/Ministry_of_Heavy_Industries_India.svg.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6706,
+      "error": null
+    },
+    {
+      "id": 23607,
+      "title": "MUTBI",
+      "url": "https://fracktal.in/wp-content/uploads/2024/05/MUTBI.jpeg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7424,
+      "error": null
+    },
+    {
+      "id": 23492,
+      "title": "Fracktal Logo",
+      "url": "https://fracktal.in/wp-content/uploads/2024/05/Fracktal-Logo.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7543,
+      "error": null
+    },
+    {
+      "id": 23346,
+      "title": "Hero banner",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/Hero-banner-3.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6668,
+      "error": null
+    },
+    {
+      "id": 23323,
+      "title": "Untitled design",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/Untitled-design.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.5343,
+      "error": null
+    },
+    {
+      "id": 23289,
+      "title": "12",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/12-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.703,
+      "error": null
+    },
+    {
+      "id": 23288,
+      "title": "15",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/15-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.435,
+      "error": null
+    },
+    {
+      "id": 23287,
+      "title": "23",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/23-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9552,
+      "error": null
+    },
+    {
+      "id": 23286,
+      "title": "22",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/22-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8508,
+      "error": null
+    },
+    {
+      "id": 23285,
+      "title": "20",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/20-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7724,
+      "error": null
+    },
+    {
+      "id": 23284,
+      "title": "17",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/17-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.5878,
+      "error": null
+    },
+    {
+      "id": 23283,
+      "title": "16",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/16-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7719,
+      "error": null
+    },
+    {
+      "id": 23282,
+      "title": "14",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/14-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.5412,
+      "error": null
+    },
+    {
+      "id": 23281,
+      "title": "24",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/24-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6997,
+      "error": null
+    },
+    {
+      "id": 23280,
+      "title": "10",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/10-2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.4652,
+      "error": null
+    },
+    {
+      "id": 23279,
+      "title": "9",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/9-2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9578,
+      "error": null
+    },
+    {
+      "id": 23278,
+      "title": "8",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/8-2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8874,
+      "error": null
+    },
+    {
+      "id": 23277,
+      "title": "Untitled design (2)",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/Untitled-design-2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.958,
+      "error": null
+    },
+    {
+      "id": 23276,
+      "title": "IIT-Tiru",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IIT-Tiru-2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9693,
+      "error": null
+    },
+    {
+      "id": 23275,
+      "title": "IIT-Jammu",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IIT-Jammu-2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.8165,
+      "error": null
+    },
+    {
+      "id": 23274,
+      "title": "IIT-Bombay",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IIT-Bombay-2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.5819,
+      "error": null
+    },
+    {
+      "id": 23273,
+      "title": "IISc",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IISc-2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7271,
+      "error": null
+    },
+    {
+      "id": 23272,
+      "title": "IDC",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IDC-2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.639,
+      "error": null
+    },
+    {
+      "id": 23268,
+      "title": "NID",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/NID-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6927,
+      "error": null
+    },
+    {
+      "id": 23267,
+      "title": "NCL",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/NCL-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.4864,
+      "error": null
+    },
+    {
+      "id": 23266,
+      "title": "Manipal",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/Manipal-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6842,
+      "error": null
+    },
+    {
+      "id": 23265,
+      "title": "Logos_DY-patil",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/Logos_DY-patil-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.934,
+      "error": null
+    },
+    {
+      "id": 23264,
+      "title": "Logos",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/Logos-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6375,
+      "error": null
+    },
+    {
+      "id": 23263,
+      "title": "KLE",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/KLE-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8565,
+      "error": null
+    },
+    {
+      "id": 23262,
+      "title": "IIT-Tiru",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IIT-Tiru-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9693,
+      "error": null
+    },
+    {
+      "id": 23261,
+      "title": "IIT-Jammu",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IIT-Jammu-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.8165,
+      "error": null
+    },
+    {
+      "id": 23260,
+      "title": "IIT-Bombay",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IIT-Bombay-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.5819,
+      "error": null
+    },
+    {
+      "id": 23259,
+      "title": "IISc",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IISc-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7271,
+      "error": null
+    },
+    {
+      "id": 23258,
+      "title": "IDC",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IDC-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.639,
+      "error": null
+    },
+    {
+      "id": 23257,
+      "title": "CMTI",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/CMTI-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.9145,
+      "error": null
+    },
+    {
+      "id": 23256,
+      "title": "BVPNM",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/BVPNM-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9387,
+      "error": null
+    },
+    {
+      "id": 23255,
+      "title": "Atria",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/Atria-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7621,
+      "error": null
+    },
+    {
+      "id": 23251,
+      "title": "24",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/24.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6997,
+      "error": null
+    },
+    {
+      "id": 23250,
+      "title": "23",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/23.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9552,
+      "error": null
+    },
+    {
+      "id": 23249,
+      "title": "22",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/22.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8508,
+      "error": null
+    },
+    {
+      "id": 23248,
+      "title": "21",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/21.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.604,
+      "error": null
+    },
+    {
+      "id": 23247,
+      "title": "20",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/20.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7724,
+      "error": null
+    },
+    {
+      "id": 23246,
+      "title": "19",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/19.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9736,
+      "error": null
+    },
+    {
+      "id": 23245,
+      "title": "18",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/18.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.5403,
+      "error": null
+    },
+    {
+      "id": 23244,
+      "title": "17",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/17.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.5878,
+      "error": null
+    },
+    {
+      "id": 23243,
+      "title": "16",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/16.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7719,
+      "error": null
+    },
+    {
+      "id": 23242,
+      "title": "15",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/15.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.435,
+      "error": null
+    },
+    {
+      "id": 23241,
+      "title": "14",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/14.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.5412,
+      "error": null
+    },
+    {
+      "id": 23240,
+      "title": "13",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/13.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.8046,
+      "error": null
+    },
+    {
+      "id": 23239,
+      "title": "12",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/12.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.703,
+      "error": null
+    },
+    {
+      "id": 23238,
+      "title": "11",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/11.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.5412,
+      "error": null
+    },
+    {
+      "id": 23237,
+      "title": "10",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/10-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.4652,
+      "error": null
+    },
+    {
+      "id": 23236,
+      "title": "9",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/9-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9578,
+      "error": null
+    },
+    {
+      "id": 23235,
+      "title": "8",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/8-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8874,
+      "error": null
+    },
+    {
+      "id": 23234,
+      "title": "7",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/7-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.971,
+      "error": null
+    },
+    {
+      "id": 23233,
+      "title": "6",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/6-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8273,
+      "error": null
+    },
+    {
+      "id": 23232,
+      "title": "5",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/5-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7225,
+      "error": null
+    },
+    {
+      "id": 23231,
+      "title": "4",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/4-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8922,
+      "error": null
+    },
+    {
+      "id": 23230,
+      "title": "3",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/3-4.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9591,
+      "error": null
+    },
+    {
+      "id": 23229,
+      "title": "2",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/2-4.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8795,
+      "error": null
+    },
+    {
+      "id": 23228,
+      "title": "1",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/1-4.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7852,
+      "error": null
+    },
+    {
+      "id": 23171,
+      "title": "Black Minimal Email Header",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/Black-Minimal-Email-Header.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7553,
+      "error": null
+    },
+    {
+      "id": 23135,
+      "title": "NID",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/NID.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6927,
+      "error": null
+    },
+    {
+      "id": 23134,
+      "title": "NCL",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/NCL.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.4864,
+      "error": null
+    },
+    {
+      "id": 23133,
+      "title": "Manipal",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/Manipal.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6842,
+      "error": null
+    },
+    {
+      "id": 23132,
+      "title": "Logos_DY-patil",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/Logos_DY-patil.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.934,
+      "error": null
+    },
+    {
+      "id": 23131,
+      "title": "Logos",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/Logos.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6375,
+      "error": null
+    },
+    {
+      "id": 23130,
+      "title": "KLE",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/KLE.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8565,
+      "error": null
+    },
+    {
+      "id": 23129,
+      "title": "JNTU",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/JNTU.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.74,
+      "error": null
+    },
+    {
+      "id": 23128,
+      "title": "IIT-Tiru",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IIT-Tiru.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9693,
+      "error": null
+    },
+    {
+      "id": 23127,
+      "title": "IIT-Jammu",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IIT-Jammu.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.8165,
+      "error": null
+    },
+    {
+      "id": 23126,
+      "title": "IIT-Bombay",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IIT-Bombay.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.5819,
+      "error": null
+    },
+    {
+      "id": 23125,
+      "title": "IISc",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IISc.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7475,
+      "error": null
+    },
+    {
+      "id": 23124,
+      "title": "IDC",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/IDC.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.571,
+      "error": null
+    },
+    {
+      "id": 23121,
+      "title": "e84a82baf2299baf704cab8a5896b90c-e1575203401634",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/e84a82baf2299baf704cab8a5896b90c-e1575203401634.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8529,
+      "error": null
+    },
+    {
+      "id": 23120,
+      "title": "download-pwmgjxbayaf8bcp6c1hynxcaiw0baod3pqg9kqcj9g",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/download-pwmgjxbayaf8bcp6c1hynxcaiw0baod3pqg9kqcj9g.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7863,
+      "error": null
+    },
+    {
+      "id": 23117,
+      "title": "CMTI",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/CMTI.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.908,
+      "error": null
+    },
+    {
+      "id": 23116,
+      "title": "BVPNM",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/BVPNM.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9387,
+      "error": null
+    },
+    {
+      "id": 23115,
+      "title": "Atria",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/Atria.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7316,
+      "error": null
+    },
+    {
+      "id": 23069,
+      "title": "1",
+      "url": "https://fracktal.in/wp-content/uploads/2024/04/1.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6188,
+      "error": null
+    },
+    {
+      "id": 22737,
+      "title": "Twin Dragon logo black",
+      "url": "https://fracktal.in/wp-content/uploads/2024/03/Twin-Dragon-logo-black.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8467,
+      "error": null
+    },
+    {
+      "id": 22735,
+      "title": "Twin Dragon logo",
+      "url": "https://fracktal.in/wp-content/uploads/2024/03/Twin-Dragon-logo.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.926,
+      "error": null
+    },
+    {
+      "id": 22553,
+      "title": "UVCE",
+      "url": "https://fracktal.in/wp-content/uploads/2024/01/UVCE.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.4268,
+      "error": null
+    },
+    {
+      "id": 22552,
+      "title": "AID",
+      "url": "https://fracktal.in/wp-content/uploads/2024/01/AID.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8416,
+      "error": null
+    },
+    {
+      "id": 22551,
+      "title": "Logos_DY patil",
+      "url": "https://fracktal.in/wp-content/uploads/2024/01/Logos_DY-patil.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.934,
+      "error": null
+    },
+    {
+      "id": 22550,
+      "title": "Logos",
+      "url": "https://fracktal.in/wp-content/uploads/2024/01/Logos.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6375,
+      "error": null
+    },
+    {
+      "id": 22549,
+      "title": "JNTU",
+      "url": "https://fracktal.in/wp-content/uploads/2024/01/JNTU.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.74,
+      "error": null
+    },
+    {
+      "id": 22548,
+      "title": "BVPNM",
+      "url": "https://fracktal.in/wp-content/uploads/2024/01/BVPNM.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9387,
+      "error": null
+    },
+    {
+      "id": 22344,
+      "title": "GIrl Robot 2",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/GIrl-Robot-2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.5795,
+      "error": null
+    },
+    {
+      "id": 22343,
+      "title": "Atria",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/Atria.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7621,
+      "error": null
+    },
+    {
+      "id": 22342,
+      "title": "KLE",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/KLE.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8565,
+      "error": null
+    },
+    {
+      "id": 22341,
+      "title": "NCL",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/NCL.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.4864,
+      "error": null
+    },
+    {
+      "id": 22340,
+      "title": "CMTI",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/CMTI.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.9145,
+      "error": null
+    },
+    {
+      "id": 22339,
+      "title": "Manipal",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/Manipal.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6842,
+      "error": null
+    },
+    {
+      "id": 22338,
+      "title": "NID",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/NID.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6927,
+      "error": null
+    },
+    {
+      "id": 22337,
+      "title": "Ramainah",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/Untitled-3.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8501,
+      "error": null
+    },
+    {
+      "id": 22336,
+      "title": "IISc",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/IISc.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7271,
+      "error": null
+    },
+    {
+      "id": 22335,
+      "title": "IIT Jammu",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/IIT-Jammu.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.8165,
+      "error": null
+    },
+    {
+      "id": 22334,
+      "title": "IIT Tiru",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/IIT-Tiru.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9693,
+      "error": null
+    },
+    {
+      "id": 22333,
+      "title": "IDC",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/IDC.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.639,
+      "error": null
+    },
+    {
+      "id": 22332,
+      "title": "IIT Bombay",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/IIT-Bombay.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.5819,
+      "error": null
+    },
+    {
+      "id": 22307,
+      "title": "Red BG Genrated",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/Red-BG-Genrated-9.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.987,
+      "error": null
+    },
+    {
+      "id": 22304,
+      "title": "Red BG Genrated",
+      "url": "https://fracktal.in/wp-content/uploads/2023/12/Red-BG-Genrated-6.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.9884,
+      "error": null
+    },
+    {
+      "id": 21997,
+      "title": "reviews1",
+      "url": "https://fracktal.in/wp-content/uploads/2023/05/reviews1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8581,
+      "error": null
+    },
+    {
+      "id": 21946,
+      "title": "reviews",
+      "url": "https://fracktal.in/wp-content/uploads/2023/05/reviews-scaled.jpg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9046,
+      "error": null
+    },
+    {
+      "id": 21726,
+      "title": "Powered By Fracktal Services",
+      "url": "https://fracktal.in/wp-content/uploads/2023/05/Powered-By-Fracktal-Services.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8219,
+      "error": null
+    },
+    {
+      "id": 21307,
+      "title": "1.jpg",
+      "url": "https://fracktal.in/wp-content/uploads/2023/03/1.jpg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9636,
+      "error": null
+    },
+    {
+      "id": 21302,
+      "title": "e84a82baf2299baf704cab8a5896b90c-e1575203401634.png",
+      "url": "https://fracktal.in/wp-content/uploads/2023/03/e84a82baf2299baf704cab8a5896b90c-e1575203401634.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9084,
+      "error": null
+    },
+    {
+      "id": 21298,
+      "title": "TIE-Entreprenuerial-Excelence.png",
+      "url": "https://fracktal.in/wp-content/uploads/2023/03/TIE-Entreprenuerial-Excelence.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.4391,
+      "error": null
+    },
+    {
+      "id": 21293,
+      "title": "hdsay.png",
+      "url": "https://fracktal.in/wp-content/uploads/2023/03/hdsay.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.3874,
+      "error": null
+    },
+    {
+      "id": 21294,
+      "title": "download.png",
+      "url": "https://fracktal.in/wp-content/uploads/2023/03/download.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7288,
+      "error": null
+    },
+    {
+      "id": 21292,
+      "title": "HackadayPrize2017Logo.png",
+      "url": "https://fracktal.in/wp-content/uploads/2023/03/HackadayPrize2017Logo-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6706,
+      "error": null
+    },
+    {
+      "id": 18373,
+      "title": "Snowflake Logo",
+      "url": "https://fracktal.in/wp-content/uploads/2022/03/Snowflake-Logo.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6334,
+      "error": null
+    },
+    {
+      "id": 17932,
+      "title": "logo (2)",
+      "url": "https://fracktal.in/wp-content/uploads/2022/03/logo-2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.739,
+      "error": null
+    },
+    {
+      "id": 17927,
+      "title": "logo",
+      "url": "https://fracktal.in/wp-content/uploads/2022/03/logo.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.4415,
+      "error": null
+    },
+    {
+      "id": 17926,
+      "title": "AE-logo",
+      "url": "https://fracktal.in/wp-content/uploads/2022/03/AE-logo.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9681,
+      "error": null
+    },
+    {
+      "id": 16246,
+      "title": "TVS-Motor-Company",
+      "url": "https://fracktal.in/wp-content/uploads/2022/02/TVS-Motor-Company.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7833,
+      "error": null
+    },
+    {
+      "id": 16245,
+      "title": "bosch-eh3i4e45px",
+      "url": "https://fracktal.in/wp-content/uploads/2022/02/bosch-eh3i4e45px.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9038,
+      "error": null
+    },
+    {
+      "id": 16224,
+      "title": "gary-barth-sony_hero_editedjpg__1354x0_q85_subsampling-2_copy (1)",
+      "url": "https://fracktal.in/wp-content/uploads/2022/02/gary-barth-sony_hero_editedjpg__1354x0_q85_subsampling-2_copy-1.jpeg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Uncategorized",
+      "confidence": 0.2764,
+      "error": null
+    },
+    {
+      "id": 16145,
+      "title": "gary-barth-sony_hero_editedjpg__1354x0_q85_subsampling-2_copy",
+      "url": "https://fracktal.in/wp-content/uploads/2022/02/gary-barth-sony_hero_editedjpg__1354x0_q85_subsampling-2_copy.jpeg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Uncategorized",
+      "confidence": 0.2764,
+      "error": null
+    },
+    {
+      "id": 16143,
+      "title": "model-making-entertainment.png__2800x0_q85_subsampling-2",
+      "url": "https://fracktal.in/wp-content/uploads/2022/02/model-making-entertainment.png__2800x0_q85_subsampling-2-scaled.jpg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "People and Lifestyle",
+      "confidence": 0.5093,
+      "error": null
+    },
+    {
+      "id": 16097,
+      "title": "cw40_investment_digital_design",
+      "url": "https://fracktal.in/wp-content/uploads/2022/02/cw40_investment_digital_design.jpeg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Printed Parts",
+      "confidence": 0.7147,
+      "error": null
+    },
+    {
+      "id": 15675,
+      "title": "Website-Header_black-768&#215;198",
+      "url": "https://fracktal.in/wp-content/uploads/2021/12/Website-Header_black-768x198-2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9175,
+      "error": null
+    },
+    {
+      "id": 15674,
+      "title": "Website-Header_black-768&#215;198",
+      "url": "https://fracktal.in/wp-content/uploads/2021/12/Website-Header_black-768x198-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9175,
+      "error": null
+    },
+    {
+      "id": 14941,
+      "title": "Home Page #2",
+      "url": "https://fracktal.in/wp-content/uploads/2021/11/Home-Page-2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.8024,
+      "error": null
+    },
+    {
+      "id": 14897,
+      "title": "Logo (2)",
+      "url": "https://fracktal.in/wp-content/uploads/2021/11/Logo-2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.4601,
+      "error": null
+    },
+    {
+      "id": 14811,
+      "title": "ViZUxd8dRg25d2f8P85A_proof",
+      "url": "https://fracktal.in/wp-content/uploads/2021/11/ViZUxd8dRg25d2f8P85A_proof.jpeg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9557,
+      "error": null
+    },
+    {
+      "id": 13209,
+      "title": "DWYQPfQuTBGjuqNMBBDm_Mockup_pesante_copia_copia",
+      "url": "https://fracktal.in/wp-content/uploads/2021/11/DWYQPfQuTBGjuqNMBBDm_Mockup_pesante_copia_copia-scaled.jpeg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Screenshots and UI",
+      "confidence": 0.7044,
+      "error": null
+    },
+    {
+      "id": 13078,
+      "title": "8rehxYEjQ3KG0JDFskRv_file",
+      "url": "https://fracktal.in/wp-content/uploads/2021/11/8rehxYEjQ3KG0JDFskRv_file-scaled.jpg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9612,
+      "error": null
+    },
+    {
+      "id": 12784,
+      "title": "Kyle",
+      "url": "https://fracktal.in/wp-content/uploads/2021/11/Kyle.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.6267,
+      "error": null
+    },
+    {
+      "id": 12558,
+      "title": "Nvida_375x",
+      "url": "https://fracktal.in/wp-content/uploads/2021/10/Nvida_375x-1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6721,
+      "error": null
+    },
+    {
+      "id": 12557,
+      "title": "Samsung_375x",
+      "url": "https://fracktal.in/wp-content/uploads/2021/10/Samsung_375x.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.4295,
+      "error": null
+    },
+    {
+      "id": 12556,
+      "title": "Nvida_375x",
+      "url": "https://fracktal.in/wp-content/uploads/2021/10/Nvida_375x.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6721,
+      "error": null
+    },
+    {
+      "id": 12554,
+      "title": "DJI_375x",
+      "url": "https://fracktal.in/wp-content/uploads/2021/10/DJI_375x.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8865,
+      "error": null
+    },
+    {
+      "id": 11767,
+      "title": "Email Header",
+      "url": "https://fracktal.in/wp-content/uploads/2021/09/Email-Header.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.6645,
+      "error": null
+    },
+    {
+      "id": 11151,
+      "title": "SSL-PNG-Clipart",
+      "url": "https://fracktal.in/wp-content/uploads/2021/09/SSL-PNG-Clipart.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.792,
+      "error": null
+    },
+    {
+      "id": 7119,
+      "title": "Email Header",
+      "url": "https://fracktal.in/wp-content/uploads/2021/05/Email-Header.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.5904,
+      "error": null
+    },
+    {
+      "id": 6846,
+      "title": "About-BG1",
+      "url": "https://fracktal.in/wp-content/uploads/2021/05/About-BG1.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.5117,
+      "error": null
+    },
+    {
+      "id": 6491,
+      "title": "e84a82baf2299baf704cab8a5896b90c-e1575203401634",
+      "url": "https://fracktal.in/wp-content/uploads/2021/05/e84a82baf2299baf704cab8a5896b90c-e1575203401634.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9084,
+      "error": null
+    },
+    {
+      "id": 6490,
+      "title": "1",
+      "url": "https://fracktal.in/wp-content/uploads/2021/05/1.jpg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9636,
+      "error": null
+    },
+    {
+      "id": 6479,
+      "title": "hdsay",
+      "url": "https://fracktal.in/wp-content/uploads/2021/05/hdsay.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.3874,
+      "error": null
+    },
+    {
+      "id": 6477,
+      "title": "TIE Entreprenuerial Excelence",
+      "url": "https://fracktal.in/wp-content/uploads/2021/05/TIE-Entreprenuerial-Excelence.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.4391,
+      "error": null
+    },
+    {
+      "id": 6472,
+      "title": "download",
+      "url": "https://fracktal.in/wp-content/uploads/2021/05/download.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7288,
+      "error": null
+    },
+    {
+      "id": 6471,
+      "title": "hday",
+      "url": "https://fracktal.in/wp-content/uploads/2021/05/hday.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.439,
+      "error": null
+    },
+    {
+      "id": 6470,
+      "title": "HackadayPrize2017Logo",
+      "url": "https://fracktal.in/wp-content/uploads/2021/05/HackadayPrize2017Logo.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6706,
+      "error": null
+    },
+    {
+      "id": 6415,
+      "title": "Course-BG.png",
+      "url": "https://fracktal.in/wp-content/uploads/2021/05/Course-BG.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.5035,
+      "error": null
+    },
+    {
+      "id": 6064,
+      "title": "BG-Hero-Classes.png",
+      "url": "https://fracktal.in/wp-content/uploads/2021/05/BG-Hero-Classes.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Blog and Editorial",
+      "confidence": 0.4736,
+      "error": null
+    },
+    {
+      "id": 5741,
+      "title": "Group-37.png",
+      "url": "https://fracktal.in/wp-content/uploads/2021/04/Group-37.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Banners and Hero",
+      "confidence": 0.4407,
+      "error": null
+    },
+    {
+      "id": 5734,
+      "title": "Banner for Signature",
+      "url": "https://fracktal.in/wp-content/uploads/2021/04/Banner-for-Signature.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.4883,
+      "error": null
+    },
+    {
+      "id": 5728,
+      "title": "Signature_logo",
+      "url": "https://fracktal.in/wp-content/uploads/2021/04/Signature_logo.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8716,
+      "error": null
+    },
+    {
+      "id": 5156,
+      "title": "Logo-W.png",
+      "url": "https://fracktal.in/wp-content/uploads/2021/04/Logo-W.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6201,
+      "error": null
+    },
+    {
+      "id": 5131,
+      "title": "cropped-Website-Header_black.png",
+      "url": "https://fracktal.in/wp-content/uploads/2021/01/cropped-Website-Header_black.webp",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.4338,
+      "error": null
+    },
+    {
+      "id": 4997,
+      "title": "Powered By Fracktal2_flattened_Updated",
+      "url": "https://fracktal.in/wp-content/uploads/2021/02/Powered-By-Fracktal2_flattened_Updated.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9349,
+      "error": null
+    },
+    {
+      "id": 4777,
+      "title": "Website Header_black",
+      "url": "https://fracktal.in/wp-content/uploads/2021/01/Website-Header_black.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9258,
+      "error": null
+    },
+    {
+      "id": 4762,
+      "title": "Cost_per_part_vs._Production_volume_graph",
+      "url": "https://fracktal.in/wp-content/uploads/2021/01/Cost_per_part_vs._Production_volume_graph.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.7269,
+      "error": null
+    },
+    {
+      "id": 4755,
+      "title": "Electric Car",
+      "url": "https://fracktal.in/wp-content/uploads/2021/01/car-3321668_1920.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Icons and Illustrations",
+      "confidence": 0.8215,
+      "error": null
+    },
+    {
+      "id": 4690,
+      "title": "Website Header",
+      "url": "https://fracktal.in/wp-content/uploads/2020/12/Website-Header.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9389,
+      "error": null
+    },
+    {
+      "id": 4659,
+      "title": "cropped-White_Shirt-Logo_Small_flat.png",
+      "url": "https://fracktal.in/wp-content/uploads/2020/02/cropped-White_Shirt-Logo_Small_flat.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9485,
+      "error": null
+    },
+    {
+      "id": 4549,
+      "title": "Beautiful railway station with modern red commuter train at suns",
+      "url": "https://fracktal.in/wp-content/uploads/2020/12/PULS-images-applications_railway_yellow_1050pix..jpg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "People and Lifestyle",
+      "confidence": 0.491,
+      "error": null
+    },
+    {
+      "id": 4490,
+      "title": "Ashok_Leyland_logo",
+      "url": "https://fracktal.in/wp-content/uploads/2020/12/Ashok_Leyland_logo.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8315,
+      "error": null
+    },
+    {
+      "id": 4488,
+      "title": "thingQbator",
+      "url": "https://fracktal.in/wp-content/uploads/2020/12/thingQbator.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6953,
+      "error": null
+    },
+    {
+      "id": 4099,
+      "title": "Automotive",
+      "url": "https://fracktal.in/wp-content/uploads/2020/11/Automotive-e1631111421655.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.5846,
+      "error": null
+    },
+    {
+      "id": 4006,
+      "title": "Volterra Logo WHile",
+      "url": "https://fracktal.in/wp-content/uploads/2020/10/Volterra-Logo-WHile.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6108,
+      "error": null
+    },
+    {
+      "id": 3512,
+      "title": "Julia Logo",
+      "url": "https://fracktal.in/wp-content/uploads/2020/02/Julia-Logo.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8906,
+      "error": null
+    },
+    {
+      "id": 3510,
+      "title": "Julia White Logo",
+      "url": "https://fracktal.in/wp-content/uploads/2020/02/Julia-White-Logo.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8199,
+      "error": null
+    },
+    {
+      "id": 3226,
+      "title": "Volterra Logo",
+      "url": "https://fracktal.in/wp-content/uploads/2020/02/Volterra-Logo.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.6421,
+      "error": null
+    },
+    {
+      "id": 3167,
+      "title": "FracktalWorks Logo ( For white Background)",
+      "url": "https://fracktal.in/wp-content/uploads/2020/02/FracktalWorks-Logo-For-white-Background.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9703,
+      "error": null
+    },
+    {
+      "id": 3128,
+      "title": "White_Shirt Logo_FLAT",
+      "url": "https://fracktal.in/wp-content/uploads/2020/02/White_Shirt-Logo_FLAT.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9677,
+      "error": null
+    },
+    {
+      "id": 3125,
+      "title": "White_Shirt Logo_Small_flat",
+      "url": "https://fracktal.in/wp-content/uploads/2020/02/White_Shirt-Logo_Small_flat.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9485,
+      "error": null
+    },
+    {
+      "id": 2848,
+      "title": "Powered By Fracktal2",
+      "url": "https://fracktal.in/wp-content/uploads/2020/01/Powered-By-Fracktal2.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9562,
+      "error": null
+    },
+    {
+      "id": 2530,
+      "title": "team",
+      "url": "https://fracktal.in/wp-content/uploads/2020/01/team-1-scaled.jpg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Team and Office",
+      "confidence": 0.9869,
+      "error": null
+    },
+    {
+      "id": 2528,
+      "title": "team",
+      "url": "https://fracktal.in/wp-content/uploads/2020/01/team-scaled-e1579869529397.jpg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Team and Office",
+      "confidence": 0.9837,
+      "error": null
+    },
+    {
+      "id": 2523,
+      "title": "teamedit",
+      "url": "https://fracktal.in/wp-content/uploads/2020/01/teamedit.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Team and Office",
+      "confidence": 0.9863,
+      "error": null
+    },
+    {
+      "id": 2500,
+      "title": "Make_In_India",
+      "url": "https://fracktal.in/wp-content/uploads/2020/01/Make_In_India.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.8226,
+      "error": null
+    },
+    {
+      "id": 2450,
+      "title": "big6.jpg",
+      "url": "https://fracktal.in/wp-content/uploads/2020/01/big6.jpg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Product Images",
+      "confidence": 0.595,
+      "error": null
+    },
+    {
+      "id": 2387,
+      "title": "Powered By Fracktal",
+      "url": "https://fracktal.in/wp-content/uploads/2020/01/Powered-By-Fracktal.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7723,
+      "error": null
+    },
+    {
+      "id": 2363,
+      "title": "Black_Shirt Logo_small",
+      "url": "https://fracktal.in/wp-content/uploads/2020/01/Black_Shirt-Logo_small.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9041,
+      "error": null
+    },
+    {
+      "id": 2362,
+      "title": "cropped-Black_Shirt-Logo.png",
+      "url": "https://fracktal.in/wp-content/uploads/2020/01/cropped-Black_Shirt-Logo.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.9368,
+      "error": null
+    },
+    {
+      "id": 2346,
+      "title": "cropped-Site-Icon_White.png",
+      "url": "https://fracktal.in/wp-content/uploads/2020/01/cropped-Site-Icon_White.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8617,
+      "error": null
+    },
+    {
+      "id": 2345,
+      "title": "Site Icon_White",
+      "url": "https://fracktal.in/wp-content/uploads/2020/01/Site-Icon_White.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8617,
+      "error": null
+    },
+    {
+      "id": 2337,
+      "title": "head1.jpg",
+      "url": "https://fracktal.in/wp-content/uploads/2020/01/head1.jpg",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Uncategorized",
+      "confidence": 0.2803,
+      "error": null
+    },
+    {
+      "id": 2330,
+      "title": "cropped-Site-Icon_Black.png",
+      "url": "https://fracktal.in/wp-content/uploads/2020/01/cropped-Site-Icon_Black.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.8073,
+      "error": null
+    },
+    {
+      "id": 2329,
+      "title": "Site Icon_Black",
+      "url": "https://fracktal.in/wp-content/uploads/2020/01/Site-Icon_Black.png",
+      "current_folders": [
+        365
+      ],
+      "predicted_category": "Logos and Branding",
+      "confidence": 0.7502,
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser",
+        "chrome",
+        "--executable-path",
+        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+      ],
+      "env": {}
+    },
+    "emcp-tools": {
+      "type": "http",
+      "url": "https://fracktal.in/wp-json/mcp/emcp-tools-server",
+      "headers": {
+        "Authorization": "${EMCP_AUTH_BASIC}"
+      }
+    },
+    "higgsfield": {
+      "type": "http",
+      "url": "https://mcp.higgsfield.ai/mcp"
+    }
+  }
+}

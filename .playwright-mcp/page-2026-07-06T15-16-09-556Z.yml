@@ -1,0 +1,407 @@
+- generic [active] [ref=f15e1]:
+  - banner [ref=f15e2]:
+    - generic [ref=f15e4]:
+      - generic [ref=f15e5]:
+        - generic [ref=f15e6]: FDM Material · Composite
+        - heading "Carbon Fiber Nylon (CF-PA)" [level=1] [ref=f15e7]:
+          - text: Carbon Fiber Nylon
+          - text: (CF-PA)
+        - paragraph [ref=f15e8]: Short-fiber reinforced PA12 composite for high-strength structural FDM printing.
+        - generic [ref=f15e9]:
+          - generic [ref=f15e10]: FDM
+          - generic [ref=f15e11]: Structural
+          - generic [ref=f15e12]: Engineering Grade
+          - generic [ref=f15e13]: Composite
+        - generic [ref=f15e14]:
+          - generic [ref=f15e15]:
+            - generic [ref=f15e16]: Tensile Strength
+            - generic [ref=f15e17]: 85 MPa
+          - generic [ref=f15e18]:
+            - generic [ref=f15e19]: Heat Deflection
+            - generic [ref=f15e20]: 140 °C
+          - generic [ref=f15e21]:
+            - generic [ref=f15e22]: Density
+            - generic [ref=f15e23]: 1.1 g/cm³
+          - generic [ref=f15e24]:
+            - generic [ref=f15e25]: Print Temp
+            - generic [ref=f15e26]: 260–280 °C
+      - img "Carbon fiber nylon (CF-PA) FDM 3D printed structural parts — brackets, fixtures and engineering components" [ref=f15e28]
+  - region "Material quick reference" [ref=f15e30]:
+    - heading "Quick Reference" [level=2] [ref=f15e31]
+    - generic [ref=f15e32]:
+      - term: Material properties
+      - generic [ref=f15e33]:
+        - text: Material Name
+        - definition [ref=f15e34]: Carbon Fiber Nylon (CF-PA)
+      - generic [ref=f15e35]:
+        - text: Category
+        - definition [ref=f15e36]: Engineering composite
+      - generic [ref=f15e37]:
+        - text: Base Polymer
+        - definition [ref=f15e38]: Polyamide 12 (PA12)
+      - generic [ref=f15e39]:
+        - text: Filler
+        - definition [ref=f15e40]: Short chopped carbon fibre
+      - generic [ref=f15e41]:
+        - text: Print Process
+        - definition [ref=f15e42]: FDM / FFF
+      - generic [ref=f15e43]:
+        - text: Tensile Strength
+        - definition [ref=f15e44]: 85 MPa
+      - generic [ref=f15e45]:
+        - text: Heat Deflection (HDT)
+        - definition [ref=f15e46]: 140 °C
+      - generic [ref=f15e47]:
+        - text: Density
+        - definition [ref=f15e48]: 1.1 g/cm³
+      - generic [ref=f15e49]:
+        - text: Layer Bond Strength
+        - definition [ref=f15e50]: 35 MPa
+      - generic [ref=f15e51]:
+        - text: Moisture Absorption
+        - definition [ref=f15e52]: 1.2 %
+      - generic [ref=f15e53]:
+        - text: Nozzle Temp
+        - definition [ref=f15e54]: 260–280 °C
+      - generic [ref=f15e55]:
+        - text: Nozzle Material
+        - definition [ref=f15e56]: Hardened steel (≥0.4 mm)
+  - generic [ref=f15e59]:
+    - img "Radar chart comparing CF-PA, Nylon PA12 and PLA across eight material properties on a 0 to 10 scale" [ref=f15e61]:
+      - generic [ref=f15e72]:
+        - generic [ref=f15e73]: "2.5"
+        - generic [ref=f15e74]: "5.0"
+        - generic [ref=f15e75]: "7.5"
+        - generic [ref=f15e76]: "10"
+      - generic [ref=f15e80]:
+        - generic [ref=f15e81]: Tensile Strength
+        - generic [ref=f15e82]: Flexural Modulus
+        - generic [ref=f15e83]: Impact Resistance
+        - generic [ref=f15e84]: Heat Resistance
+        - generic [ref=f15e85]: Surface Finish
+        - generic [ref=f15e86]: Ease of Printing
+        - generic [ref=f15e87]: Chemical Resistance
+        - generic [ref=f15e88]: Dimensional Stability
+    - generic [ref=f15e89]:
+      - generic [ref=f15e90]: Comparative Profile
+      - heading "Material Property Profile" [level=2] [ref=f15e91]
+      - generic [ref=f15e92]:
+        - generic [ref=f15e93]:
+          - generic [ref=f15e95]: CF-PA
+          - generic [ref=f15e96]: This material
+        - generic [ref=f15e97]:
+          - generic [ref=f15e99]: Nylon (PA12)
+          - generic [ref=f15e100]: Unfilled base
+        - generic [ref=f15e101]:
+          - generic [ref=f15e103]: PLA
+          - generic [ref=f15e104]: Reference
+      - paragraph [ref=f15e105]: Values scored 0–10 from measured mechanical data and print process behaviour. CF-PA trades ease-of-printing and surface finish for strength, stiffness, heat and dimensional performance.
+  - generic [ref=f15e107]:
+    - generic [ref=f15e108]:
+      - generic [ref=f15e109]: Measured Properties
+      - heading "Key Properties" [level=2] [ref=f15e110]
+      - paragraph [ref=f15e111]: Engineering values with the context that decides whether CF-PA is the right choice for a load-bearing part.
+    - generic [ref=f15e112]:
+      - generic [ref=f15e113]:
+        - img [ref=f15e115]
+        - generic [ref=f15e117]: Tensile Strength
+        - generic [ref=f15e118]: 85 MPa
+        - generic [ref=f15e119]: vs 55 MPa for unfilled PA12.
+      - generic [ref=f15e120]:
+        - img [ref=f15e122]
+        - generic [ref=f15e124]: Heat Deflection Temp
+        - generic [ref=f15e125]: 140 °C
+        - generic [ref=f15e126]: Maintains shape in automotive engine-bay conditions.
+      - generic [ref=f15e127]:
+        - img [ref=f15e129]
+        - generic [ref=f15e131]: Layer Bond Strength
+        - generic [ref=f15e132]: 35 MPa
+        - generic [ref=f15e133]: Isotropic-approaching for structural FDM.
+      - generic [ref=f15e134]:
+        - img [ref=f15e136]
+        - generic [ref=f15e139]: Specific Stiffness
+        - generic [ref=f15e140]: 78 GPa·cm³/g
+        - generic [ref=f15e141]: Exceeds aluminium 6061.
+      - generic [ref=f15e142]:
+        - img [ref=f15e144]
+        - generic [ref=f15e146]: Moisture Absorption
+        - generic [ref=f15e147]: 1.2 %
+        - generic [ref=f15e148]: Desiccated storage required.
+      - generic [ref=f15e149]:
+        - img [ref=f15e151]
+        - generic [ref=f15e154]: Print Speed
+        - generic [ref=f15e155]: 40–70 mm/s
+        - generic [ref=f15e156]: Hardened steel nozzle required, ≥0.4 mm.
+  - generic [ref=f15e158]:
+    - generic [ref=f15e159]:
+      - generic [ref=f15e160]: Printer Compatibility
+      - heading "Machine Requirements" [level=2] [ref=f15e161]
+      - paragraph [ref=f15e162]: Can your printer handle this? These are the hard thresholds for reliable CF-PA output.
+    - table [ref=f15e164]:
+      - rowgroup [ref=f15e165]:
+        - row "Requirement Minimum Spec Recommended" [ref=f15e166]:
+          - columnheader "Requirement" [ref=f15e167]
+          - columnheader "Minimum Spec" [ref=f15e168]
+          - columnheader "Recommended" [ref=f15e169]
+      - rowgroup [ref=f15e170]:
+        - row "Nozzle Temperature 260 °C 265–280 °C" [ref=f15e171]:
+          - cell "Nozzle Temperature" [ref=f15e172]
+          - cell "260 °C" [ref=f15e173]
+          - cell "265–280 °C" [ref=f15e174]
+        - row "Bed Temperature 80 °C (heated mandatory) 100–110 °C" [ref=f15e175]:
+          - cell "Bed Temperature" [ref=f15e176]
+          - cell "80 °C (heated mandatory)" [ref=f15e177]
+          - cell "100–110 °C" [ref=f15e178]
+        - row "Nozzle Material Hardened steel Hardened steel (carbide optional)" [ref=f15e179]:
+          - cell "Nozzle Material" [ref=f15e180]
+          - cell "Hardened steel" [ref=f15e181]
+          - cell "Hardened steel (carbide optional)" [ref=f15e182]
+        - row "Enclosure Strongly recommended Fully enclosed + temp-controlled" [ref=f15e183]:
+          - cell "Enclosure" [ref=f15e184]
+          - cell "Strongly recommended" [ref=f15e185]
+          - cell "Fully enclosed + temp-controlled" [ref=f15e186]
+        - row "Drying 70 °C / 6 hr before print 80 °C / 8 hr; re-dry if open >4 hr" [ref=f15e187]:
+          - cell "Drying" [ref=f15e188]
+          - cell "70 °C / 6 hr before print" [ref=f15e189]
+          - cell "80 °C / 8 hr; re-dry if open >4 hr" [ref=f15e190]
+        - row "Bed Surface PEI / Garolite Garolite (G10)" [ref=f15e191]:
+          - cell "Bed Surface" [ref=f15e192]
+          - cell "PEI / Garolite" [ref=f15e193]
+          - cell "Garolite (G10)" [ref=f15e194]
+        - row "Retraction ≤1 mm (direct drive) Direct drive preferred" [ref=f15e195]:
+          - cell "Retraction" [ref=f15e196]
+          - cell "≤1 mm (direct drive)" [ref=f15e197]
+          - cell "Direct drive preferred" [ref=f15e198]
+    - generic [ref=f15e199]:
+      - img [ref=f15e201]
+      - paragraph [ref=f15e204]:
+        - text: CF-PA is an
+        - strong [ref=f15e205]: engineering-grade material
+        - text: . Standard FDM printers with PTFE hot-end liners cannot reliably print above 240 °C — verify your machine's all-metal hot-end before ordering.
+  - generic [ref=f15e207]:
+    - generic [ref=f15e208]:
+      - generic [ref=f15e209]: Where It Is Used
+      - heading "Applications — By Industry" [level=2] [ref=f15e210]
+    - generic [ref=f15e211]:
+      - generic [ref=f15e212]:
+        - img "3D printed carbon fibre mould — aerospace tooling application" [ref=f15e213]
+        - generic [ref=f15e214]:
+          - img [ref=f15e216]
+          - heading "Aerospace & Defence" [level=3] [ref=f15e218]
+          - list [ref=f15e219]:
+            - listitem [ref=f15e220]: Jigs & fixtures
+            - listitem [ref=f15e221]: Structural brackets
+            - listitem [ref=f15e222]: Tooling inserts
+      - generic [ref=f15e223]:
+        - img "Automotive 3D printing services — under-hood components and sensor housings" [ref=f15e224]
+        - generic [ref=f15e225]:
+          - img [ref=f15e227]
+          - heading "Automotive" [level=3] [ref=f15e230]
+          - list [ref=f15e231]:
+            - listitem [ref=f15e232]: Under-hood components
+            - listitem [ref=f15e233]: Sensor housings
+            - listitem [ref=f15e234]: Intake manifolds
+      - generic [ref=f15e235]:
+        - img "3D printed assembly jig for industrial tooling — end-of-arm tooling and fixtures" [ref=f15e236]
+        - generic [ref=f15e237]:
+          - img [ref=f15e239]
+          - heading "Industrial Tooling" [level=3] [ref=f15e241]
+          - list [ref=f15e242]:
+            - listitem [ref=f15e243]: End-of-arm tooling
+            - listitem [ref=f15e244]: Robotic grippers
+            - listitem [ref=f15e245]: Drill guides
+      - generic [ref=f15e246]:
+        - img [ref=f15e248]
+        - heading "Electronics" [level=3] [ref=f15e251]
+        - list [ref=f15e252]:
+          - listitem [ref=f15e253]: EMI-shielding housings (conductive CF variants)
+          - listitem [ref=f15e254]: Structural enclosures
+      - generic [ref=f15e255]:
+        - img [ref=f15e257]
+        - heading "Sports & Performance" [level=3] [ref=f15e262]
+        - list [ref=f15e263]:
+          - listitem [ref=f15e264]: Bicycle components
+          - listitem [ref=f15e265]: Equipment frames
+          - listitem [ref=f15e266]: Protective gear
+      - generic [ref=f15e267]:
+        - img "FDM 3D printed nylon gears — functional prototyping and R&D validation" [ref=f15e268]
+        - generic [ref=f15e269]:
+          - img [ref=f15e271]
+          - heading "R&D / Prototyping" [level=3] [ref=f15e273]
+          - list [ref=f15e274]:
+            - listitem [ref=f15e275]: Functional prototypes validated in the final operating environment
+  - generic [ref=f15e277]:
+    - generic [ref=f15e278]:
+      - generic [ref=f15e279]: Benchmark
+      - heading "Tensile Strength — FDM Materials (MPa)" [level=2] [ref=f15e280]
+    - img "Horizontal bar chart comparing tensile strength of six Fracktal FDM materials in megapascals" [ref=f15e281]:
+      - generic [ref=f15e282]:
+        - generic [ref=f15e284]:
+          - generic [ref=f15e285]: "20"
+          - generic [ref=f15e286]: "40"
+          - generic [ref=f15e287]: "60"
+          - generic [ref=f15e288]: "80"
+        - generic [ref=f15e289]:
+          - generic [ref=f15e290]: CF-PA
+          - generic [ref=f15e292]: "85"
+          - generic [ref=f15e293]: Nylon PA12
+          - generic [ref=f15e295]: "55"
+          - generic [ref=f15e296]: PETG
+          - generic [ref=f15e298]: "48"
+          - generic [ref=f15e299]: ABS
+          - generic [ref=f15e301]: "40"
+          - generic [ref=f15e302]: PLA
+          - generic [ref=f15e304]: "60"
+          - generic [ref=f15e305]: TPU 95A
+          - generic [ref=f15e307]: "28"
+  - generic [ref=f15e309]:
+    - generic [ref=f15e310]:
+      - generic [ref=f15e311]: Decision Guide
+      - heading "When to Use CF-PA — and When Not To" [level=2] [ref=f15e312]
+    - generic [ref=f15e313]:
+      - generic [ref=f15e314]:
+        - generic [ref=f15e315]:
+          - img [ref=f15e316]
+          - heading "Use CF-PA when" [level=3] [ref=f15e318]
+        - list [ref=f15e320]:
+          - listitem [ref=f15e321]:
+            - img [ref=f15e323]
+            - text: Part operates above 80 °C continuously.
+          - listitem [ref=f15e325]:
+            - img [ref=f15e327]
+            - text: High stiffness-to-weight ratio is required (e.g. EOAT, structural brackets).
+          - listitem [ref=f15e329]:
+            - img [ref=f15e331]
+            - text: Dimensional stability over temperature cycles is critical.
+          - listitem [ref=f15e333]:
+            - img [ref=f15e335]
+            - text: Part will be machined or drilled after printing.
+          - listitem [ref=f15e337]:
+            - img [ref=f15e339]
+            - text: You need to replace metal in low-to-medium load applications.
+      - generic [ref=f15e341]:
+        - generic [ref=f15e342]:
+          - img [ref=f15e343]
+          - heading "Avoid CF-PA when" [level=3] [ref=f15e345]
+        - list [ref=f15e347]:
+          - listitem [ref=f15e348]:
+            - img [ref=f15e350]
+            - text: Part requires high impact / ductile failure — use unfilled Nylon or TPU instead.
+          - listitem [ref=f15e352]:
+            - img [ref=f15e354]
+            - text: Surface aesthetics are primary — CF-PA has a matte, slightly rough finish.
+          - listitem [ref=f15e356]:
+            - img [ref=f15e358]
+            - text: Your machine lacks an all-metal hot-end.
+          - listitem [ref=f15e360]:
+            - img [ref=f15e362]
+            - text: Part contacts food, drinking water, or medical fluids (not certified).
+          - listitem [ref=f15e364]:
+            - img [ref=f15e366]
+            - text: You need tight tolerances without post-machining (moisture variability ±0.3 %).
+  - generic [ref=f15e369]:
+    - generic [ref=f15e370]:
+      - generic [ref=f15e371]: Design for Additive
+      - heading "DfAM Tips for CF-PA" [level=2] [ref=f15e372]
+      - paragraph [ref=f15e373]: Design rules that turn a printable part into a structural one.
+    - generic [ref=f15e374]:
+      - generic [ref=f15e375]:
+        - img [ref=f15e377]
+        - heading "Wall thickness ≥ 1.5 mm" [level=3] [ref=f15e380]
+        - paragraph [ref=f15e381]: CF fibre reinforcement needs a minimum of 3 perimeters to align correctly. Thinner walls print but lose their structural benefit.
+      - generic [ref=f15e382]:
+        - img [ref=f15e384]
+        - heading "Fibre orientation = load path" [level=3] [ref=f15e386]
+        - paragraph [ref=f15e387]: Route perimeters parallel to the primary stress axis. Avoid horizontal slicing through critical cross-sections.
+      - generic [ref=f15e388]:
+        - img [ref=f15e390]
+        - heading "Avoid sharp internal corners" [level=3] [ref=f15e393]
+        - paragraph [ref=f15e394]: Stress concentrations amplify at 90° interior corners in stiff composites. Use fillets of ≥1 mm radius.
+      - generic [ref=f15e395]:
+        - img [ref=f15e397]
+        - heading "Post-anneal for best results" [level=3] [ref=f15e400]
+        - paragraph [ref=f15e401]: 90 minutes at 80 °C in an oven reduces residual stress by ~40%. It also improves interlayer bond strength.
+  - generic [ref=f15e403]:
+    - generic [ref=f15e404]:
+      - generic [ref=f15e405]: Fracktal Printers
+      - heading "Printers Compatible with CF-PA" [level=2] [ref=f15e406]
+      - paragraph [ref=f15e407]: CF-PA requires an all-metal hot-end, an enclosed chamber, and direct-drive extrusion. These Fracktal machines meet every requirement out of the box.
+    - generic [ref=f15e408]:
+      - link "Fracktal Twin Dragon — dual-chamber FDM 3D printer compatible with CF-PA Twin Dragon Dual-chamber enclosed FDM printer with dual direct-drive extruders. Hardened steel nozzles standard. Runs CF-PA in both chambers, supports high-temp dual-material prints (CF-PA + support). Enclosed 300 °C capable Dual direct drive Hardened nozzle View printer" [ref=f15e409] [cursor=pointer]:
+        - /url: https://fracktal.in/twin-dragon/
+        - img "Fracktal Twin Dragon — dual-chamber FDM 3D printer compatible with CF-PA" [ref=f15e410]
+        - generic [ref=f15e411]:
+          - generic [ref=f15e412]: Twin Dragon
+          - generic [ref=f15e413]: Dual-chamber enclosed FDM printer with dual direct-drive extruders. Hardened steel nozzles standard. Runs CF-PA in both chambers, supports high-temp dual-material prints (CF-PA + support).
+          - generic [ref=f15e414]:
+            - generic [ref=f15e415]: Enclosed
+            - generic [ref=f15e416]: 300 °C capable
+            - generic [ref=f15e417]: Dual direct drive
+            - generic [ref=f15e418]: Hardened nozzle
+          - generic [ref=f15e419]:
+            - text: View printer
+            - img [ref=f15e420]
+      - link "Fracktal Julia Advanced — high-temperature enclosed FDM 3D printer compatible with CF-PA Julia Advanced Fully enclosed FDM printer with all-metal hot-end and active heated chamber. Direct-drive extruder handles abrasive CF-PA reliably. Ideal for single-material structural parts. Enclosed 300 °C capable Direct drive Hardened nozzle View printer" [ref=f15e422] [cursor=pointer]:
+        - /url: https://fracktal.in/julia-advanced/
+        - img "Fracktal Julia Advanced — high-temperature enclosed FDM 3D printer compatible with CF-PA" [ref=f15e423]
+        - generic [ref=f15e424]:
+          - generic [ref=f15e425]: Julia Advanced
+          - generic [ref=f15e426]: Fully enclosed FDM printer with all-metal hot-end and active heated chamber. Direct-drive extruder handles abrasive CF-PA reliably. Ideal for single-material structural parts.
+          - generic [ref=f15e427]:
+            - generic [ref=f15e428]: Enclosed
+            - generic [ref=f15e429]: 300 °C capable
+            - generic [ref=f15e430]: Direct drive
+            - generic [ref=f15e431]: Hardened nozzle
+          - generic [ref=f15e432]:
+            - text: View printer
+            - img [ref=f15e433]
+    - generic [ref=f15e435]:
+      - img [ref=f15e437]
+      - paragraph [ref=f15e440]:
+        - strong [ref=f15e441]: "Not compatible:"
+        - text: Snowflake and other open-frame printers with PTFE-lined hot-ends cannot safely reach the 260–280 °C required for CF-PA. Attempting to print CF-PA on an incompatible machine damages the hot-end and produces unreliable, weak parts.
+  - generic [ref=f15e443]:
+    - generic [ref=f15e444]:
+      - generic [ref=f15e445]: Compare
+      - heading "Related Materials" [level=2] [ref=f15e446]
+    - navigation "Related material pages" [ref=f15e447]:
+      - link "Nylon PA12 View material" [ref=f15e448] [cursor=pointer]:
+        - /url: /nylon/
+        - generic [ref=f15e449]: Nylon PA12
+        - generic [ref=f15e450]:
+          - text: View material
+          - img [ref=f15e451]
+      - link "Polycarbonate (PC) View material" [ref=f15e453] [cursor=pointer]:
+        - /url: /polycarbonate/
+        - generic [ref=f15e454]: Polycarbonate (PC)
+        - generic [ref=f15e455]:
+          - text: View material
+          - img [ref=f15e456]
+      - link "PLA View material" [ref=f15e458] [cursor=pointer]:
+        - /url: /pla/
+        - generic [ref=f15e459]: PLA
+        - generic [ref=f15e460]:
+          - text: View material
+          - img [ref=f15e461]
+      - link "ABS View material" [ref=f15e463] [cursor=pointer]:
+        - /url: /abs-acrylonitrile-butadiene-styrene/
+        - generic [ref=f15e464]: ABS
+        - generic [ref=f15e465]:
+          - text: View material
+          - img [ref=f15e466]
+      - link "PETG View material" [ref=f15e468] [cursor=pointer]:
+        - /url: /pet-g-polyethylene-terephthalate-glycol/
+        - generic [ref=f15e469]: PETG
+        - generic [ref=f15e470]:
+          - text: View material
+          - img [ref=f15e471]
+  - generic [ref=f15e474]:
+    - heading "Ready to print in CF-PA?" [level=2] [ref=f15e475]
+    - paragraph [ref=f15e476]: Talk specs, tolerances and lead time with our applications engineers.
+    - generic [ref=f15e477]:
+      - link "Get a Quote" [ref=f15e478] [cursor=pointer]:
+        - /url: /get-a-quote/
+      - link "Talk to an Engineer" [ref=f15e479] [cursor=pointer]:
+        - /url: /consulting-services/
+    - generic [ref=f15e480]: FRACKTAL WORKS
+  - generic [ref=f15e482]: Built in Bangalore. Fracktal Works — India's premier 3D printer manufacturer since 2013.

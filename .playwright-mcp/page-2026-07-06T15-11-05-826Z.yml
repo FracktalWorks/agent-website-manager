@@ -1,0 +1,331 @@
+- generic [active] [ref=f7e1]:
+  - link "Skip to content" [ref=f7e2] [cursor=pointer]:
+    - /url: "#content"
+  - banner [ref=f7e3]:
+    - generic [ref=f7e5]:
+      - link [ref=f7e9] [cursor=pointer]:
+        - /url: https://fracktal.in
+      - navigation "Menu" [ref=f7e13]:
+        - generic "Menu Toggle" [ref=f7e14]:
+          - list [ref=f7e15]:
+            - listitem [ref=f7e16]:
+              - generic [ref=f7e17]:
+                - generic [ref=f7e19]: Products
+                - button "Open Products" [ref=f7e20] [cursor=pointer]:
+                  - generic [ref=f7e21]:
+                    - img [ref=f7e22]
+                    - generic [ref=f7e24]: Open Products
+            - listitem [ref=f7e25]:
+              - generic [ref=f7e26]:
+                - generic [ref=f7e28]: Manufacturing Services
+                - button "Open Manufacturing Services" [ref=f7e29] [cursor=pointer]:
+                  - generic [ref=f7e30]:
+                    - img [ref=f7e31]
+                    - generic [ref=f7e33]: Open Manufacturing Services
+            - listitem [ref=f7e34]:
+              - generic [ref=f7e35]:
+                - generic [ref=f7e37]: Industries
+                - button "Open Industries" [ref=f7e38] [cursor=pointer]:
+                  - generic [ref=f7e39]:
+                    - img [ref=f7e40]
+                    - generic [ref=f7e42]: Open Industries
+            - listitem [ref=f7e43]:
+              - generic [ref=f7e44]:
+                - generic [ref=f7e46]: Materials
+                - button "Open Materials" [ref=f7e47] [cursor=pointer]:
+                  - generic [ref=f7e48]:
+                    - img [ref=f7e49]
+                    - generic [ref=f7e51]: Open Materials
+            - listitem [ref=f7e52]:
+              - generic [ref=f7e53]:
+                - generic [ref=f7e55]: Resources
+                - button "Open Resources" [ref=f7e56] [cursor=pointer]:
+                  - generic [ref=f7e57]:
+                    - img [ref=f7e58]
+                    - generic [ref=f7e60]: Open Resources
+            - listitem [ref=f7e61]:
+              - link "Support" [ref=f7e63] [cursor=pointer]:
+                - /url: https://fracktal.odoo.com/ticket
+                - generic [ref=f7e64]: Support
+            - listitem [ref=f7e65]:
+              - link "About Us" [ref=f7e67] [cursor=pointer]:
+                - /url: http://fracktal.in/about-us
+                - generic [ref=f7e68]: About Us
+      - link "+916364925434" [ref=f7e72] [cursor=pointer]:
+        - /url: tel:+916364925434
+        - generic [ref=f7e74]: "+916364925434"
+      - link "Contact Us" [ref=f7e78] [cursor=pointer]:
+        - /url: https://fracktal.in/contact-us/
+        - generic [ref=f7e80]: Contact Us
+  - generic [ref=f7e81]:
+    - generic [ref=f7e82]:
+      - generic:
+        - img
+      - generic [ref=f7e86]:
+        - heading "Carbon Fiber Nylon" [level=2] [ref=f7e88]
+        - heading "Composite Carbon Filament" [level=4] [ref=f7e93]
+    - generic [ref=f7e94]:
+      - img [ref=f7e96]
+      - generic [ref=f7e105]:
+        - heading "Carbon Fiber Nylon for FDM 3D Printing" [level=2] [ref=f7e107]
+        - heading "Carbon Fiber Nylon is a composite filament made by infusing chopped carbon fibers into a nylon (polyamide) base." [level=6] [ref=f7e109]
+        - generic [ref=f7e110]:
+          - paragraph [ref=f7e111]: This combination results in a material that is incredibly strong, lightweight, and highly resistant to wear and impact. It also has excellent chemical resistance and can withstand demanding mechanical stress.
+          - paragraph [ref=f7e112]: The carbon fibers add stiffness and dimensional stability, while the nylon base contributes flexibility and durability, making it ideal for high-performance and engineering-grade applications.
+    - generic [ref=f7e114]:
+      - img [ref=f7e116]
+      - img [ref=f7e121]
+      - heading "Key Benefits" [level=2] [ref=f7e126]
+    - generic [ref=f7e129]:
+      - generic [ref=f7e131]:
+        - heading "Material Performance Radar Chart" [level=2] [ref=f7e132]
+        - img [ref=f7e134]:
+          - generic [ref=f7e135]:
+            - generic [ref=f7e145]: "1"
+            - generic [ref=f7e146]: "2"
+            - generic [ref=f7e147]: "3"
+            - generic [ref=f7e148]: "4"
+            - generic [ref=f7e149]: "5"
+            - generic [ref=f7e156]: Strength
+            - generic [ref=f7e157]: Flexibility
+            - generic [ref=f7e158]: Detail
+            - generic [ref=f7e159]: Ease of Use
+            - generic [ref=f7e160]: Durability
+            - generic [ref=f7e161]: Cost
+      - generic [ref=f7e167]:
+        - heading "Carbon Fiber Nylon Performance Analysis" [level=3] [ref=f7e168]:
+          - strong [ref=f7e169]: Carbon Fiber Nylon Performance Analysis
+        - paragraph [ref=f7e170]: Carbon Fiber Nylon represents the pinnacle of FDM 3D printing technology, combining the already impressive properties of nylon with the extreme strength and stiffness of carbon fiber reinforcement. This composite material is reserved for the most demanding applications where performance justifies any cost.
+        - paragraph [ref=f7e171]:
+          - strong [ref=f7e172]: "Unparalleled Properties:"
+        - list [ref=f7e173]:
+          - listitem [ref=f7e174]:
+            - strong [ref=f7e175]: Maximum Strength
+            - text: – Stronger than aluminum at fraction of weight
+          - listitem [ref=f7e176]:
+            - strong [ref=f7e177]: Extreme Stiffness
+            - text: – Minimal deflection under load
+          - listitem [ref=f7e178]:
+            - strong [ref=f7e179]: Superior Wear Resistance
+            - text: – Outlasts metal in many applications
+          - listitem [ref=f7e180]:
+            - strong [ref=f7e181]: Thermal Stability
+            - text: – Maintains properties at high temperatures
+          - listitem [ref=f7e182]:
+            - strong [ref=f7e183]: Low Thermal Expansion
+            - text: – Excellent dimensional accuracy
+        - paragraph [ref=f7e184]:
+          - strong [ref=f7e185]: "Specialized Applications:"
+        - list [ref=f7e186]:
+          - listitem [ref=f7e187]: Aerospace components and drone frames
+          - listitem [ref=f7e188]: Racing and automotive performance parts
+          - listitem [ref=f7e189]: Robotic end effectors and fixtures
+          - listitem [ref=f7e190]: High-stress industrial tooling
+          - listitem [ref=f7e191]: Professional-grade jigs and fixtures
+          - listitem [ref=f7e192]: Replacement for machined metal parts
+        - paragraph [ref=f7e193]:
+          - strong [ref=f7e194]: "Technical Requirements:"
+        - list [ref=f7e195]:
+          - listitem [ref=f7e196]:
+            - strong [ref=f7e197]: Hardened Nozzle
+            - text: – Carbon fiber destroys brass nozzles
+          - listitem [ref=f7e198]:
+            - strong [ref=f7e199]: Enclosed Printer
+            - text: – Temperature control essential
+          - listitem [ref=f7e200]:
+            - strong [ref=f7e201]: Professional Equipment
+            - text: – Not suitable for consumer printers
+          - listitem [ref=f7e202]:
+            - strong [ref=f7e203]: Expert Knowledge
+            - text: – Requires significant experience
+          - listitem [ref=f7e204]:
+            - strong [ref=f7e205]: Dry Storage
+            - text: – Extremely hygroscopic
+        - paragraph [ref=f7e206]:
+          - strong [ref=f7e207]: "The Ultimate Choice:"
+          - text: With an overall score of 2.8/5, the low rating reflects accessibility rather than performance. For applications where weight savings and strength are paramount, no other FDM material comes close. The extreme cost (5-10x standard materials) and technical challenges are insignificant compared to the performance gains.
+        - paragraph [ref=f7e208]:
+          - strong [ref=f7e209]: "Professional Warning:"
+          - text: Carbon Fiber Nylon is not for hobbyists or beginners. It requires industrial-grade equipment, extensive experience, and proper safety equipment. The material can damage printers not designed for abrasive filaments.
+    - generic [ref=f7e211]:
+      - heading "Primary Industries for Carbon Fiber Nylon" [level=2] [ref=f7e213]
+      - generic [ref=f7e214]:
+        - region "Carousel" [ref=f7e215]:
+          - generic [ref=f7e216]:
+            - group "1 of 5" [ref=f7e217]:
+              - heading "Education" [level=2] [ref=f7e224]
+            - group "2 of 5" [ref=f7e225]:
+              - heading "Automotive" [level=2] [ref=f7e232]
+            - group "3 of 5" [ref=f7e233]:
+              - heading "Entertainment" [level=2] [ref=f7e240]
+            - group "4 of 5" [ref=f7e241]:
+              - heading "Manufacturing" [level=2] [ref=f7e248]
+            - group "5 of 5" [ref=f7e249]:
+              - heading "Engineering" [level=2] [ref=f7e256]
+        - button "Previous" [ref=f7e257] [cursor=pointer]:
+          - img [ref=f7e258]
+        - button "Next" [ref=f7e260] [cursor=pointer]:
+          - img [ref=f7e261]
+    - generic [ref=f7e264]:
+      - heading "Our TPU Printers" [level=2] [ref=f7e266]
+      - region "Carousel" [ref=f7e268]:
+        - generic [ref=f7e269]:
+          - group "1 of 4" [ref=f7e270]:
+            - generic [ref=f7e274]:
+              - heading "Snowflake V2" [level=2] [ref=f7e277]
+              - link "View More" [ref=f7e279] [cursor=pointer]:
+                - /url: https://fracktal.in/snowflake/
+                - generic [ref=f7e280]:
+                  - img [ref=f7e282]
+                  - generic [ref=f7e284]: View More
+          - group "2 of 4" [ref=f7e285]:
+            - generic [ref=f7e289]:
+              - heading "Julia Series" [level=2] [ref=f7e292]
+              - link "View More" [ref=f7e294] [cursor=pointer]:
+                - /url: https://fracktal.in/julia/
+                - generic [ref=f7e295]:
+                  - img [ref=f7e297]
+                  - generic [ref=f7e299]: View More
+          - group "3 of 4" [ref=f7e300]:
+            - generic [ref=f7e304]:
+              - heading "Twin Dragon" [level=2] [ref=f7e307]
+              - link "View More" [ref=f7e309] [cursor=pointer]:
+                - /url: https://fracktal.in/twindragon/
+                - generic [ref=f7e310]:
+                  - img [ref=f7e312]
+                  - generic [ref=f7e314]: View More
+          - group "4 of 4" [ref=f7e315]:
+            - generic [ref=f7e319]:
+              - heading "Volterra" [level=2] [ref=f7e322]
+              - link "View More" [ref=f7e324] [cursor=pointer]:
+                - /url: https://fracktal.in/volterra/
+                - generic [ref=f7e325]:
+                  - img [ref=f7e327]
+                  - generic [ref=f7e329]: View More
+    - heading "TRUSTED BY" [level=4] [ref=f7e335]
+    - generic [ref=f7e399]:
+      - img [ref=f7e401]
+      - generic [ref=f7e407]:
+        - img [ref=f7e411]
+        - heading "\"We have been using Fracktal Works 3D Printers for multiple years now, and they are helping us with advanced research as well as student projects. The Fracktal is just a call away to support us.\"" [level=2] [ref=f7e414]
+        - heading "Rohit Shenoi, Research Scholar, MIT Manipal" [level=6] [ref=f7e416]
+    - generic [ref=f7e419]:
+      - heading "Question? Talk to our experts today" [level=2] [ref=f7e421]
+      - link "Contact Us" [ref=f7e423] [cursor=pointer]:
+        - /url: https://fracktal.in/contact-us/
+        - generic [ref=f7e424]:
+          - img [ref=f7e426]
+          - generic [ref=f7e428]: Contact Us
+    - generic [ref=f7e430]:
+      - heading "Featured In" [level=4] [ref=f7e434]
+      - link [ref=f7e448] [cursor=pointer]:
+        - /url: https://www.eco-business.com/videos/eco-business-releases-new-documentary-from-asia-to-antarctica/
+  - contentinfo [ref=f7e464]:
+    - generic [ref=f7e467]:
+      - generic [ref=f7e468]:
+        - generic [ref=f7e469]:
+          - heading "Information" [level=2] [ref=f7e471]
+          - heading "About Us" [level=2] [ref=f7e473]:
+            - link "About Us" [ref=f7e474] [cursor=pointer]:
+              - /url: https://fracktal.in/home/about-us/
+          - heading "Contact Us" [level=2] [ref=f7e476]:
+            - link "Contact Us" [ref=f7e477] [cursor=pointer]:
+              - /url: https://fracktal.in/contact-us/
+          - heading "Our Partners" [level=2] [ref=f7e479]:
+            - link "Our Partners" [ref=f7e480] [cursor=pointer]:
+              - /url: https://fracktal.in/partners/
+          - heading "Careers" [level=2] [ref=f7e482]:
+            - link "Careers" [ref=f7e483] [cursor=pointer]:
+              - /url: https://fracktal.in/careers/
+        - generic [ref=f7e487]:
+          - heading "Products" [level=2] [ref=f7e489]
+          - heading "Snowflake" [level=2] [ref=f7e491]:
+            - link "Snowflake" [ref=f7e492] [cursor=pointer]:
+              - /url: https://fracktal.in/snowflake/
+          - heading "Julia" [level=2] [ref=f7e494]:
+            - link "Julia" [ref=f7e495] [cursor=pointer]:
+              - /url: https://fracktal.in/3dprinters/julia/
+          - heading "Dragon" [level=2] [ref=f7e497]:
+            - link "Dragon" [ref=f7e498] [cursor=pointer]:
+              - /url: https://fracktal.in/dragon/
+          - heading "Twin Dragon" [level=2] [ref=f7e500]:
+            - link "Twin Dragon" [ref=f7e501] [cursor=pointer]:
+              - /url: https://fracktal.in/twindragon/
+          - heading "Volterra" [level=2] [ref=f7e503]:
+            - link "Volterra" [ref=f7e504] [cursor=pointer]:
+              - /url: https://fracktal.in/volterra/
+          - heading "Material Dryer" [level=2] [ref=f7e506]:
+            - link "Material Dryer" [ref=f7e507] [cursor=pointer]:
+              - /url: https://fracktal.in/materialdryer
+          - heading "Printstick" [level=2] [ref=f7e509]:
+            - link "Printstick" [ref=f7e510] [cursor=pointer]:
+              - /url: https://fracktal.in/printstick-2
+          - heading "Apollo SLS" [level=2] [ref=f7e512]:
+            - link "Apollo SLS" [ref=f7e513] [cursor=pointer]:
+              - /url: https://fracktal.in/apollo-sls-landing-page/
+        - generic [ref=f7e517]:
+          - heading "Solutions" [level=2] [ref=f7e519]
+          - heading "3D Printing Services" [level=2] [ref=f7e521]:
+            - link "3D Printing Services" [ref=f7e522] [cursor=pointer]:
+              - /url: https://fracktal.in/3d-printing-service/
+          - heading "Engneering Services" [level=2] [ref=f7e524]:
+            - link "Engneering Services" [ref=f7e525] [cursor=pointer]:
+              - /url: https://fracktal.in/engineering-services/
+        - generic [ref=f7e529]:
+          - heading "Support" [level=2] [ref=f7e531]
+          - heading "Knowledge Base" [level=2] [ref=f7e533]:
+            - link "Knowledge Base" [ref=f7e534] [cursor=pointer]:
+              - /url: https://care.fracktal.in/portal/en/kb
+          - heading "Raise an Issue" [level=2] [ref=f7e536]:
+            - link "Raise an Issue" [ref=f7e537] [cursor=pointer]:
+              - /url: https://care.fracktal.in/portal/en/newticket
+              - text: Raise an Issue
+        - generic [ref=f7e541]:
+          - heading "Legal" [level=2] [ref=f7e543]
+          - heading "EULA" [level=2] [ref=f7e545]:
+            - link "EULA" [ref=f7e546] [cursor=pointer]:
+              - /url: https://fracktal.in/eula/
+          - heading "Terms & Conditions" [level=2] [ref=f7e548]:
+            - link "Terms & Conditions" [ref=f7e549] [cursor=pointer]:
+              - /url: https://fracktal.in/terms-and-conditions/
+          - heading "Privacy Policy" [level=2] [ref=f7e551]:
+            - link "Privacy Policy" [ref=f7e552] [cursor=pointer]:
+              - /url: https://fracktal.in/privacypolicy/
+          - heading "Cookie Policy" [level=2] [ref=f7e554]:
+            - link "Cookie Policy" [ref=f7e555] [cursor=pointer]:
+              - /url: https://fracktal.in/cookie-policy/
+          - heading "Return & Refund Policy" [level=2] [ref=f7e557]:
+            - link "Return & Refund Policy" [ref=f7e558] [cursor=pointer]:
+              - /url: https://fracktal.in/return-refund-policy/
+          - heading "Shipping Policy" [level=2] [ref=f7e560]:
+            - link "Shipping Policy" [ref=f7e561] [cursor=pointer]:
+              - /url: https://fracktal.in/shipping-policy/
+      - paragraph [ref=f7e567]: © 2025 Fracktal Works Pvt. Ltd
+      - list [ref=f7e569]:
+        - listitem [ref=f7e570]:
+          - link "Facebook" [ref=f7e571] [cursor=pointer]:
+            - /url: https://www.facebook.com/FracktalWorks
+            - generic [ref=f7e572]: Facebook
+            - img [ref=f7e573]
+        - listitem [ref=f7e575]:
+          - link "Twitter" [ref=f7e576] [cursor=pointer]:
+            - /url: https://twitter.com/fracktalworks
+            - generic [ref=f7e577]: Twitter
+            - img [ref=f7e578]
+        - listitem [ref=f7e580]:
+          - link "Youtube" [ref=f7e581] [cursor=pointer]:
+            - /url: https://www.youtube.com/channel/UC0jc-IxUx_7V07lZnRqtlGg
+            - generic [ref=f7e582]: Youtube
+            - img [ref=f7e583]
+        - listitem [ref=f7e585]:
+          - link "Instagram" [ref=f7e586] [cursor=pointer]:
+            - /url: https://www.instagram.com/fracktalworks
+            - generic [ref=f7e587]: Instagram
+            - img [ref=f7e588]
+        - listitem [ref=f7e590]:
+          - link "Linkedin" [ref=f7e591] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/3228893/
+            - generic [ref=f7e592]: Linkedin
+            - img [ref=f7e593]
+  - generic [ref=f7e595]: desktop
+  - status [ref=f7e596]

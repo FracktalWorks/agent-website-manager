@@ -22,6 +22,7 @@ organize the WordPress media library for better performance and storage.
 |--------|---------|
 | `scripts/wp_media_cleanup.py` | Detect unused images, safe delete, media audit |
 | `scripts/wp_image_optimize.py` | Compress, convert to WebP, regenerate thumbnails |
+| `scripts/wp_media_classify.py` | CLIP-based image classification, virtual folder (VMFO) organization |
 
 ## Usage
 
@@ -63,7 +64,73 @@ python .github/skills/media_cleanup/scripts/wp_image_optimize.py --action regene
 
 # Full optimization: compress + webp + thumbnails
 python .github/skills/media_cleanup/scripts/wp_image_optimize.py --action optimize-all
+
+# Ensure virtual folders (VMFO taxonomy) exist for the target taxonomy
+python .github/skills/media_cleanup/scripts/wp_media_classify.py --action ensure-folders
+
+# Classify a random sample first to spot-check accuracy (no writes)
+python .github/skills/media_cleanup/scripts/wp_media_classify.py --action classify --dry-run --sample 50
+
+# Classify the full library (no writes, just a report)
+python .github/skills/media_cleanup/scripts/wp_media_classify.py --action classify --dry-run
+
+# Classify + assign images to virtual folders in WordPress
+python .github/skills/media_cleanup/scripts/wp_media_classify.py --action classify --apply
+
+# Classify a single category's images only, writing a named report
+python .github/skills/media_cleanup/scripts/wp_media_classify.py --action classify --dry-run \
+  --report-name banners_hero
+
+# Apply only a pre-approved, hand-reviewed set of media IDs
+python .github/skills/media_cleanup/scripts/wp_media_classify.py --action classify --apply \
+  --ids-file outputs/_memory/banners_hero_ids.txt
+
+# Classify images referenced in post/page content instead of by CLIP (for blog images)
+python .github/skills/media_cleanup/scripts/wp_media_classify.py --action blog-images
+
+# Sort by MIME type (SVG/font/video/etc.) instead of CLIP — no model load, near-instant
+python .github/skills/media_cleanup/scripts/wp_media_classify.py --action sort-files
 ```
+
+### The real workflow: classify → review → approve → apply
+
+Never go straight from `--dry-run` to `--apply` on a category with real ambiguity (e.g.
+"is this a banner or a hero image?"). The proven multi-pass loop, used for every category
+cleanup so far:
+
+1. **Classify** that category with a named report: `--action classify --dry-run
+   --report-name <category>` → writes `outputs/_memory/media_classification_<category>.json`.
+2. **Build a review HTML** from that JSON (thumbnail grid with predicted folder + confidence)
+   so a human can eyeball misclassifications at a glance — save as
+   `outputs/_memory/<category>_review.html`.
+3. **Approve** — after review, write the accepted media IDs to
+   `outputs/_memory/<category>_ids.txt` (one ID per line, or whatever the reviewer confirms).
+4. **Apply** only those IDs: `--action classify --apply --ids-file
+   outputs/_memory/<category>_ids.txt`. This scopes the write to reviewed items instead of
+   trusting the raw model output for the whole library.
+
+This is why `outputs/_memory/` accumulates `*_items.json` / `*_review.html` / `*_ids.txt`
+triples per category (banners_hero, product_cleanup, product_images, blog_images, ...) —
+that's expected, not clutter. Keep them; they're the audit trail for what was approved.
+
+## Virtual Folder Classification (CLIP)
+
+The site uses the **VMFO** (Media Folder) plugin, which exposes a real taxonomy
+(`vmfo_folder`) readable/writable via the standard `wp/v2/media` endpoint
+(`vmfo-folders` field, an array of folder term IDs) and manageable via
+`/wp-json/vmfo/v1/folders`.
+
+Media titles/alt text on this site are mostly blank or auto-generated
+(`image-147.png`, "Misc – Image 96"), so classification is done by actually
+looking at each image using local **CLIP zero-shot classification**
+(`open_clip`, `ViT-B-32/openai`) against a fixed set of category prompts —
+no API cost, no external vision calls. Low-confidence predictions
+(similarity below the threshold in the script) fall into "Uncategorized"
+for manual review rather than being force-assigned.
+
+Always run `--action classify --dry-run` (optionally with `--sample N`)
+first and review `outputs/_memory/media_classification.json` before
+`--apply`.
 
 ## How Unused Image Detection Works
 

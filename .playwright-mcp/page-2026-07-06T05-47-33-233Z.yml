@@ -1,0 +1,367 @@
+- generic [active] [ref=f168e1]:
+  - link "Skip to content" [ref=f168e2] [cursor=pointer]:
+    - /url: "#content"
+  - banner [ref=f168e3]:
+    - generic [ref=f168e5]:
+      - link [ref=f168e9] [cursor=pointer]:
+        - /url: https://fracktal.in
+      - navigation "Menu" [ref=f168e13]:
+        - generic "Menu Toggle" [ref=f168e14]:
+          - list [ref=f168e15]:
+            - listitem [ref=f168e16]:
+              - generic [ref=f168e17]:
+                - generic [ref=f168e19]: Products
+                - button "Open Products" [ref=f168e20] [cursor=pointer]:
+                  - generic [ref=f168e21]:
+                    - img [ref=f168e22]
+                    - generic [ref=f168e24]: Open Products
+            - listitem [ref=f168e25]:
+              - generic [ref=f168e26]:
+                - generic [ref=f168e28]: Manufacturing Services
+                - button "Open Manufacturing Services" [ref=f168e29] [cursor=pointer]:
+                  - generic [ref=f168e30]:
+                    - img [ref=f168e31]
+                    - generic [ref=f168e33]: Open Manufacturing Services
+            - listitem [ref=f168e34]:
+              - generic [ref=f168e35]:
+                - generic [ref=f168e37]: Industries
+                - button "Open Industries" [ref=f168e38] [cursor=pointer]:
+                  - generic [ref=f168e39]:
+                    - img [ref=f168e40]
+                    - generic [ref=f168e42]: Open Industries
+            - listitem [ref=f168e43]:
+              - generic [ref=f168e44]:
+                - generic [ref=f168e46]: Materials
+                - button "Open Materials" [ref=f168e47] [cursor=pointer]:
+                  - generic [ref=f168e48]:
+                    - img [ref=f168e49]
+                    - generic [ref=f168e51]: Open Materials
+            - listitem [ref=f168e52]:
+              - generic [ref=f168e53]:
+                - generic [ref=f168e55]: Resources
+                - button "Open Resources" [ref=f168e56] [cursor=pointer]:
+                  - generic [ref=f168e57]:
+                    - img [ref=f168e58]
+                    - generic [ref=f168e60]: Open Resources
+            - listitem [ref=f168e61]:
+              - link "Support" [ref=f168e63] [cursor=pointer]:
+                - /url: https://fracktal.odoo.com/ticket
+                - generic [ref=f168e64]: Support
+            - listitem [ref=f168e65]:
+              - link "About Us" [ref=f168e67] [cursor=pointer]:
+                - /url: http://fracktal.in/about-us
+                - generic [ref=f168e68]: About Us
+      - link "+916364925434" [ref=f168e72] [cursor=pointer]:
+        - /url: tel:+916364925434
+        - generic [ref=f168e74]: "+916364925434"
+      - link "Contact Us" [ref=f168e78] [cursor=pointer]:
+        - /url: https://fracktal.in/contact-us/
+        - generic [ref=f168e80]: Contact Us
+  - main [ref=f168e81]:
+    - generic [ref=f168e83]:
+      - generic [ref=f168e88]:
+        - generic [ref=f168e89]: Original Equipment Manufacturer · Bangalore, India
+        - heading "India's Premier 3D Printer Manufacturer" [level=1] [ref=f168e91]
+        - paragraph [ref=f168e93]: Fracktal Works designs, engineers, and manufactures 3D printers in Bangalore, India — from desktop precision machines to production-grade industrial systems. Every printer is built in-house, from the ground up. No imported kits. No rebadging.
+        - generic [ref=f168e95]:
+          - link "View Our 3D Printers" [ref=f168e98] [cursor=pointer]:
+            - /url: https://fracktal.in/3dprinters/
+            - generic [ref=f168e100]: View Our 3D Printers
+          - link "About Fracktal" [ref=f168e103] [cursor=pointer]:
+            - /url: https://fracktal.in/home/about-us/
+            - generic [ref=f168e105]: About Fracktal
+        - generic [ref=f168e107]:
+          - generic [ref=f168e108]:
+            - strong [ref=f168e109]: "2013"
+            - text: — founded at Manipal Institute of Technology
+          - generic [ref=f168e110]:
+            - strong [ref=f168e111]: In-house
+            - text: — design, firmware & manufacturing
+      - generic [ref=f168e113]:
+        - generic [ref=f168e115]:
+          - generic [ref=f168e116]: Why Fracktal
+          - heading "An Original Equipment Manufacturer, Not a Reseller" [level=2] [ref=f168e118]
+          - paragraph [ref=f168e120]: Most “manufacturers” in this market import and rebadge machines. Fracktal designs, builds, and tests every printer at its own facility.
+        - generic [ref=f168e122]:
+          - generic [ref=f168e123]:
+            - generic [ref=f168e124]: "01"
+            - heading "Built from the Ground Up" [level=3] [ref=f168e126]
+            - paragraph [ref=f168e128]: Motion systems, firmware, and electronics are developed in-house — not sourced from a generic reference design and relabeled.
+          - generic [ref=f168e129]:
+            - generic [ref=f168e130]: "02"
+            - heading "Make in India, Verified" [level=3] [ref=f168e132]
+            - paragraph [ref=f168e134]: Design, assembly, and calibration happen at our own facility in Bangalore — not outsourced, not imported as a kit.
+          - generic [ref=f168e135]:
+            - generic [ref=f168e136]: "03"
+            - heading "Direct Engineering Support" [level=3] [ref=f168e138]
+            - paragraph [ref=f168e140]: Because we build the machine, our engineering team can support it — no reseller layer between you and the people who designed it.
+      - generic [ref=f168e144]:
+        - generic [ref=f168e145]: Since 2013
+        - heading "Founded by Engineers, for Engineers" [level=2] [ref=f168e147]
+        - generic [ref=f168e148]:
+          - paragraph [ref=f168e149]: Fracktal Works was founded in 2013 by Rohit Asil and Vijay Raghav Varada, engineering students at the Manipal Institute of Technology working with the Robomanipal robotics team. Building their own robots meant they needed 3D printers they could actually afford — so they built their own.
+          - paragraph [ref=f168e150]: That printer became a company. Over a decade later, Fracktal designs and manufactures every machine itself, from compact desktop systems to large-format industrial printers.
+        - link "Read Our Full Story" [ref=f168e152] [cursor=pointer]:
+          - /url: https://fracktal.in/home/about-us/
+          - generic [ref=f168e154]: Read Our Full Story
+      - generic [ref=f168e156]:
+        - generic [ref=f168e158]:
+          - generic [ref=f168e159]: Made in India
+          - heading "3D Printers Engineered for Real Production" [level=2] [ref=f168e161]
+          - paragraph [ref=f168e163]: "Three families, one design philosophy: real specs, not adjectives."
+        - generic [ref=f168e164]:
+          - generic [ref=f168e165]:
+            - generic [ref=f168e168]: Desktop Precision
+            - heading "Snowflake" [level=3] [ref=f168e170]
+            - generic [ref=f168e172]:
+              - text: Plug-and-play desktop 3D printing with auto bed leveling and power-failure recovery.
+              - text: "Build volume: 200 x 200 x 200 mm"
+              - text: "Accuracy: 50um X/Y, 5um Z"
+              - text: "Materials: ABS, ASA, PLA/PLA+, PETG+"
+            - link "View Snowflake" [ref=f168e174] [cursor=pointer]:
+              - /url: https://fracktal.in/snowflake/
+              - generic [ref=f168e176]: View Snowflake
+          - generic [ref=f168e177]:
+            - generic [ref=f168e180]: Advanced Industrial Desktop
+            - heading "Julia" [level=3] [ref=f168e182]
+            - generic [ref=f168e184]:
+              - text: High-temperature, multi-material printing with remote monitoring built in.
+              - text: "Build volume: up to 250 x 250 x 300 mm"
+              - text: "Print speed: up to 200 mm/s"
+              - text: "Materials: PC, Nylon 12, Nylon CF, TPU & more"
+            - link "View Julia" [ref=f168e186] [cursor=pointer]:
+              - /url: https://fracktal.in/julia/
+              - generic [ref=f168e188]: View Julia
+          - generic [ref=f168e189]:
+            - generic [ref=f168e192]: Independent Dual Extrusion
+            - heading "Twin Dragon" [level=3] [ref=f168e194]
+            - generic [ref=f168e196]:
+              - text: IDEX architecture for duplication and mirror modes, with hot-swappable nozzles.
+              - text: "Build volume: up to 600 x 600 x 400 mm"
+              - text: "Print speed: up to 500 mm/s"
+              - text: "Materials: PC, carbon-fiber nylon & composites"
+            - link "View Twin Dragon" [ref=f168e198] [cursor=pointer]:
+              - /url: https://fracktal.in/twindragon/
+              - generic [ref=f168e200]: View Twin Dragon
+      - generic [ref=f168e206]:
+        - generic [ref=f168e207]: Beyond the Desktop
+        - heading "A Growing Family of Indigenous 3D Printers" [level=2] [ref=f168e209]
+        - generic [ref=f168e210]:
+          - paragraph [ref=f168e211]: Snowflake, Julia, and Twin Dragon are our desktop and dual-extrusion lines. For industrial-scale production, Fracktal also builds Volterra — a heated-chamber industrial FFF printer for engineering-grade materials like PEEK, ULTEM, and carbon-fiber nylon — with an SLS platform in development.
+          - generic [ref=f168e212]:
+            - generic [ref=f168e213]: Snowflake
+            - generic [ref=f168e214]: Julia
+            - generic [ref=f168e215]: Twin Dragon
+            - generic [ref=f168e216]: Volterra-400
+            - generic [ref=f168e217]: Apollo SLS — coming soon
+        - link "Explore Volterra" [ref=f168e219] [cursor=pointer]:
+          - /url: https://fracktal.in/volterra/
+          - generic [ref=f168e221]: Explore Volterra
+      - generic [ref=f168e223]:
+        - generic [ref=f168e225]:
+          - generic [ref=f168e226]: Complete the Setup
+          - heading "Accessories Built for the Same Standard" [level=2] [ref=f168e228]
+          - paragraph [ref=f168e230]: Print quality depends on more than the printer — Fracktal also builds the accessories that keep materials and beds print-ready.
+        - generic [ref=f168e232]:
+          - generic [ref=f168e236]:
+            - generic [ref=f168e237]: Filament Care
+            - heading "MDS1 Material Dryer" [level=3] [ref=f168e239]
+            - paragraph [ref=f168e241]: Dries up to three 1kg spools (1.75mm or 2.85mm) at once, with smart sensors that protect hygroscopic materials like Nylon, PETG, and TPU from moisture damage.
+            - link "Learn more →" [ref=f168e243] [cursor=pointer]:
+              - /url: https://fracktal.in/material-dryer/
+              - generic [ref=f168e245]: Learn more →
+          - generic [ref=f168e249]:
+            - generic [ref=f168e250]: Bed Adhesion
+            - heading "PrintStick" [level=3] [ref=f168e252]
+            - paragraph [ref=f168e254]: Temperature-responsive bed adhesive — grips while the bed is hot, releases clean after cooling. Water-soluble with zero residue, good for 50+ applications per bottle.
+            - link "Learn more →" [ref=f168e256] [cursor=pointer]:
+              - /url: https://fracktal.in/printstick/
+              - generic [ref=f168e258]: Learn more →
+      - generic [ref=f168e263]:
+        - generic [ref=f168e264]: Software, Too
+        - heading "Fracktory — Our Own Slicing Software" [level=2] [ref=f168e266]
+        - paragraph [ref=f168e268]: Every Fracktal printer ships with Fracktory, our in-house slicer built alongside the hardware. It’s part of why Fracktal is a complete manufacturing solution, not just a machine supplier.
+        - link "Download Fracktory" [ref=f168e270] [cursor=pointer]:
+          - /url: https://github.com/FracktalWorks/Fracktory-5/releases
+          - generic [ref=f168e272]: Download Fracktory
+      - generic [ref=f168e275]:
+        - generic [ref=f168e277]:
+          - generic [ref=f168e278]: Compare
+          - heading "Specifications at a Glance" [level=2] [ref=f168e280]
+          - paragraph [ref=f168e282]: Real numbers, not marketing language — so you can match the machine to the job.
+        - generic [ref=f168e284]:
+          - generic [ref=f168e286]:
+            - generic [ref=f168e288]: Printer
+            - generic [ref=f168e290]: Build Volume
+            - generic [ref=f168e292]: Print Speed
+            - generic [ref=f168e294]: Notable Materials
+          - generic [ref=f168e296]:
+            - generic [ref=f168e298]: Snowflake
+            - generic [ref=f168e300]: 200 x 200 x 200 mm
+            - generic [ref=f168e302]: up to 150 mm/s
+            - generic [ref=f168e304]: ABS, ASA, PLA+, PETG+
+          - generic [ref=f168e306]:
+            - generic [ref=f168e308]: Julia
+            - generic [ref=f168e310]: up to 250 x 250 x 300 mm
+            - generic [ref=f168e312]: up to 200 mm/s
+            - generic [ref=f168e314]: Nylon 12, Nylon CF, TPU, PC
+          - generic [ref=f168e316]:
+            - generic [ref=f168e318]: Twin Dragon
+            - generic [ref=f168e320]: up to 600 x 600 x 400 mm
+            - generic [ref=f168e322]: up to 500 mm/s
+            - generic [ref=f168e324]: Carbon-fiber nylon, PC, composites
+      - generic [ref=f168e326]:
+        - generic [ref=f168e329]:
+          - generic [ref=f168e330]: Founded at Manipal Institute of Technology
+          - generic [ref=f168e333]: "0"
+        - generic [ref=f168e337]:
+          - generic [ref=f168e338]: Of in-house R&D
+          - generic [ref=f168e339]:
+            - generic [ref=f168e340]: "0"
+            - generic [ref=f168e341]: + yrs
+        - generic [ref=f168e344]:
+          - generic [ref=f168e345]: Printer families in production
+          - generic [ref=f168e348]: "0"
+        - generic [ref=f168e352]:
+          - generic [ref=f168e353]: Designed & built in Bangalore
+          - generic [ref=f168e354]:
+            - generic [ref=f168e356]: "0"
+            - generic [ref=f168e357]: "%"
+      - generic [ref=f168e359]:
+        - generic [ref=f168e361]:
+          - generic [ref=f168e362]: FAQ
+          - heading "Common Questions" [level=2] [ref=f168e364]
+        - generic [ref=f168e366]:
+          - generic [ref=f168e367]:
+            - button "Is Fracktal Works an actual 3D printer manufacturer, or a reseller?" [expanded] [ref=f168e368] [cursor=pointer]:
+              - img [ref=f168e371]
+              - text: Is Fracktal Works an actual 3D printer manufacturer, or a reseller?
+            - region "Is Fracktal Works an actual 3D printer manufacturer, or a reseller?" [ref=f168e373]: Fracktal designs, engineers, and manufactures every printer at its own facility in Bangalore. We are an Original Equipment Manufacturer (OEM) — we do not import and rebadge machines.
+          - button "Where are Fracktal 3D printers made?" [ref=f168e375] [cursor=pointer]:
+            - img [ref=f168e378]
+            - text: Where are Fracktal 3D printers made?
+          - button "What materials can Fracktal printers use?" [ref=f168e381] [cursor=pointer]:
+            - img [ref=f168e384]
+            - text: What materials can Fracktal printers use?
+          - button "Does Fracktal offer industrial-scale 3D printing, or only desktop machines?" [ref=f168e387] [cursor=pointer]:
+            - img [ref=f168e390]
+            - text: Does Fracktal offer industrial-scale 3D printing, or only desktop machines?
+      - generic [ref=f168e395]:
+        - heading "Talk to the Team That Builds the Machines" [level=2] [ref=f168e397]
+        - paragraph [ref=f168e399]: No resellers, no middle layer — our Bangalore-based engineering team can answer technical questions directly.
+        - generic [ref=f168e401]:
+          - link "Contact Our Team" [ref=f168e404] [cursor=pointer]:
+            - /url: https://fracktal.in/contact-us/
+            - generic [ref=f168e406]: Contact Our Team
+          - link "Browse All Printers" [ref=f168e409] [cursor=pointer]:
+            - /url: https://fracktal.in/3dprinters/
+            - generic [ref=f168e411]: Browse All Printers
+  - contentinfo [ref=f168e412]:
+    - generic [ref=f168e415]:
+      - generic [ref=f168e416]:
+        - generic [ref=f168e417]:
+          - heading "Information" [level=2] [ref=f168e419]
+          - heading "About Us" [level=2] [ref=f168e421]:
+            - link "About Us" [ref=f168e422] [cursor=pointer]:
+              - /url: https://fracktal.in/home/about-us/
+          - heading "Contact Us" [level=2] [ref=f168e424]:
+            - link "Contact Us" [ref=f168e425] [cursor=pointer]:
+              - /url: https://fracktal.in/contact-us/
+          - heading "Our Partners" [level=2] [ref=f168e427]:
+            - link "Our Partners" [ref=f168e428] [cursor=pointer]:
+              - /url: https://fracktal.in/partners/
+          - heading "Careers" [level=2] [ref=f168e430]:
+            - link "Careers" [ref=f168e431] [cursor=pointer]:
+              - /url: https://fracktal.in/careers/
+        - generic [ref=f168e435]:
+          - heading "Products" [level=2] [ref=f168e437]
+          - heading "Snowflake" [level=2] [ref=f168e439]:
+            - link "Snowflake" [ref=f168e440] [cursor=pointer]:
+              - /url: https://fracktal.in/snowflake/
+          - heading "Julia" [level=2] [ref=f168e442]:
+            - link "Julia" [ref=f168e443] [cursor=pointer]:
+              - /url: https://fracktal.in/3dprinters/julia/
+          - heading "Dragon" [level=2] [ref=f168e445]:
+            - link "Dragon" [ref=f168e446] [cursor=pointer]:
+              - /url: https://fracktal.in/dragon/
+          - heading "Twin Dragon" [level=2] [ref=f168e448]:
+            - link "Twin Dragon" [ref=f168e449] [cursor=pointer]:
+              - /url: https://fracktal.in/twindragon/
+          - heading "Volterra" [level=2] [ref=f168e451]:
+            - link "Volterra" [ref=f168e452] [cursor=pointer]:
+              - /url: https://fracktal.in/volterra/
+          - heading "Material Dryer" [level=2] [ref=f168e454]:
+            - link "Material Dryer" [ref=f168e455] [cursor=pointer]:
+              - /url: https://fracktal.in/materialdryer
+          - heading "Printstick" [level=2] [ref=f168e457]:
+            - link "Printstick" [ref=f168e458] [cursor=pointer]:
+              - /url: https://fracktal.in/printstick-2
+          - heading "Apollo SLS" [level=2] [ref=f168e460]:
+            - link "Apollo SLS" [ref=f168e461] [cursor=pointer]:
+              - /url: https://fracktal.in/apollo-sls-landing-page/
+        - generic [ref=f168e465]:
+          - heading "Solutions" [level=2] [ref=f168e467]
+          - heading "3D Printing Services" [level=2] [ref=f168e469]:
+            - link "3D Printing Services" [ref=f168e470] [cursor=pointer]:
+              - /url: https://fracktal.in/3d-printing-service/
+          - heading "Engneering Services" [level=2] [ref=f168e472]:
+            - link "Engneering Services" [ref=f168e473] [cursor=pointer]:
+              - /url: https://fracktal.in/engineering-services/
+        - generic [ref=f168e477]:
+          - heading "Support" [level=2] [ref=f168e479]
+          - heading "Knowledge Base" [level=2] [ref=f168e481]:
+            - link "Knowledge Base" [ref=f168e482] [cursor=pointer]:
+              - /url: https://care.fracktal.in/portal/en/kb
+          - heading "Raise an Issue" [level=2] [ref=f168e484]:
+            - link "Raise an Issue" [ref=f168e485] [cursor=pointer]:
+              - /url: https://care.fracktal.in/portal/en/newticket
+              - text: Raise an Issue
+        - generic [ref=f168e489]:
+          - heading "Legal" [level=2] [ref=f168e491]
+          - heading "EULA" [level=2] [ref=f168e493]:
+            - link "EULA" [ref=f168e494] [cursor=pointer]:
+              - /url: https://fracktal.in/eula/
+          - heading "Terms & Conditions" [level=2] [ref=f168e496]:
+            - link "Terms & Conditions" [ref=f168e497] [cursor=pointer]:
+              - /url: https://fracktal.in/terms-and-conditions/
+          - heading "Privacy Policy" [level=2] [ref=f168e499]:
+            - link "Privacy Policy" [ref=f168e500] [cursor=pointer]:
+              - /url: https://fracktal.in/privacypolicy/
+          - heading "Cookie Policy" [level=2] [ref=f168e502]:
+            - link "Cookie Policy" [ref=f168e503] [cursor=pointer]:
+              - /url: https://fracktal.in/cookie-policy/
+          - heading "Return & Refund Policy" [level=2] [ref=f168e505]:
+            - link "Return & Refund Policy" [ref=f168e506] [cursor=pointer]:
+              - /url: https://fracktal.in/return-refund-policy/
+          - heading "Shipping Policy" [level=2] [ref=f168e508]:
+            - link "Shipping Policy" [ref=f168e509] [cursor=pointer]:
+              - /url: https://fracktal.in/shipping-policy/
+      - paragraph [ref=f168e515]: © 2025 Fracktal Works Pvt. Ltd
+      - list [ref=f168e517]:
+        - listitem [ref=f168e518]:
+          - link "Facebook" [ref=f168e519] [cursor=pointer]:
+            - /url: https://www.facebook.com/FracktalWorks
+            - generic [ref=f168e520]: Facebook
+            - img [ref=f168e521]
+        - listitem [ref=f168e523]:
+          - link "Twitter" [ref=f168e524] [cursor=pointer]:
+            - /url: https://twitter.com/fracktalworks
+            - generic [ref=f168e525]: Twitter
+            - img [ref=f168e526]
+        - listitem [ref=f168e528]:
+          - link "Youtube" [ref=f168e529] [cursor=pointer]:
+            - /url: https://www.youtube.com/channel/UC0jc-IxUx_7V07lZnRqtlGg
+            - generic [ref=f168e530]: Youtube
+            - img [ref=f168e531]
+        - listitem [ref=f168e533]:
+          - link "Instagram" [ref=f168e534] [cursor=pointer]:
+            - /url: https://www.instagram.com/fracktalworks
+            - generic [ref=f168e535]: Instagram
+            - img [ref=f168e536]
+        - listitem [ref=f168e538]:
+          - link "Linkedin" [ref=f168e539] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/3228893/
+            - generic [ref=f168e540]: Linkedin
+            - img [ref=f168e541]
+  - generic [ref=f168e543]: desktop
+  - status [ref=f168e544]

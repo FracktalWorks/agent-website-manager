@@ -1,0 +1,216 @@
+- generic [ref=f193e1]:
+  - generic [ref=f193e2]:
+    - generic "Hide panel" [ref=f193e4] [cursor=pointer]: ←
+    - generic [ref=f193e5]:
+      - generic [ref=f193e6]:
+        - link "phpMyAdmin" [ref=f193e8] [cursor=pointer]:
+          - /url: index.php
+          - img "phpMyAdmin" [ref=f193e9]
+        - generic [ref=f193e10]:
+          - link "Home" [ref=f193e11] [cursor=pointer]:
+            - /url: index.php?route=/
+            - img "Home" [ref=f193e12]
+          - link "Log out" [ref=f193e13] [cursor=pointer]:
+            - /url: index.php?route=/logout
+            - img "Log out" [ref=f193e14]
+          - link "phpMyAdmin documentation" [ref=f193e15] [cursor=pointer]:
+            - /url: ./doc/html/index.html
+            - img "phpMyAdmin documentation" [ref=f193e16]
+          - link "MariaDB Documentation" [ref=f193e17] [cursor=pointer]:
+            - /url: ./url.php?url=https%3A%2F%2Fmariadb.com%2Fkb%2Fen%2Fdocumentation%2F
+            - img "MariaDB Documentation" [ref=f193e18]
+          - link "Navigation panel settings" [ref=f193e19] [cursor=pointer]:
+            - /url: "#"
+            - img "Navigation panel settings" [ref=f193e20]
+          - link "Reload navigation panel" [ref=f193e21] [cursor=pointer]:
+            - /url: "#"
+            - img "Reload navigation panel" [ref=f193e22]
+      - generic [ref=f193e23]:
+        - generic [ref=f193e24]:
+          - button "Recent" [ref=f193e26] [cursor=pointer]
+          - button "Favorites" [ref=f193e28] [cursor=pointer]
+        - list [ref=f193e29]:
+          - listitem [ref=f193e30]:
+            - generic [ref=f193e31]:
+              - link "Collapse all" [ref=f193e32] [cursor=pointer]:
+                - /url: "#"
+                - img "Collapse all" [ref=f193e33]
+              - link "Unlink from main panel" [ref=f193e34] [cursor=pointer]:
+                - /url: "#"
+                - img "Unlink from main panel" [ref=f193e35]
+        - list [ref=f193e37]:
+          - listitem [ref=f193e38]:
+            - link "Expand/Collapse" [ref=f193e42] [cursor=pointer]:
+              - /url: "#"
+              - img "Expand/Collapse" [ref=f193e43]
+            - link "Database operations" [ref=f193e45] [cursor=pointer]:
+              - /url: index.php?route=/database/operations&db=information_schema
+              - img "Database operations" [ref=f193e46]
+            - link "information_schema" [ref=f193e47] [cursor=pointer]:
+              - /url: index.php?route=/database/structure&db=information_schema
+          - listitem [ref=f193e48]:
+            - link "Expand/Collapse" [ref=f193e51] [cursor=pointer]:
+              - /url: "#"
+              - img "Expand/Collapse" [ref=f193e52]
+            - link "Database operations" [ref=f193e54] [cursor=pointer]:
+              - /url: index.php?route=/database/operations&db=u667749758_FracktalDB
+              - img "Database operations" [ref=f193e55]
+            - link "u667749758_FracktalDB" [ref=f193e56] [cursor=pointer]:
+              - /url: index.php?route=/database/structure&db=u667749758_FracktalDB
+  - generic [ref=f193e57]:
+    - navigation "breadcrumb" [ref=f193e58]:
+      - list [ref=f193e59]:
+        - listitem [ref=f193e60]:
+          - 'link "Server: 127.0.0.1:3306" [ref=f193e61] [cursor=pointer]':
+            - /url: index.php?route=/
+        - listitem [ref=f193e62]:
+          - text: »
+          - 'link "Database: u667749758_FracktalDB" [ref=f193e63] [cursor=pointer]':
+            - /url: index.php?route=/database/structure&db=u667749758_FracktalDB
+    - navigation [ref=f193e65]:
+      - list [ref=f193e67]:
+        - listitem [ref=f193e68]:
+          - link "Structure Structure" [ref=f193e69] [cursor=pointer]:
+            - /url: index.php?route=/database/structure&db=u667749758_FracktalDB
+            - img "Structure" [ref=f193e70]
+            - text: Structure
+        - listitem [ref=f193e71]:
+          - link "SQL SQL (current)" [ref=f193e72] [cursor=pointer]:
+            - /url: index.php?route=/database/sql&db=u667749758_FracktalDB
+            - img "SQL" [ref=f193e73]
+            - text: SQL
+            - generic [ref=f193e74]: (current)
+        - listitem [ref=f193e75]:
+          - link "Search Search" [ref=f193e76] [cursor=pointer]:
+            - /url: index.php?route=/database/search&db=u667749758_FracktalDB
+            - img "Search" [ref=f193e77]
+            - text: Search
+        - listitem [ref=f193e78]:
+          - link "Query Query" [ref=f193e79] [cursor=pointer]:
+            - /url: index.php?route=/database/multi-table-query&db=u667749758_FracktalDB
+            - img "Query" [ref=f193e80]
+            - text: Query
+        - listitem [ref=f193e81]:
+          - link "Export Export" [ref=f193e82] [cursor=pointer]:
+            - /url: index.php?route=/database/export&db=u667749758_FracktalDB
+            - img "Export" [ref=f193e83]
+            - text: Export
+        - listitem [ref=f193e84]:
+          - link "Import Import" [ref=f193e85] [cursor=pointer]:
+            - /url: index.php?route=/database/import&db=u667749758_FracktalDB
+            - img "Import" [ref=f193e86]
+            - text: Import
+        - listitem [ref=f193e87]:
+          - link "Operations Operations" [ref=f193e88] [cursor=pointer]:
+            - /url: index.php?route=/database/operations&db=u667749758_FracktalDB
+            - img "Operations" [ref=f193e89]
+            - text: Operations
+        - listitem [ref=f193e90]:
+          - link "Routines Routines" [ref=f193e91] [cursor=pointer]:
+            - /url: index.php?route=/database/routines&db=u667749758_FracktalDB
+            - img "Routines" [ref=f193e92]
+            - text: Routines
+        - listitem [ref=f193e93]:
+          - link "Events Events" [ref=f193e94] [cursor=pointer]:
+            - /url: index.php?route=/database/events&db=u667749758_FracktalDB
+            - img "Events" [ref=f193e95]
+            - text: Events
+        - listitem [ref=f193e96]:
+          - link "Triggers Triggers" [ref=f193e97] [cursor=pointer]:
+            - /url: index.php?route=/database/triggers&db=u667749758_FracktalDB
+            - img "Triggers" [ref=f193e98]
+            - text: Triggers
+        - listitem [ref=f193e99]:
+          - link "Designer Designer" [ref=f193e100] [cursor=pointer]:
+            - /url: index.php?route=/database/designer&db=u667749758_FracktalDB
+            - img "Designer" [ref=f193e101]
+            - text: Designer
+  - generic [ref=f193e102]:
+    - img "Page-related settings" [ref=f193e104] [cursor=pointer]
+    - link "Click on the bar to scroll to top of page" [ref=f193e105] [cursor=pointer]:
+      - /url: "#"
+      - img "Click on the bar to scroll to top of page" [ref=f193e106]
+  - generic [ref=f193e107]:
+    - generic [ref=f193e109] [cursor=pointer]:
+      - img "SQL Query Console" [ref=f193e110]
+      - text: Console
+    - generic [ref=f193e111]:
+      - generic [ref=f193e113]: Press Ctrl+Enter to execute query
+      - generic: ">"
+    - generic [ref=f193e115]:
+      - generic [ref=f193e116] [cursor=pointer]: ascending
+      - generic [ref=f193e117] [cursor=pointer]: descending
+      - generic [ref=f193e118]: "Order:"
+      - generic [ref=f193e119] [cursor=pointer]: Debug SQL
+      - generic [ref=f193e120] [cursor=pointer]: Count
+      - generic [ref=f193e121] [cursor=pointer]: Execution order
+      - generic [ref=f193e122] [cursor=pointer]: Time taken
+      - generic [ref=f193e123]: "Order by:"
+      - generic [ref=f193e124] [cursor=pointer]: Group queries
+      - generic [ref=f193e125] [cursor=pointer]: Ungroup queries
+    - generic [ref=f193e128]:
+      - generic [ref=f193e129]:
+        - generic [ref=f193e130] [cursor=pointer]: Options
+        - generic [ref=f193e131] [cursor=pointer]: Set default
+      - generic [ref=f193e132]:
+        - generic [ref=f193e133]:
+          - checkbox "Always expand query messages" [ref=f193e134]
+          - text: Always expand query messages
+        - generic [ref=f193e135]:
+          - checkbox "Show query history at start" [ref=f193e136]
+          - text: Show query history at start
+        - generic [ref=f193e137]:
+          - checkbox "Show current browsing query" [ref=f193e138]
+          - text: Show current browsing query
+        - generic [ref=f193e139]:
+          - checkbox "Execute queries on Enter and insert new line with Shift+Enter. To make this permanent, view settings." [ref=f193e140]
+          - text: Execute queries on Enter and insert new line with Shift+Enter. To make this permanent, view settings.
+        - generic [ref=f193e141]:
+          - checkbox "Switch to dark theme" [ref=f193e142]
+          - text: Switch to dark theme
+  - generic [ref=f193e145]:
+    - generic [ref=f193e146]:
+      - text: Run SQL query/queries on database
+      - link "u667749758_FracktalDB" [ref=f193e147] [cursor=pointer]:
+        - /url: index.php?route=/database/structure&db=u667749758_FracktalDB
+      - text: ":"
+      - link "Documentation" [ref=f193e148] [cursor=pointer]:
+        - /url: ./url.php?url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F8.0%2Fen%2Fselect.html
+        - img "Documentation" [ref=f193e149]
+    - generic [ref=f193e153]:
+      - generic [ref=f193e155]:
+        - textbox [active] [ref=f193e156]
+        - generic [ref=f193e161]: "1"
+      - toolbar [ref=f193e167]:
+        - group [ref=f193e168]:
+          - button "Clear" [ref=f193e169] [cursor=pointer]
+          - button "Format" [ref=f193e170] [cursor=pointer]
+        - button "Get auto-saved query" [ref=f193e171] [cursor=pointer]
+      - generic [ref=f193e173]:
+        - checkbox "Bind parameters Documentation" [ref=f193e174]
+        - generic [ref=f193e175]:
+          - text: Bind parameters
+          - link "Documentation" [ref=f193e176] [cursor=pointer]:
+            - /url: ./doc/html/faq.html#faq6-40
+            - img "Documentation" [ref=f193e177]
+    - generic [ref=f193e179]:
+      - generic [ref=f193e181]:
+        - generic [ref=f193e182]: Delimiter
+        - generic [ref=f193e183]: Delimiter
+        - textbox "Delimiter" [ref=f193e184]: ;
+      - generic [ref=f193e186]:
+        - checkbox "Show this query here again" [ref=f193e187]
+        - generic [ref=f193e188]: Show this query here again
+      - generic [ref=f193e190]:
+        - checkbox "Retain query box" [ref=f193e191]
+        - generic [ref=f193e192]: Retain query box
+      - generic [ref=f193e194]:
+        - checkbox "Rollback when finished" [ref=f193e195]
+        - generic [ref=f193e196]: Rollback when finished
+      - generic [ref=f193e198]:
+        - checkbox "Enable foreign key checks" [checked] [ref=f193e199]
+        - generic [ref=f193e200]: Enable foreign key checks
+      - button "Go" [ref=f193e202] [cursor=pointer]
+  - link "Open new phpMyAdmin window" [ref=f193e204] [cursor=pointer]:
+    - /url: index.php?route=%2Fdatabase%2Fsql&db=u667749758_FracktalDB&server=1
+    - img "Open new phpMyAdmin window" [ref=f193e205]

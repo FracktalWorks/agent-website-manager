@@ -1,0 +1,324 @@
+- generic [active] [ref=f176e1]:
+  - link "Skip to content" [ref=f176e2] [cursor=pointer]:
+    - /url: "#content"
+  - banner [ref=f176e3]:
+    - generic [ref=f176e5]:
+      - link [ref=f176e9] [cursor=pointer]:
+        - /url: https://fracktal.in
+      - navigation "Menu" [ref=f176e13]:
+        - generic "Menu Toggle" [ref=f176e14]:
+          - list [ref=f176e15]:
+            - listitem [ref=f176e16]:
+              - generic [ref=f176e17]:
+                - generic [ref=f176e19]: Products
+                - button "Open Products" [ref=f176e20] [cursor=pointer]:
+                  - generic [ref=f176e21]:
+                    - img [ref=f176e22]
+                    - generic [ref=f176e24]: Open Products
+            - listitem [ref=f176e25]:
+              - generic [ref=f176e26]:
+                - generic [ref=f176e28]: Manufacturing Services
+                - button "Open Manufacturing Services" [ref=f176e29] [cursor=pointer]:
+                  - generic [ref=f176e30]:
+                    - img [ref=f176e31]
+                    - generic [ref=f176e33]: Open Manufacturing Services
+            - listitem [ref=f176e34]:
+              - generic [ref=f176e35]:
+                - generic [ref=f176e37]: Industries
+                - button "Open Industries" [ref=f176e38] [cursor=pointer]:
+                  - generic [ref=f176e39]:
+                    - img [ref=f176e40]
+                    - generic [ref=f176e42]: Open Industries
+            - listitem [ref=f176e43]:
+              - generic [ref=f176e44]:
+                - generic [ref=f176e46]: Materials
+                - button "Open Materials" [ref=f176e47] [cursor=pointer]:
+                  - generic [ref=f176e48]:
+                    - img [ref=f176e49]
+                    - generic [ref=f176e51]: Open Materials
+            - listitem [ref=f176e52]:
+              - generic [ref=f176e53]:
+                - generic [ref=f176e55]: Resources
+                - button "Open Resources" [ref=f176e56] [cursor=pointer]:
+                  - generic [ref=f176e57]:
+                    - img [ref=f176e58]
+                    - generic [ref=f176e60]: Open Resources
+            - listitem [ref=f176e61]:
+              - link "Support" [ref=f176e63] [cursor=pointer]:
+                - /url: https://fracktal.odoo.com/ticket
+                - generic [ref=f176e64]: Support
+            - listitem [ref=f176e65]:
+              - link "About Us" [ref=f176e67] [cursor=pointer]:
+                - /url: http://fracktal.in/about-us
+                - generic [ref=f176e68]: About Us
+      - link "+916364925434" [ref=f176e72] [cursor=pointer]:
+        - /url: tel:+916364925434
+        - generic [ref=f176e74]: "+916364925434"
+      - link "Contact Us" [ref=f176e78] [cursor=pointer]:
+        - /url: https://fracktal.in/contact-us/
+        - generic [ref=f176e80]: Contact Us
+  - generic [ref=f176e81]:
+    - banner [ref=f176e82]:
+      - generic [ref=f176e83]:
+        - generic [ref=f176e84]:
+          - paragraph [ref=f176e86]: Tax & Classification Reference
+          - heading "HSN Code & GST on 3D Printing in India" [level=1] [ref=f176e87]
+          - paragraph [ref=f176e88]: Accurate HSN and SAC classifications and GST rates for 3D printers, filament, and printing services — so procurement and finance teams can invoice, import, and claim input tax credit with confidence.
+          - generic [ref=f176e89]:
+            - generic [ref=f176e90]: 3D Printers · HSN 8443 · 18%
+            - generic [ref=f176e91]: Printing Services · SAC 998920 · 18%
+            - generic [ref=f176e92]: Filament · HSN 3916 · 18%
+        - img "Fracktal Works Twin Dragon 3D printer, a black dual-chamber machine with red and white filament spools, shown at a three-quarter angle on a transparent background" [ref=f176e94]
+    - generic [ref=f176e96]:
+      - generic [ref=f176e97]:
+        - paragraph [ref=f176e98]: Why classification matters
+        - heading "Get the code right before the purchase order goes out" [level=2] [ref=f176e99]
+        - paragraph [ref=f176e100]: HSN and SAC codes determine the GST you pay, the input tax credit you can claim, and whether your invoices and import documents clear without dispute. For 3D printing, the correct code depends on exactly what is being supplied — a machine, a consumable, or a service. Below is how Fracktal Works classifies each, based on the relevant tariff headings.
+      - generic [ref=f176e101]:
+        - generic [ref=f176e103]:
+          - generic [ref=f176e104]: "01"
+          - heading "Import & purchase decisions" [level=3] [ref=f176e105]
+          - paragraph [ref=f176e106]: Machinery, consumables, and spares sit under different tariff headings. The heading sets the GST and any applicable customs duty on landed cost.
+        - generic [ref=f176e108]:
+          - generic [ref=f176e109]: "02"
+          - heading "Invoicing & compliance" [level=3] [ref=f176e110]
+          - paragraph [ref=f176e111]: A wrong HSN or SAC on a tax invoice creates reconciliation issues in GSTR filings and can delay payment from your customers.
+        - generic [ref=f176e113]:
+          - generic [ref=f176e114]: "03"
+          - heading "Input tax credit" [level=3] [ref=f176e115]
+          - paragraph [ref=f176e116]: Correctly booked GST on equipment and services flows into eligible input tax credit — misclassification risks a reversal on audit.
+    - generic [ref=f176e118]:
+      - generic [ref=f176e119]:
+        - paragraph [ref=f176e120]: What’s being classified
+        - heading "Three supplies, three different codes" [level=2] [ref=f176e121]
+      - generic [ref=f176e122]:
+        - generic [ref=f176e124]:
+          - img "Snowflake desktop 3D printer by Fracktal Works, 3/4 studio render" [ref=f176e125]
+          - generic [ref=f176e126]:
+            - generic [ref=f176e127]: HSN 8443 · 18%
+            - heading "3D Printers" [level=3] [ref=f176e128]
+            - paragraph [ref=f176e129]:
+              - text: Complete
+              - link "FDM/SLS 3D printing machines" [ref=f176e130] [cursor=pointer]:
+                - /url: https://fracktal.in/3dprinters/
+              - text: ", classified as printing machinery under heading 8443."
+        - generic [ref=f176e132]:
+          - img "Spools of 3D printing filament in multiple colors" [ref=f176e133]
+          - generic [ref=f176e134]:
+            - generic [ref=f176e135]: HSN 3916 · 18%
+            - heading "Filament" [level=3] [ref=f176e136]
+            - paragraph [ref=f176e137]: Plastic monofilament and profile shapes with cross-section over 1 mm — spooled FDM filament.
+        - generic [ref=f176e139]:
+          - img "FDM 3D printed plastic parts" [ref=f176e140]
+          - generic [ref=f176e141]:
+            - generic [ref=f176e142]: SAC 998920 · 18%
+            - heading "Printing Services" [level=3] [ref=f176e143]
+            - paragraph [ref=f176e144]: On-demand FDM manufacturing and job-work, classified as a plastic manufacturing service.
+    - generic [ref=f176e146]:
+      - generic [ref=f176e147]:
+        - paragraph [ref=f176e148]: Reference table
+        - heading "HSN / SAC codes and GST rates" [level=2] [ref=f176e149]
+        - paragraph [ref=f176e150]: Classifications applied by Fracktal Works across 3D printing machinery, consumables, and services in India.
+      - table "HSN = Harmonized System of Nomenclature (goods). SAC = Services Accounting Code (services). Rates are the applicable GST at the time of verification and may be subject to notification changes." [ref=f176e152]:
+        - caption [ref=f176e153]: HSN = Harmonized System of Nomenclature (goods). SAC = Services Accounting Code (services). Rates are the applicable GST at the time of verification and may be subject to notification changes.
+        - rowgroup [ref=f176e154]:
+          - row "Product / Service HSN / SAC Code GST Rate Notes" [ref=f176e155]:
+            - columnheader "Product / Service" [ref=f176e156]
+            - columnheader "HSN / SAC Code" [ref=f176e157]
+            - columnheader "GST Rate" [ref=f176e158]
+            - columnheader "Notes" [ref=f176e159]
+        - rowgroup [ref=f176e160]:
+          - row "3D Printers (FDM machinery) Complete printing machines 8443 HSN 18% Printing machinery used for printing by means of plates, cylinders and other printing components, capable of connecting to an automatic data processing machine or to a network. Excludes multi-function printers/copiers and ink cartridges." [ref=f176e161]:
+            - rowheader "3D Printers (FDM machinery) Complete printing machines" [ref=f176e162]:
+              - text: 3D Printers (FDM machinery)
+              - generic [ref=f176e163]: Complete printing machines
+            - cell "8443 HSN" [ref=f176e164]:
+              - generic [ref=f176e165]:
+                - text: "8443"
+                - generic [ref=f176e166]: HSN
+            - cell "18%" [ref=f176e167]:
+              - generic [ref=f176e168]: 18%
+            - cell "Printing machinery used for printing by means of plates, cylinders and other printing components, capable of connecting to an automatic data processing machine or to a network. Excludes multi-function printers/copiers and ink cartridges." [ref=f176e169]
+          - row "3D Printing / FDM services Moulding, pressing, stamping, extruding & similar plastic manufacturing services 998920 SAC 18% Job-work and on-demand manufacturing of plastic parts by additive/FDM processes is a service, classified under the manufacturing-services heading — not under a goods HSN." [ref=f176e170]:
+            - rowheader "3D Printing / FDM services Moulding, pressing, stamping, extruding & similar plastic manufacturing services" [ref=f176e171]:
+              - text: 3D Printing / FDM services
+              - generic [ref=f176e172]: Moulding, pressing, stamping, extruding & similar plastic manufacturing services
+            - cell "998920 SAC" [ref=f176e173]:
+              - generic [ref=f176e174]:
+                - text: "998920"
+                - generic [ref=f176e175]: SAC
+            - cell "18%" [ref=f176e176]:
+              - generic [ref=f176e177]: 18%
+            - cell "Job-work and on-demand manufacturing of plastic parts by additive/FDM processes is a service, classified under the manufacturing-services heading — not under a goods HSN." [ref=f176e178]
+          - row "3D printer filament Monofilament, rods, sticks & profile shapes of plastics 3916 HSN 18% Plastic monofilament with a cross-sectional dimension greater than 1 mm, and rods, sticks and profile shapes — the tariff heading that covers spooled FDM filament." [ref=f176e179]:
+            - rowheader "3D printer filament Monofilament, rods, sticks & profile shapes of plastics" [ref=f176e180]:
+              - text: 3D printer filament
+              - generic [ref=f176e181]: Monofilament, rods, sticks & profile shapes of plastics
+            - cell "3916 HSN" [ref=f176e182]:
+              - generic [ref=f176e183]:
+                - text: "3916"
+                - generic [ref=f176e184]: HSN
+            - cell "18%" [ref=f176e185]:
+              - generic [ref=f176e186]: 18%
+            - cell "Plastic monofilament with a cross-sectional dimension greater than 1 mm, and rods, sticks and profile shapes — the tariff heading that covers spooled FDM filament." [ref=f176e187]
+          - row "Nozzles / print-heads sold separately Supplied as standalone parts 8443 HSN 28% When sold separately, print-heads fall under the multi-function printer / copier / ink-cartridge classification within heading 8443, which attracts the higher rate. Bundled with a complete machine, they follow the machine’s classification." [ref=f176e188]:
+            - rowheader "Nozzles / print-heads sold separately Supplied as standalone parts" [ref=f176e189]:
+              - text: Nozzles / print-heads sold separately
+              - generic [ref=f176e190]: Supplied as standalone parts
+            - cell "8443 HSN" [ref=f176e191]:
+              - generic [ref=f176e192]:
+                - text: "8443"
+                - generic [ref=f176e193]: HSN
+            - cell "28%" [ref=f176e194]:
+              - generic [ref=f176e195]: 28%
+            - cell "When sold separately, print-heads fall under the multi-function printer / copier / ink-cartridge classification within heading 8443, which attracts the higher rate. Bundled with a complete machine, they follow the machine’s classification." [ref=f176e196]
+      - generic [ref=f176e197]:
+        - generic [ref=f176e198]: Please verify
+        - generic [ref=f176e199]:
+          - paragraph [ref=f176e200]: GST and HSN classification can be nuanced and is subject to periodic notification changes. These codes reflect Fracktal Works’ classification for its own products and services, but the correct treatment for a specific transaction can depend on end-use, bundling, and place of supply. Confirm current rates with your tax advisor or the official GST portal before filing.
+          - generic [ref=f176e201]: Updated as of 5 July 2026 · Verified against Fracktal Works’ published classifications.
+    - generic [ref=f176e203]:
+      - generic [ref=f176e204]:
+        - paragraph [ref=f176e205]: Frequently asked
+        - heading "Common HSN & GST questions on 3D printing" [level=2] [ref=f176e206]
+      - generic [ref=f176e207]:
+        - heading "What is the HSN code for 3D printed parts?" [level=3] [ref=f176e208]
+        - paragraph [ref=f176e209]:
+          - text: It depends on how the parts are supplied. When you commission Fracktal Works to print parts on demand, that is a manufacturing
+          - emphasis [ref=f176e210]: service
+          - text: and is classified under SAC 998920 at 18% GST — not a goods HSN. The finished part itself, if sold as a traded good, would take the HSN of the article it represents. For most procurement of custom FDM parts, the 998920 service code applies.
+      - generic [ref=f176e211]:
+        - heading "What is the GST rate on 3D printed products?" [level=3] [ref=f176e212]
+        - paragraph [ref=f176e213]: "The core 3D printing supplies attract 18% GST — this covers 3D printers (HSN 8443), printing services (SAC 998920), and filament (HSN 3916). One notable exception: nozzles and print-heads sold separately fall under a classification within heading 8443 that attracts 28% GST. Always match the rate to what is actually being invoiced."
+      - generic [ref=f176e214]:
+        - heading "Is there a separate HSN code for 3D printing services vs. 3D printer filament?" [level=3] [ref=f176e215]
+        - paragraph [ref=f176e216]:
+          - text: Yes. They are fundamentally different supplies. 3D printing
+          - emphasis [ref=f176e217]: services
+          - text: use SAC 998920 (a services code for moulding, pressing, extruding and similar plastic manufacturing services). 3D printer
+          - emphasis [ref=f176e218]: filament
+          - text: is a physical good and uses HSN 3916 (plastic monofilament and profile shapes with cross-section greater than 1 mm). Both are taxed at 18%, but the codes are distinct and must be used correctly on the invoice.
+    - generic [ref=f176e220]:
+      - heading "Buying 3D printers or sourcing printed parts?" [level=2] [ref=f176e222]
+      - paragraph [ref=f176e223]:
+        - link "Fracktal Works designs and builds 3D printers" [ref=f176e224] [cursor=pointer]:
+          - /url: https://fracktal.in/3d-printer-manufacturer-india/
+        - text: in-house in Bangalore and runs a
+        - link "production 3D printing service" [ref=f176e225] [cursor=pointer]:
+          - /url: https://fracktal.in/3d-printing-services/
+        - text: . If you need the right classification for a purchase order, a bulk filament supply, or an on-demand manufacturing quote, our team can help you get the paperwork and the parts right.
+      - generic [ref=f176e226]:
+        - link "Explore 3D printing services" [ref=f176e227] [cursor=pointer]:
+          - /url: https://www.fracktal.in/3d-printing-services/
+        - link "Talk to our team" [ref=f176e228] [cursor=pointer]:
+          - /url: https://www.fracktal.in/contact-us/
+    - paragraph [ref=f176e229]: This page is a general reference for HSN/SAC classification and GST rates on 3D printing in India. It is not tax advice. Confirm current rates with your tax advisor or the GST portal.
+  - contentinfo [ref=f176e230]:
+    - generic [ref=f176e233]:
+      - generic [ref=f176e234]:
+        - generic [ref=f176e235]:
+          - heading "Information" [level=2] [ref=f176e237]
+          - heading "About Us" [level=2] [ref=f176e239]:
+            - link "About Us" [ref=f176e240] [cursor=pointer]:
+              - /url: https://fracktal.in/home/about-us/
+          - heading "Contact Us" [level=2] [ref=f176e242]:
+            - link "Contact Us" [ref=f176e243] [cursor=pointer]:
+              - /url: https://fracktal.in/contact-us/
+          - heading "Our Partners" [level=2] [ref=f176e245]:
+            - link "Our Partners" [ref=f176e246] [cursor=pointer]:
+              - /url: https://fracktal.in/partners/
+          - heading "Careers" [level=2] [ref=f176e248]:
+            - link "Careers" [ref=f176e249] [cursor=pointer]:
+              - /url: https://fracktal.in/careers/
+        - generic [ref=f176e253]:
+          - heading "Products" [level=2] [ref=f176e255]
+          - heading "Snowflake" [level=2] [ref=f176e257]:
+            - link "Snowflake" [ref=f176e258] [cursor=pointer]:
+              - /url: https://fracktal.in/snowflake/
+          - heading "Julia" [level=2] [ref=f176e260]:
+            - link "Julia" [ref=f176e261] [cursor=pointer]:
+              - /url: https://fracktal.in/3dprinters/julia/
+          - heading "Dragon" [level=2] [ref=f176e263]:
+            - link "Dragon" [ref=f176e264] [cursor=pointer]:
+              - /url: https://fracktal.in/dragon/
+          - heading "Twin Dragon" [level=2] [ref=f176e266]:
+            - link "Twin Dragon" [ref=f176e267] [cursor=pointer]:
+              - /url: https://fracktal.in/twindragon/
+          - heading "Volterra" [level=2] [ref=f176e269]:
+            - link "Volterra" [ref=f176e270] [cursor=pointer]:
+              - /url: https://fracktal.in/volterra/
+          - heading "Material Dryer" [level=2] [ref=f176e272]:
+            - link "Material Dryer" [ref=f176e273] [cursor=pointer]:
+              - /url: https://fracktal.in/materialdryer
+          - heading "Printstick" [level=2] [ref=f176e275]:
+            - link "Printstick" [ref=f176e276] [cursor=pointer]:
+              - /url: https://fracktal.in/printstick-2
+          - heading "Apollo SLS" [level=2] [ref=f176e278]:
+            - link "Apollo SLS" [ref=f176e279] [cursor=pointer]:
+              - /url: https://fracktal.in/apollo-sls-landing-page/
+        - generic [ref=f176e283]:
+          - heading "Solutions" [level=2] [ref=f176e285]
+          - heading "3D Printing Services" [level=2] [ref=f176e287]:
+            - link "3D Printing Services" [ref=f176e288] [cursor=pointer]:
+              - /url: https://fracktal.in/3d-printing-service/
+          - heading "Engneering Services" [level=2] [ref=f176e290]:
+            - link "Engneering Services" [ref=f176e291] [cursor=pointer]:
+              - /url: https://fracktal.in/engineering-services/
+        - generic [ref=f176e295]:
+          - heading "Support" [level=2] [ref=f176e297]
+          - heading "Knowledge Base" [level=2] [ref=f176e299]:
+            - link "Knowledge Base" [ref=f176e300] [cursor=pointer]:
+              - /url: https://care.fracktal.in/portal/en/kb
+          - heading "Raise an Issue" [level=2] [ref=f176e302]:
+            - link "Raise an Issue" [ref=f176e303] [cursor=pointer]:
+              - /url: https://care.fracktal.in/portal/en/newticket
+              - text: Raise an Issue
+        - generic [ref=f176e307]:
+          - heading "Legal" [level=2] [ref=f176e309]
+          - heading "EULA" [level=2] [ref=f176e311]:
+            - link "EULA" [ref=f176e312] [cursor=pointer]:
+              - /url: https://fracktal.in/eula/
+          - heading "Terms & Conditions" [level=2] [ref=f176e314]:
+            - link "Terms & Conditions" [ref=f176e315] [cursor=pointer]:
+              - /url: https://fracktal.in/terms-and-conditions/
+          - heading "Privacy Policy" [level=2] [ref=f176e317]:
+            - link "Privacy Policy" [ref=f176e318] [cursor=pointer]:
+              - /url: https://fracktal.in/privacypolicy/
+          - heading "Cookie Policy" [level=2] [ref=f176e320]:
+            - link "Cookie Policy" [ref=f176e321] [cursor=pointer]:
+              - /url: https://fracktal.in/cookie-policy/
+          - heading "Return & Refund Policy" [level=2] [ref=f176e323]:
+            - link "Return & Refund Policy" [ref=f176e324] [cursor=pointer]:
+              - /url: https://fracktal.in/return-refund-policy/
+          - heading "Shipping Policy" [level=2] [ref=f176e326]:
+            - link "Shipping Policy" [ref=f176e327] [cursor=pointer]:
+              - /url: https://fracktal.in/shipping-policy/
+      - paragraph [ref=f176e333]: © 2025 Fracktal Works Pvt. Ltd
+      - list [ref=f176e335]:
+        - listitem [ref=f176e336]:
+          - link "Facebook" [ref=f176e337] [cursor=pointer]:
+            - /url: https://www.facebook.com/FracktalWorks
+            - generic [ref=f176e338]: Facebook
+            - img [ref=f176e339]
+        - listitem [ref=f176e341]:
+          - link "Twitter" [ref=f176e342] [cursor=pointer]:
+            - /url: https://twitter.com/fracktalworks
+            - generic [ref=f176e343]: Twitter
+            - img [ref=f176e344]
+        - listitem [ref=f176e346]:
+          - link "Youtube" [ref=f176e347] [cursor=pointer]:
+            - /url: https://www.youtube.com/channel/UC0jc-IxUx_7V07lZnRqtlGg
+            - generic [ref=f176e348]: Youtube
+            - img [ref=f176e349]
+        - listitem [ref=f176e351]:
+          - link "Instagram" [ref=f176e352] [cursor=pointer]:
+            - /url: https://www.instagram.com/fracktalworks
+            - generic [ref=f176e353]: Instagram
+            - img [ref=f176e354]
+        - listitem [ref=f176e356]:
+          - link "Linkedin" [ref=f176e357] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/3228893/
+            - generic [ref=f176e358]: Linkedin
+            - img [ref=f176e359]
+  - generic [ref=f176e361]: desktop
+  - status [ref=f176e362]

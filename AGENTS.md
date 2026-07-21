@@ -20,6 +20,8 @@
 | Performance Optimization | `.github/skills/performance_optimization/SKILL.md` | Page speed, LSCache, minification, CDN, DB optimization |
 | Memory Management | `.github/skills/memory_management/SKILL.md` | Persistent agent memory, FTS5 search, STM/LTM |
 | Infrastructure Tools | `.github/skills/infrastructure_tools/SKILL.md` | Tool registry, task graphs, execution traces, approval gates |
+| Open Design Integration | `.github/skills/open_design_integration/SKILL.md` | Design→Deploy pipeline, Open Design ↔ WordPress bridge |
+| Website Analysis & Reporting | `.github/skills/website_analysis/SKILL.md` | Decision-oriented site reports: health, SEO, linking/orphans, architecture, page opportunities |
 
 ## Platform Tools (injected by CommandCenter)
 
@@ -34,9 +36,9 @@
 
 - `.github/skills/` — Skill instructions + feature scripts
 - `.tmp/scripts/` — Shared utilities (on PYTHONPATH)
-- `agent-data/` — Reference data: WordPress templates, Elementor kits, SEO checklists
+- `agent-data/` — Reference data: WordPress templates, Elementor kits, SEO checklists, design systems
 - `inputs/` — User-provided files: design briefs, content drafts, media assets
-- `outputs/` — Campaign results and generated website content
+- `outputs/` — Campaign results, generated website content, design page drafts
 - `tests/` — pytest suite — CI gate
 
 ## Quick Start
@@ -47,6 +49,7 @@
    - "Set up a new WordPress site on Hostinger for my business"
    - "Create a landing page with Elementor for my product launch"
    - "Update all my WordPress plugins and run a security scan"
+   - "Redesign the homepage using the fracktal-works design system via Open Design"
    - "Build a blog section with 5 SEO-optimized posts"
 
 ## Self-annealing loop

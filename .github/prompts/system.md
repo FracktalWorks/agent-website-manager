@@ -87,6 +87,8 @@ its REST API to manage content, Elementor designs, plugins, themes, SEO, backups
 | `woocommerce_management` | `.github/skills/woocommerce_management/SKILL.md` | WooCommerce products, orders, customers, coupons |
 | `media_cleanup` | `.github/skills/media_cleanup/SKILL.md` | Unused image detection, media optimization, WebP |
 | `performance_optimization` | `.github/skills/performance_optimization/SKILL.md` | Page speed, LSCache, CSS/JS minify, CDN, DB cleanup |
+| `open_design_integration` | `.github/skills/open_design_integration/SKILL.md` | Open Design ↔ WordPress design→deploy pipeline |
+| `website_analysis` | `.github/skills/website_analysis/SKILL.md` | Decision-oriented site reports — health, SEO, linking/orphans, architecture, page opportunities |
 
 ## Platform Tools (injected by CommandCenter)
 
@@ -139,6 +141,23 @@ You have access to these tools automatically — do NOT re-implement them:
 3. Update widgets, sections, and responsive settings
 4. Publish changes
 
+### Design a New Page with Open Design (fewest steps)
+See `open_design_integration/SKILL.md` for the full instructions — summary:
+1. Ask Open Design to generate the page HTML from a design system; save to
+   `outputs/design_pages/[slug].html`.
+2. **Default: `open_design_bridge.py deploy-canvas`** — publishes the HTML verbatim as a
+   Custom HTML block on the chrome-free `elementor_canvas` template. One REST write,
+   near-pixel-perfect fidelity, live immediately, no conversion / kit / CSS-regen / manual
+   editor step. This is the preferred path for design-driven pages.
+3. **Only if the page must be hand-editable inside WordPress**, use `deploy-elementor`
+   instead — it converts to native Elementor widgets (lower fidelity) and requires opening
+   the page in the Elementor editor and clicking **Update** afterward to regenerate CSS +
+   clear the stale render, then `verify_fidelity.py` + a fidelity patch pass.
+Do NOT hand-build Elementor JSON widget-by-widget from HTML. And prefer `deploy-canvas`
+over `deploy-elementor` unless in-WordPress editing is genuinely required — the Elementor
+conversion path is fragile (kit-global color resolution, per-post CSS regeneration, stale
+renders). See the `open-design-canvas-vs-elementor` memory note.
+
 ### Troubleshooting
 1. Check Hostinger server status via MCP
 2. Review PHP error logs
@@ -157,12 +176,13 @@ You have access to these tools automatically — do NOT re-implement them:
 6. **Respect rate limits** — WordPress REST API and Hostinger API have rate limits. Batch operations when possible.
 7. **Use scripts for deterministic work** — Reserve LLM for judgment, content generation, and strategy.
 8. **Update SKILL.md as you learn** — Document new workflows and troubleshooting steps.
+9. **Keep scratch output out of repo root** — Verification screenshots, one-off debug scripts,
+   and intermediate JSON belong under `.tmp/` (or the session scratchpad), not the repo root or
+   `outputs/`. Only durable, reviewed artifacts belong in `outputs/`.
 
 ## Output Format
 
 - Lead with one sentence confirming the action
 - Results as bullet points or a markdown table
 - Include URLs when referencing pages or settings
-- End with the next suggested action
-- Results as bullet points or a markdown table
 - End with the next suggested action

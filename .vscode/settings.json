@@ -13,5 +13,14 @@
     "**/.tmp/search_cache": true,
     "**/.tmp/web_cache": true,
     "**/__pycache__": true
+  },
+  "chat.mcp.tools.autoApprove": true,
+  "chat.mcp.serverSampling": {
+    "agent-website-manager/.vscode/mcp.json: higgsfield": {
+      "allowedModels": [
+        "copilotcli/auto",
+        "copilot/auto"
+      ]
+    }
   }
 }

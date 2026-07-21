@@ -1,0 +1,125 @@
+<title>REPORT TITLE — site.com</title>
+<!--
+  website_analysis report skeleton. Copy this file, replace every <!-- REPLACE ... --> region,
+  set the <title>, and publish with the Artifact tool (favicon per topic: 🔗/🗺️/🩺/📊).
+  Design system: reference/report_design_system.md. Swap --brand for the brand's accent.
+-->
+<style>
+  :root {
+    --ground:#f7f6f3; --surface:#ffffff; --surface-2:#faf8f5;
+    --ink:#17171a; --ink-2:#565660; --ink-3:#86858f; --hairline:#e7e4dd; --hairline-2:#efece6;
+    --brand:#d84332;                              /* REPLACE per brand */
+    --good:#2c845f;   --good-bg:#e5f0ea;   --good-line:#bfe0cf;
+    --warn:#a8720f;   --warn-bg:#f8efd9;   --warn-line:#ecd6a3;
+    --crit:#cf4032;   --crit-bg:#fbe9e6;   --crit-line:#f0c4bd;
+    --risk:#b5192b;   --risk-bg:#fbe4e6;   --risk-line:#eeb3ba;
+    --build:#3f6bd0;  --build-bg:#e8eefb;  --build-line:#c3d3f2;
+    --consol:#6a5aa0; --consol-bg:#ede9f6; --consol-line:#cfc6ea;
+    --band:#18171b; --band-ink:#f4f2ee;
+    --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    --mono:"SF Mono","Cascadia Mono","JetBrains Mono",Consolas,ui-monospace,monospace;
+    --maxw:1100px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground:#131317; --surface:#1a1a1f; --surface-2:#202027;
+      --ink:#f1efec; --ink-2:#a6a5b0; --ink-3:#75747f; --hairline:#2b2b33; --hairline-2:#242429;
+      --brand:#f0685a;
+      --good:#4eb489;--good-bg:#17281f;--good-line:#264f3a; --warn:#e0a63c;--warn-bg:#2e2716;--warn-line:#544521;
+      --crit:#f2685c;--crit-bg:#33201d;--crit-line:#5a2f28; --risk:#ff6b78;--risk-bg:#3a1c20;--risk-line:#6b2e35;
+      --build:#7ba0ec;--build-bg:#1a2334;--build-line:#2f456e; --consol:#a596d8;--consol-bg:#241f33;--consol-line:#40376a;
+      --band:#0e0e11; --band-ink:#f4f2ee;
+    }
+  }
+  :root[data-theme="light"]{--ground:#f7f6f3;--surface:#fff;--surface-2:#faf8f5;--ink:#17171a;--ink-2:#565660;--ink-3:#86858f;--hairline:#e7e4dd;--hairline-2:#efece6;--brand:#d84332;--good:#2c845f;--good-bg:#e5f0ea;--good-line:#bfe0cf;--warn:#a8720f;--warn-bg:#f8efd9;--warn-line:#ecd6a3;--crit:#cf4032;--crit-bg:#fbe9e6;--crit-line:#f0c4bd;--risk:#b5192b;--risk-bg:#fbe4e6;--risk-line:#eeb3ba;--build:#3f6bd0;--build-bg:#e8eefb;--build-line:#c3d3f2;--consol:#6a5aa0;--consol-bg:#ede9f6;--consol-line:#cfc6ea;--band:#18171b;--band-ink:#f4f2ee;}
+  :root[data-theme="dark"]{--ground:#131317;--surface:#1a1a1f;--surface-2:#202027;--ink:#f1efec;--ink-2:#a6a5b0;--ink-3:#75747f;--hairline:#2b2b33;--hairline-2:#242429;--brand:#f0685a;--good:#4eb489;--good-bg:#17281f;--good-line:#264f3a;--warn:#e0a63c;--warn-bg:#2e2716;--warn-line:#544521;--crit:#f2685c;--crit-bg:#33201d;--crit-line:#5a2f28;--risk:#ff6b78;--risk-bg:#3a1c20;--risk-line:#6b2e35;--build:#7ba0ec;--build-bg:#1a2334;--build-line:#2f456e;--consol:#a596d8;--consol-bg:#241f33;--consol-line:#40376a;--band:#0e0e11;--band-ink:#f4f2ee;}
+
+  *{box-sizing:border-box;} body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  a{color:var(--brand);text-decoration:none;} a:hover{text-decoration:underline;} a:focus-visible{outline:2px solid var(--brand);outline-offset:2px;}
+  .mast{background:var(--band);color:var(--band-ink);border-bottom:3px solid var(--brand);}
+  .mast .wrap{padding:38px 24px 32px;}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);margin:0 0 13px;}
+  .mast h1{font-size:clamp(27px,4.6vw,42px);line-height:1.08;margin:0;font-weight:700;letter-spacing:-.02em;text-wrap:balance;max-width:22ch;}
+  .mast .sub{margin:15px 0 0;color:#c7c5cb;font-size:15px;max-width:68ch;}
+  .mast .meta{margin-top:20px;font-family:var(--mono);font-size:12.5px;color:#8f8e97;display:flex;flex-wrap:wrap;gap:8px 20px;}
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:-28px 0 0;}
+  .metric{background:var(--surface);border:1px solid var(--hairline);border-radius:10px;padding:18px 18px 16px 22px;position:relative;box-shadow:0 6px 20px rgba(20,18,16,.05);}
+  .metric::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:3px;background:var(--m,transparent);}
+  .metric .n{font-size:32px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1;color:var(--m,var(--ink));}
+  .metric .l{margin-top:8px;font-size:12.5px;color:var(--ink-2);}
+  .bar{display:flex;height:14px;border-radius:7px;overflow:hidden;border:1px solid var(--hairline);margin:26px 0 10px;}
+  .legend{display:flex;flex-wrap:wrap;gap:16px;font-size:12.5px;color:var(--ink-2);}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:7px;vertical-align:-1px;}
+  section{padding:40px 0;border-top:1px solid var(--hairline);}
+  .sec-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
+  .sec-h h2{font-size:21px;margin:0;font-weight:700;letter-spacing:-.01em;}
+  .sec-intro{color:var(--ink-2);font-size:14.5px;margin:2px 0 20px;max-width:70ch;}
+  .chip{font-family:var(--mono);font-size:11px;font-weight:600;padding:3px 9px;border-radius:6px;white-space:nowrap;}
+  .c-good{color:var(--good);background:var(--good-bg);border:1px solid var(--good-line);}
+  .c-warn{color:var(--warn);background:var(--warn-bg);border:1px solid var(--warn-line);}
+  .c-crit{color:var(--crit);background:var(--crit-bg);border:1px solid var(--crit-line);}
+  .c-risk{color:var(--risk);background:var(--risk-bg);border:1px solid var(--risk-line);}
+  .c-build{color:var(--build);background:var(--build-bg);border:1px solid var(--build-line);}
+  .c-consol{color:var(--consol);background:var(--consol-bg);border:1px solid var(--consol-line);}
+  .t-scroll{overflow-x:auto;border:1px solid var(--hairline);border-radius:10px;background:var(--surface);}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px;}
+  thead th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600;padding:13px 16px;border-bottom:1px solid var(--hairline);background:var(--surface-2);white-space:nowrap;}
+  tbody td{padding:13px 16px;border-top:1px solid var(--hairline-2);vertical-align:top;}
+  .url{font-family:var(--mono);font-size:12.5px;word-break:break-all;}
+  td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:center;font-weight:600;}
+  .row-crit td:first-child{box-shadow:inset 3px 0 0 var(--crit);} .row-warn td:first-child{box-shadow:inset 3px 0 0 var(--warn);}
+  .callout{background:var(--surface);border:1px solid var(--hairline);border-left:4px solid var(--brand);border-radius:10px;padding:20px 22px;}
+  .decisions{background:var(--surface);border:1px solid var(--hairline);border-radius:12px;padding:20px 22px;margin-top:16px;}
+  footer{padding:26px 0 60px;color:var(--ink-3);font-size:12.5px;line-height:1.7;}
+  @media(max-width:720px){.metrics{grid-template-columns:repeat(2,1fr);}}
+</style>
+
+<header class="mast"><div class="wrap">
+  <p class="eyebrow"><!-- REPLACE: report type, e.g. SITE AUDIT · INTERNAL LINKING --></p>
+  <h1><!-- REPLACE: the report's thesis as a sentence --></h1>
+  <p class="sub"><!-- REPLACE: one-paragraph summary / verdict --></p>
+  <div class="meta"><span>Site: site.com</span><span>Scanned: N URLs</span><span>Date: DD Mon YYYY</span></div>
+</div></header>
+
+<main class="wrap">
+  <!-- METRIC STRIP — total + the severity buckets -->
+  <div class="metrics">
+    <div class="metric"><div class="n">0</div><div class="l">Total</div></div>
+    <div class="metric" style="--m:var(--good)"><div class="n">0</div><div class="l">Working</div></div>
+    <div class="metric" style="--m:var(--warn)"><div class="n">0</div><div class="l">Needs work</div></div>
+    <div class="metric" style="--m:var(--crit)"><div class="n">0</div><div class="l">Critical</div></div>
+  </div>
+  <div class="bar" aria-hidden="true">
+    <span style="width:50%;background:var(--good)"></span>
+    <span style="width:25%;background:var(--warn);opacity:.6"></span>
+    <span style="width:25%;background:var(--crit)"></span>
+  </div>
+  <div class="legend"><span><i style="background:var(--good)"></i>working</span><span><i style="background:var(--warn)"></i>needs work</span><span><i style="background:var(--crit)"></i>critical</span></div>
+
+  <!-- FINDINGS — one section per group; lead with the highest-priority -->
+  <section>
+    <div class="sec-h"><h2><!-- REPLACE: section title --></h2><span class="chip c-crit">Priority</span></div>
+    <p class="sec-intro"><!-- REPLACE: what this group is and why it matters --></p>
+    <div class="t-scroll"><table>
+      <thead><tr><th>Item</th><th>Metric</th><th>Suggested fix</th></tr></thead>
+      <tbody>
+        <tr class="row-crit"><td><span class="url">/example/</span></td><td class="num">0</td><td><!-- fix --></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ROOT-CAUSE CALLOUT (optional) -->
+  <section>
+    <div class="sec-h"><h2><!-- REPLACE: the structural insight --></h2><span class="chip c-consol">Structural</span></div>
+    <div class="callout"><!-- REPLACE: the one thing that explains most of the findings + the recommendation --></div>
+  </section>
+
+  <!-- OPEN DECISIONS -->
+  <div class="decisions">
+    <h2 style="margin:0 0 4px;font-size:18px;">Open decisions</h2>
+    <ol><li><!-- REPLACE: the calls only the user can make --></li></ol>
+  </div>
+
+  <footer><b>Method.</b> <!-- REPLACE: what was scanned, how counts are defined, caveats --></footer>
+</main>

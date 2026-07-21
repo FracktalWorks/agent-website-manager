@@ -32,15 +32,6 @@
   ],
   "tool_scope": null,
   "max_mutation_attempts": 1,
-  "mcp_servers": {
-    "hostinger": {
-      "command": "npx",
-      "args": ["-y", "@hostinger/mcp-server"],
-      "env": {
-        "HOSTINGER_API_TOKEN": "${HOSTINGER_API_TOKEN}"
-      }
-    }
-  },
   "icon": "Globe",
   "category": "web",
   "webhook_routes": []

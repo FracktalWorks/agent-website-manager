@@ -1,0 +1,67 @@
+{
+  "site": "https://fracktal.in",
+  "results": [
+    {
+      "url": "https://fracktal.in/hsn-code-gst-3d-printing-india/",
+      "seo_plugin": "Yoast",
+      "title": "HSN Code & GST on 3D Printing in India - Fracktal",
+      "title_len": 49,
+      "meta_description": "HSN & SAC codes and 18% GST rates for 3D printers, filament, and 3D printing services in India — a quick reference for procurement and finance teams.",
+      "desc_len": 149,
+      "canonical": "https://fracktal.in/hsn-code-gst-3d-printing-india/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "og_title": "HSN Code & GST on 3D Printing in India - Fracktal",
+      "og_image": "https://fracktal.in/wp-content/uploads/2026/07/twin-dragon-3d-printer-transparent-cutout-v3.png",
+      "schema_types": [
+        "BreadcrumbList",
+        "FAQPage",
+        "ImageObject",
+        "ItemPage",
+        "Organization",
+        "WebPage",
+        "WebSite"
+      ],
+      "h1": [
+        "HSN Code & GST on 3D Printing in India"
+      ],
+      "h2_count": 5,
+      "h3_count": 9,
+      "content_images": 4,
+      "images_missing_alt": 0,
+      "word_count": 903,
+      "internal_links": 5,
+      "issues": []
+    },
+    {
+      "url": "https://fracktal.in/kb/firmware-display-setup-guide/",
+      "seo_plugin": "Yoast",
+      "title": "Firmware & Display Setup Guide - Fracktal",
+      "title_len": 41,
+      "meta_description": "",
+      "desc_len": 0,
+      "canonical": "https://fracktal.in/kb/firmware-display-setup-guide/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "og_title": "Firmware & Display Setup Guide - Fracktal",
+      "og_image": null,
+      "schema_types": [
+        "BreadcrumbList",
+        "Organization",
+        "WebPage",
+        "WebSite"
+      ],
+      "h1": [
+        "Firmware & Display Setup Guide"
+      ],
+      "h2_count": 35,
+      "h3_count": 110,
+      "content_images": 147,
+      "images_missing_alt": 100,
+      "word_count": 2200,
+      "internal_links": 432,
+      "issues": [
+        "missing meta description",
+        "100 content images missing alt"
+      ]
+    }
+  ]
+}

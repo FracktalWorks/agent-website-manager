@@ -1,0 +1,231 @@
+abs material                                  impr=  870 pos=  9.0 ctr=  0.3%
+tpu material                                  impr=  820 pos=  3.1 ctr=  0.2%
+carbon fiber nylon filament                   impr=  717 pos=  4.1 ctr=  0.1%
+carbon fiber nylon                            impr=  561 pos=  4.7 ctr=  0.2%
+3d powder dryer                               impr=  273 pos= 19.2 ctr=  0.0%
+nylon cf filament                             impr=  262 pos=  2.6 ctr=  1.1%
+3d printing service                           impr=  258 pos= 21.6 ctr=  0.4%
+3d printer manufacturers in india             impr=  257 pos= 20.1 ctr=  0.4%
+3d printing services                          impr=  236 pos= 18.8 ctr=  1.3%
+cf nylon filament                             impr=  224 pos=  2.6 ctr=  0.4%
+nylon carbon fiber                            impr=  215 pos=  3.5 ctr=  0.5%
+pet g                                         impr=  169 pos=  4.9 ctr=  0.6%
+3d print consulting                           impr=  150 pos=  7.6 ctr=  0.0%
+vacuum casting services                       impr=  149 pos= 14.4 ctr=  2.0%
+nylon filament for 3d printing                impr=  131 pos=  8.2 ctr=  0.8%
+nylon cf                                      impr=  114 pos=  4.4 ctr=  0.9%
+3d manufacturer                               impr=  113 pos= 22.8 ctr=  0.0%
+print stick                                   impr=  104 pos=  6.5 ctr=  1.0%
+3d pact                                       impr=  101 pos= 55.5 ctr=  0.0%
+carbon fiber nylon 3d printer                 impr=   98 pos=  2.7 ctr=  2.0%
+3d printing hsn code                          impr=   98 pos=  6.2 ctr=  1.0%
+sls printing                                  impr=   96 pos=  5.5 ctr=  1.0%
+fractal                                       impr=   88 pos= 27.9 ctr=  1.1%
+3d printer glue                               impr=   86 pos=  7.1 ctr=  1.2%
+mjf 3d printing                               impr=   85 pos= 23.5 ctr=  1.2%
+"affordable 3d printing services"             impr=   84 pos= 72.1 ctr=  0.0%
+3d manufacturing in india                     impr=   84 pos= 34.1 ctr=  0.0%
+fraktal                                       impr=   83 pos=  4.7 ctr=  2.4%
+"3d printing troubleshooting"                 impr=   82 pos= 72.9 ctr=  0.0%
+3d printing glue                              impr=   77 pos=  5.4 ctr=  2.6%
+fraktal works                                 impr=   76 pos=  2.2 ctr= 48.7%
+3d printing company                           impr=   69 pos= 36.4 ctr=  1.4%
+fracktory                                     impr=   65 pos=  2.8 ctr= 18.5%
+"3d printing nylon"                           impr=   63 pos= 72.8 ctr=  0.0%
+3d additive manufacturing companies           impr=   62 pos= 29.5 ctr=  0.0%
+fractal 3d printing                           impr=   61 pos=  2.5 ctr= 31.1%
+3d printing internship                        impr=   60 pos=  9.2 ctr=  3.3%
+3d printed wearable devices                   impr=   56 pos= 18.0 ctr=  0.0%
+3d printing service india                     impr=   55 pos= 37.8 ctr=  1.8%
+indian 3d printers                            impr=   48 pos= 18.5 ctr=  2.1%
+gst on 3d printed products                    impr=   45 pos=  6.3 ctr=  2.2%
+3d print bangalore                            impr=   45 pos= 29.5 ctr=  0.0%
+hpmjf                                         impr=   44 pos=  7.3 ctr=  2.3%
+3d manufacturing companies                    impr=   44 pos= 38.6 ctr=  0.0%
+3d print glue                                 impr=   44 pos=  6.8 ctr=  0.0%
+fracktory software                            impr=   43 pos=  5.7 ctr= 25.6%
+fractalworks                                  impr=   43 pos=  3.7 ctr=  9.3%
+pva                                           impr=   42 pos=  8.1 ctr=  2.4%
+"3d print plastic"                            impr=   41 pos= 50.8 ctr=  0.0%
+3d print services                             impr=   40 pos= 37.8 ctr=  0.0%
+3d printed parts hsn code                     impr=   36 pos=  5.4 ctr=  0.0%
+pa-cf filament properties                     impr=   35 pos=  6.8 ctr=  2.9%
+3d fractal                                    impr=   33 pos=  4.1 ctr= 15.2%
+3d glue                                       impr=   31 pos= 11.7 ctr=  0.0%
+3d print stick                                impr=   30 pos=  6.9 ctr=  0.0%
+fractal 3d                                    impr=   28 pos= 11.9 ctr= 25.0%
+3d printer nylon carbon fiber                 impr=   25 pos=  7.5 ctr=  4.0%
+nylon carbon fibre                            impr=   25 pos=  4.4 ctr=  4.0%
+3d print india                                impr=   22 pos= 37.8 ctr=  0.0%
+fractal 3d printer                            impr=   21 pos= 10.2 ctr= 19.0%
+3d print in india                             impr=   21 pos= 37.8 ctr=  0.0%
+3d print nylon                                impr=   19 pos=  1.0 ctr=  5.3%
+3d manufacturing company                      impr=   19 pos= 26.0 ctr=  0.0%
+3d printing adhesive                          impr=   16 pos=  6.0 ctr=  6.2%
+fractal factory                               impr=   16 pos=  4.4 ctr=  6.2%
+3d print service                              impr=   16 pos= 23.6 ctr=  0.0%
+3d print troubleshooting                      impr=   15 pos= 55.4 ctr=  0.0%
+"pla                                          impr=   13 pos=  1.0 ctr=  0.0%
+3d printed wearable market                    impr=   13 pos= 44.7 ctr=  0.0%
+3d metal printer companies                    impr=   12 pos= 56.7 ctr=  0.0%
+3d printed products hsn code                  impr=   12 pos=  5.8 ctr=  0.0%
+3d printing machine manufacturers in bangalore impr=   11 pos=  7.4 ctr= 18.2%
+3d printed fashion accessories                impr=   11 pos=  5.9 ctr=  9.1%
+polyethylene terephthalate glycol filament    impr=   11 pos= 28.0 ctr=  9.1%
+エンジェリックケアコーム どこで 買える                          impr=   11 pos=  4.2 ctr=  9.1%
+3d print adhesive                             impr=   11 pos=  4.9 ctr=  0.0%
+bed adhesion glue                             impr=   10 pos=  5.0 ctr= 10.0%
+3d cad reverse engineering services           impr=   10 pos= 14.8 ctr=  0.0%
+3d design hsn code                            impr=   10 pos=  5.4 ctr=  0.0%
+3d glue stick                                 impr=   10 pos=  8.0 ctr=  0.0%
+3d printed nylon                              impr=   10 pos=  1.0 ctr=  0.0%
+3d printed abs material properties            impr=    9 pos= 80.9 ctr=  0.0%
+ptfe nozzle                                   impr=    8 pos=  4.8 ctr= 12.5%
+3d fabrication service                        impr=    8 pos= 18.4 ctr=  0.0%
+3d printer bed glue stick                     impr=    6 pos=  7.0 ctr= 16.7%
+3d additive manufacturing services            impr=    6 pos= 43.5 ctr=  0.0%
+3d print bed glue                             impr=    6 pos=  7.7 ctr=  0.0%
+3d printed packaging prototypes manufacturers impr=    6 pos= 44.8 ctr=  0.0%
+3d printed stick                              impr=    6 pos=  8.2 ctr=  0.0%
+"nylon 3d printing"                           impr=    5 pos=  1.0 ctr=  0.0%
+3d print glue stick                           impr=    5 pos=  4.2 ctr=  0.0%
+3d printed wearable                           impr=    5 pos= 23.0 ctr=  0.0%
+diorヘアクリップ                                    impr=    4 pos=  3.8 ctr= 25.0%
+fracktory software download                   impr=    4 pos=  1.5 ctr= 25.0%
+limit switch repair                           impr=    4 pos=  2.8 ctr= 25.0%
+printing consulting services                  impr=    4 pos= 10.2 ctr= 25.0%
+printing internship                           impr=    4 pos= 11.0 ctr= 25.0%
+3d manufacturing consulting                   impr=    4 pos= 41.0 ctr=  0.0%
+3d mould design                               impr=    4 pos=  1.0 ctr=  0.0%
+3d printed accessories fashion                impr=    4 pos=  7.8 ctr=  0.0%
+3d printed fixtures                           impr=    4 pos=  3.0 ctr=  0.0%
+3d tal                                        impr=    3 pos=  8.3 ctr= 33.3%
+ポケモンことわざ大百科                                   impr=    3 pos=  2.0 ctr= 33.3%
+"3d printing in nylon"                        impr=    3 pos=  1.0 ctr=  0.0%
+"3d printing shops"                           impr=    3 pos= 63.0 ctr=  0.0%
+"3d printing with nylon"                      impr=    3 pos=  1.0 ctr=  0.0%
+"nylon 3d print"                              impr=    3 pos=  1.0 ctr=  0.0%
+"nylon 3d prints"                             impr=    3 pos=  1.0 ctr=  0.0%
+"nylon for 3d printing"                       impr=    3 pos=  1.0 ctr=  0.0%
+.pla                                          impr=    3 pos=  7.3 ctr=  0.0%
+17クオン エアー取り出しキット                              impr=    3 pos=  7.3 ctr=  0.0%
+3 d printing                                  impr=    3 pos=  1.3 ctr=  0.0%
+3d company                                    impr=    3 pos= 35.7 ctr=  0.0%
+3d filament near me                           impr=    3 pos= 13.3 ctr=  0.0%
+3d print fractal                              impr=    3 pos= 14.0 ctr=  0.0%
+3d printed clothing accessories               impr=    3 pos=  4.0 ctr=  0.0%
+3d printed jigs and fixtures service          impr=    3 pos= 38.7 ctr=  0.0%
+3d printed service                            impr=    3 pos= 20.3 ctr=  0.0%
+fraktal 3d                                    impr=    2 pos=  1.0 ctr= 50.0%
+history of 3d printing                        impr=    2 pos=  5.5 ctr= 50.0%
+ibanez rb824                                  impr=    2 pos=  1.0 ctr= 50.0%
+panasonic ch700                               impr=    2 pos=  9.0 ctr= 50.0%
+ニンテンドーミュージアム tシャツ サイズ                         impr=    2 pos=  3.0 ctr= 50.0%
+月に雁 ウッウ                                       impr=    2 pos=  7.0 ctr= 50.0%
+"3d nylon printing"                           impr=    2 pos=  1.0 ctr=  0.0%
+"3d print nylon"                              impr=    2 pos=  1.0 ctr=  0.0%
+"3d print with nylon"                         impr=    2 pos=  1.0 ctr=  0.0%
+"dynatorch" nozzle diameter                   impr=    2 pos=  2.0 ctr=  0.0%
+175/65r15 7j                                  impr=    2 pos=  2.5 ctr=  0.0%
+3d druck consulting                           impr=    2 pos= 48.5 ctr=  0.0%
+3d dryer                                      impr=    2 pos=  1.0 ctr=  0.0%
+3d fabric printer                             impr=    2 pos= 38.0 ctr=  0.0%
+3d filament carbon fiber                      impr=    2 pos=  6.5 ctr=  0.0%
+3d miniature near me                          impr=    2 pos=  7.0 ctr=  0.0%
+3d print and paint service                    impr=    2 pos= 16.0 ctr=  0.0%
+3d print bed adhesive                         impr=    2 pos=  5.5 ctr=  0.0%
+3d print bed glue stick                       impr=    2 pos=  8.0 ctr=  0.0%
+3d print carbon fiber                         impr=    2 pos= 10.5 ctr=  0.0%
+3d print filament shop near me                impr=    2 pos=  1.0 ctr=  0.0%
+3d print service india                        impr=    2 pos= 32.5 ctr=  0.0%
+3d printed construction                       impr=    2 pos=  8.5 ctr=  0.0%
+3d printed customised plates for surgery      impr=    2 pos= 62.5 ctr=  0.0%
+3d printed jigs and fixtures                  impr=    2 pos= 50.0 ctr=  0.0%
+3d printed modeling dryer flights             impr=    2 pos= 69.5 ctr=  0.0%
+3d printed services                           impr=    2 pos= 26.0 ctr=  0.0%
+3d printed structures                         impr=    2 pos= 18.0 ctr=  0.0%
+3d printing warehouse                         impr=    1 pos= 82.0 ctr=100.0%
+brother drucker lässt sich nicht mehr einschalten impr=    1 pos=  2.0 ctr=100.0%
+fractal labs                                  impr=    1 pos=  1.0 ctr=100.0%
+vacuum casting services in india              impr=    1 pos=  4.0 ctr=100.0%
+ゼノア bc2211ez                                  impr=    1 pos= 10.0 ctr=100.0%
+激安 ヘッドホン                                      impr=    1 pos= 27.0 ctr=100.0%
+激安 扇風機                                        impr=    1 pos= 19.0 ctr=100.0%
+"3d printing of equipment components" dprk spray dryers impr=    1 pos= 11.0 ctr=  0.0%
+"history of 3d printing"                      impr=    1 pos= 43.0 ctr=  0.0%
+"nylon filament"                              impr=    1 pos= 76.0 ctr=  0.0%
+#d printers                                   impr=    1 pos=  8.0 ctr=  0.0%
+0.05mm nozzle                                 impr=    1 pos= 88.0 ctr=  0.0%
+10 more                                       impr=    1 pos=  9.0 ctr=  0.0%
+103系 京浜東北線                                    impr=    1 pos= 45.0 ctr=  0.0%
+12634 ロレックス                                   impr=    1 pos= 10.0 ctr=  0.0%
+2 nozzle 3d printer                           impr=    1 pos= 14.0 ctr=  0.0%
+225/70r16 ホワイトレター                             impr=    1 pos= 22.0 ctr=  0.0%
+3 d printers                                  impr=    1 pos= 73.0 ctr=  0.0%
+3 d printing services                         impr=    1 pos= 35.0 ctr=  0.0%
+3 detail                                      impr=    1 pos=  1.0 ctr=  0.0%
+3-d printer                                   impr=    1 pos=  1.0 ctr=  0.0%
+3-d printer glue                              impr=    1 pos= 11.0 ctr=  0.0%
+3-d printing                                  impr=    1 pos=  1.0 ctr=  0.0%
+3coins リボン                                    impr=    1 pos= 18.0 ctr=  0.0%
+3d                                            impr=    1 pos= 82.0 ctr=  0.0%
+3d adhesive                                   impr=    1 pos=  5.0 ctr=  0.0%
+3d bed adhesive                               impr=    1 pos=  5.0 ctr=  0.0%
+3d carbon fiber printing                      impr=    1 pos=  1.0 ctr=  0.0%
+3d construction printing                      impr=    1 pos=  1.0 ctr=  0.0%
+3d construction technology                    impr=    1 pos= 32.0 ctr=  0.0%
+3d consulting services                        impr=    1 pos=  1.0 ctr=  0.0%
+3d creating software                          impr=    1 pos= 11.0 ctr=  0.0%
+3d designer near me                           impr=    1 pos= 24.0 ctr=  0.0%
+3d digital printing                           impr=    1 pos=  3.0 ctr=  0.0%
+3d druck stringing                            impr=    1 pos=  1.0 ctr=  0.0%
+3d experts                                    impr=    1 pos= 41.0 ctr=  0.0%
+3d fabricator                                 impr=    1 pos=  1.0 ctr=  0.0%
+3d factory                                    impr=    1 pos=  1.0 ctr=  0.0%
+3d filament desiccant                         impr=    1 pos=  1.0 ctr=  0.0%
+3d filament manufacturer india                impr=    1 pos= 49.0 ctr=  0.0%
+3d filament petg                              impr=    1 pos=  1.0 ctr=  0.0%
+3d filament storage                           impr=    1 pos=  1.0 ctr=  0.0%
+3d fractal software                           impr=    1 pos= 62.0 ctr=  0.0%
+3d homes                                      impr=    1 pos= 23.0 ctr=  0.0%
+3d house printing                             impr=    1 pos=  4.0 ctr=  0.0%
+3d machine                                    impr=    1 pos=  4.0 ctr=  0.0%
+3d metal printer service                      impr=    1 pos= 87.0 ctr=  0.0%
+3d metal printing company                     impr=    1 pos= 63.0 ctr=  0.0%
+3d metal printing service                     impr=    1 pos= 98.0 ctr=  0.0%
+3d miniature                                  impr=    1 pos= 17.0 ctr=  0.0%
+3d miniature printing near me                 impr=    1 pos=  1.0 ctr=  0.0%
+3d nylon printing                             impr=    1 pos=  1.0 ctr=  0.0%
+3d one                                        impr=    1 pos= 59.0 ctr=  0.0%
+3d part printing service                      impr=    1 pos= 23.0 ctr=  0.0%
+3d pla                                        impr=    1 pos= 13.0 ctr=  0.0%
+3d pla printer                                impr=    1 pos= 81.0 ctr=  0.0%
+3d polycarbonate                              impr=    1 pos= 11.0 ctr=  0.0%
+3d print                                      impr=    1 pos=  3.0 ctr=  0.0%
+3d print business                             impr=    1 pos=  1.0 ctr=  0.0%
+3d print carbon                               impr=    1 pos= 20.0 ctr=  0.0%
+3d print construction                         impr=    1 pos=  4.0 ctr=  0.0%
+3d print course                               impr=    1 pos= 12.0 ctr=  0.0%
+3d print dryer                                impr=    1 pos=  8.0 ctr=  0.0%
+3d print factory                              impr=    1 pos=  9.0 ctr=  0.0%
+3d print filament nylon                       impr=    1 pos= 24.0 ctr=  0.0%
+3d print fusion                               impr=    1 pos=  1.0 ctr=  0.0%
+3d print in bangalore                         impr=    1 pos= 16.0 ctr=  0.0%
+3d print material                             impr=    1 pos=  1.0 ctr=  0.0%
+3d print service cheap                        impr=    1 pos= 25.0 ctr=  0.0%
+3d print sls                                  impr=    1 pos=  1.0 ctr=  0.0%
+3d print wearable                             impr=    1 pos=  9.0 ctr=  0.0%
+3d printed carbon fiber parts                 impr=    1 pos=  3.0 ctr=  0.0%
+3d printed factory                            impr=    1 pos=  3.0 ctr=  0.0%
+3d printed fractal                            impr=    1 pos= 22.0 ctr=  0.0%
+3d printed house machine                      impr=    1 pos=  1.0 ctr=  0.0%
+3d printed india                              impr=    1 pos= 21.0 ctr=  0.0%
+3d printed jewellery                          impr=    1 pos= 15.0 ctr=  0.0%
+3d printed jewellery india                    impr=    1 pos= 16.0 ctr=  0.0%
+3d printed lamps                              impr=    1 pos=  4.0 ctr=  0.0%
+3d printed lattice structures                 impr=    1 pos= 21.0 ctr=  0.0%
+3d printed machine parts                      impr=    1 pos=  1.0 ctr=  0.0%
+3d printed nylon parts                        impr=    1 pos=  8.0 ctr=  0.0%
+3d printed piston                             impr=    1 pos= 56.0 ctr=  0.0%
+3d printed products india                     impr=    1 pos=  9.0 ctr=  0.0%
+3d printed wearable prototype                 impr=    1 pos=  4.0 ctr=  0.0%

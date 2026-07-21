@@ -43,6 +43,8 @@ Reserve the LLM for judgment, content, and strategy. Use scripts for determinist
 | Deployment Manager | [.github/skills/deployment_manager/SKILL.md](.github/skills/deployment_manager/SKILL.md) |
 | Memory Management | [.github/skills/memory_management/SKILL.md](.github/skills/memory_management/SKILL.md) |
 | Infrastructure Tools | [.github/skills/infrastructure_tools/SKILL.md](.github/skills/infrastructure_tools/SKILL.md) |
+| Open Design Integration | [.github/skills/open_design_integration/SKILL.md](.github/skills/open_design_integration/SKILL.md) |
+| Website Analysis & Reporting | [.github/skills/website_analysis/SKILL.md](.github/skills/website_analysis/SKILL.md) |
 
 Each skill's `scripts/` directory holds runnable Python. Run scripts with the repo's
 interpreter; shared utilities live on `PYTHONPATH` under `.tmp/scripts/`.
@@ -63,6 +65,7 @@ platform tool, use the Claude Code equivalent:
 | `save_note` / `recall_notes` | file-based memory (see below) |
 | `hostinger-*` MCP tools | `mcp__hostinger-*` MCP tools (Hostinger domains, DNS, hosting, VPS, email, billing) |
 | `emcp-tools/*` (Elementor MCP) | the Elementor MCP tools if connected; otherwise WordPress REST API + skill scripts |
+| `open-design/*` (Open Design MCP) | `mcp__open-design_*` — create_project, start_run, get_artifact, etc. |
 
 The Hostinger MCP servers exposed to Claude Code map 1:1 to the `hostinger-*` tools in the
 agent allow-list — use them for domains, DNS, hosting, VPS, email marketing, and billing.
