@@ -45,6 +45,8 @@ Reserve the LLM for judgment, content, and strategy. Use scripts for determinist
 | Infrastructure Tools | [.github/skills/infrastructure_tools/SKILL.md](.github/skills/infrastructure_tools/SKILL.md) |
 | Open Design Integration | [.github/skills/open_design_integration/SKILL.md](.github/skills/open_design_integration/SKILL.md) |
 | Website Analysis & Reporting | [.github/skills/website_analysis/SKILL.md](.github/skills/website_analysis/SKILL.md) |
+| Site Generator & Live Editor | [.github/skills/site_generator/SKILL.md](.github/skills/site_generator/SKILL.md) |
+| Design System Management | [.github/skills/design_system_management/SKILL.md](.github/skills/design_system_management/SKILL.md) |
 
 Each skill's `scripts/` directory holds runnable Python. Run scripts with the repo's
 interpreter; shared utilities live on `PYTHONPATH` under `.tmp/scripts/`.
@@ -80,7 +82,9 @@ Never commit or echo secrets.
 ## Repo layout
 
 - `.github/` — the shared agent definition (skills, scripts, prompts, agent spec)
-- `agent-data/` — templates, Elementor kits, SEO checklists
+- `agent-data/` — templates, Elementor kits, SEO checklists, and
+  `design-systems/` — 152 vendored design systems + `_craft/` rulebooks
+  (start at `agent-data/design-systems/INDEX.md`)
 - `inputs/` — user-provided briefs, drafts, media
 - `outputs/` — generated content and reports
 - `tests/` — pytest suite (CI gate)

@@ -89,6 +89,8 @@ its REST API to manage content, Elementor designs, plugins, themes, SEO, backups
 | `performance_optimization` | `.github/skills/performance_optimization/SKILL.md` | Page speed, LSCache, CSS/JS minify, CDN, DB cleanup |
 | `open_design_integration` | `.github/skills/open_design_integration/SKILL.md` | Open Design ↔ WordPress design→deploy pipeline |
 | `website_analysis` | `.github/skills/website_analysis/SKILL.md` | Decision-oriented site reports — health, SEO, linking/orphans, architecture, page opportunities |
+| `site_generator` | `.github/skills/site_generator/SKILL.md` | In-repo site generation — pages as data, validating builder, live browser editor that writes back to source |
+| `design_system_management` | `.github/skills/design_system_management/SKILL.md` | Choose/load/use/validate/create design systems from the 152-package corpus — token tiers, paste-the-`:root` rule, quality rubric |
 
 ## Platform Tools (injected by CommandCenter)
 

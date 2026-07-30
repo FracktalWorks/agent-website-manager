@@ -22,6 +22,8 @@
 | Infrastructure Tools | `.github/skills/infrastructure_tools/SKILL.md` | Tool registry, task graphs, execution traces, approval gates |
 | Open Design Integration | `.github/skills/open_design_integration/SKILL.md` | Design→Deploy pipeline, Open Design ↔ WordPress bridge |
 | Website Analysis & Reporting | `.github/skills/website_analysis/SKILL.md` | Decision-oriented site reports: health, SEO, linking/orphans, architecture, page opportunities |
+| Site Generator & Live Editor | `.github/skills/site_generator/SKILL.md` | In-repo site generation: pages as data, validating builder, live browser editor writing back to source |
+| Design System Management | `.github/skills/design_system_management/SKILL.md` | Choose/load/use/validate/create design systems from the 152-package corpus: token tiers, paste-the-`:root` rule, quality rubric, craft rules |
 
 ## Platform Tools (injected by CommandCenter)
 
