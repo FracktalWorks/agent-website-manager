@@ -118,3 +118,9 @@
   cursor: pointer; border-radius: 8px; border: 1px solid #3a4150;
   background: #1d222c; color: var(--od-fg); }
 #od-toast button:hover { background: #2a3140; }
+
+/* A history button with nothing behind it should say so rather than fail
+   silently when clicked — the journal survives restarts, so "nothing to undo"
+   is now genuinely informative instead of the default state. */
+#od-bar button[disabled] { opacity: .38; cursor: default; }
+#od-bar button[disabled]:hover { background: transparent; }

@@ -32,6 +32,7 @@ import base64
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import threading
@@ -67,7 +68,6 @@ _lock = threading.Lock()          # one edit/build at a time
 _version = 0                      # bumped on every successful build
 _cond = threading.Condition()
 _last_error = ""                  # last build failure text, "" when green
-_history: list[dict] = []         # session undo stack
 
 
 # ── build + notify ───────────────────────────────────────────────────────────
@@ -157,6 +157,150 @@ def restore(snap: dict[Path, str]) -> None:
             f.write_text(text, encoding="utf-8")
 
 
+# ── history ──────────────────────────────────────────────────────────────────
+
+EDITS = ROOT / ".edits"
+HISTORY_MAX = 120
+
+
+class History:
+    """Undo/redo that survives restarting the editor.
+
+    The session-only stack this replaces was the weakest part of the editing
+    loop: close the terminal and an afternoon of edits became irreversible, and
+    there was no redo at all, so an accidental undo destroyed work outright.
+
+    Each entry stores only the files that actually changed, not every tracked
+    file — one content module rather than the whole site — so a hundred entries
+    cost a few megabytes. The `after` side is written lazily at undo time,
+    because until you undo something there is nothing to redo.
+
+    Uploaded files are *moved* into the entry rather than deleted on undo. A
+    deleted upload cannot be redone: the browser has long since dropped the
+    bytes, and asking the user to find the photograph again is not an undo.
+    """
+
+    def __init__(self, root: Path):
+        self.root = root
+        self.index = root / "index.json"
+        self.entries: list[dict] = []
+        self.cursor = 0
+        self._load()
+
+    # ── persistence ──────────────────────────────────────────────────────
+    def _load(self) -> None:
+        try:
+            data = json.loads(self.index.read_text(encoding="utf-8"))
+            self.entries = data["entries"]
+            self.cursor = data["cursor"]
+        except (OSError, ValueError, KeyError):
+            self.entries, self.cursor = [], 0
+
+    def _save(self) -> None:
+        self.root.mkdir(parents=True, exist_ok=True)
+        self.index.write_text(
+            json.dumps({"entries": self.entries, "cursor": self.cursor}, indent=1),
+            encoding="utf-8")
+
+    def _dir(self, entry: dict, side: str) -> Path:
+        return self.root / entry["id"] / side
+
+    @staticmethod
+    def _rel(f: Path) -> str:
+        return f.relative_to(ROOT).as_posix()
+
+    def _write_side(self, entry: dict, side: str, texts: dict[str, str]) -> None:
+        for rel, text in texts.items():
+            dest = self._dir(entry, side) / rel
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_text(text, encoding="utf-8")
+
+    def _restore_side(self, entry: dict, side: str) -> None:
+        for rel in entry["files"]:
+            src = self._dir(entry, side) / rel
+            if src.exists():
+                (ROOT / rel).write_text(src.read_text(encoding="utf-8"),
+                                        encoding="utf-8")
+
+    # ── recording ────────────────────────────────────────────────────────
+    def record(self, label: str, before: dict[Path, str],
+               created: list[Path]) -> None:
+        changed = {self._rel(f): text for f, text in before.items()
+                   if f.read_text(encoding="utf-8") != text}
+        if not changed and not created:
+            return
+        # A new edit made after an undo discards the redo tail, the same way
+        # every editor does — those states are no longer reachable.
+        for stale in self.entries[self.cursor:]:
+            shutil.rmtree(self.root / stale["id"], ignore_errors=True)
+        del self.entries[self.cursor:]
+
+        entry = {
+            "id": f"{int(time.time() * 1000):013d}",
+            "label": label[:80],
+            "when": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "files": sorted(changed),
+            "created": [self._rel(f) for f in created if f.exists()],
+        }
+        self._write_side(entry, "before", changed)
+        self.entries.append(entry)
+        self.cursor = len(self.entries)
+        self._prune()
+        self._save()
+
+    def _prune(self) -> None:
+        while len(self.entries) > HISTORY_MAX:
+            gone = self.entries.pop(0)
+            self.cursor = max(0, self.cursor - 1)
+            shutil.rmtree(self.root / gone["id"], ignore_errors=True)
+
+    # ── moving ───────────────────────────────────────────────────────────
+    def undo(self) -> dict:
+        if self.cursor == 0:
+            return {"error": "Nothing to undo."}
+        entry = self.entries[self.cursor - 1]
+        self._write_side(entry, "after",
+                         {rel: (ROOT / rel).read_text(encoding="utf-8")
+                          for rel in entry["files"] if (ROOT / rel).exists()})
+        self._restore_side(entry, "before")
+        for rel in entry["created"]:                  # park, do not delete
+            src, dest = ROOT / rel, self._dir(entry, "created") / rel
+            if src.exists():
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                shutil.move(str(src), str(dest))
+        self.cursor -= 1
+        self._save()
+        return {"ok": True, "label": entry["label"]}
+
+    def redo(self) -> dict:
+        if self.cursor >= len(self.entries):
+            return {"error": "Nothing to redo."}
+        entry = self.entries[self.cursor]
+        if not self._dir(entry, "after").exists():
+            return {"error": "This step has no forward state recorded."}
+        self._restore_side(entry, "after")
+        for rel in entry["created"]:
+            src = self._dir(entry, "created") / rel
+            if src.exists():
+                (ROOT / rel).parent.mkdir(parents=True, exist_ok=True)
+                shutil.move(str(src), str(ROOT / rel))
+        self.cursor += 1
+        self._save()
+        return {"ok": True, "label": entry["label"]}
+
+    def state(self) -> dict:
+        return {
+            "undo": self.entries[self.cursor - 1]["label"] if self.cursor else None,
+            "redo": (self.entries[self.cursor]["label"]
+                     if self.cursor < len(self.entries) else None),
+            "depth": len(self.entries),
+            "cursor": self.cursor,
+        }
+
+
+_history = History(EDITS)
+
+
 def transaction(label: str, apply, *, undoable: bool = True) -> dict:
     """Apply a change, keep it only if the site still builds.
 
@@ -187,26 +331,51 @@ def transaction(label: str, apply, *, undoable: bool = True) -> dict:
             build()                              # put dist/ back to last good
             return {"error": "Reverted — the build rejected this change:\n" + out}
         if undoable:
-            _history.append({"label": label, "files": snap, "created": created})
-            del _history[:-40]
+            _history.record(label, snap, created)
         adopt_mtimes()
     bump()
-    return {"ok": True, **payload}
+    return {"ok": True, **payload, "history": _history.state()}
+
+
+def _step(move) -> dict:
+    """Undo or redo, then rebuild — and put it back if the rebuild fails.
+
+    A step through history can only fail if the files on disk moved out from
+    under it (an external edit, a git checkout). Rebuilding and checking is the
+    same gate every forward edit passes, so a broken step is reverted rather
+    than left for the user to discover on the next save.
+    """
+    with _lock:
+        before = snapshot()
+        res = move()
+        if "error" in res:
+            return res
+        ok, out = build()
+        if not ok:
+            restore(before)
+            build()
+            return {"error": "That step would have broken the build, so it was "
+                             "put back:\n" + out}
+        adopt_mtimes()
+    bump()
+    return {**res, "history": _history.state()}
 
 
 def handle_undo(_req: dict) -> dict:
-    with _lock:
-        if not _history:
-            return {"error": "Nothing to undo in this session."}
-        entry = _history.pop()
-        restore(entry["files"])
-        for f in entry.get("created", []):
-            f.unlink(missing_ok=True)
-        ok, out = build()
-        if not ok:
-            return {"error": "Undo left the build failing:\n" + out}
-    bump()
-    return {"ok": True, "label": entry["label"]}
+    return _step(_history.undo)
+
+
+def handle_redo(_req: dict) -> dict:
+    return _step(_history.redo)
+
+
+def handle_history(_req: dict) -> dict:
+    """The recent edit log — what the on-disk journal holds, newest first."""
+    return {"ok": True, **_history.state(),
+            "entries": [{"label": e["label"], "when": e["when"],
+                         "files": e["files"],
+                         "undone": i >= _history.cursor}
+                        for i, e in reversed(list(enumerate(_history.entries)))][:40]}
 
 
 # ── text ─────────────────────────────────────────────────────────────────────
@@ -370,9 +539,17 @@ def handle_link(req: dict) -> dict:
 
     def apply(created):
         node_value = datapatch.read(slug, addr) if addr else None
-        if addr and isinstance(node_value, (list, tuple)) and len(node_value) == 2:
-            new = (label if label is not None else node_value[0], target)
-            f, line = datapatch.set_value(slug, addr, list(new))
+        # >= 2 rather than == 2: a chip is (label, slug, accent) and a pillar
+        # row is (label, slug) or (label, slug, flag). Only the first two
+        # elements are the link; anything after them is carried through
+        # untouched, so retargeting a chip does not drop its category colour.
+        if addr and isinstance(node_value, (list, tuple)) and len(node_value) >= 2:
+            new = [label if label is not None else node_value[0], target,
+                   *node_value[2:]]
+            # keep the container type — these files write links as tuples, and
+            # turning one into a list on every edit is churn in the diff
+            f, line = datapatch.set_value(
+                slug, addr, tuple(new) if isinstance(node_value, tuple) else new)
             return {"file": str(f.relative_to(ROOT)), "line": line}
         # the tuple holds a constant reference: retarget the constant itself
         matches = [m for m in resolver.find(req.get("oldHref", ""),
@@ -615,6 +792,8 @@ ROUTES = {
     "/api/locate": handle_locate,
     "/api/open": handle_open,
     "/api/undo": handle_undo,
+    "/api/redo": handle_redo,
+    "/api/history": handle_history,
 }
 
 

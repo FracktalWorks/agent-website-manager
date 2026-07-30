@@ -37,7 +37,7 @@ and deterministic scripts do the rendering, validation and persistence.
 | `resolver.py` | Edits copy **by value** — the fallback for text with no address. Also owns `char_col`, the UTF-8 byte→character column conversion every span write must use. |
 | `media.py` | Upload pipeline: verify by decoding, bake EXIF orientation, strip all metadata, cap the long edge, re-encode, report dimensions. |
 | `editor.py` | Live-edit server: injects the overlay, applies edits inside a transaction that reverts source *and deletes uploaded files* if the build fails, watches sources, SSE-reloads every tab. |
-| `editor/editor.js\|css` | The injected overlay: hover-pick, in-place text editing, inspector panels (image/link/tokens/site), section toolbar, undo, open-in-code. Never part of a build. |
+| `editor/editor.js\|css` | The injected overlay: hover-pick, in-place text editing, inspector panels (image/link/tokens/site), section toolbar, undo/redo, open-in-code. Never part of a build. |
 | `brandkit.py` | Drives the site from any corpus design system: reads its canonical `:root`, derives this site's tokens in OKLCH, repairs contrast, writes `assets/brand.css`. `list` / `show <id>` / `apply <id>` / `apply --native` / `calibrate` / `check`. |
 | `preview.py` | Plain build+serve, no editing. |
 | `verify.py` | Renders every built page in real Chrome at 390/768/1040/1440px and fails on horizontal scroll or broken images. Measures inside an iframe of the exact width because Chrome on Windows clamps windows to ~500px, and ignores elements clipped by a scrolling ancestor so intentional marquees and scrollable tables don't false-positive. |
@@ -61,6 +61,40 @@ anything jumps VS Code to the exact source line.
 | Sections and cards | hover toolbar: move ↑↓, duplicate, delete | element position in the Python list |
 | Design tokens | Tokens panel with colour pickers | the design system's `:root` block |
 | Site-wide details | Site panel: Practo links, phone, WhatsApp, reviewer | module constants in `chrome.py` |
+| Any of it, undone | Undo/Redo (Ctrl+Z / Ctrl+Shift+Z) | a journal under `site/.edits/`, so it survives restarting the editor |
+
+### Addressing reach — how much the editor can name exactly
+
+Every renderer threads a data address through its item loops, so **69% of
+text-bearing elements** carry an exact address (`sections.4.rows.2.1`,
+`faqs.3.1.0`, `items.2.list.5`). That number matters because the fallback is
+value matching: an unaddressed string that appears on sixteen pages produces an
+ambiguity prompt, and an addressed one just edits. Two deliberate exclusions:
+
+- **Template chrome** (nav, footer, byline, utility bar) is not page data at
+  all — it lives in `chrome.py` constants, and editing it *should* change all
+  45 pages at once. The Site panel is its surface.
+- **The `"1.a|b|c"` ordered-list shorthand** packs several items into one
+  string. No address can name a segment of a string, so those keep the
+  value-based path rather than carrying an address that would rewrite the
+  whole list.
+
+Production HTML carries none of it — `at()` emits nothing when `links` is
+`production`, and the build asserts it.
+
+### Undo that survives closing the terminal
+
+History is a journal on disk (`site/.edits/`), not a stack in RAM:
+
+- Each entry stores only the files that actually changed — one content module,
+  not the whole site — so 120 entries cost a few megabytes.
+- The redo side is written lazily at undo time; until you undo something there
+  is nothing to redo.
+- An uploaded file is **moved into the entry** on undo, never deleted. A
+  deleted upload cannot be redone — the browser dropped the bytes long ago, and
+  asking someone to find the photograph again is not an undo.
+- Undo and redo pass the same build gate as a forward edit: a step that would
+  break the build is put back and reported.
 
 ## Re-branding a site from the design-system corpus
 

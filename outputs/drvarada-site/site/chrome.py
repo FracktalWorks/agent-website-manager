@@ -443,78 +443,108 @@ def _headblock(s: dict, links: str = 'production', a: str = '') -> str:
     return f'<div class="head-block">{"".join(bits)}</div>' if bits else ""
 
 
-def _para(items) -> str:
+def _para(items, links: str = "production", a: str = "") -> str:
+    """Prose body: paragraphs, bullet lists, and the "1.a|b|c" ordered shorthand.
+
+    Only the first two forms get addresses. The shorthand packs several list
+    items into ONE string joined by pipes, and no address can name a segment of
+    a string — so those fall through to the editor's value-based matching
+    rather than carrying an address that would rewrite the whole list.
+    """
     out = []
-    for it in items:
+    for i, it in enumerate(items):
         if isinstance(it, list):
-            lis = "".join(f"<li>{e(x)}</li>" for x in it)
+            lis = "".join(f"<li{at(f'{a}.{i}.{j}', links)}>{e(x)}</li>"
+                          for j, x in enumerate(it))
             out.append(f"<ul>{lis}</ul>")
         elif it.startswith("1."):
             lis = "".join(f"<li>{e(x)}</li>" for x in it[2:].split("|"))
             out.append(f"<ol>{lis}</ol>")
         else:
-            out.append(f"<p>{e(it)}</p>")
+            out.append(f"<p{at(f'{a}.{i}', links)}>{e(it)}</p>")
     return "".join(out)
 
 
 def blk_prose(s, links, a=''):
-    return _headblock(s, links, a) + f'<div class="prose">{_para(s["body"])}</div>'
+    return (_headblock(s, links, a)
+            + f'<div class="prose">{_para(s["body"], links, f"{a}.body")}</div>')
 
 
 def blk_cards(s, links, a=''):
     accent = s.get("accent", "")
     cards = []
-    for it in s["items"]:
-        eb = f'<div class="eyebrow">{e(it["eyebrow"])}</div>' if it.get("eyebrow") else ""
-        body = f"<p>{e(it['body'])}</p>" if it.get("body") else ""
+    for n, it in enumerate(s["items"]):
+        w = f"{a}.items.{n}"
+        eb = (f'<div class="eyebrow"{at(f"{w}.eyebrow", links)}>{e(it["eyebrow"])}</div>'
+              if it.get("eyebrow") else "")
+        body = f'<p{at(f"{w}.body", links)}>{e(it["body"])}</p>' if it.get("body") else ""
         lis = ""
         if it.get("list"):
-            lis = "<ul>" + "".join(f"<li>{e(x)}</li>" for x in it["list"]) + "</ul>"
-        cards.append(f'<article class="card {accent}">{eb}<h3>{e(it["title"])}</h3>{body}{lis}</article>')
+            lis = "<ul>" + "".join(f'<li{at(f"{w}.list.{j}", links)}>{e(x)}</li>'
+                                   for j, x in enumerate(it["list"])) + "</ul>"
+        cards.append(f'<article class="card {accent}">{eb}'
+                     f'<h3{at(f"{w}.title", links)}>{e(it["title"])}</h3>'
+                     f'{body}{lis}</article>')
     return _headblock(s, links, a) + f'<div class="cols">{"".join(cards)}</div>'
 
 
 def blk_steps(s, links, a=''):
     steps = "".join(
-        f'<div class="step"><h3>{e(i["title"])}</h3><p>{e(i["body"])}</p></div>' for i in s["items"]
+        f'<div class="step"><h3{at(f"{a}.items.{n}.title", links)}>{e(i["title"])}</h3>'
+        f'<p{at(f"{a}.items.{n}.body", links)}>{e(i["body"])}</p></div>'
+        for n, i in enumerate(s["items"])
     )
     return _headblock(s, links, a) + f'<div class="steps">{steps}</div>'
 
 
 def blk_table(s, links, a=''):
-    thead = "".join(f"<th>{e(h)}</th>" for h in s["head"])
-    rows = "".join("<tr>" + "".join(f"<td>{e(c)}</td>" for c in r) + "</tr>" for r in s["rows"])
-    note = f'<p class="tnote">{e(s["note"])}</p>' if s.get("note") else ""
+    thead = "".join(f'<th{at(f"{a}.head.{j}", links)}>{e(h)}</th>'
+                    for j, h in enumerate(s["head"]))
+    rows = "".join(
+        "<tr>" + "".join(f'<td{at(f"{a}.rows.{r}.{c}", links)}>{e(cell)}</td>'
+                         for c, cell in enumerate(row)) + "</tr>"
+        for r, row in enumerate(s["rows"]))
+    note = (f'<p class="tnote"{at(f"{a}.note", links)}>{e(s["note"])}</p>'
+            if s.get("note") else "")
     return (_headblock(s, links, a) + f'<div class="tablewrap"><table><thead><tr>{thead}</tr></thead>'
             f"<tbody>{rows}</tbody></table></div>{note}")
 
 
 def blk_checklist(s, links, a=''):
-    lis = "".join(f"<li>{e(x)}</li>" for x in s["items"])
+    lis = "".join(f'<li{at(f"{a}.items.{n}", links)}>{e(x)}</li>'
+                  for n, x in enumerate(s["items"]))
     return _headblock(s, links, a) + f'<ul class="checks">{lis}</ul>'
 
 
 def blk_callout(s, links, a=''):
     cls = " warn" if s.get("warn") else ""
-    return f'<div class="callout{cls}"><h4>{e(s["title"])}</h4><p>{e(s["body"])}</p></div>'
+    return (f'<div class="callout{cls}">'
+            f'<h4{at(f"{a}.title", links)}>{e(s["title"])}</h4>'
+            f'<p{at(f"{a}.body", links)}>{e(s["body"])}</p></div>')
 
 
 def blk_quote(s, links, a=''):
-    return (f'<div class="quote"><blockquote>“{e(s["text"])}”</blockquote>'
-            f'<cite>{e(s.get("cite", "Dr. (Lt Col) Khagendra Varada"))}</cite></div>')
+    return (f'<div class="quote"><blockquote{at(f"{a}.text", links)}>'
+            f'“{e(s["text"])}”</blockquote>'
+            f'<cite{at(f"{a}.cite", links)}>'
+            f'{e(s.get("cite", "Dr. (Lt Col) Khagendra Varada"))}</cite></div>')
 
 
 def blk_stats(s, links, a=''):
     cards = "".join(
-        f'<div class="card"><div class="stat">{e(v)}</div><p>{e(l)}</p></div>' for v, l in s["items"]
+        f'<div class="card"><div class="stat"{at(f"{a}.items.{n}.0", links)}>{e(v)}</div>'
+        f'<p{at(f"{a}.items.{n}.1", links)}>{e(l)}</p></div>'
+        for n, (v, l) in enumerate(s["items"])
     )
     return _headblock(s, links, a) + f'<div class="stats">{cards}</div>'
 
 
 def blk_chips(s, links, a=''):
     chips = "".join(
-        f'<a class="chip" href="{href(sl, links)}"><i style="background:var(--{c})"></i>{e(t)} →</a>'
-        for t, sl, c in s["items"]
+        f'<a class="chip" href="{href(sl, links)}"'
+        f'{at(f"{a}.items.{n}", links, "od-link")}>'
+        f'<i style="background:var(--{c})"></i>{e(t)} →</a>'
+        for n, (t, sl, c) in enumerate(s["items"])
     )
     return _headblock(s, links, a) + f'<div class="chips">{chips}</div>'
 
@@ -522,19 +552,24 @@ def blk_chips(s, links, a=''):
 def blk_split(s, links, a=''):
     """The one dark band a page is allowed. Rendered by render_section, not here."""
     cards = "".join(
-        f'<div class="qcard"><h3>{e(i["title"])}</h3><p>{e(i["body"])}</p></div>' for i in s["items"]
+        f'<div class="qcard"><h3{at(f"{a}.items.{n}.title", links)}>{e(i["title"])}</h3>'
+        f'<p{at(f"{a}.items.{n}.body", links)}>{e(i["body"])}</p></div>'
+        for n, i in enumerate(s["items"])
     )
     cta = ""
     if s.get("cta"):
         label, link = s["cta"]
         cta = (f'<a class="btn btn-on-dark" style="margin-top:26px" '
-               f'href="{href(link, links)}" rel="noopener">{e(label)}</a>')
+               f'href="{href(link, links)}" rel="noopener"'
+               f'{at(f"{a}.cta", links, "od-link")}>{e(label)}</a>')
     left = []
     if s.get("eyebrow"):
-        left.append(f'<div class="eyebrow">{e(s["eyebrow"])}</div>')
-    left.append(f"<h2>{e(s['h2'])}</h2>")
-    for p in s.get("body", []):
-        left.append(f'<p style="margin-top:16px">{e(p)}</p>')
+        left.append(f'<div class="eyebrow"{at(f"{a}.eyebrow", links)}>'
+                    f'{e(s["eyebrow"])}</div>')
+    left.append(f'<h2{at(f"{a}.h2", links)}>{e(s["h2"])}</h2>')
+    for i, p in enumerate(s.get("body", [])):
+        left.append(f'<p style="margin-top:16px"{at(f"{a}.body.{i}", links)}>'
+                    f'{e(p)}</p>')
     return f'<div>{"".join(left)}{cta}</div><div class="aside">{cards}</div>'
 
 
@@ -558,21 +593,26 @@ def blk_pillars(s, links, a=''):
     optional Specialty flags, and a category footer link pinned to the bottom."""
     cards = []
     for n, it in enumerate(s["items"], start=1):
+        w = f"{a}.items.{n - 1}"          # the tag reads 1-based, the data is not
         sf, dp = PILLAR_ACCENTS[it["accent"]]
         rows = []
-        for entry in it["list"]:
+        for j, entry in enumerate(it["list"]):
             label, slug, flag = (entry if len(entry) == 3 else (*entry, None))
             badge = f'<span class="flag">{e(flag)}</span>' if flag else ""
-            rows.append(f'<li><a href="{href(slug, links)}">{label}</a>{badge}</li>')
+            rows.append(f'<li><a href="{href(slug, links)}"'
+                        f'{at(f"{w}.list.{j}", links, "od-link")}>{label}</a>'
+                        f'{badge}</li>')
         go_label, go_slug = it["go"]
         cards.append(
             f'<article class="pcard">'
             f'<div class="ptag" style="background:var(--{sf});color:var(--{dp})">'
             f"{n:02d}</div>"
-            f'<h3>{e(it["title"])}</h3><p>{e(it["body"])}</p>'
+            f'<h3{at(f"{w}.title", links)}>{e(it["title"])}</h3>'
+            f'<p{at(f"{w}.body", links)}>{e(it["body"])}</p>'
             f'<ul>{"".join(rows)}</ul>'
             f'<a class="go" href="{href(go_slug, links)}" '
-            f'style="color:var(--{dp})">{e(go_label)} →</a></article>'
+            f'style="color:var(--{dp})"{at(f"{w}.go", links, "od-link")}>'
+            f'{e(go_label)} →</a></article>'
         )
     return _headblock(s, links, a) + f'<div class="bento">{"".join(cards)}</div>'
 
@@ -580,8 +620,9 @@ def blk_pillars(s, links, a=''):
 def blk_quotes(s, links, a=''):
     """The social-proof band from home-v3: rating strip + verified Practo stories."""
     quotes = "".join(
-        f'<div class="q"><p>“{e(text)}”</p><footer>{e(src)}</footer></div>'
-        for text, src in s["items"]
+        f'<div class="q"><p{at(f"{a}.items.{n}.0", links)}>“{e(text)}”</p>'
+        f'<footer{at(f"{a}.items.{n}.1", links)}>{e(src)}</footer></div>'
+        for n, (text, src) in enumerate(s["items"])
     )
     return _headblock(s, links, a) + f"""<div class="rating">
       <span class="big">5.0</span>
@@ -716,13 +757,22 @@ def faq_html(page: dict, links: str) -> str:
         return ""
     rows = []
     for i, (q, a) in enumerate(page["faqs"]):
-        paras = "".join(f"<p>{e(p)}</p>" for p in (a if isinstance(a, list) else [a]))
-        rows.append(f'<details{" open" if i == 0 else ""}><summary>{e(q)}</summary>{paras}</details>')
+        # an answer is either one string or a list of paragraphs, and the
+        # address has to match: `faqs.i.1` for the first, `faqs.i.1.j` for the
+        # second, or an edit rewrites the wrong node
+        if isinstance(a, list):
+            paras = "".join(f'<p{at(f"faqs.{i}.1.{j}", links)}>{e(p)}</p>'
+                            for j, p in enumerate(a))
+        else:
+            paras = f'<p{at(f"faqs.{i}.1", links)}>{e(a)}</p>'
+        rows.append(f'<details{" open" if i == 0 else ""}>'
+                    f'<summary{at(f"faqs.{i}.0", links)}>{e(q)}</summary>'
+                    f'{paras}</details>')
     return f"""<section class="band paper" id="faq">
   <div class="wrap">
     <div class="faq">
       <div class="eyebrow">Questions patients actually ask</div>
-      <h2 style="margin-top:10px">{e(page.get('faq_h2', 'Before you come in'))}</h2>
+      <h2 style="margin-top:10px"{at("faq_h2", links)}>{e(page.get('faq_h2', 'Before you come in'))}</h2>
       <div style="margin-top:26px">{''.join(rows)}</div>
       <div class="byline">
         <span>Medically reviewed by <b>{REVIEWER}</b></span>
@@ -737,13 +787,16 @@ def related_html(page: dict, links: str) -> str:
     if not page.get("related"):
         return ""
     cards = "".join(
-        f'<a href="{href(s, links)}"><h3>{e(t)}</h3><p>{e(b)}</p>'
-        f'<div class="go">Read this →</div></a>' for s, t, b in page["related"]
+        f'<a href="{href(slug, links)}">'
+        f'<h3{at(f"related.{i}.1", links)}>{e(t)}</h3>'
+        f'<p{at(f"related.{i}.2", links)}>{e(b)}</p>'
+        f'<div class="go">Read this →</div></a>'
+        for i, (slug, t, b) in enumerate(page["related"])
     )
     return f"""<section class="band">
   <div class="wrap">
     <div class="head-block"><div class="eyebrow">Keep reading</div>
-      <h2>{e(page.get('related_h2', 'Related on this site'))}</h2></div>
+      <h2{at("related_h2", links)}>{e(page.get('related_h2', 'Related on this site'))}</h2></div>
     <div class="cols related">{cards}</div>
   </div>
 </section>"""

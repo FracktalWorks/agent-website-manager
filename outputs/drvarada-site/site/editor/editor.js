@@ -36,7 +36,8 @@
       '<button id="od-toggle" type="button"></button>' +
       '<button id="od-tokens" type="button" title="Design tokens">Tokens</button>' +
       '<button id="od-site" type="button" title="Practo links, phone, WhatsApp">Site</button>' +
-      '<button id="od-undo" type="button" title="Undo last change (Ctrl+Z)">Undo</button>' +
+      '<button id="od-undo" type="button" title="Undo (Ctrl+Z)">Undo</button>' +
+      '<button id="od-redo" type="button" title="Redo (Ctrl+Shift+Z)">Redo</button>' +
     '</div>' +
     '<div id="od-hl" hidden><span id="od-hl-tag"></span></div>' +
     '<div id="od-sectools" hidden></div>' +
@@ -80,12 +81,17 @@
   // Every mutating call carries the per-run secret the server injected into this
   // page. Loopback alone is not protection: a POST like this is a "simple"
   // request, so any site the user has open could otherwise drive the editor.
+  // Every mutating response carries the new history state, so the Undo and
+  // Redo buttons stay truthful without a second round trip after each edit.
   const post = (route, body) =>
     fetch(route, {
       method: "POST",
       headers: { "X-OD-Token": window.__odToken || "" },
       body: JSON.stringify(body || {}),
-    }).then((r) => r.json());
+    }).then((r) => r.json()).then((res) => {
+      if (res && res.history) showHistory(res.history);
+      return res;
+    });
 
   function saved(res, extra) {
     if (res.error) { toast(res.error, "err"); return false; }
@@ -97,9 +103,24 @@
   }
 
   const openInCode = (file, line) => post("/api/open", { file: file, line: line });
-  const undo = () => post("/api/undo").then((res) =>
-    toast(res.ok ? "Undid: " + res.label : (res.error || "Nothing to undo"),
-      res.ok ? "ok" : "err"));
+  // History lives on disk now, so the buttons reflect a journal that outlived
+  // the last run of the editor rather than a stack that started empty.
+  function showHistory(h) {
+    if (!h) return;
+    const u = $("#od-undo"), r = $("#od-redo");
+    u.disabled = !h.undo;
+    r.disabled = !h.redo;
+    u.title = h.undo ? "Undo: " + h.undo + " (Ctrl+Z)" : "Nothing to undo";
+    r.title = h.redo ? "Redo: " + h.redo + " (Ctrl+Shift+Z)" : "Nothing to redo";
+  }
+
+  const step = (what) => post("/api/" + what).then((res) => {
+    showHistory(res.history);
+    toast(res.ok ? (what === "undo" ? "Undid: " : "Redid: ") + res.label
+                 : (res.error || "Nothing to " + what), res.ok ? "ok" : "err");
+  });
+  const undo = () => step("undo");
+  const redo = () => step("redo");
 
   /* ---------- target discovery ---------- */
   const onlyInline = (el) => {
@@ -481,6 +502,8 @@
   $("#od-tokens").onclick = () => { if (!mode) toggle.click(); tokensPanel(); };
   $("#od-site").onclick = () => { if (!mode) toggle.click(); sitePanel(); };
   $("#od-undo").onclick = undo;
+  $("#od-redo").onclick = redo;
+  post("/api/history").then(showHistory);
 
   document.addEventListener("mousemove", (e) => {
     if (!mode || editing || ui.contains(e.target)) return;
@@ -514,10 +537,10 @@
     }
     if (!mode) return;
     if (e.key === "Escape") closePanel();
-    if ((e.ctrlKey || e.metaKey) && e.key === "z" &&
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z" &&
         !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) {
       e.preventDefault();
-      undo();
+      (e.shiftKey ? redo : undo)();
     }
   }, true);
 
