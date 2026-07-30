@@ -1,0 +1,48 @@
+<!-- @dsCard group="Colors" -->
+<title>Neutrals</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+body { margin:0; padding:40px 34px 60px; background:var(--ground); }
+.sheet { max-width:1000px; margin:0 auto; }
+.sheet > header { margin-bottom:30px; }
+.sheet h1 { font-size:34px; }
+.sheet header p { margin-top:8px; }
+.grid { display:grid; gap:14px; margin-top:22px; }
+.sw { border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden;
+      background:var(--paper); }
+.sw .chip { height:92px; }
+.sw .meta { padding:11px 14px; display:flex; flex-direction:column; gap:2px; }
+.sw .meta b { font:600 13.5px/1.3 var(--body); color:var(--ink); }
+.sw .meta code { font:500 12px/1.4 var(--mono); color:var(--ink-3); }
+.sw .meta span { font:400 12px/1.45 var(--body); color:var(--ink-3); }
+.note { margin-top:26px; padding:16px 20px; background:var(--paper);
+        border:1px solid var(--line); border-left:3px solid var(--navy);
+        border-radius:0 var(--r-sm) var(--r-sm) 0; }
+.note p { font-size:14.5px; max-width:80ch; }
+h2.sec { font-size:19px; margin:38px 0 4px; }
+h3.sub { font-size:15.5px; margin:26px 0 2px; font-family:var(--body);
+         font-weight:700; letter-spacing:0; }
+.tablewrap { overflow-x:auto; margin-top:20px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; min-width:520px; }
+th { text-align:left; font:600 11px/1.3 var(--body); letter-spacing:.1em;
+     text-transform:uppercase; color:var(--ink-2);
+     border-bottom:2px solid var(--ink); padding:0 14px 9px 0; vertical-align:bottom; }
+td { border-bottom:1px solid var(--line); padding:10px 14px 10px 0;
+     vertical-align:top; }
+td:last-child, th:last-child { padding-right:0; }
+.num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+.stage { display:flex; align-items:center; justify-content:center; padding:26px; }
+.stage img { width:100%; height:auto; display:block; }
+.yes b, .no b { font:600 11px/1 var(--body); letter-spacing:.1em;
+                text-transform:uppercase; }
+.yes b { color:var(--mint-dp); }
+.no b { color:#9A5320; }
+</style>
+<div class="sheet">
+<header>
+  <div class="eyebrow">Palette</div>
+  <h1>Neutrals</h1>
+  <p>Three inks on light, three on dark, and the one identity navy.</p>
+</header>
+<h2 class="sec">Ink &amp; identity</h2><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr))"><div class="sw"><div class="chip" style="background:#12202F"></div><div class="meta"><b>Ink</b><code>--ink</code><span>Body and headings on light</span></div></div><div class="sw"><div class="chip" style="background:#53616D"></div><div class="meta"><b>Ink 2</b><code>--ink-2</code><span>Secondary text, descriptions</span></div></div><div class="sw"><div class="chip" style="background:#7C8794"></div><div class="meta"><b>Ink 3</b><code>--ink-3</code><span>Metadata, captions, eyebrows</span></div></div><div class="sw"><div class="chip" style="background:#1E3A63"></div><div class="meta"><b>Navy</b><code>--navy</code><span>Identity only — logo, icons, print</span></div></div></div><h2 class="sec">On dark bands</h2><div class="band on-dark" style="border-radius:var(--r-sm);padding:22px;margin-top:14px"><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr))"><div class="sw"><div class="chip" style="background:rgba(240,245,248,.76)"></div><div class="meta"><b>On dark</b><code>--on-dark</code><span>Body text on a dark band</span></div></div><div class="sw"><div class="chip" style="background:#FFFFFF"></div><div class="meta"><b>On dark strong</b><code>--on-dark-str</code><span>Headings on a dark band</span></div></div><div class="sw"><div class="chip" style="background:rgba(255,255,255,.14)"></div><div class="meta"><b>Dark line</b><code>--dark-line</code><span>Hairlines on dark</span></div></div></div></div><div class="note"><p><b>Navy versus ink is deliberate.</b> <code>--navy</code> <code>#1E3A63</code> is the identity colour and belongs to the logo, the icon tiles and anything printed. <code>--ink</code> <code>#12202F</code> is the interface colour: text, dark bands, footer. They are close on purpose and do different jobs — do not unify them.</p></div>
+</div>

@@ -1,0 +1,24 @@
+{
+  "token": {
+    "colorPrimary": "#8FDCC6",
+    "colorSuccess": "#0B6353",
+    "colorWarning": "#9A5320",
+    "colorError": "#B3261E",
+    "colorInfo": "#1E3A63",
+    "colorTextBase": "#12202F",
+    "colorBgBase": "#F8F5F3",
+    "fontFamily": "Manrope, 'Segoe UI Variable Text', system-ui, -apple-system, sans-serif",
+    "fontFamilyCode": "ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, Consolas, monospace",
+    "fontSize": 16,
+    "borderRadius": 26,
+    "sizeUnit": 4,
+    "sizeStep": 4,
+    "controlHeight": 44,
+    "lineWidth": 1,
+    "motionUnit": 0.1,
+    "motionBase": 0,
+    "wireframe": false,
+    "motion": true
+  },
+  "algorithm": "default"
+}

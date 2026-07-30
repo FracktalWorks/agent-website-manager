@@ -1,0 +1,48 @@
+<!-- @dsCard group="Brand" -->
+<title>When to use what</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+body { margin:0; padding:40px 34px 60px; background:var(--ground); }
+.sheet { max-width:1000px; margin:0 auto; }
+.sheet > header { margin-bottom:30px; }
+.sheet h1 { font-size:34px; }
+.sheet header p { margin-top:8px; }
+.grid { display:grid; gap:14px; margin-top:22px; }
+.sw { border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden;
+      background:var(--paper); }
+.sw .chip { height:92px; }
+.sw .meta { padding:11px 14px; display:flex; flex-direction:column; gap:2px; }
+.sw .meta b { font:600 13.5px/1.3 var(--body); color:var(--ink); }
+.sw .meta code { font:500 12px/1.4 var(--mono); color:var(--ink-3); }
+.sw .meta span { font:400 12px/1.45 var(--body); color:var(--ink-3); }
+.note { margin-top:26px; padding:16px 20px; background:var(--paper);
+        border:1px solid var(--line); border-left:3px solid var(--navy);
+        border-radius:0 var(--r-sm) var(--r-sm) 0; }
+.note p { font-size:14.5px; max-width:80ch; }
+h2.sec { font-size:19px; margin:38px 0 4px; }
+h3.sub { font-size:15.5px; margin:26px 0 2px; font-family:var(--body);
+         font-weight:700; letter-spacing:0; }
+.tablewrap { overflow-x:auto; margin-top:20px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; min-width:520px; }
+th { text-align:left; font:600 11px/1.3 var(--body); letter-spacing:.1em;
+     text-transform:uppercase; color:var(--ink-2);
+     border-bottom:2px solid var(--ink); padding:0 14px 9px 0; vertical-align:bottom; }
+td { border-bottom:1px solid var(--line); padding:10px 14px 10px 0;
+     vertical-align:top; }
+td:last-child, th:last-child { padding-right:0; }
+.num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+.stage { display:flex; align-items:center; justify-content:center; padding:26px; }
+.stage img { width:100%; height:auto; display:block; }
+.yes b, .no b { font:600 11px/1 var(--body); letter-spacing:.1em;
+                text-transform:uppercase; }
+.yes b { color:var(--mint-dp); }
+.no b { color:#9A5320; }
+</style>
+<div class="sheet">
+<header>
+  <div class="eyebrow">Logo</div>
+  <h1>When to use what</h1>
+  <p>Three decisions: which form, which colourway, and how small it may go.</p>
+</header>
+<h2 class="sec">Which form</h2><div class="tablewrap"><table class=""><tr><th>File</th><th>Form</th><th>Ratio</th><th>Use it for</th><th>Min width</th></tr><tr><td><code>logo-horizontal-*</code></td><td><b>Horizontal</b></td><td><span class="num">3.3 : 1</span></td><td>The default. Site header, letterhead, email signature, any wide strip.</td><td><span class="num">160 px</span></td></tr><tr><td><code>logo-horizontal-tagline-*</code></td><td><b>Horizontal + tagline</b></td><td><span class="num">2.7 : 1</span></td><td>Same, where there is room to say what you do — ads, brochure covers, presentation title slides.</td><td><span class="num">260 px</span></td></tr><tr><td><code>logo-stacked-*</code></td><td><b>Stacked</b></td><td><span class="num">1.2 : 1</span></td><td>Square-ish spaces: signage, a clinic board, a social post, a stamp.</td><td><span class="num">170 px</span></td></tr><tr><td><code>logo-stacked-tagline-*</code></td><td><b>Stacked + tagline</b></td><td><span class="num">1.1 : 1</span></td><td>The fullest expression. Reception wall, brochure front, poster.</td><td><span class="num">260 px</span></td></tr><tr><td><code>logo-wordmark-*</code></td><td><b>Wordmark</b></td><td><span class="num">4.2 : 1</span></td><td>Where the symbol already appears nearby, or is too small to survive.</td><td><span class="num">160 px</span></td></tr><tr><td><code>logo-wordmark-tagline-*</code></td><td><b>Wordmark + tagline</b></td><td><span class="num">3.3 : 1</span></td><td>Document footers, certificates, anywhere the name must carry the tagline alone.</td><td><span class="num">260 px</span></td></tr></table></div><h2 class="sec">Which colourway</h2><div class="tablewrap"><table class=""><tr><th>Suffix</th><th>Name</th><th>When</th></tr><tr><td><code>*-light</code></td><td><b>Light</b></td><td>White or porcelain grounds. The primary.</td></tr><tr><td><code>*-dark</code></td><td><b>Dark</b></td><td>Navy, ink or photographic grounds. A considered re-step, not an inversion.</td></tr><tr><td><code>*-flat-navy</code></td><td><b>Flat navy</b></td><td>One-colour brand navy: signage, embroidery, screen print, stamps.</td></tr><tr><td><code>*-mono-dark</code></td><td><b>Mono ink</b></td><td>One colour ink: fax, forms, engraving, newspaper.</td></tr><tr><td><code>*-mono-light</code></td><td><b>Mono white</b></td><td>One-colour knockout: dark print, etched glass, merchandise.</td></tr><tr><td><code>*-adaptive</code></td><td><b>Adaptive</b></td><td>Web only. Follows the viewer's colour scheme and honours data-theme.</td></tr></table></div><h2 class="sec">Which one goes where</h2><div class="tablewrap"><table class=""><tr><th>Destination</th><th>Use</th><th>Why</th></tr><tr><td>Website header</td><td><code>horizontal</code> or <code>adaptive</code></td><td>46 px tall — the symbol alone is not enough for brand recall</td></tr><tr><td>Letterhead / email signature</td><td><code>horizontal</code></td><td>Light ground</td></tr><tr><td>Brochure cover, ad, title slide</td><td><code>horizontal-tagline</code></td><td>Room for the promise</td></tr><tr><td>Clinic signage / board</td><td><code>stacked</code> or <code>flat-navy</code></td><td>One colour survives vinyl and paint</td></tr><tr><td>Reception wall, poster</td><td><code>stacked-tagline</code></td><td>The fullest form</td></tr><tr><td>Certificate, document footer</td><td><code>wordmark-tagline</code></td><td>The symbol would compete with the seal</td></tr><tr><td>Favicon, app icon, avatar</td><td><b>icon tier</b> — never a lockup</td><td>See the icon ladder card</td></tr><tr><td>Practo / Google / social avatar</td><td><code>profile-512.png</code></td><td>Compact tier — built for a 48 px display, not a 512 px file</td></tr><tr><td>Embroidery, stamp, screen print</td><td><code>*-flat-navy</code></td><td>The grey ramp cannot reproduce</td></tr><tr><td>Watermark on a document</td><td><code>logo-mark-mono-*</code></td><td>Symbol only, one colour</td></tr></table></div><h2 class="sec">Clear space</h2><p style="margin-top:10px">Keep clear on all four sides by the <b>cap height of the &ldquo;D&rdquo; in &ldquo;Dr.&rdquo;</b> Nothing sits inside that margin. Each file already carries about a third of it inside its own viewBox, so the logo never sits flush against its container even when placed carelessly.</p><div class="note"><p>Minimum widths were measured by rendering and reading, not by rule of thumb. Below them the descriptor&rsquo;s letterspacing closes up and the tagline breaks into grey noise. <b>Below a tagline form&rsquo;s floor, drop to the form without a tagline</b> rather than shrinking further.</p></div><div class="note"><p>The wordmark is set in the brand&rsquo;s own faces — Gabarito for the name, Manrope for the descriptor and tagline — the same pairing the website uses, so the logo and the site speak in one voice.</p></div>
+</div>

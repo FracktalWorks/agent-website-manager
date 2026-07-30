@@ -1,0 +1,85 @@
+# robots.txt — drvarada.com
+# Policy: we WANT to be found by AI assistants as well as search engines.
+# Every major AI crawler is explicitly allowed. Do not add Disallow rules for
+# these agents without a deliberate decision — blocking them removes the clinic
+# from ChatGPT / Claude / Perplexity / Gemini answers entirely.
+
+# ── Search engines ─────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# ── AI answer engines & assistant browsing ─────────────────────
+# OpenAI — training, search index, and live user browsing
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic — Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google AI (Gemini / AI Overviews grounding) — separate from Googlebot.
+# Disallowing this removes the site from AI Overviews without affecting normal ranking.
+User-agent: Google-Extended
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# Common Crawl — feeds many downstream models
+User-agent: CCBot
+Allow: /
+
+# Others
+User-agent: Amazonbot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+# ── Everyone else ──────────────────────────────────────────────
+User-agent: *
+Allow: /
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Disallow: /?s=
+Disallow: /search/
+Disallow: /cart/
+Disallow: /checkout/
+
+Sitemap: https://drvarada.com/sitemap_index.xml

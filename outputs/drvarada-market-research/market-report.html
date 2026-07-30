@@ -1,0 +1,380 @@
+<title>Dr. Varada's Skin & Hair Center — Hyderabad Market Research & Growth Plan</title>
+<style>
+  :root {
+    --surface: #FBF8F4;
+    --panel: #F3EEE6;
+    --ink: #22303A;
+    --ink-2: #55636E;
+    --ink-3: #8A959E;
+    --teal: #0E6B66;
+    --teal-soft: #DCEBE8;
+    --clay: #B85F35;
+    --clay-soft: #F4E4D9;
+    --line: #E2DBD0;
+    --good: #2E7D46;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface: #14191D;
+      --panel: #1C2429;
+      --ink: #E9E4DA;
+      --ink-2: #A8B2B9;
+      --ink-3: #71808A;
+      --teal: #53B3A6;
+      --teal-soft: #1E3B39;
+      --clay: #D98F63;
+      --clay-soft: #3A2A1F;
+      --line: #2C363D;
+      --good: #6CBF85;
+    }
+  }
+  :root[data-theme="dark"] {
+    --surface: #14191D; --panel: #1C2429; --ink: #E9E4DA; --ink-2: #A8B2B9;
+    --ink-3: #71808A; --teal: #53B3A6; --teal-soft: #1E3B39; --clay: #D98F63;
+    --clay-soft: #3A2A1F; --line: #2C363D; --good: #6CBF85;
+  }
+  :root[data-theme="light"] {
+    --surface: #FBF8F4; --panel: #F3EEE6; --ink: #22303A; --ink-2: #55636E;
+    --ink-3: #8A959E; --teal: #0E6B66; --teal-soft: #DCEBE8; --clay: #B85F35;
+    --clay-soft: #F4E4D9; --line: #E2DBD0; --good: #2E7D46;
+  }
+  body {
+    background: var(--surface); color: var(--ink);
+    font: 16px/1.65 system-ui, "Segoe UI", Roboto, sans-serif;
+    margin: 0; -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 48px 24px 96px; }
+  h1, h2, h3 { font-family: Charter, "Bitstream Charter", Cambria, Georgia, serif; text-wrap: balance; }
+  h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.12; margin: 12px 0 8px; font-weight: 700; }
+  h2 { font-size: 26px; margin: 0 0 6px; }
+  h3 { font-size: 19px; margin: 0 0 4px; }
+  p { max-width: 68ch; }
+  a { color: var(--teal); }
+  .eyebrow {
+    font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--teal); font-weight: 650;
+  }
+  .sub { color: var(--ink-2); font-size: 17px; max-width: 64ch; }
+  section { margin-top: 64px; }
+  .sechead { border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-bottom: 24px; }
+  .sechead .eyebrow { color: var(--clay); }
+  .lede { font-size: 17px; }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 20px 0; }
+  .tile { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; }
+  .tile .n { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; font-family: Charter, Cambria, Georgia, serif; }
+  .tile .n small { font-size: 15px; font-weight: 500; color: var(--ink-2); }
+  .tile .l { font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+  .tile .s { font-size: 12px; color: var(--ink-3); margin-top: 6px; }
+  .tile.hero { background: var(--teal-soft); border-color: var(--teal); }
+  .tile.hero .n { color: var(--teal); }
+
+  .chart { margin: 24px 0; }
+  .chart .ct { font-weight: 650; font-size: 15px; }
+  .chart .cs { font-size: 13px; color: var(--ink-2); margin-bottom: 14px; }
+  .barrow { display: grid; grid-template-columns: 175px 1fr 52px; gap: 10px; align-items: center; margin: 7px 0; font-size: 13.5px; }
+  .barrow .bl { text-align: right; color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .barrow .track { background: none; height: 16px; position: relative; }
+  .barrow .bar { position: absolute; inset: 0 auto 0 0; background: var(--teal); border-radius: 0 4px 4px 0; min-width: 3px; }
+  .barrow .bar.dim { background: var(--ink-3); opacity: .55; }
+  .barrow .bv { font-variant-numeric: tabular-nums; color: var(--ink-2); font-size: 12.5px; }
+  .barrow:hover .bar { filter: brightness(1.12); }
+  .barrow:hover .bl, .barrow:hover .bv { color: var(--ink); }
+  .bargroup { margin: 18px 0 4px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); font-weight: 650; }
+  .footnote { font-size: 12.5px; color: var(--ink-3); max-width: 72ch; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  .tablewrap { overflow-x: auto; margin: 18px 0; }
+  th { text-align: left; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); border-bottom: 2px solid var(--ink); padding: 8px 12px 8px 0; }
+  td { border-bottom: 1px solid var(--line); padding: 9px 12px 9px 0; vertical-align: top; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .pill { display: inline-block; font-size: 11.5px; font-weight: 650; padding: 1px 9px; border-radius: 99px; background: var(--teal-soft); color: var(--teal); white-space: nowrap; }
+  .pill.c { background: var(--clay-soft); color: var(--clay); }
+
+  .callout { background: var(--clay-soft); border-left: 3px solid var(--clay); border-radius: 0 6px 6px 0; padding: 14px 18px; margin: 24px 0; max-width: 72ch; }
+  .callout .t { font-weight: 700; color: var(--clay); font-size: 14px; letter-spacing: .04em; }
+  .callout p { margin: 6px 0 0; font-size: 14.5px; }
+  .note { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px 18px; margin: 20px 0; font-size: 14.5px; max-width: 72ch; }
+
+  pre.tree {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+    padding: 18px 22px; overflow-x: auto; font: 13px/1.7 ui-monospace, "Cascadia Mono", Consolas, monospace;
+    color: var(--ink-2);
+  }
+  pre.tree b { color: var(--ink); font-weight: 650; }
+  pre.tree .hl { color: var(--teal); font-weight: 650; }
+
+  ul.tight { padding-left: 20px; max-width: 70ch; } ul.tight li { margin: 5px 0; }
+  ol.plan { padding-left: 22px; max-width: 72ch; } ol.plan li { margin: 10px 0; }
+  .src { font-size: 13px; color: var(--ink-2); } .src li { margin: 4px 0; }
+  .meta { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--ink-3); margin-top: 14px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Market Research &amp; Digital Growth Plan · July 2026</div>
+    <h1>Dr. Varada's Skin &amp; Hair Center</h1>
+    <p class="sub">Search-demand analysis, market sizing, and a complete site architecture for
+    <b>drvarada.com</b> — built from Google Trends (India + Telangana), Google&nbsp;India autocomplete,
+    Practo profile data, and published epidemiology. Bookings funnel through <b>Practo</b> —
+    the channel the clinic team already runs on.</p>
+    <div class="meta">
+      <span>📍 Jubilee Hills · West Marredpally · (Ameerpet listing) — Hyderabad</span>
+      <span>Data: Google Trends 12-mo · autocomplete (gl=IN) · Practo · prevalence studies</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="sechead"><div class="eyebrow">The headline</div><h2>What the numbers say</h2></div>
+    <p class="lede">Hyderabad's metro population of ~11&nbsp;million contains an enormous pool of
+    people with exactly the conditions this clinic treats. The realistic question isn't demand —
+    it's <b>capture</b>. With the site architecture below and 6–12 months of consistent local SEO,
+    a defensible estimate is <b>40–300 incremental new patients per month</b> from digital, with the
+    vitiligo specialty pulling patients from well beyond Hyderabad.</p>
+    <div class="tiles">
+      <div class="tile hero"><div class="n">≈ 5M+</div><div class="l">people in Hyderabad metro with a condition this clinic treats</div><div class="s">sum of condition pools below (overlapping)</div></div>
+      <div class="tile hero"><div class="n">40–300<small>/mo</small></div><div class="l">achievable incremental new patients from digital in 12 months</div><div class="s">conservative → stretch scenario</div></div>
+      <div class="tile hero"><div class="n">#1</div><div class="l">India has the world's highest vitiligo prevalence — and patients travel</div><div class="s">clinic's flagship = national market</div></div>
+    </div>
+
+    <div class="tiles">
+      <div class="tile"><div class="n">~110K</div><div class="l">vitiligo — Hyderabad metro</div><div class="s">0.25–4% prevalence, ~1% midpoint</div></div>
+      <div class="tile"><div class="n">~120K</div><div class="l">psoriasis</div><div class="s">0.44–2.8% of adults</div></div>
+      <div class="tile"><div class="n">~550K</div><div class="l">eczema / atopic dermatitis</div><div class="s">~5% incl. children (9.9% of adults report eczema)</div></div>
+      <div class="tile"><div class="n">~750K</div><div class="l">active acne (ages 15–30)</div><div class="s">~25% of the youth cohort</div></div>
+      <div class="tile"><div class="n">~2.4M</div><div class="l">meaningful hair loss</div><div class="s">~63% of men 21–61; 20–30% of women</div></div>
+      <div class="tile"><div class="n">~1M<small>/yr</small></div><div class="l">allergy &amp; rash episodes</div><div class="s">episodic; largest search cluster in Telangana</div></div>
+      <div class="tile"><div class="n">$651M</div><div class="l">India medical-aesthetics market, 2025</div><div class="s">botox/injectables growing 10–13% CAGR</div></div>
+      <div class="tile"><div class="n">119</div><div class="l">dermatologists listed in Ameerpet alone</div><div class="s">why specialty positioning matters</div></div>
+    </div>
+    <p class="footnote">Pools overlap (one person can have acne + hair fall). Prevalence sources listed at the end;
+    Hyderabad figures = published Indian prevalence rates × ~11M metro population, adult cohorts where applicable.</p>
+  </section>
+
+  <section>
+    <div class="sechead"><div class="eyebrow">Search demand</div><h2>What Hyderabad actually types into Google</h2></div>
+    <p>Google Trends, 12-month average interest, India (anchored — every bar is comparable to every other).
+    Three things stand out: <b>"near me" intent terms tower over everything</b> (that traffic is won by
+    Google Business Profile + local pack, not blog posts); <b>hair transplant and botox are the biggest
+    commercial terms</b>; and among conditions, <b>skin allergy leads in Telangana</b> — bigger there than
+    acne, and 3× psoriasis.</p>
+
+    <div class="chart">
+      <div class="ct">Relative search interest, India — 12-month average</div>
+      <div class="cs">Google Trends, all terms normalized against "dermatologist" (= 81). Bar length = interest.</div>
+
+      <div class="bargroup">Local intent — won via Google Business Profile</div>
+      <div class="barrow"><span class="bl">dermatologist near me</span><span class="track"><span class="bar" style="width:100%"></span></span><span class="bv">81</span></div>
+      <div class="barrow"><span class="bl">skin doctor near me</span><span class="track"><span class="bar" style="width:53%"></span></span><span class="bv">43</span></div>
+      <div class="barrow"><span class="bl">skin clinic near me</span><span class="track"><span class="bar" style="width:27%"></span></span><span class="bv">22</span></div>
+      <div class="barrow"><span class="bl">hair doctor near me</span><span class="track"><span class="bar" style="width:13%"></span></span><span class="bv">11</span></div>
+
+      <div class="bargroup">Commercial treatments</div>
+      <div class="barrow"><span class="bl">hair transplant</span><span class="track"><span class="bar" style="width:34%"></span></span><span class="bv">27</span></div>
+      <div class="barrow"><span class="bl">botox</span><span class="track"><span class="bar" style="width:32%"></span></span><span class="bv">26</span></div>
+      <div class="barrow"><span class="bl">chemical peel</span><span class="track"><span class="bar" style="width:6.4%"></span></span><span class="bv">5.2</span></div>
+      <div class="barrow"><span class="bl">skin tightening</span><span class="track"><span class="bar" style="width:3.8%"></span></span><span class="bv">3.1</span></div>
+      <div class="barrow"><span class="bl">laser skin treatment</span><span class="track"><span class="bar" style="width:3.2%"></span></span><span class="bv">2.6</span></div>
+      <div class="barrow"><span class="bl">PRP hair treatment</span><span class="track"><span class="bar" style="width:3.1%"></span></span><span class="bv">2.5</span></div>
+      <div class="barrow"><span class="bl">skin booster</span><span class="track"><span class="bar" style="width:3.1%"></span></span><span class="bv">2.5</span></div>
+
+      <div class="bargroup">Conditions — medical dermatology</div>
+      <div class="barrow"><span class="bl">skin allergy</span><span class="track"><span class="bar" style="width:15.6%"></span></span><span class="bv">13</span></div>
+      <div class="barrow"><span class="bl">acne treatment</span><span class="track"><span class="bar" style="width:10.9%"></span></span><span class="bv">8.8</span></div>
+      <div class="barrow"><span class="bl">skin rash</span><span class="track"><span class="bar" style="width:5.7%"></span></span><span class="bv">4.6</span></div>
+      <div class="barrow"><span class="bl">atopic dermatitis</span><span class="track"><span class="bar" style="width:5.4%"></span></span><span class="bv">4.4</span></div>
+      <div class="barrow"><span class="bl">dandruff treatment</span><span class="track"><span class="bar" style="width:5.4%"></span></span><span class="bv">4.4</span></div>
+      <div class="barrow"><span class="bl">psoriasis treatment</span><span class="track"><span class="bar" style="width:5.1%"></span></span><span class="bv">4.1</span></div>
+      <div class="barrow"><span class="bl">hair loss treatment</span><span class="track"><span class="bar" style="width:4.2%"></span></span><span class="bv">3.4</span></div>
+      <div class="barrow"><span class="bl">hair fall treatment</span><span class="track"><span class="bar" style="width:3.0%"></span></span><span class="bv">2.4</span></div>
+      <div class="barrow"><span class="bl">vitiligo treatment</span><span class="track"><span class="bar" style="width:2.6%"></span></span><span class="bv">2.1</span></div>
+      <div class="barrow"><span class="bl">eczema treatment</span><span class="track"><span class="bar" style="width:2.6%"></span></span><span class="bv">2.1</span></div>
+      <div class="barrow"><span class="bl">alopecia treatment</span><span class="track"><span class="bar" style="width:2.3%"></span></span><span class="bv">1.9</span></div>
+      <div class="barrow"><span class="bl">premature greying</span><span class="track"><span class="bar" style="width:1.2%"></span></span><span class="bv">1.0</span></div>
+    </div>
+
+    <div class="note"><b>Telangana momentum (last 90 days vs. 12-mo avg):</b>
+      psoriasis treatment <b style="color:var(--good)">+48%</b> ·
+      skin booster <b style="color:var(--good)">+86%</b> ·
+      skin clinic near me <b style="color:var(--good)">+43%</b> ·
+      hair fall treatment <b style="color:var(--good)">+67%</b>.
+      Vitiligo scores low in raw Trends because searches fragment across variants
+      ("white patches on skin", "leucoderma", Telugu queries) — autocomplete proves the local demand below.</div>
+
+    <h3 style="margin-top:36px">Autocomplete proof — real queries Google suggests in India</h3>
+    <p>These are verbatim Google India autocomplete suggestions — each one exists because enough
+    people type it. The Hyderabad-specific ones are the site's page titles, almost word for word:</p>
+    <ul class="tight">
+      <li><span class="pill">vitiligo</span> "vitiligo treatment in hyderabad" · "best vitiligo treatment in hyderabad" · "vitiligo treatment hospital in hyderabad" · "vitiligo laser treatment in hyderabad" · <b>"leucoderma treatment in hyderabad"</b> (synonym — must appear on-page)</li>
+      <li><span class="pill">psoriasis</span> "psoriasis treatment in hyderabad" · <b>"psoriasis treatment in telugu"</b> (Telugu content is an open flank)</li>
+      <li><span class="pill">hair</span> "hair loss treatment hyderabad" · "hair specialist in hyderabad" · "hair dermatologist in hyderabad" · "hair loss treatment for men / for women"</li>
+      <li><span class="pill">aesthetics</span> "botox hyderabad" · "chemical peel hyderabad" · "chemical peel cost" · "skin boosters before and after" · "botox meaning" (education-first market)</li>
+      <li><span class="pill">local</span> "dermatologist in hyderabad" · "skin specialist in hyderabad" · "skin hospital in hyderabad" · <b>"best dermatologist in ameerpet"</b> · "best skin specialist in ameerpet"</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sechead"><div class="eyebrow">Strategy</div><h2>Positioning: the vitiligo wedge</h2></div>
+    <p class="lede">With 119 dermatologists listed in Ameerpet alone and aggregators (Practo, Justdial,
+    Apollo 24/7) owning the generic SERPs, competing head-on for "dermatologist in hyderabad" is a
+    long war. The winning sequence is: <b>dominate the specialty, then widen.</b></p>
+    <ul class="tight">
+      <li><b>1. Own vitiligo &amp; psoriasis</b> — the clinic is literally named for it, competition is thin,
+      India is the world's largest vitiligo market, and patients travel across states for a trusted specialist.
+      Practo already carries repigmentation success stories — surface them.
+      Add teleconsult + a "WhatsApp your photos" flow and the catchment becomes national.</li>
+      <li><b>2. Ride the doctor's credential</b> — Dr. (Lt Col) Khagendra Varada:
+      <b>41 years of practice</b>, MBBS (Osmania, 1981), Dip. Practical Dermatology (Cardiff, UK),
+      Dip. Dermatology (AAAM), IMA member, <b>97% patient recommendation and 61 verified Practo stories</b>.
+      That's E-E-A-T gold — most competitor clinics publish anonymous content.</li>
+      <li><b>3. Then harvest volume</b> — hair fall, acne, allergy and the aesthetics menu (botox, boosters,
+      RF, peels) once the domain has specialty authority and reviews compound on the Business Profile.</li>
+    </ul>
+
+    <h3 style="margin-top:36px">The practice footprint (from Practo)</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Location</th><th>Identity</th><th>Timings</th><th>Fee</th><th>Role in strategy</th></tr>
+      <tr><td><b>Jubilee Hills</b><br><span style="color:var(--ink-3);font-size:12.5px">Plot 237, opp. Heritage Super Market</span></td>
+        <td>Dr Varada's Ageless Aesthetics <span class="pill">5.0 · 61 stories</span></td>
+        <td>Mon–Sat 13:30–20:00</td><td class="num">₹500</td>
+        <td>Aesthetics + trichology flagship — affluent catchment, matches botox/booster demand</td></tr>
+      <tr><td><b>West Marredpally</b><br><span style="color:var(--ink-3);font-size:12.5px">Sarvasukhi Colony, beside Indian Overseas Bank</span></td>
+        <td>Vardhan Healthcare &amp; Diagnostics</td>
+        <td>Mon–Sat 07:00–09:00</td><td class="num">₹500</td>
+        <td>Morning medical-dermatology slot (vitiligo, psoriasis, eczema)</td></tr>
+      <tr><td><b>Ameerpet</b> <span style="color:var(--ink-3);font-size:12.5px">(directory listings)</span></td>
+        <td>BNR Skin &amp; Vitiligo Hospital — the current <b>Google</b> identity</td>
+        <td colspan="2" style="color:var(--ink-3)">verify if active</td>
+        <td>Legacy vitiligo brand equity — must not be orphaned</td></tr>
+    </table></div>
+
+    <div class="callout"><div class="t">⚠ Priority one: the brand is fragmented across three names</div>
+      <p>Google says <b>"BNR Skin &amp; VITILIGO HOSPITAL"</b> (Ameerpet) · Practo says
+      <b>"Dr Varada's Ageless Aesthetics"</b> (Jubilee Hills) + Vardhan Healthcare (West Marredpally) ·
+      the new site says <b>"Dr Varada's Skin Center"</b>. Search engines treat these as unrelated businesses,
+      so review equity and local rank don't compound. Fix: drvarada.com becomes the umbrella entity with a
+      location page per practice (same names Practo uses), every profile links back to drvarada.com, and any
+      Business Profile rename keeps "BNR" + "Vitiligo" during transition — renaming abruptly resets local-rank trust.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead"><div class="eyebrow">Architecture</div><h2>Sitemap — one pillar page per demand cluster</h2></div>
+    <p>Each service gets one pillar page whose title matches the autocomplete-verified query, supported
+    by informational content that funnels to it. Slugs carry the local qualifier where demand proves it:</p>
+<pre class="tree">
+/                                     <b>Home</b> — "Skin &amp; hair specialists in Hyderabad" + trust bar + 3 pillars
+/about/dr-khagendra-varada            <b>Doctor profile</b> — 41 yrs, Lt Col, Cardiff/AAAM diplomas; E-E-A-T anchor
+/locations/
+  /jubilee-hills                      <b>Ageless Aesthetics</b> — NAP = Practo listing, timings, Practo book link
+  /west-marredpally                   Vardhan Healthcare morning practice — NAP + Practo book link
+/services/
+  <span class="hl">/vitiligo-treatment-hyderabad</span>       ★ flagship — targets 5 autocomplete queries + national
+  /psoriasis-treatment-hyderabad      (+ Telugu version)
+  /eczema-atopic-dermatitis-treatment
+  /acne-treatment-hyderabad
+  /skin-allergy-rashes-treatment      biggest condition cluster in Telangana
+  /anti-aging-botox-hyderabad
+  /skin-boosters-hyderabad            +86% momentum in TG
+  /rf-skin-tightening-hyderabad
+  /chemical-peels-hyderabad
+  <span class="hl">/hair-loss-treatment-hyderabad</span>      ★ trichology pillar — men/women sections
+  /alopecia-treatment-hyderabad       areata → universalis (specialty depth)
+  /dandruff-treatment
+  /premature-greying-treatment        low competition, clean win
+/conditions/                          education library (EN + Telugu) → links into pillars
+/results/                             before–after gallery (vitiligo repigmentation + aesthetics)
+/testimonials/
+/blog/                                long-tail: "vitiligo treatment at home", "hair fall reasons"…
+/contact/                             both locations, maps, hours, WhatsApp, <span class="hl">Book on Practo</span>
+</pre>
+    <p class="footnote">Current site state: 8 placeholder pages (duplicate Home/About/Services/Contact from the
+    AI builder, dummy Springfield-MA address) — replace wholesale with this structure.</p>
+  </section>
+
+  <section>
+    <div class="sechead"><div class="eyebrow">Conversion</div><h2>Practo-first funnel &amp; landing-page anatomy</h2></div>
+    <p class="lede">The clinic team runs on Practo today, so <b>every CTA on the site terminates in a Practo
+    booking</b> — the website's job is to win the search click <i>before</i> Practo's own pages do, then hand
+    the patient to the familiar workflow. This matters more than it sounds: when patients land directly on
+    Practo search, Dr. Varada is displayed beside 119 competing dermatologists; when they land on
+    drvarada.com first, the booking link goes only to him.</p>
+    <div class="tablewrap"><table>
+      <tr><th style="width:32%">Element</th><th>Spec</th></tr>
+      <tr><td><b>Above the fold</b></td><td>Condition headline matching the search query → one-line credibility
+        ("41 years · 97% patient recommendation · Jubilee Hills &amp; West Marredpally") → primary CTA.
+        Photo of the doctor, not stock art.</td></tr>
+      <tr><td><b>Primary CTA</b></td><td><span class="pill c">Book on Practo</span> — deep link to the correct
+        practice for the service (aesthetics → Ageless Aesthetics profile; medical derm → the morning practice).
+        Sticky on mobile. No parallel booking form to split the team's workflow.</td></tr>
+      <tr><td><b>Secondary CTA</b></td><td><span class="pill c">WhatsApp your skin/hair photos</span> — wa.me deep link.
+        India's lowest-friction medical lead; essential for out-of-town vitiligo patients. Staff replies with the
+        Practo booking link — same funnel, one door.</td></tr>
+      <tr><td><b>Tertiary CTA</b></td><td>Tap-to-call per location (Practo online-consult link for out-of-town patients —
+        the doctor already takes video consults there).</td></tr>
+      <tr><td><b>Social proof</b></td><td>"⭐ 5.0 on Practo — 61 verified patient stories" strip on every page,
+        quoting 2–3 real story excerpts (the vitiligo repigmentation story on the vitiligo pillar), linking to the
+        Practo profile. Reviews compound where bookings happen.</td></tr>
+      <tr><td><b>Body sections</b></td><td>What it is → our treatment protocol (name the technology: excimer, RF, PRP, peels)
+        → before/after strip → doctor quote → FAQ targeting autocomplete questions ("can vitiligo be cured?",
+        "chemical peel cost") → Practo stories embed.</td></tr>
+      <tr><td><b>Trust bar (site-wide)</b></td><td>🎖 41 years · Lt Col (veteran) · MBBS Osmania · Dip. Derm (Cardiff, UK) ·
+        97% recommend · Telugu / Hindi / English.</td></tr>
+      <tr><td><b>Schema</b></td><td><code>MedicalClinic</code> + <code>Physician</code> + <code>FAQPage</code> markup;
+        NAP per location page matching Practo/GBP exactly; localised <code>hreflang</code> for Telugu pages.</td></tr>
+    </table></div>
+    <p class="footnote">Trade-off, stated honestly: Practo bookings keep the team's workflow but Practo owns the
+    patient relationship data and charges for lead products. Once digital volume is proven (~6 months), consider a
+    parallel "call/WhatsApp direct" path prominence test — the site is built so the CTA target can be swapped per
+    page without redesign.</p>
+  </section>
+
+  <section>
+    <div class="sechead"><div class="eyebrow">Forecast</div><h2>Capture model — what "maximum traffic" means in patients</h2></div>
+    <p>Anchoring Trends ratios to typical Keyword-Planner ranges for "dermatologist near me" in India
+    (~250–450K/mo) puts Hyderabad's monthly search demand at roughly <b>35–60K local-intent searches</b>
+    plus <b>25–45K condition searches</b> relevant to this clinic, plus a national vitiligo cluster the
+    specialty can reach. Scenarios at a 12-month horizon:</p>
+    <div class="tablewrap"><table>
+      <tr><th>Scenario</th><th class="num">Site visits /mo</th><th class="num">Lead rate</th><th class="num">Leads /mo</th><th class="num">New patients /mo</th><th>Assumes</th></tr>
+      <tr><td><span class="pill">Conservative</span></td><td class="num">3,000</td><td class="num">2.5%</td><td class="num">75</td><td class="num"><b>≈ 40</b></td><td>Pillar pages live, GBP optimized, few reviews</td></tr>
+      <tr><td><span class="pill">Expected</span></td><td class="num">8,000</td><td class="num">3.5%</td><td class="num">280</td><td class="num"><b>≈ 140</b></td><td>Top-3 local pack for specialty terms; Telugu content; review flywheel</td></tr>
+      <tr><td><span class="pill">Stretch</span></td><td class="num">15,000</td><td class="num">4%</td><td class="num">600</td><td class="num"><b>≈ 300</b></td><td>+ teleconsult funnel, national vitiligo reach, paid support</td></tr>
+    </table></div>
+    <p class="footnote">Lead→patient conversion assumed ~50%. Google Business Profile calls/directions typically add
+    2–3× website leads for clinics — the table counts website leads only, so these are floor estimates.
+    Capacity check: 300/mo ≈ 12 extra patients/working day — verify clinic slot headroom before the stretch push.
+    Exact volumes need Google Keyword Planner (free with an Ads account); Trends gives reliable ratios, not counts.</p>
+  </section>
+
+  <section>
+    <div class="sechead"><div class="eyebrow">Execution</div><h2>90-day plan</h2></div>
+    <ol class="plan">
+      <li><b>Weeks 1–2 · Foundation.</b> Untangle the entity: verify which locations are active, align Google
+      Business Profile(s) with the Practo listings (categories "Dermatologist" + "Skin care clinic" +
+      "Hair transplantation clinic", link drvarada.com, photos); replace placeholder pages; publish Home,
+      Doctor profile, both Location pages and Contact with Practo booking links; schema markup.</li>
+      <li><b>Weeks 3–6 · Specialty pillars.</b> Vitiligo (EN), psoriasis (EN + Telugu), alopecia, hair loss.
+      Launch WhatsApp photo-consult flow. Start review collection (QR card at reception → GBP).</li>
+      <li><b>Weeks 7–10 · Volume pillars.</b> Acne, allergy/rashes, botox/anti-aging, boosters, peels, RF,
+      dandruff, greying. Before–after gallery. First 6 blog posts targeting autocomplete long-tail.</li>
+      <li><b>Weeks 11–13 · Amplify.</b> Claim/align Practo, Justdial, Apollo 24/7, Skedoc, ClinicSpots listings
+      (identical NAP); local citations; consider ₹15–25K/mo Google Ads on "vitiligo treatment hyderabad" +
+      "botox hyderabad" while organic ranks build; install call/WhatsApp tracking to measure per-page leads.</li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="sechead"><div class="eyebrow">Appendix</div><h2>Sources &amp; data</h2></div>
+    <ul class="src">
+      <li>Google Trends, 12-month averages + last-90-day momentum, geo IN and IN-TG, anchored batches (raw data in repo: <code>outputs/drvarada-market-research/</code>)</li>
+      <li>Google India autocomplete (gl=in), July 2026 — 23 seed terms</li>
+      <li>Vitiligo prevalence: <a href="https://ijdvl.com/clinical-and-sociodemographic-study-of-vitiligo/">IJDVL clinical &amp; sociodemographic study</a>; <a href="https://nams-annals.in/vitiligo-an-indian-perspective/">Annals NAMS — Vitiligo: An Indian Perspective</a>; <a href="https://telanganatoday.com/indian-subcontinent-tops-global-charts-with-highest-prevalence-of-vitiligo">Telangana Today — subcontinent highest prevalence</a></li>
+      <li>Psoriasis/eczema/acne: <a href="https://ijdvl.com/psoriasis-in-india-prevalence-and-pattern/">IJDVL psoriasis prevalence</a>; <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4252960/">hospital-based point-prevalence study</a>; <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10509898/">Global Asthma Network India (eczema)</a></li>
+      <li>Hair loss: <a href="https://journalajrdes.com/index.php/AJRDES/article/view/81">HAILO multicentre study</a>; <a href="https://www.bwhealthcareworld.com/article/the-new-pandemic-hair-loss-balding-among-indias-youth-550615">BW Healthcare — hair loss in India's youth</a></li>
+      <li>Aesthetics market: <a href="https://www.imarcgroup.com/india-medical-aesthetics-market">IMARC India medical aesthetics ($651M, 2025)</a>; <a href="https://www.imarcgroup.com/india-botulinum-toxin-market">IMARC India botulinum toxin market</a></li>
+      <li>Practice data: <a href="https://www.practo.com/hyderabad/doctor/dr-khagendra-varada-dermatologist-cosmetologist-1">Practo — Dr. Khagendra Varada</a> (41 yrs, 97%, 61 stories); <a href="https://www.practo.com/hyderabad/clinic/dr-varada-s-ageless-aesthetics-jubilee-hills">Practo — Dr Varada's Ageless Aesthetics, Jubilee Hills</a> (5.0)</li>
+      <li>Clinic listing &amp; competition: <a href="https://yappe.in/telangana/hyderabad/bnr-skin-vitiligo-hospital/234285">Yappe — BNR Skin &amp; Vitiligo Hospital</a>; <a href="https://www.justdial.com/Hyderabad/Dermatologists-in-Ameerpet/nct-10156786">Justdial — dermatologists in Ameerpet</a>; <a href="https://www.practo.com/hyderabad/dermatologist/ameerpet">Practo Ameerpet</a></li>
+    </ul>
+  </section>
+</div>

@@ -1,0 +1,80 @@
+<!-- @dsCard group="Components" -->
+<title>Navigation</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+body { margin:0; padding:40px 34px 60px; background:var(--ground); }
+.sheet { max-width:1000px; margin:0 auto; }
+.sheet > header { margin-bottom:30px; }
+.sheet h1 { font-size:34px; }
+.sheet header p { margin-top:8px; }
+.grid { display:grid; gap:14px; margin-top:22px; }
+.sw { border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden;
+      background:var(--paper); }
+.sw .chip { height:92px; }
+.sw .meta { padding:11px 14px; display:flex; flex-direction:column; gap:2px; }
+.sw .meta b { font:600 13.5px/1.3 var(--body); color:var(--ink); }
+.sw .meta code { font:500 12px/1.4 var(--mono); color:var(--ink-3); }
+.sw .meta span { font:400 12px/1.45 var(--body); color:var(--ink-3); }
+.note { margin-top:26px; padding:16px 20px; background:var(--paper);
+        border:1px solid var(--line); border-left:3px solid var(--navy);
+        border-radius:0 var(--r-sm) var(--r-sm) 0; }
+.note p { font-size:14.5px; max-width:80ch; }
+h2.sec { font-size:19px; margin:38px 0 4px; }
+h3.sub { font-size:15.5px; margin:26px 0 2px; font-family:var(--body);
+         font-weight:700; letter-spacing:0; }
+.tablewrap { overflow-x:auto; margin-top:20px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; min-width:520px; }
+th { text-align:left; font:600 11px/1.3 var(--body); letter-spacing:.1em;
+     text-transform:uppercase; color:var(--ink-2);
+     border-bottom:2px solid var(--ink); padding:0 14px 9px 0; vertical-align:bottom; }
+td { border-bottom:1px solid var(--line); padding:10px 14px 10px 0;
+     vertical-align:top; }
+td:last-child, th:last-child { padding-right:0; }
+.num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+.stage { display:flex; align-items:center; justify-content:center; padding:26px; }
+.stage img { width:100%; height:auto; display:block; }
+.yes b, .no b { font:600 11px/1 var(--body); letter-spacing:.1em;
+                text-transform:uppercase; }
+.yes b { color:var(--mint-dp); }
+.no b { color:#9A5320; }
+</style>
+<div class="sheet">
+<header>
+  <div class="eyebrow">Components</div>
+  <h1>Navigation</h1>
+  <p>Utility bar, header and the mobile dock.</p>
+</header>
+
+<h2 class="sec">Utility bar</h2>
+<div class="band on-dark" style="padding:12px 20px;border-radius:var(--r-sm);
+     margin-top:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+     font-size:13px">
+  <span>Jubilee Hills &middot; Mon–Sat 1:30–8 pm &nbsp;|&nbsp; West Marredpally &middot;
+  Mon–Sat 7–9 am</span>
+  <span>&#9733; 5.0 on Practo — 65 patient stories &rarr;</span>
+</div>
+
+<h2 class="sec">Header</h2>
+<div style="background:var(--paper);border:1px solid var(--line);
+     border-radius:var(--r-sm);padding:16px 20px;margin-top:14px;display:flex;
+     align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+  <div style="width:190px"><img src="../logos/logo-horizontal-light.svg"
+       alt="Dr. Varada's Skin & Hair Center" style="width:100%;height:auto;display:block">
+  </div>
+  <a class="btn btn-primary" href="#">Book on Practo</a>
+</div>
+<div class="note"><p>The header carries the <b>horizontal lockup</b>, not the symbol
+alone &mdash; a mark without the name earns no brand recall on a first visit. It sits at
+46 px tall.</p></div>
+
+<h2 class="sec">Mobile dock</h2>
+<div style="background:var(--paper);border:1px solid var(--line);
+     border-radius:var(--r-pill);padding:10px 12px;margin-top:14px;display:flex;gap:10px;
+     max-width:420px">
+  <a class="btn btn-primary" href="#" style="flex:1;justify-content:center">Book</a>
+  <a class="btn btn-secondary" href="#" style="flex:1;justify-content:center">Call</a>
+</div>
+<div class="note"><p>Fixed to the bottom below 720 px. Two actions only. It appears after
+the hero scrolls out, never over it.</p></div>
+
+</div>

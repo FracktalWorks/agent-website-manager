@@ -1,0 +1,48 @@
+<!-- @dsCard group="Type" -->
+<title>Typography</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+body { margin:0; padding:40px 34px 60px; background:var(--ground); }
+.sheet { max-width:1000px; margin:0 auto; }
+.sheet > header { margin-bottom:30px; }
+.sheet h1 { font-size:34px; }
+.sheet header p { margin-top:8px; }
+.grid { display:grid; gap:14px; margin-top:22px; }
+.sw { border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden;
+      background:var(--paper); }
+.sw .chip { height:92px; }
+.sw .meta { padding:11px 14px; display:flex; flex-direction:column; gap:2px; }
+.sw .meta b { font:600 13.5px/1.3 var(--body); color:var(--ink); }
+.sw .meta code { font:500 12px/1.4 var(--mono); color:var(--ink-3); }
+.sw .meta span { font:400 12px/1.45 var(--body); color:var(--ink-3); }
+.note { margin-top:26px; padding:16px 20px; background:var(--paper);
+        border:1px solid var(--line); border-left:3px solid var(--navy);
+        border-radius:0 var(--r-sm) var(--r-sm) 0; }
+.note p { font-size:14.5px; max-width:80ch; }
+h2.sec { font-size:19px; margin:38px 0 4px; }
+h3.sub { font-size:15.5px; margin:26px 0 2px; font-family:var(--body);
+         font-weight:700; letter-spacing:0; }
+.tablewrap { overflow-x:auto; margin-top:20px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; min-width:520px; }
+th { text-align:left; font:600 11px/1.3 var(--body); letter-spacing:.1em;
+     text-transform:uppercase; color:var(--ink-2);
+     border-bottom:2px solid var(--ink); padding:0 14px 9px 0; vertical-align:bottom; }
+td { border-bottom:1px solid var(--line); padding:10px 14px 10px 0;
+     vertical-align:top; }
+td:last-child, th:last-child { padding-right:0; }
+.num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+.stage { display:flex; align-items:center; justify-content:center; padding:26px; }
+.stage img { width:100%; height:auto; display:block; }
+.yes b, .no b { font:600 11px/1 var(--body); letter-spacing:.1em;
+                text-transform:uppercase; }
+.yes b { color:var(--mint-dp); }
+.no b { color:#9A5320; }
+</style>
+<div class="sheet">
+<header>
+  <div class="eyebrow">Typography</div>
+  <h1>Typography</h1>
+  <p>Gabarito for display, Manrope for text. One scale, no improvisation.</p>
+</header>
+<div style="border-top:1px solid var(--line);padding:22px 0"><div class="eyebrow">Hero &middot; clamp(42px, 6.5vw, 76px) &middot; 600</div><div style="font-family:var(--display);font-weight:600;font-size:clamp(42px, 6.5vw, 76px);letter-spacing:-.03em;line-height:1.1;margin-top:10px">Vitiligo &amp; psoriasis care</div><p style="margin-top:8px;font-size:13.5px">One per page. Tracking −.03em</p></div><div style="border-top:1px solid var(--line);padding:22px 0"><div class="eyebrow">Section head &middot; clamp(30px, 4.2vw, 46px) &middot; 600</div><div style="font-family:var(--display);font-weight:600;font-size:clamp(30px, 4.2vw, 46px);letter-spacing:-.03em;line-height:1.1;margin-top:10px">Vitiligo &amp; psoriasis care</div><p style="margin-top:8px;font-size:13.5px">text-wrap: balance</p></div><div style="border-top:1px solid var(--line);padding:22px 0"><div class="eyebrow">Sub head &middot; clamp(28px, 3.6vw, 42px) &middot; 600</div><div style="font-family:var(--display);font-weight:600;font-size:clamp(28px, 3.6vw, 42px);letter-spacing:-.03em;line-height:1.1;margin-top:10px">Vitiligo &amp; psoriasis care</div></div><div style="border-top:1px solid var(--line);padding:22px 0"><div class="eyebrow">Card title &middot; 20px &middot; 600</div><div style="font-family:var(--display);font-weight:600;font-size:20px;letter-spacing:-.03em;line-height:1.1;margin-top:10px">Vitiligo &amp; psoriasis care</div></div><div style="border-top:1px solid var(--line);padding:22px 0"><div class="eyebrow">Body &middot; 16px &middot; 400</div><div style="font-family:var(--body);font-weight:400;font-size:16px;letter-spacing:-.03em;line-height:1.1;margin-top:10px">Vitiligo &amp; psoriasis care</div><p style="margin-top:8px;font-size:13.5px">Cap running text near 65 characters</p></div><div style="border-top:1px solid var(--line);padding:22px 0"><div class="eyebrow">Small &middot; 14.5px &middot; 400</div><div style="font-family:var(--body);font-weight:400;font-size:14.5px;letter-spacing:-.03em;line-height:1.1;margin-top:10px">Vitiligo &amp; psoriasis care</div><p style="margin-top:8px;font-size:13.5px">Captions, footnotes</p></div><h2 class="sec">Eyebrow &amp; statistic</h2><div style="display:flex;gap:44px;flex-wrap:wrap;margin-top:16px;align-items:flex-end"><div><div class="eyebrow">Trichology</div><p style="font-size:13px;margin-top:8px">12px, .14em, uppercase</p></div><div><div class="stat" style="font-size:62px">45</div><p style="font-size:13px;margin-top:8px">Tabular numerals, always</p></div></div><div class="note"><p>Headings sit at <b>600, not 700</b>. At display sizes Gabarito&rsquo;s 700 turns shouty, which is the wrong register for a medical practice. Gabarito carries every heading, statistic and label; Manrope carries every sentence a patient actually reads.</p></div>
+</div>

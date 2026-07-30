@@ -1,0 +1,48 @@
+<!-- @dsCard group="Content" -->
+<title>Accessibility</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+body { margin:0; padding:40px 34px 60px; background:var(--ground); }
+.sheet { max-width:1000px; margin:0 auto; }
+.sheet > header { margin-bottom:30px; }
+.sheet h1 { font-size:34px; }
+.sheet header p { margin-top:8px; }
+.grid { display:grid; gap:14px; margin-top:22px; }
+.sw { border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden;
+      background:var(--paper); }
+.sw .chip { height:92px; }
+.sw .meta { padding:11px 14px; display:flex; flex-direction:column; gap:2px; }
+.sw .meta b { font:600 13.5px/1.3 var(--body); color:var(--ink); }
+.sw .meta code { font:500 12px/1.4 var(--mono); color:var(--ink-3); }
+.sw .meta span { font:400 12px/1.45 var(--body); color:var(--ink-3); }
+.note { margin-top:26px; padding:16px 20px; background:var(--paper);
+        border:1px solid var(--line); border-left:3px solid var(--navy);
+        border-radius:0 var(--r-sm) var(--r-sm) 0; }
+.note p { font-size:14.5px; max-width:80ch; }
+h2.sec { font-size:19px; margin:38px 0 4px; }
+h3.sub { font-size:15.5px; margin:26px 0 2px; font-family:var(--body);
+         font-weight:700; letter-spacing:0; }
+.tablewrap { overflow-x:auto; margin-top:20px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; min-width:520px; }
+th { text-align:left; font:600 11px/1.3 var(--body); letter-spacing:.1em;
+     text-transform:uppercase; color:var(--ink-2);
+     border-bottom:2px solid var(--ink); padding:0 14px 9px 0; vertical-align:bottom; }
+td { border-bottom:1px solid var(--line); padding:10px 14px 10px 0;
+     vertical-align:top; }
+td:last-child, th:last-child { padding-right:0; }
+.num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+.stage { display:flex; align-items:center; justify-content:center; padding:26px; }
+.stage img { width:100%; height:auto; display:block; }
+.yes b, .no b { font:600 11px/1 var(--body); letter-spacing:.1em;
+                text-transform:uppercase; }
+.yes b { color:var(--mint-dp); }
+.no b { color:#9A5320; }
+</style>
+<div class="sheet">
+<header>
+  <div class="eyebrow">Access</div>
+  <h1>Accessibility</h1>
+  <p>Measured contrast pairs, focus, motion and tap targets.</p>
+</header>
+<div class="tablewrap"><table class=""><tr><th>Pair</th><th>Foreground</th><th>Background</th><th>Contrast</th><th>WCAG</th></tr><tr><td><b>Ink on ground</b></td><td><span class="sw" style="display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:7px;background:#12202F"></span><code>#12202F</code></td><td><span class="sw" style="display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:7px;border:1px solid var(--line);background:#F8F5F3"></span><code>#F8F5F3</code></td><td><span class="num">15.8:1</span></td><td><b>AAA</b></td></tr><tr><td><b>Ink 2 on ground</b></td><td><span class="sw" style="display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:7px;background:#53616D"></span><code>#53616D</code></td><td><span class="sw" style="display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:7px;border:1px solid var(--line);background:#F8F5F3"></span><code>#F8F5F3</code></td><td><span class="num">6.4:1</span></td><td><b>AA</b></td></tr><tr><td><b>Ink 3 on paper</b></td><td><span class="sw" style="display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:7px;background:#7C8794"></span><code>#7C8794</code></td><td><span class="sw" style="display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:7px;border:1px solid var(--line);background:#FFFFFF"></span><code>#FFFFFF</code></td><td><span class="num">4.0:1</span></td><td><b>AA large only</b></td></tr><tr><td><b>Mint deep on mint soft</b></td><td><span class="sw" style="display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:7px;background:#0B6353"></span><code>#0B6353</code></td><td><span class="sw" style="display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:7px;border:1px solid var(--line);background:#DFF3EC"></span><code>#DFF3EC</code></td><td><span class="num">7.4:1</span></td><td><b>AAA</b></td></tr><tr><td><b>Apricot deep on apricot soft</b></td><td><span class="sw" style="display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:7px;background:#9A5320"></span><code>#9A5320</code></td><td><span class="sw" style="display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:7px;border:1px solid var(--line);background:#FCEBDD"></span><code>#FCEBDD</code></td><td><span class="num">5.9:1</span></td><td><b>AA</b></td></tr><tr><td><b>Lilac deep on lilac soft</b></td><td><span class="sw" style="display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:7px;background:#514697"></span><code>#514697</code></td><td><span class="sw" style="display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:7px;border:1px solid var(--line);background:#EAE7F8"></span><code>#EAE7F8</code></td><td><span class="num">7.1:1</span></td><td><b>AAA</b></td></tr><tr><td><b>On-dark on dark</b></td><td><span class="sw" style="display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:7px;background:rgba(240,245,248,.76)"></span><code>rgba(240,245,248,.76)</code></td><td><span class="sw" style="display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:7px;border:1px solid var(--line);background:#12202F"></span><code>#12202F</code></td><td><span class="num">9.8:1</span></td><td><b>AAA</b></td></tr></table></div><div class="note"><p><code>--ink-3</code> is the one token that does not clear AA at body size. It is for eyebrows, captions and metadata — set at 12–14 px <b>semibold or uppercase</b>, never for a sentence someone has to read.</p></div><h2 class="sec">Focus &amp; motion</h2><p style="margin-top:10px">Every interactive element takes a visible focus ring: <code>2px solid var(--mint-dp)</code> at <code>3px</code> offset. The ticker, the canvas field and every transition stop under <code>prefers-reduced-motion</code>.</p><div class="note"><p>Tap targets are 44 px minimum — which is why <code>--controlHeight</code> is 44 and buttons pad to 15 px vertical. Patients using this site are frequently older.</p></div>
+</div>

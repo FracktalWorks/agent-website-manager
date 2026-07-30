@@ -1,0 +1,201 @@
+{
+ "IN": {
+  "chronic": {
+   "12m_avg": {
+    "vitiligo treatment": 2.1,
+    "eczema treatment": 2.1,
+    "psoriasis treatment": 4.1,
+    "dermatologist": 81.3
+   },
+   "last90d_avg": {
+    "vitiligo treatment": 2.0,
+    "eczema treatment": 1.8,
+    "psoriasis treatment": 3.2,
+    "dermatologist": 83.8
+   }
+  },
+  "acute": {
+   "error": "The request failed: Google returned a response with code 429"
+  },
+  "aesthetic1": {
+   "12m_avg": {
+    "botox": 25.9,
+    "anti aging treatment": 0.1,
+    "skin tightening": 3.1,
+    "chemical peel": 5.2,
+    "dermatologist": 81.3
+   },
+   "last90d_avg": {
+    "botox": 22.0,
+    "anti aging treatment": 0.0,
+    "skin tightening": 2.8,
+    "chemical peel": 4.7,
+    "dermatologist": 83.7
+   }
+  },
+  "aesthetic2": {
+   "12m_avg": {
+    "skin booster": 2.5,
+    "laser skin treatment": 2.6,
+    "skin whitening treatment": 1.1,
+    "dermatologist": 81.3
+   },
+   "last90d_avg": {
+    "skin booster": 2.8,
+    "laser skin treatment": 2.4,
+    "skin whitening treatment": 1.0,
+    "dermatologist": 83.8
+   }
+  },
+  "tricho1": {
+   "12m_avg": {
+    "hair fall treatment": 2.4,
+    "hair loss treatment": 3.4,
+    "dandruff treatment": 4.4,
+    "alopecia treatment": 1.9,
+    "dermatologist": 81.3
+   },
+   "last90d_avg": {
+    "hair fall treatment": 2.3,
+    "hair loss treatment": 3.1,
+    "dandruff treatment": 3.0,
+    "alopecia treatment": 1.8,
+    "dermatologist": 83.8
+   }
+  },
+  "tricho2": {
+   "12m_avg": {
+    "hair transplant": 27.3,
+    "premature greying": 1.0,
+    "PRP hair treatment": 2.5,
+    "dermatologist": 81.2
+   },
+   "last90d_avg": {
+    "hair transplant": 26.4,
+    "premature greying": 0.9,
+    "PRP hair treatment": 2.2,
+    "dermatologist": 83.5
+   }
+  },
+  "intent": {
+   "12m_avg": {
+    "skin doctor near me": 42.6,
+    "dermatologist near me": 81.1,
+    "skin clinic near me": 21.9,
+    "hair doctor near me": 10.6
+   },
+   "last90d_avg": {
+    "skin doctor near me": 40.5,
+    "dermatologist near me": 82.2,
+    "skin clinic near me": 20.5,
+    "hair doctor near me": 10.9
+   }
+  }
+ },
+ "IN-TG": {
+  "chronic": {
+   "12m_avg": {
+    "vitiligo treatment": 0.0,
+    "eczema treatment": 0.2,
+    "psoriasis treatment": 2.1,
+    "dermatologist": 81.6
+   },
+   "last90d_avg": {
+    "vitiligo treatment": 0.2,
+    "eczema treatment": 0.2,
+    "psoriasis treatment": 3.1,
+    "dermatologist": 79.8
+   }
+  },
+  "acute": {
+   "12m_avg": {
+    "acne treatment": 5.6,
+    "atopic dermatitis": 2.1,
+    "skin allergy": 12.4,
+    "skin rash": 3.1,
+    "dermatologist": 81.3
+   },
+   "last90d_avg": {
+    "acne treatment": 5.9,
+    "atopic dermatitis": 1.8,
+    "skin allergy": 10.0,
+    "skin rash": 2.1,
+    "dermatologist": 79.5
+   }
+  },
+  "aesthetic1": {
+   "12m_avg": {
+    "botox": 14.1,
+    "anti aging treatment": 0.0,
+    "skin tightening": 0.2,
+    "chemical peel": 4.6,
+    "dermatologist": 81.3
+   },
+   "last90d_avg": {
+    "botox": 13.1,
+    "anti aging treatment": 0.0,
+    "skin tightening": 0.6,
+    "chemical peel": 4.1,
+    "dermatologist": 79.5
+   }
+  },
+  "aesthetic2": {
+   "12m_avg": {
+    "skin booster": 0.7,
+    "laser skin treatment": 0.2,
+    "skin whitening treatment": 0.1,
+    "dermatologist": 81.3
+   },
+   "last90d_avg": {
+    "skin booster": 1.3,
+    "laser skin treatment": 0.2,
+    "skin whitening treatment": 0.1,
+    "dermatologist": 79.5
+   }
+  },
+  "tricho1": {
+   "12m_avg": {
+    "hair fall treatment": 0.3,
+    "hair loss treatment": 0.6,
+    "dandruff treatment": 1.7,
+    "alopecia treatment": 0.1,
+    "dermatologist": 81.3
+   },
+   "last90d_avg": {
+    "hair fall treatment": 0.5,
+    "hair loss treatment": 0.9,
+    "dandruff treatment": 0.6,
+    "alopecia treatment": 0.2,
+    "dermatologist": 79.5
+   }
+  },
+  "tricho2": {
+   "12m_avg": {
+    "hair transplant": 19.6,
+    "premature greying": 0.0,
+    "PRP hair treatment": 0.1,
+    "dermatologist": 81.3
+   },
+   "last90d_avg": {
+    "hair transplant": 20.1,
+    "premature greying": 0.0,
+    "PRP hair treatment": 0.2,
+    "dermatologist": 79.5
+   }
+  },
+  "intent": {
+   "12m_avg": {
+    "skin doctor near me": 14.1,
+    "dermatologist near me": 61.7,
+    "skin clinic near me": 11.1,
+    "hair doctor near me": 0.6
+   },
+   "last90d_avg": {
+    "skin doctor near me": 17.1,
+    "dermatologist near me": 57.9,
+    "skin clinic near me": 15.9,
+    "hair doctor near me": 0.9
+   }
+  }
+ }
+}
