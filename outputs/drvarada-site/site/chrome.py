@@ -90,7 +90,7 @@ NAV = [
         ("Hair loss", "hair-loss-treatment-hyderabad", None),
         ("Alopecia areata", "alopecia-treatment-hyderabad", None),
         ("Hair grafting surgery", "hair-grafting-hyderabad", None),
-        ("Dandruff", "dandruff-treatment", None),
+        ("Dandruff", "premature-greying-treatment", None),
         ("Premature greying", "premature-greying-treatment", None),
     ]),
     ("Results", "results", None),
@@ -243,20 +243,25 @@ def utility(links: str) -> str:
 
 def header(links: str) -> str:
     items = []
-    for label, slug, panel in NAV:
+    for i, (label, slug, panel) in enumerate(NAV):
+        nav_at = f"chrome:NAV.{i}.1"
         if not panel:
-            items.append(f'<a href="{href(slug, links)}">{label}</a>')
+            items.append(f'<a href="{href(slug, links)}"'
+                         f'{at(nav_at, links, "od-link")}>{label}</a>')
             continue
         rows = []
-        for plabel, pslug, note in panel:
+        for j, (plabel, pslug, note) in enumerate(panel):
             if plabel.startswith("__"):
                 rows.append(f'<p class="grp">{plabel[2:]}</p>')
                 continue
             sub = f"<small>{note}</small>" if note else ""
-            rows.append(f'<a href="{href(pslug, links)}">{plabel}{sub}</a>')
+            rows.append(f'<a href="{href(pslug, links)}"'
+                        f'{at(f"chrome:NAV.{i}.2.{j}.1", links, "od-link")}>'
+                        f'{plabel}{sub}</a>')
         top = href(slug, links) if slug else "#"
         items.append(
-            f'<div class="menu"><a href="{top}">{label}</a>'
+            f'<div class="menu"><a href="{top}"'
+            f'{at(nav_at, links, "od-link") if slug else ""}>{label}</a>'
             f'<div class="panel">{"".join(rows)}</div></div>'
         )
     nav = "\n      ".join(items)
@@ -313,8 +318,11 @@ def crumbs(page: dict, links: str) -> str:
 
 def footer(links: str) -> str:
     cols = []
-    for title, items in FOOTER:
-        rows = "".join(f'<a href="{href(s, links)}">{l}</a>' for l, s in items)
+    for i, (title, items) in enumerate(FOOTER):
+        rows = "".join(
+            f'<a href="{href(s, links)}"'
+            f'{at(f"chrome:FOOTER.{i}.1.{j}.1", links, "od-link")}>{l}</a>'
+            for j, (l, s) in enumerate(items))
         cols.append(f"<div><h4>{title}</h4>{rows}</div>")
     return f"""<!-- footer — dark 3 of 3 -->
 <footer>

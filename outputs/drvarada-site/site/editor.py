@@ -32,7 +32,6 @@ import base64
 import json
 import os
 import re
-import shutil
 import subprocess
 import sys
 import threading
@@ -44,7 +43,9 @@ from pathlib import Path
 
 import datapatch
 import media
+import linkscan
 import resolver
+import versions
 
 ROOT = Path(__file__).parent
 DIST = ROOT / "dist"
@@ -158,147 +159,34 @@ def restore(snap: dict[Path, str]) -> None:
 
 
 # ── history ──────────────────────────────────────────────────────────────────
+# Ported from Open Design's project file versions — see versions.py for what was
+# taken and why. The short version: the timeline is append-only, restoring an
+# old version writes it forward as a new one, and nothing is ever discarded.
 
-EDITS = ROOT / ".edits"
-HISTORY_MAX = 120
+VERSION_STORE = ROOT / ".versions"
+# Rooted at the project, not at site/: an edit can touch the design system's
+# stylesheet, which sits beside site/ rather than inside it, and a version that
+# cannot record the tokens is not a version of the site.
+PROJECT = ROOT.parent
+_history = versions.Versions(PROJECT, VERSION_STORE)
 
 
-class History:
-    """Undo/redo that survives restarting the editor.
+def _restore_files(files: dict[str, str]) -> None:
+    """Write a version's content back to disk.
 
-    The session-only stack this replaces was the weakest part of the editing
-    loop: close the terminal and an afternoon of edits became irreversible, and
-    there was no redo at all, so an accidental undo destroyed work outright.
-
-    Each entry stores only the files that actually changed, not every tracked
-    file — one content module rather than the whole site — so a hundred entries
-    cost a few megabytes. The `after` side is written lazily at undo time,
-    because until you undo something there is nothing to redo.
-
-    Uploaded files are *moved* into the entry rather than deleted on undo. A
-    deleted upload cannot be redone: the browser has long since dropped the
-    bytes, and asking the user to find the photograph again is not an undo.
+    Only files that actually differ are written. Every write bumps an mtime,
+    and the source watcher would otherwise see the whole tracked set change and
+    trigger a second rebuild behind the one this step already does.
     """
-
-    def __init__(self, root: Path):
-        self.root = root
-        self.index = root / "index.json"
-        self.entries: list[dict] = []
-        self.cursor = 0
-        self._load()
-
-    # ── persistence ──────────────────────────────────────────────────────
-    def _load(self) -> None:
-        try:
-            data = json.loads(self.index.read_text(encoding="utf-8"))
-            self.entries = data["entries"]
-            self.cursor = data["cursor"]
-        except (OSError, ValueError, KeyError):
-            self.entries, self.cursor = [], 0
-
-    def _save(self) -> None:
-        self.root.mkdir(parents=True, exist_ok=True)
-        self.index.write_text(
-            json.dumps({"entries": self.entries, "cursor": self.cursor}, indent=1),
-            encoding="utf-8")
-
-    def _dir(self, entry: dict, side: str) -> Path:
-        return self.root / entry["id"] / side
-
-    @staticmethod
-    def _rel(f: Path) -> str:
-        return f.relative_to(ROOT).as_posix()
-
-    def _write_side(self, entry: dict, side: str, texts: dict[str, str]) -> None:
-        for rel, text in texts.items():
-            dest = self._dir(entry, side) / rel
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            dest.write_text(text, encoding="utf-8")
-
-    def _restore_side(self, entry: dict, side: str) -> None:
-        for rel in entry["files"]:
-            src = self._dir(entry, side) / rel
-            if src.exists():
-                (ROOT / rel).write_text(src.read_text(encoding="utf-8"),
-                                        encoding="utf-8")
-
-    # ── recording ────────────────────────────────────────────────────────
-    def record(self, label: str, before: dict[Path, str],
-               created: list[Path]) -> None:
-        changed = {self._rel(f): text for f, text in before.items()
-                   if f.read_text(encoding="utf-8") != text}
-        if not changed and not created:
-            return
-        # A new edit made after an undo discards the redo tail, the same way
-        # every editor does — those states are no longer reachable.
-        for stale in self.entries[self.cursor:]:
-            shutil.rmtree(self.root / stale["id"], ignore_errors=True)
-        del self.entries[self.cursor:]
-
-        entry = {
-            "id": f"{int(time.time() * 1000):013d}",
-            "label": label[:80],
-            "when": time.strftime("%Y-%m-%d %H:%M:%S"),
-            "files": sorted(changed),
-            "created": [self._rel(f) for f in created if f.exists()],
-        }
-        self._write_side(entry, "before", changed)
-        self.entries.append(entry)
-        self.cursor = len(self.entries)
-        self._prune()
-        self._save()
-
-    def _prune(self) -> None:
-        while len(self.entries) > HISTORY_MAX:
-            gone = self.entries.pop(0)
-            self.cursor = max(0, self.cursor - 1)
-            shutil.rmtree(self.root / gone["id"], ignore_errors=True)
-
-    # ── moving ───────────────────────────────────────────────────────────
-    def undo(self) -> dict:
-        if self.cursor == 0:
-            return {"error": "Nothing to undo."}
-        entry = self.entries[self.cursor - 1]
-        self._write_side(entry, "after",
-                         {rel: (ROOT / rel).read_text(encoding="utf-8")
-                          for rel in entry["files"] if (ROOT / rel).exists()})
-        self._restore_side(entry, "before")
-        for rel in entry["created"]:                  # park, do not delete
-            src, dest = ROOT / rel, self._dir(entry, "created") / rel
-            if src.exists():
-                dest.parent.mkdir(parents=True, exist_ok=True)
-                shutil.move(str(src), str(dest))
-        self.cursor -= 1
-        self._save()
-        return {"ok": True, "label": entry["label"]}
-
-    def redo(self) -> dict:
-        if self.cursor >= len(self.entries):
-            return {"error": "Nothing to redo."}
-        entry = self.entries[self.cursor]
-        if not self._dir(entry, "after").exists():
-            return {"error": "This step has no forward state recorded."}
-        self._restore_side(entry, "after")
-        for rel in entry["created"]:
-            src = self._dir(entry, "created") / rel
-            if src.exists():
-                (ROOT / rel).parent.mkdir(parents=True, exist_ok=True)
-                shutil.move(str(src), str(ROOT / rel))
-        self.cursor += 1
-        self._save()
-        return {"ok": True, "label": entry["label"]}
-
-    def state(self) -> dict:
-        return {
-            "undo": self.entries[self.cursor - 1]["label"] if self.cursor else None,
-            "redo": (self.entries[self.cursor]["label"]
-                     if self.cursor < len(self.entries) else None),
-            "depth": len(self.entries),
-            "cursor": self.cursor,
-        }
+    for rel, text in files.items():
+        f = PROJECT / rel
+        if not f.exists() or f.read_text(encoding="utf-8") != text:
+            f.parent.mkdir(parents=True, exist_ok=True)
+            f.write_text(text, encoding="utf-8")
 
 
-_history = History(EDITS)
+def chrome_path() -> Path:
+    return ROOT / "chrome.py"
 
 
 def transaction(label: str, apply, *, undoable: bool = True) -> dict:
@@ -331,51 +219,65 @@ def transaction(label: str, apply, *, undoable: bool = True) -> dict:
             build()                              # put dist/ back to last good
             return {"error": "Reverted — the build rejected this change:\n" + out}
         if undoable:
-            _history.record(label, snap, created)
+            _history.create(snapshot(), prompt=label)
         adopt_mtimes()
     bump()
     return {"ok": True, **payload, "history": _history.state()}
 
 
-def _step(move) -> dict:
-    """Undo or redo, then rebuild — and put it back if the rebuild fails.
+def _travel(move, *, append_restore: bool = False) -> dict:
+    """Move to another point in the timeline, then rebuild — reverting if it breaks.
 
-    A step through history can only fail if the files on disk moved out from
-    under it (an external edit, a git checkout). Rebuilding and checking is the
-    same gate every forward edit passes, so a broken step is reverted rather
-    than left for the user to discover on the next save.
+    Time travel can only fail if the files on disk moved out from under the
+    stored version (an external edit, a git checkout). Rebuilding and checking
+    is the same gate every forward edit passes, so a broken jump is put back
+    rather than left for the user to find on the next save.
     """
     with _lock:
         before = snapshot()
-        res = move()
+        try:
+            res = move()
+        except versions.VersionError as exc:
+            return {"error": str(exc)}
         if "error" in res:
             return res
+        _restore_files(res.pop("files"))
         ok, out = build()
         if not ok:
             restore(before)
             build()
-            return {"error": "That step would have broken the build, so it was "
+            return {"error": "That version does not build any more, so it was "
                              "put back:\n" + out}
+        if append_restore:
+            # Restoring writes the old content FORWARD as a new version, so the
+            # version you came from is still reachable. This is the property
+            # that makes the timeline safe to jump around in, and it is the one
+            # thing Open Design's model gets right that a rewind cannot.
+            entry = _history.note_restored(snapshot(), res["entry"])
+            res["label"] = entry["label"]
         adopt_mtimes()
     bump()
+    res.pop("entry", None)
     return {**res, "history": _history.state()}
 
 
 def handle_undo(_req: dict) -> dict:
-    return _step(_history.undo)
+    return _travel(lambda: _history.step(-1))
 
 
 def handle_redo(_req: dict) -> dict:
-    return _step(_history.redo)
+    return _travel(lambda: _history.step(+1))
+
+
+def handle_restore(req: dict) -> dict:
+    """Jump to any version in the timeline, not only the neighbouring one."""
+    vid = str(req.get("id") or "")
+    return _travel(lambda: _history.restore(vid), append_restore=True)
 
 
 def handle_history(_req: dict) -> dict:
-    """The recent edit log — what the on-disk journal holds, newest first."""
-    return {"ok": True, **_history.state(),
-            "entries": [{"label": e["label"], "when": e["when"],
-                         "files": e["files"],
-                         "undone": i >= _history.cursor}
-                        for i, e in reversed(list(enumerate(_history.entries)))][:40]}
+    """The version timeline, newest first."""
+    return {"ok": True, **_history.state(), "entries": _history.timeline()}
 
 
 # ── text ─────────────────────────────────────────────────────────────────────
@@ -522,8 +424,26 @@ def handle_image_clear(req: dict) -> dict:
 
 # ── links ────────────────────────────────────────────────────────────────────
 
+def handle_link_where(req: dict) -> dict:
+    """Everywhere a destination is used, so the inspector can offer the choice.
+
+    Open Design's link inspector edits the one anchor you clicked, because an
+    artifact is one file. A 45-page site needs the other question answered
+    first: the Practo URL is on 60 buttons, and "change this one" is almost
+    never what someone means.
+    """
+    target = (req.get("href") or "").strip()
+    try:
+        hits = linkscan.occurrences(target)
+    except Exception as exc:                     # noqa: BLE001 — advisory only
+        return {"ok": True, "count": 0, "note": str(exc)[:120]}
+    return {"ok": True, "count": len(hits),
+            "constant": next((h.const for h in hits if h.const and not h.sub), ""),
+            "where": [h.where for h in hits[:12]]}
+
+
 def handle_link(req: dict) -> dict:
-    """Retarget a link.
+    """Retarget a link — this one, or every use of the same destination.
 
     An internal link is a slug; an external one is a URL. When the current
     target is one of `chrome.py`'s shared constants (`PRACTO`, `PHONE`,
@@ -536,6 +456,50 @@ def handle_link(req: dict) -> dict:
     if not target:
         return {"error": "A link needs a destination."}
     label = req.get("label")
+    old = (req.get("oldHref") or "").strip()
+
+    if req.get("scope") == "all" and old and old != target:
+        def apply_all(created):
+            here = next((ln for ln in linkscan.occurrences(old)
+                         if ln.slug == slug and ln.addr == (addr or "")), None)
+            changed = linkscan.retarget(old, target)
+            if not changed:
+                raise datapatch.PatchError(
+                    f"Nothing on the site points at {old} any more.")
+            if label is not None and here is not None and here.addr:
+                # The label belongs to this one button even when the
+                # destination is shared — retargeting everywhere must not
+                # rename every button on the site.
+                current = datapatch.read(slug, here.addr)
+                if isinstance(current, (list, tuple)) and len(current) >= 2:
+                    datapatch.set_value(slug, f"{here.addr}.0", label,
+                                        create=False)
+            return {"applied": len(changed), "file": changed[0].split(":")[0],
+                    "line": 0, "everywhere": changed[:8]}
+        return transaction(f"{old} → {target} (everywhere)", apply_all)
+
+    if (addr or "").startswith("chrome:"):
+        # A nav or footer entry: the address resolves against a constant in
+        # chrome.py rather than against a page, because that is where those
+        # links actually live. Everything else about the edit is the same.
+        name, _, subpath = addr[len("chrome:"):].partition(".")
+
+        def apply_chrome(created):
+            current = datapatch.read_in_constant(chrome_path(), name, subpath)
+            if not isinstance(current, str):
+                raise datapatch.PatchError(
+                    f"{addr} does not point at a destination any more — the "
+                    "page was probably rebuilt underneath the editor.")
+            line = datapatch.set_in_constant(chrome_path(), name, subpath, target)
+            if label is not None:
+                parent = subpath.rsplit(".", 1)[0]
+                current_label = datapatch.read_in_constant(
+                    chrome_path(), name, f"{parent}.0")
+                if isinstance(current_label, str) and label != current_label:
+                    datapatch.set_in_constant(chrome_path(), name,
+                                              f"{parent}.0", label)
+            return {"file": "chrome.py", "line": line, "applied": 1}
+        return transaction(f"{name}.{subpath} → {target}", apply_chrome)
 
     def apply(created):
         node_value = datapatch.read(slug, addr) if addr else None
@@ -784,6 +748,7 @@ ROUTES = {
     "/api/image-meta": handle_image_meta,
     "/api/image-clear": handle_image_clear,
     "/api/link": handle_link,
+    "/api/link-where": handle_link_where,
     "/api/constants": handle_constants,
     "/api/structure": handle_structure,
     "/api/tokens": handle_tokens,
@@ -794,6 +759,7 @@ ROUTES = {
     "/api/undo": handle_undo,
     "/api/redo": handle_redo,
     "/api/history": handle_history,
+    "/api/restore": handle_restore,
 }
 
 
@@ -914,6 +880,15 @@ def main() -> int:
     print(out.splitlines()[-1] if ok else out)
     if not ok:
         return 1
+
+    # Capture whatever is on disk before the first edit can bury it. This is
+    # Open Design's `ensureCurrentProjectFileVersion`, and it earns its keep in
+    # a git working tree: check out a branch, start the editor, make one edit,
+    # and without this the pre-edit state has no version to go back to.
+    seeded = _history.ensure_current(snapshot())
+    state = _history.state()
+    print(f"history: {state['depth']} version(s), on v{state['version']}"
+          + ("  (captured the current files as a new version)" if seeded else ""))
 
     threading.Thread(target=watch_sources, daemon=True).start()
     handler = partial(Handler, directory=str(DIST))

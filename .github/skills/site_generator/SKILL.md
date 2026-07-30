@@ -34,6 +34,8 @@ and deterministic scripts do the rendering, validation and persistence.
 | `chrome.py` | ALL markup: header, nav, footer, block renderers, schema.org, `img()`/`slot()`/`at()`. One edit fixes every page. |
 | `build.py` | Assembler + validator + sitemap/robots + `site-manifest.json`. Validation is not optional. |
 | `datapatch.py` | Edits page data **by address** (`sections.4.items.0.before`) via AST spans — creates missing keys, reorders/duplicates/removes list items, rewrites module constants. |
+| `versions.py` | Version timeline, ported from Open Design's `project-file-versions.ts`: append-only, restore-writes-forward, content-addressed blobs, parent links so undo follows the edit lineage. |
+| `linkscan.py` | Every link on the site by walking the *renderer's* positions in the page data. `where <target>` / `audit`; powers the inspector's this-one-or-all-N choice. |
 | `resolver.py` | Edits copy **by value** — the fallback for text with no address. Also owns `char_col`, the UTF-8 byte→character column conversion every span write must use. |
 | `media.py` | Upload pipeline: verify by decoding, bake EXIF orientation, strip all metadata, cap the long edge, re-encode, report dimensions. |
 | `editor.py` | Live-edit server: injects the overlay, applies edits inside a transaction that reverts source *and deletes uploaded files* if the build fails, watches sources, SSE-reloads every tab. |
@@ -57,11 +59,12 @@ anything jumps VS Code to the exact source line.
 |---|---|---|
 | Copy | click to edit in place | the string literal in `content/*.py` |
 | Images + empty slots | inspector: drag-drop, alt, focal point, consent | an image dict in the page data + a processed file in `assets/img/` |
-| Links and CTAs | inspector: label + destination, with slug autocomplete | the `(label, target)` tuple — or the shared constant, when the target is one |
+| Links and CTAs — including nav and footer | inspector on **any** anchor: label + destination + scope | the `(label, target)` tuple, a `chrome:NAV.0.2.1` address into a module constant, or the shared constant when the target is one |
 | Sections and cards | hover toolbar: move ↑↓, duplicate, delete | element position in the Python list |
 | Design tokens | Tokens panel with colour pickers | the design system's `:root` block |
 | Site-wide details | Site panel: Practo links, phone, WhatsApp, reviewer | module constants in `chrome.py` |
-| Any of it, undone | Undo/Redo (Ctrl+Z / Ctrl+Shift+Z) | a journal under `site/.edits/`, so it survives restarting the editor |
+| Any of it, undone | Undo/Redo (Ctrl+Z / Ctrl+Shift+Z) and a **Versions** panel | an append-only timeline under `site/.versions/`, surviving restarts |
+| A link, everywhere | the Link inspector's scope: *just this one* or *all N pointing here* | every occurrence at once, found by walking the page data |
 
 ### Addressing reach — how much the editor can name exactly
 
@@ -82,19 +85,69 @@ ambiguity prompt, and an addressed one just edits. Two deliberate exclusions:
 Production HTML carries none of it — `at()` emits nothing when `links` is
 `production`, and the build asserts it.
 
-### Undo that survives closing the terminal
+### Editing a link everywhere it appears
 
-History is a journal on disk (`site/.edits/`), not a stack in RAM:
+Open Design's inspector edits the one anchor you clicked (`set-link` in
+`apps/web/src/edit-mode/source-patches.ts`) — correct for a single artifact,
+wrong for a 45-page site where the Practo button appears 60 times. Because
+pages are data, `linkscan.py` can answer a question OD cannot ask: *where else
+does this destination appear?* The inspector then offers **this one** or **all
+N**.
 
-- Each entry stores only the files that actually changed — one content module,
-  not the whole site — so 120 entries cost a few megabytes.
-- The redo side is written lazily at undo time; until you undo something there
-  is nothing to redo.
-- An uploaded file is **moved into the entry** on undo, never deleted. A
-  deleted upload cannot be redone — the browser dropped the bytes long ago, and
-  asking someone to find the photograph again is not an undo.
-- Undo and redo pass the same build gate as a forward edit: a step that would
-  break the build is put back and reported.
+Three things make it trustworthy:
+
+- **It walks the renderer's positions, never the text.** The slug `vitiligo`
+  appears in the source as a link target, as a page's own `slug` key, and
+  inside prose. A textual search would rewrite all three.
+- **Rendered hrefs are normalised back to slugs.** The browser reports
+  `vitiligo.html`; the source stores `vitiligo`. Skip that and the scan finds
+  nothing and reports "used once" — the worst possible failure for a control
+  offering to change everything.
+- **The scan re-reads from disk every time.** It runs inside a long-lived
+  process that has already imported the content modules, and Python caches
+  them; without a reload every scan answers from startup state.
+
+Nav and footer links are addressed as `chrome:NAV.0.2.1` — into the module
+constant where they actually live — so those 64 links became editable too.
+`datapatch.set_in_constant` writes them with the same read-back verification
+page addresses get.
+
+### Version history (ported from Open Design)
+
+`versions.py` is a port of Open Design's `apps/daemon/src/project-file-versions.ts`.
+The model is what was worth copying, and three rules carry it:
+
+1. **Append-only.** Versions number from 1 and are never renumbered, reordered
+   or deleted.
+2. **Restore is a write, not a rewind.** Going back to v3 writes v3's content
+   and appends it as a *new* version labelled `Version 9 · restored from v3`
+   (upstream's `nextLabel`). Nothing you have seen can be lost, because no
+   operation removes anything.
+3. **Seed the current state.** `ensure_current()` captures whatever is on disk
+   as v1 when the store is empty or has drifted (upstream
+   `ensureCurrentProjectFileVersion`). In a git working tree this is the rule
+   that matters: check out a branch, edit once, and without it the branch state
+   has no version to return to.
+
+Also lifted: defensive manifest reads (a record that does not parse is skipped,
+not raised on — history is a convenience and must never block editing), and an
+atomic manifest write.
+
+Three deliberate departures, each for a reason upstream does not face:
+
+- **The unit is the tracked set, not one file.** An edit here can touch a
+  content module, the design system and an upload at once.
+- **Content is content-addressed.** Upstream stores a full copy per version;
+  our tracked set is ~540 KB, so unchanged files would dominate. Blobs are
+  shared, `read()` is still a direct lookup, and there is no diff chain.
+- **Undo follows parent links, not array order.** Upstream has no undo — every
+  move is a restore. With undo, a flat array puts abandoned states between you
+  and your earlier work, so the next Ctrl+Z jumps into a branch you left. Each
+  entry records the version it was made from, so undo means what it says while
+  the abandoned branch stays reachable from the Versions panel.
+
+Undo, redo and restore all pass the same build gate as a forward edit: a jump
+that would not build is put back and reported.
 
 ## Re-branding a site from the design-system corpus
 

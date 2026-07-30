@@ -124,3 +124,23 @@
    is now genuinely informative instead of the default state. */
 #od-bar button[disabled] { opacity: .38; cursor: default; }
 #od-bar button[disabled]:hover { background: transparent; }
+
+/* ---- version timeline ---- */
+.od-vers { display: grid; gap: 8px; max-height: 62vh; overflow: auto; }
+.od-ver { border: 1px solid var(--od-line, rgba(0,0,0,.12)); border-radius: 10px;
+          padding: 9px 11px; font-size: 12.5px; position: relative; }
+.od-ver-now { border-color: currentColor; }
+/* A version ahead of where you are is still reachable — it is only dimmed to
+   say "this is future relative to your cursor", never hidden. */
+.od-ver-ahead { opacity: .62; }
+.od-ver-head { display: flex; align-items: baseline; gap: 8px; }
+.od-ver-when { opacity: .6; font-size: 11.5px; }
+.od-ver-tag { margin-left: auto; font-size: 10.5px; text-transform: uppercase;
+              letter-spacing: .08em; opacity: .75; }
+.od-ver-what { margin-top: 3px; word-break: break-word; }
+.od-ver-files { margin-top: 2px; opacity: .58; font-size: 11.5px; }
+.od-ver-go { margin-top: 7px; font-size: 12px; padding: 3px 10px; }
+
+/* ---- link scope ---- */
+.od-scope { margin-top: 10px; display: grid; gap: 4px; }
+.od-scope label { display: flex; align-items: center; gap: 7px; font-size: 13px; }

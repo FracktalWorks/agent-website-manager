@@ -38,6 +38,7 @@
       '<button id="od-site" type="button" title="Practo links, phone, WhatsApp">Site</button>' +
       '<button id="od-undo" type="button" title="Undo (Ctrl+Z)">Undo</button>' +
       '<button id="od-redo" type="button" title="Redo (Ctrl+Shift+Z)">Redo</button>' +
+      '<button id="od-versions" type="button" title="Version history">Versions</button>' +
     '</div>' +
     '<div id="od-hl" hidden><span id="od-hl-tag"></span></div>' +
     '<div id="od-sectools" hidden></div>' +
@@ -83,6 +84,14 @@
   // request, so any site the user has open could otherwise drive the editor.
   // Every mutating response carries the new history state, so the Undo and
   // Redo buttons stay truthful without a second round trip after each edit.
+  // Version labels are the user's own edit text echoed back. Panels are built
+  // with innerHTML, so anything from the server has to be escaped on the way
+  // in — a paragraph edited to contain "<img onerror>" must not execute when
+  // it shows up in the history list.
+  const esc = (v) => String(v == null ? "" : v)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
   const post = (route, body) =>
     fetch(route, {
       method: "POST",
@@ -295,29 +304,101 @@
   }
 
   /* ----- links ----- */
+  // A label made of nested markup cannot be replaced with plain text without
+  // throwing the markup away. Open Design refuses that edit rather than doing
+  // it silently (source-patches.ts, "This link contains nested markup"), and
+  // the same reasoning holds here.
+  const plainLabel = (el) => !el.querySelector("*") ||
+    Array.prototype.every.call(el.querySelectorAll("*"), (c) => INLINE.has(c.tagName));
+
   function linkPanel(el) {
     target = el;
     const a = addr(el, "link");
     const href = el.getAttribute("href") || "";
-    post("/api/inspect", { slug: slug, addr: a, wantSlugs: true }).then((res) => {
+    const editable = plainLabel(el);
+    Promise.all([
+      post("/api/inspect", { slug: slug, addr: a, wantSlugs: true }),
+      post("/api/link-where", { href: href }),
+    ]).then(([res, use]) => {
       const slugs = res.slugs || [];
+      const count = use.count || 0;
+      // The interesting question on a 45-page site is not "what should this
+      // button point at" but "should the other 59 follow". Ask it up front.
+      const scope = count > 1
+        ? '<div class="od-scope">' +
+            '<label><input type="radio" name="od-scope" value="one" checked> ' +
+              'Just this one</label>' +
+            '<label><input type="radio" name="od-scope" value="all"> ' +
+              'All <b>' + count + "</b> links pointing here</label>" +
+            '<p class="od-note">' +
+              (use.constant
+                ? "This destination is the shared <code>" + use.constant +
+                  "</code> constant, so either choice updates every use."
+                : (use.where || []).slice(0, 4).join(" · ") +
+                  (count > 4 ? " · +" + (count - 4) + " more" : "")) +
+            "</p></div>"
+        : "";
       openPanel("Link",
-        field("Label", "od-label", el.textContent.trim()) +
+        (editable
+          ? field("Label", "od-label", el.textContent.trim())
+          : '<p class="od-note">This link\'s label contains markup, so it is ' +
+            'edited as text on the page rather than here.</p>') +
         field("Destination", "od-href", href,
           "A page slug for an internal link, or a full https:// URL.") +
         '<datalist id="od-slugs">' +
           slugs.map((s) => '<option value="' + s + '">').join("") + "</datalist>" +
-        '<p class="od-note">Practo, phone and WhatsApp targets are shared ' +
-          'constants — changing one here updates every CTA on the site. Use ' +
-          '<b>Site</b> in the toolbar to edit them as a form.</p>' +
+        scope +
         '<div class="od-acts"><button id="od-save" class="od-primary">Save link</button></div>',
         el);
       panel.querySelector("#od-href").setAttribute("list", "od-slugs");
-      panel.querySelector("#od-save").onclick = () =>
+      panel.querySelector("#od-save").onclick = () => {
+        const picked = panel.querySelector('input[name="od-scope"]:checked');
+        const labelBox = panel.querySelector("#od-label");
         post("/api/link", { slug: slug, addr: a, oldHref: href,
           href: panel.querySelector("#od-href").value.trim(),
-          label: panel.querySelector("#od-label").value.trim() })
-          .then((r) => { if (saved(r, "Link saved")) closePanel(); });
+          scope: picked ? picked.value : "one",
+          label: labelBox ? labelBox.value.trim() : undefined })
+          .then((r) => {
+            if (saved(r, r.everywhere ? "Retargeted " + r.applied + " links"
+                                      : "Link saved")) closePanel();
+          });
+      };
+    });
+  }
+
+  /* ----- version history ----- */
+  // Ported from Open Design's version list: an append-only timeline where
+  // restoring an old version writes it forward as a new one, so the version
+  // you came from stays reachable. Nothing here can lose a state you have seen.
+  function versionsPanel() {
+    post("/api/history").then((res) => {
+      if (res.error) { toast(res.error, "err"); return; }
+      const rows = (res.entries || []).map((e) =>
+        '<div class="od-ver' + (e.current ? " od-ver-now" : "") +
+          (e.ahead ? " od-ver-ahead" : "") + '">' +
+          '<div class="od-ver-head"><b>v' + e.version + "</b>" +
+            '<span class="od-ver-when">' + e.when + "</span>" +
+            (e.current ? '<span class="od-ver-tag">on this</span>' : "") +
+          "</div>" +
+          '<div class="od-ver-what">' + esc(e.prompt || e.label) + "</div>" +
+          '<div class="od-ver-files">' + e.files.length + " file" +
+            (e.files.length === 1 ? "" : "s") + " · " + e.source + "</div>" +
+          (e.current ? "" :
+            '<button class="od-ver-go" data-id="' + e.id + '">Restore</button>') +
+        "</div>").join("");
+      openPanel("Versions",
+        '<p class="od-note">' + res.depth + ' version(s). Restoring writes that ' +
+        'state forward as a new version, so where you are now stays reachable — ' +
+        'nothing in this list is ever lost.</p>' +
+        '<div class="od-vers">' + (rows || "<p>No history yet.</p>") + "</div>",
+        null, "versions");
+      panel.querySelectorAll(".od-ver-go").forEach((b) => {
+        b.onclick = () => post("/api/restore", { id: b.dataset.id }).then((r) => {
+          toast(r.ok ? "Restored — now " + r.label : (r.error || "Could not restore"),
+            r.ok ? "ok" : "err");
+          if (r.ok) versionsPanel();
+        });
+      });
     });
   }
 
@@ -503,6 +584,7 @@
   $("#od-site").onclick = () => { if (!mode) toggle.click(); sitePanel(); };
   $("#od-undo").onclick = undo;
   $("#od-redo").onclick = redo;
+  $("#od-versions").onclick = versionsPanel;
   post("/api/history").then(showHistory);
 
   document.addEventListener("mousemove", (e) => {
@@ -525,7 +607,10 @@
     if (e.altKey) { locate(el); return; }
     const k = kindOf(el);
     if (k === "image") { imagePanel(el); return; }
-    if (k === "link" && addr(el, "link")) { linkPanel(el); return; }
+    // Open Design opens its inspector on ANY anchor, inferred from the tag.
+    // Ours used to need a data address, which meant every nav and footer link
+    // fell through to text editing and could not be retargeted at all.
+    if (k === "link") { linkPanel(el); return; }
     begin(el, e);
   }, true);
 

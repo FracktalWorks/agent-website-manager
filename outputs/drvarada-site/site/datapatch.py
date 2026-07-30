@@ -330,6 +330,47 @@ def read_constants(path: Path, names: list[str]) -> dict[str, object]:
     return out
 
 
+def _constant_node(site, name: str):
+    for node in site.tree.body:
+        if (isinstance(node, ast.Assign) and len(node.targets) == 1
+                and isinstance(node.targets[0], ast.Name)
+                and node.targets[0].id == name):
+            return node.value
+    raise PatchError(f"{site.file.name} has no constant called {name}.")
+
+
+def read_in_constant(path: Path, name: str, subpath: str):
+    """A value inside a structured module constant, e.g. NAV.0.2.1.
+
+    The nav and footer are lists of tuples in chrome.py, not page data, so
+    nothing in `content/` can address them — yet they hold more links than any
+    single page does. Addressing into a constant is what makes those editable
+    at all.
+    """
+    site = _load(path)
+    try:
+        return ast.literal_eval(walk(_constant_node(site, name), subpath))
+    except (PatchError, ValueError):
+        return None
+
+
+def set_in_constant(path: Path, name: str, subpath: str, value) -> int:
+    site = _load(path)
+    node = walk(_constant_node(site, name), subpath)
+    text = literal(value, node.col_offset)
+    src = _splice(site, (node.lineno, node.col_offset),
+                  (node.end_lineno, node.end_col_offset), text)
+    _commit(site, src)
+    # `_commit`'s address-based read-back only understands page addresses, so
+    # verify this one the same way by hand — the byte-offset trap that check
+    # exists to catch applies equally here.
+    if read_in_constant(path, name, subpath) != value:
+        site.file.write_text(site.source, encoding="utf-8")
+        raise PatchError(
+            f"{name}.{subpath} did not write back cleanly; rolled back.")
+    return node.lineno
+
+
 def set_constant(path: Path, name: str, value: str) -> int:
     """Rewrite one module-level string constant. Re-parses, so it is safe to
     call in a loop even though every write shifts the lines below it."""

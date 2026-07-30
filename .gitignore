@@ -56,5 +56,6 @@ outputs/*/site/assets/fonts/
 # ...except mcp.json — it holds a live MCP auth header (WordPress app password)
 .vscode/mcp.json
 
-# Live-editor undo journal — machine-local working state, not site content.
-outputs/*/site/.edits/
+# Live-editor version timeline — machine-local working state, not site content.
+# The site itself is versioned in git; this is the in-session undo history.
+outputs/*/site/.versions/
