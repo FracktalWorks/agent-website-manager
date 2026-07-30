@@ -38,6 +38,7 @@ and deterministic scripts do the rendering, validation and persistence.
 | `media.py` | Upload pipeline: verify by decoding, bake EXIF orientation, strip all metadata, cap the long edge, re-encode, report dimensions. |
 | `editor.py` | Live-edit server: injects the overlay, applies edits inside a transaction that reverts source *and deletes uploaded files* if the build fails, watches sources, SSE-reloads every tab. |
 | `editor/editor.js\|css` | The injected overlay: hover-pick, in-place text editing, inspector panels (image/link/tokens/site), section toolbar, undo, open-in-code. Never part of a build. |
+| `brandkit.py` | Drives the site from any corpus design system: reads its canonical `:root`, derives this site's tokens in OKLCH, repairs contrast, writes `assets/brand.css`. `list` / `show <id>` / `apply <id>` / `apply --native` / `calibrate` / `check`. |
 | `preview.py` | Plain build+serve, no editing. |
 | `verify.py` | Renders every built page in real Chrome at 390/768/1040/1440px and fails on horizontal scroll or broken images. Measures inside an iframe of the exact width because Chrome on Windows clamps windows to ~500px, and ignores elements clipped by a scrolling ancestor so intentional marquees and scrollable tables don't false-positive. |
 
@@ -60,6 +61,46 @@ anything jumps VS Code to the exact source line.
 | Sections and cards | hover toolbar: move ↑↓, duplicate, delete | element position in the Python list |
 | Design tokens | Tokens panel with colour pickers | the design system's `:root` block |
 | Site-wide details | Site panel: Practo links, phone, WhatsApp, reviewer | module constants in `chrome.py` |
+
+## Re-branding a site from the design-system corpus
+
+`python brandkit.py apply stripe` makes any of the 152 vendored systems drive
+the whole site. It is a **token bridge**, not a rename table:
+
+- The corpus speaks 54 shared names (`--bg`, `--fg`, `--accent`); a site speaks
+  its own (`--ground`, `--ink`, `--mint`). Aliasing alone leaves a third of the
+  site undefined, because the site needs colours the schema has no name for —
+  a dark punctuation band, a ramp for text on it, category pastels, a gold.
+  Those are **derived in OKLCH from the brand's own hue** (never HSL: HSL's
+  "lightness" is not perceptual, so a hue-rotated palette built in it comes out
+  with one washed-out member and one muddy one).
+- Every derived text colour is walked along its lightness axis until it meets
+  WCAG AA on the surfaces it actually appears on. A brand whose `--meta` is a
+  decorative 3:1 grey cannot reintroduce a contrast failure.
+- `apply` **refuses** a brand whose palette cannot reach AA, and says which
+  pairing fails. 150 of the 152 systems pass; the two that do not declare a
+  dark page background behind white cards, which a single body-copy token
+  cannot serve — a real structural mismatch, not a tuning problem.
+- `calibrate` feeds the site's *own* hand-tuned kit back through the same
+  derivation and diffs the result. That is the only test that separates "the
+  rules are sound" from "the rules produce something plausible". On the
+  reference site 18 of 20 colours land within perceptual tolerance.
+- `check` fails the build if any `var()` the CSS reads is undefined. Without
+  it a bad bridge renders a **grey page and no error** — an undefined custom
+  property silently drops the declaration that used it.
+
+Fonts go through `.tmp/scripts/webfonts.py`. All 152 systems name a typeface
+and none ship one, so a brand's own tokens typeset in the fallback unless
+something intervenes: a system face is left alone, an openly licensed face is
+fetched and embedded for real, and a proprietary face is substituted by
+classification **and the substitution is reported**. A silent substitute is a
+lie about what the brand looks like. Nothing proprietary is ever cached —
+`fetch` refuses any family not in the licensed allowlist.
+
+What this buys, stated honestly: the brand's **palette, type and geometry** in
+this site's idiom. Not the brand's layout language — Stripe's dense data panels
+are markup, not tokens. A Stripe build looks like this site drawn in Stripe's
+colours and typeface.
 
 ## Why this shape (the load-bearing decisions)
 
@@ -156,10 +197,15 @@ constants + token-scope CSS lint (`lint-artifact.ts`), layout-rhythm caps
 loop (manual-edit-mode, rebuilt source-first: they re-serialize the DOM, we
 rewrite the authored literal — ours diffs cleaner), craft references.
 
-Worth porting when needed: **seed → derive** for design systems (~20-field
-seed.json deterministically derives palette ladders, type scale, dark mode —
-rebranding becomes a one-field edit); token tiers (A1/A2/slot/extension) with
-a parity-checked human-readable defaults file; design-jury critique loop
+Also ported since: the token tier model (A1/A2/slot/extension) and a
+derive step — `brandkit.py` derives a full site palette from a brand's
+canonical tokens, which is Open Design's seed→derive idea applied at the
+consumer end rather than the authoring end, and adds a contrast-repair pass
+they do not have.
+
+Worth porting when needed: authoring-side **seed → derive** (a ~20-field
+seed.json that derives a design system's own palette ladders, type scale and
+dark mode, so rebranding a *system* is a one-field edit); design-jury critique loop
 (5 weighted panelists, threshold 8/10, max 3 rounds, ship-best fallback);
 stub-regression guard at the write boundary; a `tweaks` panel binding CSS
 custom properties to a localStorage control strip.

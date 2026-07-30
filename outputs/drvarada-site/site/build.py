@@ -58,6 +58,19 @@ for _p in PAGES:
 DS = ROOT.parent / "design-system"
 LANDING = ROOT.parent / "pages" / "landing" / "assets"
 
+# A corpus design system may be driving the site instead of the hand-tuned kit
+# (see brandkit.py). Its stylesheet redefines every token and therefore loads
+# last, which also makes it the highest-precedence source for the contrast gate.
+BRAND_CSS = ROOT / "assets" / "brand.css"
+BRAND_STATE = ROOT / "assets" / "brand.json"
+_BRAND_META = (json.loads(BRAND_STATE.read_text(encoding="utf-8"))
+               if BRAND_STATE.exists() and BRAND_CSS.exists() else {})
+ACTIVE_BRAND = _BRAND_META.get("brand")
+PAGE_IS_DARK = bool(_BRAND_META.get("page_is_dark"))
+chrome.BRAND_SYSTEM = ACTIVE_BRAND
+if _BRAND_META.get("theme_color"):
+    chrome.THEME_COLOR = _BRAND_META["theme_color"]
+
 # NMC / Indian Medical Council advertising ethics. These are claims a medical practice
 # may not make, and they are also claims that damage trust — so the build refuses them.
 BANNED = [
@@ -110,6 +123,9 @@ CONTRAST_PAIRS = [
     ("eyebrow on tint", "--ink-3", "--tint", 12, 600),
     ("headings", "--ink", "--ground", 32, 700),
     ("footer headings", "--on-dark-3", "--dark", 11.5, 600),
+    ("primary button label", "--mint-on", "--mint", 15.5, 600),
+    ("booking heading", "--booking-ink", "--mint", 32, 600),
+    ("booking body", "--booking-ink-2", "--mint", 16, 400),
     ("accent text on soft mint", "--mint-dp", "--mint-sf", 15, 500),
     ("accent text on soft apricot", "--apr-dp", "--apr-sf", 15, 500),
     ("accent text on soft lilac", "--lil-dp", "--lil-sf", 15, 500),
@@ -138,14 +154,19 @@ def lint_contrast() -> list[str]:
     tokens: dict[str, str] = {}
     for f in (DS / "kit" / "colors_and_type.css",
               LANDING / "design-system.css",
-              ROOT / "assets" / "site.css"):
+              ROOT / "assets" / "site.css",
+              BRAND_CSS):
         if not f.exists():
             continue
-        root = re.search(r":root\s*\{(.*?)\}", f.read_text(encoding="utf-8"), re.S)
-        if root:
+        # Later files override earlier ones, matching the cascade the browser
+        # sees. brand.css is last for exactly that reason — checking the kit's
+        # values while the browser renders the brand's would gate the wrong site.
+        override = f == BRAND_CSS
+        for root in re.finditer(r":root\s*\{(.*?)\}", f.read_text(encoding="utf-8"), re.S):
             for m in re.finditer(r"(--[\w-]+)\s*:\s*(#[0-9a-fA-F]{3,8})\s*;",
                                  root.group(1)):
-                tokens.setdefault(m.group(1), m.group(2))
+                if override or m.group(1) not in tokens:
+                    tokens[m.group(1)] = m.group(2)
 
     errors = []
     for label, fg, bg, size, weight in CONTRAST_PAIRS:
@@ -353,13 +374,35 @@ def copy_assets(out: Path) -> int:
     shutil.copy(ROOT / "assets" / "site.css", assets / "site.css")
     n += 1
 
-    for name in ("favicon.svg", "logo-horizontal-light.svg",
-                 "logo-horizontal-tagline-dark.svg"):
-        for base in (LANDING / "logos", DS / "logos"):
-            if (base / name).exists():
-                shutil.copy(base / name, assets / "logos" / name)
+    if ACTIVE_BRAND:
+        shutil.copy(BRAND_CSS, assets / "brand.css")
+        n += 1
+        fonts = ROOT / "assets" / "fonts"
+        if fonts.is_dir():
+            shutil.copytree(fonts, assets / "fonts", dirs_exist_ok=True)
+            n += len(list(fonts.rglob("*.woff2")))
+
+    # The logo is a brand asset — it belongs to the clinic and no token can
+    # derive it. What CAN be derived is which cut of it stays legible: the navy
+    # lockup disappears on a dark brand's near-black page. So the markup asks
+    # for a stable alias and the readable variant is copied in behind it.
+    # (Suffix convention: "-light" is drawn FOR a light background, "-dark" for
+    # a dark one — the opposite of how it first reads.)
+    header_cut = ("logo-horizontal-dark.svg" if PAGE_IS_DARK
+                  else "logo-horizontal-light.svg")
+    for alias, source in (("favicon.svg", "favicon.svg"),
+                          ("logo-header.svg", header_cut),
+                          # the footer band is dark under every brand
+                          ("logo-footer.svg", "logo-horizontal-tagline-dark.svg")):
+        for base in (LANDING / "logos", DS / "logos", DS / "kit" / "logos"):
+            if (base / source).exists():
+                shutil.copy(base / source, assets / "logos" / alias)
                 n += 1
                 break
+        else:
+            raise FileNotFoundError(
+                f"no source for {alias}: {source} is missing from every logo "
+                "directory — the header or footer would render a broken image")
 
     # photography supplied through the live editor (or dropped in by hand)
     img_src = ROOT / "assets" / "img"
@@ -462,6 +505,7 @@ def main() -> int:
         by_template[p["template"]] = by_template.get(p["template"], 0) + 1
 
     print(f"built {len(PAGES)} pages -> {out.name}/  ({links} links)")
+    print(f"  brand: {ACTIVE_BRAND or 'native (design-system/kit)'}")
     for t in sorted(by_template):
         print(f"  {t}: {by_template[t]} pages")
     print(f"  assets: {n_assets}")

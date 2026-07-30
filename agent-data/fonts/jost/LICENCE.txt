@@ -1,0 +1,7 @@
+Jost
+Licence: OFL-1.1
+Retrieved from Google Fonts (fonts.gstatic.com) via the css2 API.
+
+Both OFL-1.1 and Apache-2.0 permit redistribution and embedding, which is why only families under those licences are cached here.
+Full licence text ships with the family upstream at
+https://fonts.google.com/specimen/Jost/license

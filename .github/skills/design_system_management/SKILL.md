@@ -59,6 +59,10 @@ Everything runs through one dependency-free module:
 | `... quality <id> \| --all` | Score a rich package against the minimums (rubric below) |
 | `... craft` | List the `_craft/` rulebooks |
 | `python .tmp/scripts/build_ds_index.py` | Regenerate `INDEX.md` (`--check` fails if stale) |
+| `python .tmp/scripts/webfonts.py list` | The 39 openly licensed families we may ship, and which are cached |
+| `... resolve "<font stack>"` | What a brand's named face actually becomes: system / open / substitute / unmatched |
+| `... fetch <family> [--subsets latin,telugu]` | Cache an OFL/Apache family under `agent-data/fonts/` — refuses anything else |
+| `... css <family>` | The `@font-face` block for a cached family |
 
 Add `--json` to any command for machine-readable output. `--corpus <dir>` points at
 another corpus copy. Importable as a module: `list_systems`, `search`, `load`,
@@ -341,6 +345,34 @@ A manifest's `craft.applies` / `.suggested` / `.exemptions` declare which rulebo
 system binds; `validate` rejects a slug that does not resolve to a file, so a typo
 cannot silently drop a rulebook. `python .tmp/scripts/design_systems.py craft` lists
 them with their opening lines.
+
+## 6b. Fonts — the gap every system in the corpus has
+
+**All 152 systems name a typeface. None ships one.** 133 distinct families are
+named across the corpus and most are proprietary (Söhne, Circular, Canela,
+Druk Wide, Berkeley Mono). So pasting a `:root` block gives you the brand's
+colour and none of its voice — pick `claude` and you render in Georgia, with
+no warning. `webfonts.py` is the only thing that closes this:
+
+| Case | What happens | Corpus share |
+|---|---|---|
+| System face (Georgia, Helvetica Neue, PingFang SC) | left alone — the reader already has it | 132 stacks |
+| Openly licensed (Inter, IBM Plex, JetBrains Mono, Source Serif) | the real family is fetched and embedded | 182 stacks |
+| Proprietary | substituted by classification and metrics, **and the substitution is reported** | 138 stacks |
+| Unclassifiable | passed through with a generic tail + a warning | 1 stack |
+
+Rules that matter:
+
+- **Nothing proprietary is ever cached.** `fetch` refuses any family absent
+  from the licensed allowlist, so no later change can accidentally ship one.
+  Each cached family gets a `LICENCE.txt` naming its licence and origin.
+- **Report the substitution.** A silent stand-in is a lie about what the brand
+  looks like; a declared one is a design decision. `brandkit.py apply` prints
+  it, and `assets/brand.json` records it.
+- **Subset deliberately.** Latin-only Inter is ~35 KB against several times
+  that with Cyrillic and Greek. Pages in Telugu or Devanagari need a Noto
+  family — no Latin family has the coverage to fetch, and asking for it errors
+  rather than silently returning nothing.
 
 ## 7. Not ported from Open Design's pipeline (and why)
 

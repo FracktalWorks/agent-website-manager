@@ -32,6 +32,9 @@
 
   /* ---- accents: base for fills, deep for text on soft, soft for tinted fills ---- */
   --mint:     #8FDCC6;  --mint-dp: #0B6353;  --mint-sf: #DFF3EC;
+  --mint-on:  #0B6353;   /* label on a filled --mint button: a third job
+                          * --mint-dp cannot always do once the palette
+                          * comes from a brand whose accent is dark */
   --apricot:  #F5C09A;  --apr-dp:  #9A5320;  --apr-sf:  #FCEBDD;
   --lilac:    #C9C4EA;  --lil-dp:  #514697;  --lil-sf:  #EAE7F8;
   --gold:     #B87D2E;   /* 3.22:1 on --ground for the star glyphs */
@@ -110,7 +113,7 @@ p  { max-width: 65ch; color: var(--ink-2); margin: 0; }
 }
 .btn:hover  { transform: translateY(-1px); }
 .btn:focus-visible { outline: 2px solid var(--mint-dp); outline-offset: 3px; }
-.btn-primary   { background: var(--mint); color: var(--mint-dp); }
+.btn-primary   { background: var(--mint); color: var(--mint-on); }
 .btn-secondary { background: transparent; color: var(--ink); border-color: var(--line-2); }
 .btn-on-dark   { background: var(--on-dark-str); color: var(--ink); }
 

@@ -212,10 +212,23 @@ def head(page: dict, links: str) -> str:
 <meta property="og:description" content="{e(page['meta'])}">
 <meta property="og:url" content="{url}">
 <meta property="og:site_name" content="{BRAND}">
-<meta name="theme-color" content="#F8F5F3">
+<meta name="theme-color" content="{THEME_COLOR}">
 <link rel="icon" href="{asset("logos/favicon.svg", links)}" type="image/svg+xml">
 <link rel="stylesheet" href="{asset("design-system.css", links)}">
-<link rel="stylesheet" href="{asset("site.css", links)}">"""
+<link rel="stylesheet" href="{asset("site.css", links)}">{brand_link(links)}"""
+
+
+# Set by build.py from assets/brand.json when a corpus design system is driving
+# the site. The brand stylesheet must load LAST: it redefines the same :root
+# tokens the kit and site.css declare, and with equal specificity the winner is
+# whichever the browser reads last.
+BRAND_SYSTEM: str | None = None
+THEME_COLOR = "#F8F5F3"
+
+
+def brand_link(links: str) -> str:
+    return (f'\n<link rel="stylesheet" href="{asset("brand.css", links)}">'
+            if BRAND_SYSTEM else "")
 
 
 def utility(links: str) -> str:
@@ -270,7 +283,7 @@ def header(links: str) -> str:
 <header class="head">
   <div class="wrap">
     <a class="logo" href="{href('index', links)}" aria-label="{BRAND} — home">
-      <img src="{asset("logos/logo-horizontal-light.svg", links)}" alt="{BRAND}">
+      <img src="{asset("logos/logo-header.svg", links)}" alt="{BRAND}">
     </a>
     <nav aria-label="Main">
       {nav}
@@ -308,7 +321,7 @@ def footer(links: str) -> str:
   <div class="wrap">
     <div class="cols">
       <div>
-        <div class="logo"><img src="{asset("logos/logo-horizontal-tagline-dark.svg", links)}" alt="{BRAND}"></div>
+        <div class="logo"><img src="{asset("logos/logo-footer.svg", links)}" alt="{BRAND}"></div>
         <p style="margin-top:16px;font-size:14.5px;max-width:32ch;color:var(--on-dark)">
           Dermatology, trichology and aesthetics in Hyderabad. Formerly BNR Skin &amp;
           Vitiligo Hospital.</p>

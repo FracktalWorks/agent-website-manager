@@ -42,6 +42,9 @@ logs/
 # The generators and content are tracked; their output is not.
 outputs/*/site/dist/
 outputs/*/site/dist-prod/
+# Webfonts staged for a build are copies of the cache in agent-data/fonts/,
+# which IS tracked. `brandkit.py apply` re-stages them.
+outputs/*/site/assets/fonts/
 
 # Ad-hoc verification/debug screenshots dropped at repo root instead of .tmp/screenshots/
 /*.png
