@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fracktal Works — Radius &amp; Elevation</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { background: var(--canvas); color: var(--ink-body); font-family: var(--ff-body); margin: 0; padding: var(--space-8) var(--space-7); }
+    .wrap { max-width: 1040px; margin: 0 auto; }
+    header { border-bottom: 1px solid var(--border); padding-bottom: var(--space-5); margin-bottom: var(--space-7); }
+    h1 { font-family: var(--ff-display); font-weight: var(--fw-bold); font-size: var(--fs-h1); color: var(--ink); margin: 0 0 var(--space-2); }
+    .lede { font-size: var(--fs-body-lg); color: var(--ink-muted); margin: 0; max-width: 64ch; }
+    .lede b { color: var(--ink); }
+    .section-label { margin: var(--space-7) 0 var(--space-4); }
+    .scale { display: flex; flex-wrap: wrap; gap: var(--space-5); }
+    .swatch { display: grid; gap: var(--space-3); justify-items: center; }
+    .chip { width: 120px; height: 88px; background: var(--accent-bg); border: 1px solid var(--accent-border); }
+    .chip.pill { border-radius: var(--radius-pill); height: 44px; width: 120px; }
+    .meta { font-family: var(--ff-mono); font-size: var(--fs-caption); color: var(--ink-muted); }
+    .meta b { color: var(--ink); font-weight: var(--fw-strong); }
+    .elev { display: grid; grid-template-columns: 1fr 1fr; gap: var(--card-gap); max-width: 640px; }
+    .demo { padding: var(--space-5); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+    .demo h3 { font-family: var(--ff-display); font-weight: var(--fw-strong); font-size: var(--fs-h4); margin: 0 0 var(--space-2); }
+    .demo.flat h3 { color: var(--ok); }
+    .demo p { margin: 0; font-size: var(--fs-sm); }
+    .demo.bad { border-style: dashed; box-shadow: 0 12px 32px rgba(0,0,0,0.18); opacity: 0.65; }
+    .demo.bad h3 { color: var(--error); text-decoration: line-through; text-decoration-color: var(--error); }
+    .statement { margin-top: var(--space-6); padding: var(--space-5); background: var(--bg-layout); border: 1px solid var(--border); border-radius: var(--radius); font-size: var(--fs-body); color: var(--ink-body); max-width: 740px; }
+    .statement b { color: var(--ink); }
+    code { font-family: var(--ff-mono); }
+  </style>
+</head>
+<body>
+  <div class="wrap" data-od-id="page-radius">
+    <header data-od-id="page-header">
+      <h1>Radius &amp; Elevation</h1>
+      <p class="lede">The default theme is <b>rounded</b> (6px) and <b>flat</b>. Soft corners, solid fills, hairline borders — no shadows, no gradients.</p>
+    </header>
+
+    <p class="fk-overline section-label" data-od-id="label-radius">Radius scale</p>
+    <div class="scale" data-od-id="radius-scale">
+      <div class="swatch"><div class="chip" style="border-radius: var(--radius-xs);"></div><span class="meta"><b>2px</b> · --radius-xs</span></div>
+      <div class="swatch"><div class="chip" style="border-radius: var(--radius-sm);"></div><span class="meta"><b>4px</b> · --radius-sm</span></div>
+      <div class="swatch"><div class="chip" style="border-radius: var(--radius);"></div><span class="meta"><b>6px</b> · --radius (default)</span></div>
+      <div class="swatch"><div class="chip" style="border-radius: var(--radius-lg);"></div><span class="meta"><b>8px</b> · --radius-lg</span></div>
+      <div class="swatch"><div class="chip pill"></div><span class="meta"><b>pill</b> · --radius-pill (tags)</span></div>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-elevation">Elevation</p>
+    <div class="elev" data-od-id="elevation">
+      <div class="demo flat" data-od-id="elev-correct">
+        <h3>Correct — flat</h3>
+        <p>Rounded card distinguished by a 1px border and color contrast. <code>--shadow: none</code>.</p>
+      </div>
+      <div class="demo bad" data-od-id="elev-wrong">
+        <h3>Avoid — shadow</h3>
+        <p>No drop shadows or gradients. Depth comes from borders and color, not elevation.</p>
+      </div>
+    </div>
+
+    <div class="statement" data-od-id="posture-statement">
+      <b>Posture:</b> rounded 6px (scale 2 / 4 / 6 / 8, pills for tags) · flat — no shadows, no gradients · 1px borders. Matches the registered <code>default theme</code> in <code>system/tokens.default.json</code>.
+    </div>
+  </div>
+</body>
+</html>

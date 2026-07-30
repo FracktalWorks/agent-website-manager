@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "system/artifacts/poster.html",
+  "entry": "system/artifacts/poster.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-30T18:44:14.824Z",
+  "updatedAt": "2026-06-30T18:44:14.824Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

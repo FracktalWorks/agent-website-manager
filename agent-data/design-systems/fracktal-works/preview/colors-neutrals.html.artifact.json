@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "preview/colors-neutrals.html",
+  "entry": "preview/colors-neutrals.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-30T18:28:20.180Z",
+  "updatedAt": "2026-06-30T18:28:20.180Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

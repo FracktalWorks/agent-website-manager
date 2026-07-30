@@ -1,0 +1,175 @@
+/* ============================================================================
+   Fracktal Works — colors_and_type.css
+   Canonical, reusable design tokens. Import this file first; every preview
+   card and UI kit binds to it.
+
+   POSTURE (this is the source of truth — the `default theme`):
+     - Light canvas, Montserrat
+     - ROUNDED corners: 6px default (scale 2 / 4 / 6 / 8), pills for tags
+     - FLAT color: solid fills, no shadows, no gradients
+     - One brand red (#f25e50) as primary; success / warning / error for state
+   Aligned to system/tokens.default.json (the registered antd `default theme`).
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+:root {
+  /* --- Type families ----------------------------------------------------- */
+  --ff-display: 'Montserrat', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --ff-body:    'Montserrat', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --ff-mono:    ui-monospace, 'SFMono-Regular', 'Consolas', 'Liberation Mono', Menlo, monospace;
+
+  /* --- Canvas & surfaces ------------------------------------------------- */
+  --canvas:       #ffffff; /* page surface                                     */
+  --surface:      #ffffff; /* cards / panels                                   */
+  --bg-layout:    #f7f7f7; /* app/section background (default theme layout bg)  */
+  --fill:         #f3f3f3; /* subtle fills, progress track, zebra rows         */
+  --canvas-dark:  #111111; /* optional dark band (footer / accent section)     */
+  --surface-2:    #f4f4f4; /* subtle raised fill (used by preview cards)        */
+  --surface-dark: #1a1a1a; /* raised panel on a dark band                      */
+
+  /* --- Ink (text on light) ---------------------------------------------- */
+  --ink:          #252525; /* headings                                         */
+  --ink-body:     #3c3c3c; /* body copy                                        */
+  --ink-muted:    #5a5a5a; /* secondary / metadata / labels                    */
+  --ink-subtle:   #919191; /* captions / disabled                              */
+  --ink-on-dark:        #ffffff;
+  --ink-on-dark-muted:  #cccccc;
+
+  /* --- Brand accent (primary) + ramp (from default theme) --------------- */
+  --accent:        #f25e50; /* primary actions, emphasis                       */
+  --accent-hover:  #ff8d7d; /* primary hover (default theme)                   */
+  --accent-active: #cc4139; /* primary pressed (default theme)                 */
+  --accent-strong: #cc4139; /* alias for strong/emphasis                       */
+  --accent-bg:     #fff4f0; /* faint accent wash (tints, focus bg)             */
+  --accent-tint:   #fff4f0; /* alias kept for back-compat                      */
+  --accent-border: #ffd8cf; /* accent border on tinted chips                   */
+  --accent-text:   #801718; /* text on a faint accent wash                     */
+  --on-accent:     #ffffff; /* text/icon on accent fills                       */
+
+  /* --- Functional status (success / warning / error / info) ------------- */
+  --ok:        #52c41a;  --ok-bg:    #f6ffed;  --ok-border:    #b6eb8f;
+  --warn:      #faad14;  --warn-bg:  #fffbe6;  --warn-border:  #ffe58f;
+  --error:     #ff4d4f;  --error-bg: #fff2f0;  --error-border: #ffccc7;
+  --info:      #f25e50;  --info-bg:  #fff4f0;  --info-border:  #ffd8cf;
+
+  /* --- Borders & rules --------------------------------------------------- */
+  --border:        #e6e6e6; /* default control / divider border                */
+  --border-strong: #5a5a5a; /* strong rule                                     */
+  --rule-accent:   var(--accent);
+  --border-width:  1px;
+
+  /* --- Radius: ROUNDED (default theme) ----------------------------------- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius:    6px;   /* DEFAULT — rounded                                     */
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+
+  /* --- Elevation: FLAT (no shadow) -------------------------------------- */
+  --shadow: none;
+
+  /* --- Spacing scale (4px base) ----------------------------------------- */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --section: 80px; --section-mobile: 60px; --card-gap: 24px;
+
+  /* --- Controls ---------------------------------------------------------- */
+  --control-h:    36px; /* default control height                            */
+  --control-h-sm: 28px;
+  --control-h-lg: 44px;
+
+  /* --- Type scale (Montserrat) ------------------------------------------ */
+  --fw-regular: 400; --fw-medium: 500; --fw-strong: 600; --fw-bold: 700;
+
+  --fs-display: clamp(44px, 6vw, 60px);
+  --fs-h1: clamp(34px, 4vw, 44px);
+  --fs-h2: 30px;
+  --fs-h3: 24px;
+  --fs-h4: 20px;
+  --fs-h5: 18px;
+  --fs-body-lg: 18px;
+  --fs-body:    16px;
+  --fs-sm:      14px;
+  --fs-caption: 12px;
+  --fs-overline: 12px;
+
+  --lh-tight: 1.2; --lh-snug: 1.35; --lh-body: 1.6;
+  --tracking-overline: 0.12em; --tracking-tight: -0.01em;
+
+  /* --- Motion ------------------------------------------------------------ */
+  --dur-fast: 100ms; --dur: 200ms; --dur-slow: 300ms;
+  --ease: cubic-bezier(0.645, 0.045, 0.355, 1); /* default theme easing       */
+}
+
+/* ----------------------------------------------------------------------------
+   Base helpers — low specificity so consumers can override.
+   -------------------------------------------------------------------------- */
+.fk-canvas    { background: var(--canvas); color: var(--ink-body); font-family: var(--ff-body); }
+.fk-band-dark { background: var(--canvas-dark); color: var(--ink-on-dark); }
+
+.fk-display { font-family: var(--ff-display); font-weight: var(--fw-bold); font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tracking-tight); color: var(--ink); }
+.fk-h1 { font-family: var(--ff-display); font-weight: var(--fw-bold); font-size: var(--fs-h1); line-height: var(--lh-tight); color: var(--ink); }
+.fk-h2 { font-family: var(--ff-display); font-weight: var(--fw-bold); font-size: var(--fs-h2); line-height: var(--lh-snug); color: var(--ink); }
+.fk-h3 { font-family: var(--ff-display); font-weight: var(--fw-strong); font-size: var(--fs-h3); line-height: var(--lh-snug); color: var(--ink); }
+.fk-body { font-family: var(--ff-body); font-weight: var(--fw-regular); font-size: var(--fs-body); line-height: var(--lh-body); color: var(--ink-body); }
+.fk-overline { font-family: var(--ff-display); font-weight: var(--fw-strong); font-size: var(--fs-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--ink-muted); }
+.fk-mono { font-family: var(--ff-mono); font-variant-numeric: tabular-nums; }
+
+/* Buttons — rounded, flat, default-theme variants. -------------------------- */
+.fk-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: var(--control-h); padding: 0 var(--space-4);
+  font-family: var(--ff-display); font-weight: var(--fw-medium); font-size: var(--fs-sm); line-height: 1;
+  border: var(--border-width) solid transparent; border-radius: var(--radius);
+  cursor: pointer; white-space: nowrap;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.fk-btn svg { width: 16px; height: 16px; flex: 0 0 auto; }
+.fk-btn--primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.fk-btn--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.fk-btn--primary:active { background: var(--accent-active); border-color: var(--accent-active); }
+.fk-btn--outline { background: var(--surface); color: var(--ink-body); border-color: var(--border); } /* = default theme "default" button */
+.fk-btn--outline:hover { color: var(--accent); border-color: var(--accent); }
+.fk-btn--dashed { background: var(--surface); color: var(--ink-body); border-style: dashed; border-color: var(--border); }
+.fk-btn--dashed:hover { color: var(--accent); border-color: var(--accent); }
+.fk-btn--text { background: transparent; color: var(--ink-body); border-color: transparent; }
+.fk-btn--text:hover { background: var(--fill); }
+.fk-btn--link { background: transparent; color: var(--accent); border-color: transparent; padding: 0 var(--space-2); }
+.fk-btn--link:hover { color: var(--accent-hover); }
+.fk-btn--on-dark { background: transparent; color: var(--ink-on-dark); border-color: rgba(255,255,255,0.35); }
+.fk-btn--on-dark:hover { background: var(--accent); border-color: var(--accent); }
+.fk-btn--sm { min-height: var(--control-h-sm); padding: 0 var(--space-3); font-size: var(--fs-caption); }
+.fk-btn--lg { min-height: var(--control-h-lg); padding: 0 var(--space-5); font-size: var(--fs-body); }
+.fk-btn[disabled], .fk-btn:disabled { background: var(--fill); color: var(--ink-subtle); border-color: var(--border); cursor: not-allowed; }
+
+/* Cards — rounded, flat (border + color, never shadow). --------------------- */
+.fk-card { background: var(--surface); border: var(--border-width) solid var(--border); border-radius: var(--radius); padding: var(--space-6); box-shadow: var(--shadow); }
+.fk-card--dark { background: var(--surface-dark); color: var(--ink-on-dark); border-color: #2a2a2a; }
+
+/* Alerts — status color + Lucide icon, rounded, flat. ----------------------- */
+.fk-alert { display: flex; align-items: flex-start; gap: var(--space-3); padding: 12px 16px; border: var(--border-width) solid; border-radius: var(--radius); font-family: var(--ff-body); font-size: var(--fs-sm); color: var(--ink-body); }
+.fk-alert svg { width: 18px; height: 18px; flex: 0 0 auto; margin-top: 1px; }
+.fk-alert strong { font-weight: var(--fw-strong); }
+.fk-alert--success { background: var(--ok-bg);    border-color: var(--ok-border); }
+.fk-alert--success svg { color: var(--ok); }
+.fk-alert--warning { background: var(--warn-bg);  border-color: var(--warn-border); }
+.fk-alert--warning svg { color: var(--warn); }
+.fk-alert--error   { background: var(--error-bg); border-color: var(--error-border); }
+.fk-alert--error svg { color: var(--error); }
+.fk-alert--info    { background: var(--info-bg);  border-color: var(--info-border); }
+.fk-alert--info svg { color: var(--info); }
+
+/* Progress — rounded track + fill, flat. ----------------------------------- */
+.fk-progress { height: 8px; background: var(--fill); border-radius: var(--radius-pill); overflow: hidden; }
+.fk-progress__bar { height: 100%; background: var(--accent); border-radius: inherit; transition: width var(--dur-slow) var(--ease); }
+.fk-progress--success .fk-progress__bar { background: var(--ok); }
+.fk-progress--warning .fk-progress__bar { background: var(--warn); }
+.fk-progress--error .fk-progress__bar { background: var(--error); }
+
+/* Tag / status pill --------------------------------------------------------- */
+.fk-tag { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--ff-display); font-weight: var(--fw-strong); font-size: var(--fs-caption); letter-spacing: 0.02em; padding: 2px 10px; border-radius: var(--radius); border: var(--border-width) solid var(--accent-border); background: var(--accent-bg); color: var(--accent-text); }
+.fk-tag--pill { border-radius: var(--radius-pill); }
+
+/* Accent rule for section dividers. ---------------------------------------- */
+.fk-rule { height: 3px; width: 56px; background: var(--rule-accent); border: 0; border-radius: var(--radius-pill); }

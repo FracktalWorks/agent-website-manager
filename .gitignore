@@ -20,7 +20,9 @@ ENV/
 !.tmp/web_cache/README.md
 # .tmp/scripts/ IS tracked — shared utilities
 !.tmp/scripts/**
-# ...but NOT secrets
+# ...but the blanket un-ignore above also re-includes bytecode, so re-exclude it
+.tmp/scripts/**/__pycache__/
+# ...and NOT secrets
 .tmp/scripts/credentials.json
 .tmp/scripts/service-account.json
 .tmp/scripts/token*.json
@@ -35,6 +37,11 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# Generated site builds — fully reproducible with `python site/build.py`.
+# The generators and content are tracked; their output is not.
+outputs/*/site/dist/
+outputs/*/site/dist-prod/
 
 # Ad-hoc verification/debug screenshots dropped at repo root instead of .tmp/screenshots/
 /*.png

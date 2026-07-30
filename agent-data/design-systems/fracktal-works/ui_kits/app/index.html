@@ -1,0 +1,63 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Fracktal Works — Applied UI Kit</title>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+/* Layout-only helpers. No brand color/type/spacing is defined here — those all
+   come from colors_and_type.css tokens. This block holds only structural rules
+   (page reset, the centered .fk-wrap container, responsive grid collapses, and
+   the mobile nav behavior that React toggles via class). */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+/* Lucide icons render as inline SVG; default to 16px, inherit text color */
+[data-lucide], .fk-icon { width: 16px; height: 16px; }
+i[data-lucide] svg, svg.lucide { width: 1em; height: 1em; stroke: currentColor; }
+
+/* Centered content container, mirrors the original .wrap */
+.fk-wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--space-5); }
+
+/* Nav burger is hidden on desktop, shown on mobile (see media query below) */
+.fk-burger { display: none; }
+
+/* Responsive: hero + product grid + footer collapses */
+@media (max-width: 880px) {
+  .fk-hero-grid { grid-template-columns: 1fr !important; gap: var(--space-6) !important; }
+  .fk-hero-grid > div:last-child { order: -1; }
+}
+@media (max-width: 900px) { .fk-product-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+@media (max-width: 600px) { .fk-product-grid { grid-template-columns: 1fr !important; } }
+@media (max-width: 820px) { .fk-footer-grid { grid-template-columns: 1fr 1fr !important; } }
+@media (max-width: 520px) { .fk-footer-grid { grid-template-columns: 1fr !important; } }
+
+/* Mobile nav: collapse the primary links into a togglable stack.
+   React sets .is-mobile-open on the <nav class="fk-navlinks"> element. */
+@media (max-width: 920px) {
+  .fk-navlinks {
+    position: absolute; top: 72px; left: 0; right: 0;
+    flex-direction: column !important; align-items: stretch !important; gap: 0 !important;
+    background: var(--canvas); border-bottom: var(--border-width) solid var(--border);
+    margin-left: 0 !important; padding: var(--space-3) var(--space-5);
+    display: none !important;
+  }
+  .fk-navlinks.is-mobile-open { display: flex !important; }
+  .fk-nav-cta { display: none !important; }
+  .fk-burger { display: inline-flex !important; }
+}
+</style>
+</head><body><div id="root"></div>
+<script type="text/babel" src="components/Icon.jsx"></script>
+<script type="text/babel" src="components/TopNav.jsx"></script>
+<script type="text/babel" src="components/Hero.jsx"></script>
+<script type="text/babel" src="components/ProductGrid.jsx"></script>
+<script type="text/babel" src="components/SpecTable.jsx"></script>
+<script type="text/babel" src="components/SiteFooter.jsx"></script>
+<script type="text/babel" src="components/App.jsx"></script>
+<script type="text/babel">const {App}=window;ReactDOM.createRoot(document.getElementById('root')).render(<App/>);</script>
+</body></html>

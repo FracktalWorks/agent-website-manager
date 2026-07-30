@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fracktal Works — Canvas &amp; Ink Ramp</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { background: var(--canvas); color: var(--ink-body); font-family: var(--ff-body); margin: 0; padding: var(--space-8) var(--space-7); }
+    .wrap { max-width: 1040px; margin: 0 auto; }
+    header { border-bottom: 1px solid var(--border); padding-bottom: var(--space-5); margin-bottom: var(--space-7); }
+    h1 { font-family: var(--ff-display); font-weight: var(--fw-bold); font-size: var(--fs-h1); color: var(--ink); margin: 0 0 var(--space-2); }
+    .lede { font-size: var(--fs-body-lg); color: var(--ink-muted); margin: 0; max-width: 60ch; }
+    .section-label { margin: var(--space-7) 0 var(--space-4); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--card-gap); }
+    .swatch { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+    .chip { height: 100px; border-bottom: 1px solid var(--border); }
+    .meta { padding: var(--space-4); }
+    .name { font-family: var(--ff-display); font-weight: var(--fw-strong); font-size: var(--fs-body); color: var(--ink); margin: 0 0 var(--space-1); }
+    .hex { font-family: var(--ff-mono); font-variant-numeric: tabular-nums; font-size: var(--fs-sm); color: var(--ink-body); margin: 0 0 2px; text-transform: uppercase; }
+    .tok { font-family: var(--ff-mono); font-size: var(--fs-caption); color: var(--ink-muted); margin: 0 0 var(--space-2); }
+    .prov { font-family: var(--ff-display); font-weight: var(--fw-medium); font-size: var(--fs-caption); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-subtle); }
+    .prov.measured { color: var(--accent-strong); }
+    /* Ink ramp demonstrated on white */
+    .ramp { border: 1px solid var(--border); border-radius: var(--radius); }
+    .ramp-row { display: flex; align-items: baseline; gap: var(--space-4); padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--border); }
+    .ramp-row:last-child { border-bottom: 0; }
+    .ramp-sample { font-family: var(--ff-display); font-weight: var(--fw-strong); font-size: var(--fs-h4); flex: 1; }
+    .ramp-tok { font-family: var(--ff-mono); font-size: var(--fs-caption); color: var(--ink-muted); width: 16ch; }
+    .ramp-hex { font-family: var(--ff-mono); font-size: var(--fs-caption); color: var(--ink-subtle); text-transform: uppercase; }
+    /* Dark band */
+    .band { margin-top: var(--space-5); background: var(--canvas-dark); border-radius: var(--radius); padding: var(--space-7) var(--space-6); }
+    .band h2 { font-family: var(--ff-display); font-weight: var(--fw-bold); font-size: var(--fs-h2); color: var(--ink-on-dark); margin: 0 0 var(--space-3); }
+    .band p { font-size: var(--fs-body); color: var(--ink-on-dark-muted); margin: 0 0 var(--space-2); line-height: var(--lh-body); max-width: 60ch; }
+    .band .surf { margin-top: var(--space-5); background: var(--surface-dark); border: 1px solid #2a2a2a; border-radius: var(--radius); padding: var(--space-5); }
+    .band .surf-tok { font-family: var(--ff-mono); font-size: var(--fs-caption); color: var(--ink-on-dark-muted); text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <div class="wrap" data-od-id="page-colors-neutrals">
+    <header data-od-id="page-header">
+      <h1>Canvas &amp; Ink Ramp</h1>
+      <p class="lede">White is the working surface. Near-black bands carry technical content. The ink ramp gives one disciplined step per role — heading to subtle.</p>
+    </header>
+
+    <p class="fk-overline section-label" data-od-id="label-surfaces">Canvas &amp; Surfaces</p>
+    <div class="grid" data-od-id="grid-surfaces">
+      <div class="swatch" data-od-id="swatch-canvas">
+        <div class="chip" style="background: var(--canvas);"></div>
+        <div class="meta">
+          <p class="name">Canvas</p>
+          <p class="hex">#ffffff</p>
+          <p class="tok">var(--canvas)</p>
+          <p class="prov measured">Measured &times;91 &middot; primary surface</p>
+        </div>
+      </div>
+      <div class="swatch" data-od-id="swatch-surface-2">
+        <div class="chip" style="background: var(--surface-2);"></div>
+        <div class="meta">
+          <p class="name">Surface 2</p>
+          <p class="hex">#f4f4f4</p>
+          <p class="tok">var(--surface-2)</p>
+          <p class="prov measured">Measured &times;2 &middot; subtle raised fill</p>
+        </div>
+      </div>
+      <div class="swatch" data-od-id="swatch-border">
+        <div class="chip" style="background: var(--border);"></div>
+        <div class="meta">
+          <p class="name">Border</p>
+          <p class="hex">#e6e6e6</p>
+          <p class="tok">var(--border)</p>
+          <p class="prov">Inferred &middot; hairline divider</p>
+        </div>
+      </div>
+      <div class="swatch" data-od-id="swatch-canvas-dark">
+        <div class="chip" style="background: var(--canvas-dark);"></div>
+        <div class="meta">
+          <p class="name">Canvas Dark</p>
+          <p class="hex">#111111</p>
+          <p class="tok">var(--canvas-dark)</p>
+          <p class="prov measured">Measured &middot; technical band</p>
+        </div>
+      </div>
+      <div class="swatch" data-od-id="swatch-surface-dark">
+        <div class="chip" style="background: var(--surface-dark);"></div>
+        <div class="meta">
+          <p class="name">Surface Dark</p>
+          <p class="hex">#1a1a1a</p>
+          <p class="tok">var(--surface-dark)</p>
+          <p class="prov">Inferred &middot; raised panel on dark</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-ink">Ink Ramp (on white)</p>
+    <div class="ramp" data-od-id="ramp-ink">
+      <div class="ramp-row">
+        <span class="ramp-sample" style="color: var(--ink);">India's premier 3D printer manufacturer</span>
+        <span class="ramp-tok">var(--ink)</span>
+        <span class="ramp-hex">#252525</span>
+      </div>
+      <div class="ramp-row">
+        <span class="ramp-sample" style="color: var(--ink-body); font-weight: var(--fw-regular);">Designed and built in-house, in Bangalore.</span>
+        <span class="ramp-tok">var(--ink-body)</span>
+        <span class="ramp-hex">#3c3c3c</span>
+      </div>
+      <div class="ramp-row">
+        <span class="ramp-sample" style="color: var(--ink-muted); font-weight: var(--fw-medium);">Secondary &middot; metadata &middot; overline</span>
+        <span class="ramp-tok">var(--ink-muted)</span>
+        <span class="ramp-hex">#5a5a5a</span>
+      </div>
+      <div class="ramp-row">
+        <span class="ramp-sample" style="color: var(--ink-subtle); font-weight: var(--fw-regular);">Caption &middot; disabled</span>
+        <span class="ramp-tok">var(--ink-subtle)</span>
+        <span class="ramp-hex">#919191</span>
+      </div>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-band">Dark Technical Band</p>
+    <div class="band" data-od-id="band-dark">
+      <h2 style="color: var(--ink-on-dark);">Original Additive Manufacturer</h2>
+      <p style="color: var(--ink-on-dark-muted);">White headings, muted body. On a near-black band <code style="font-family: var(--ff-mono);">--ink-on-dark</code> (#ffffff) carries headings and <code style="font-family: var(--ff-mono);">--ink-on-dark-muted</code> (#cccccc) carries body copy — depth from contrast, not elevation.</p>
+      <div class="surf" data-od-id="surf-dark">
+        <span class="surf-tok">var(--surface-dark) #1a1a1a &middot; raised panel</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

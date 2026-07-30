@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "deck",
+  "title": "system/artifacts/deck.html",
+  "entry": "system/artifacts/deck.html",
+  "renderer": "deck-html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-30T18:44:14.574Z",
+  "updatedAt": "2026-06-30T18:44:14.574Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

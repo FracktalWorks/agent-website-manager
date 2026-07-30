@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fracktal Works — Components</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { background: var(--canvas); color: var(--ink-body); font-family: var(--ff-body); margin: 0; padding: var(--space-8) var(--space-7); }
+    .wrap { max-width: 1040px; margin: 0 auto; }
+    header { border-bottom: 1px solid var(--border); padding-bottom: var(--space-5); margin-bottom: var(--space-7); }
+    h1 { font-family: var(--ff-display); font-weight: var(--fw-bold); font-size: var(--fs-h1); color: var(--ink); margin: 0 0 var(--space-2); }
+    .lede { font-size: var(--fs-body-lg); color: var(--ink-muted); margin: 0; max-width: 64ch; }
+    code { font-family: var(--ff-mono); font-size: 0.9em; background: var(--fill); padding: 1px 5px; border-radius: var(--radius-sm); }
+    .section-label { margin: var(--space-7) 0 var(--space-4); }
+    .btn-row { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
+    .band { background: var(--canvas-dark); border-radius: var(--radius); padding: var(--space-6); }
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: var(--card-gap); }
+    .fk-card h3, .fk-card--dark h3 { font-family: var(--ff-display); font-weight: var(--fw-strong); font-size: var(--fs-h4); margin: 0 0 var(--space-2); }
+    .fk-card h3 { color: var(--ink); }
+    .fk-card p { margin: 0; font-size: var(--fs-sm); color: var(--ink-body); }
+    .fk-card--dark p { margin: 0; font-size: var(--fs-sm); color: var(--ink-on-dark-muted); }
+    .stack { display: grid; gap: var(--space-3); }
+    .alert-title { font-weight: var(--fw-strong); }
+    .prog-row { display: grid; grid-template-columns: 200px 1fr 48px; gap: var(--space-4); align-items: center; margin-bottom: var(--space-4); }
+    .prog-label { font-size: var(--fs-sm); color: var(--ink-muted); }
+    .prog-val { font-family: var(--ff-mono); font-size: var(--fs-sm); color: var(--ink-body); text-align: right; }
+    .pills { display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; }
+    .dot { width: 8px; height: 8px; border-radius: var(--radius-pill); background: var(--ok); }
+    .form { display: grid; gap: var(--space-4); max-width: 360px; }
+    .form label { font-family: var(--ff-display); font-weight: var(--fw-strong); font-size: var(--fs-caption); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-muted); display: block; margin-bottom: var(--space-2); }
+    .form input, .form select { width: 100%; box-sizing: border-box; font-family: var(--ff-body); font-size: var(--fs-body); color: var(--ink); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 9px 12px; min-height: var(--control-h); }
+    .form input:focus, .form select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-bg); }
+    table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+    caption { text-align: left; font-family: var(--ff-display); font-weight: var(--fw-strong); font-size: var(--fs-caption); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-muted); padding-bottom: var(--space-3); }
+    th, td { text-align: left; padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--border); }
+    th { font-family: var(--ff-display); font-weight: var(--fw-strong); color: var(--ink); }
+    td { color: var(--ink-body); }
+    td.num { font-family: var(--ff-mono); font-variant-numeric: tabular-nums; }
+    [data-lucide] { width: 16px; height: 16px; }
+  </style>
+</head>
+<body>
+  <div class="wrap" data-od-id="page-components">
+    <header data-od-id="page-header">
+      <h1>Components</h1>
+      <p class="lede">The default-theme component kit — rounded (6px), flat, one brand red plus standard status colors, Montserrat, Lucide icons. Built on the <code>.fk-btn</code> / <code>.fk-card</code> / <code>.fk-alert</code> / <code>.fk-progress</code> helpers from <code>colors_and_type.css</code>.</p>
+    </header>
+
+    <p class="fk-overline section-label" data-od-id="label-buttons">Buttons</p>
+    <div class="btn-row" data-od-id="buttons-light">
+      <button class="fk-btn fk-btn--primary"><i data-lucide="settings-2"></i>Configure Apollo 350</button>
+      <button class="fk-btn fk-btn--outline"><i data-lucide="file-text"></i>View specs</button>
+      <button class="fk-btn fk-btn--dashed"><i data-lucide="plus"></i>Add to compare</button>
+      <button class="fk-btn fk-btn--text">Cancel</button>
+      <button class="fk-btn fk-btn--link"><i data-lucide="external-link"></i>Documentation</button>
+      <button class="fk-btn fk-btn--primary fk-btn--sm"><i data-lucide="shopping-cart"></i>Buy</button>
+      <button class="fk-btn fk-btn--outline" disabled>Disabled</button>
+    </div>
+    <div class="band" data-od-id="buttons-dark" style="margin-top: var(--space-5);">
+      <p class="fk-overline" style="color: var(--ink-on-dark-muted); margin: 0 0 var(--space-4);">On dark band</p>
+      <div class="btn-row">
+        <button class="fk-btn fk-btn--on-dark"><i data-lucide="mail"></i>Request a quote</button>
+        <button class="fk-btn fk-btn--primary"><i data-lucide="shopping-cart"></i>Buy PrintStick</button>
+      </div>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-alerts">Alerts</p>
+    <div class="stack" data-od-id="alerts">
+      <div class="fk-alert fk-alert--success" data-od-id="alert-success"><i data-lucide="circle-check"></i><span><span class="alert-title">Order confirmed.</span> Your Twin Dragon 600 ships from Bangalore in 3 weeks.</span></div>
+      <div class="fk-alert fk-alert--info" data-od-id="alert-info"><i data-lucide="info"></i><span><span class="alert-title">Firmware available.</span> Apollo 350 firmware v2.1 improves preheat stability.</span></div>
+      <div class="fk-alert fk-alert--warning" data-od-id="alert-warning"><i data-lucide="triangle-alert"></i><span><span class="alert-title">Temperature check.</span> Nozzle is above the recommended range for PLA.</span></div>
+      <div class="fk-alert fk-alert--error" data-od-id="alert-error"><i data-lucide="circle-x"></i><span><span class="alert-title">Print failed.</span> Filament runout detected on extruder 2.</span></div>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-progress">Progress</p>
+    <div data-od-id="progress">
+      <div class="prog-row"><span class="prog-label">Print — Apollo bracket</span><span class="fk-progress"><span class="fk-progress__bar" style="width: 68%;"></span></span><span class="prog-val">68%</span></div>
+      <div class="prog-row"><span class="prog-label">Material remaining</span><span class="fk-progress fk-progress--warning"><span class="fk-progress__bar" style="width: 24%;"></span></span><span class="prog-val">24%</span></div>
+      <div class="prog-row"><span class="prog-label">Bed calibration</span><span class="fk-progress fk-progress--success"><span class="fk-progress__bar" style="width: 100%;"></span></span><span class="prog-val">100%</span></div>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-cards">Cards</p>
+    <div class="cards" data-od-id="cards">
+      <div class="fk-card" data-od-id="card-light">
+        <h3>Snowflake</h3>
+        <p>Desktop FDM. Heated bed, auto-leveling, enclosed build chamber. Designed and built in-house.</p>
+      </div>
+      <div class="fk-card fk-card--dark" data-od-id="card-dark">
+        <h3 style="color: var(--ink-on-dark);">Julia</h3>
+        <p>Dual-extruder workhorse. Production-grade reliability, presented on a dark band.</p>
+      </div>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-pills">Tags / Status Pills</p>
+    <div class="pills" data-od-id="pills">
+      <span class="fk-tag fk-tag--pill"><span class="dot"></span>In stock</span>
+      <span class="fk-tag">Required</span>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-form">Form Controls</p>
+    <div class="form" data-od-id="form">
+      <div>
+        <label for="machine">Machine</label>
+        <input id="machine" type="text" value="Twin Dragon" placeholder="Model name">
+      </div>
+      <div>
+        <label for="product">Product line</label>
+        <select id="product">
+          <option>Snowflake</option>
+          <option>Julia</option>
+          <option selected>Twin Dragon</option>
+          <option>Volterra</option>
+          <option>Apollo 350</option>
+          <option>PrintStick</option>
+        </select>
+      </div>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-table">Spec Table</p>
+    <table data-od-id="spec-table">
+      <caption>Apollo 350 — engineering specification</caption>
+      <thead>
+        <tr><th>Parameter</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Build volume</td><td class="num">600 &times; 600 &times; 400 mm</td></tr>
+        <tr><td>Max print speed</td><td class="num">500 mm/sec</td></tr>
+        <tr><td>Nozzle temperature</td><td class="num">300 &deg;C</td></tr>
+        <tr><td>Layer resolution</td><td class="num">0.05 mm</td></tr>
+        <tr><td>Frame</td><td>Welded steel, CoreXY</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>if (window.lucide) lucide.createIcons();</script>
+</body>
+</html>

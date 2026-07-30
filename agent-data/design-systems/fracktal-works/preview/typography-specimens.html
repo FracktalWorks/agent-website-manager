@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fracktal Works — Montserrat Specimen</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { background: var(--canvas); color: var(--ink-body); font-family: var(--ff-body); margin: 0; padding: var(--space-8) var(--space-7); }
+    .wrap { max-width: 1040px; margin: 0 auto; }
+    header { border-bottom: 1px solid var(--border); padding-bottom: var(--space-5); margin-bottom: var(--space-7); }
+    h1 { font-family: var(--ff-display); font-weight: var(--fw-bold); font-size: var(--fs-h1); color: var(--ink); margin: 0 0 var(--space-2); }
+    .lede { font-size: var(--fs-body-lg); color: var(--ink-muted); margin: 0; max-width: 60ch; }
+    .section-label { margin: var(--space-7) 0 var(--space-4); }
+    .row { display: grid; grid-template-columns: 1fr 18ch; gap: var(--space-5); align-items: baseline; padding: var(--space-4) 0; border-bottom: 1px solid var(--border); }
+    .sample { color: var(--ink); font-family: var(--ff-display); margin: 0; line-height: var(--lh-snug); }
+    .spec { font-family: var(--ff-mono); font-size: var(--fs-caption); color: var(--ink-muted); text-align: right; text-transform: uppercase; line-height: 1.6; }
+    .weights { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--card-gap); margin-top: var(--space-4); }
+    .weight { border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-5); }
+    .weight .g { font-family: var(--ff-display); font-size: 40px; color: var(--ink); display: block; margin-bottom: var(--space-2); }
+    .weight .l { font-family: var(--ff-mono); font-size: var(--fs-caption); color: var(--ink-muted); text-transform: uppercase; }
+    .mono-spec { margin-top: var(--space-4); background: var(--canvas-dark); border-radius: var(--radius); padding: var(--space-6); }
+    .mono-spec .num { font-family: var(--ff-mono); font-variant-numeric: tabular-nums; font-size: var(--fs-h3); color: var(--ink-on-dark); letter-spacing: 0.02em; margin: 0 0 var(--space-2); }
+    .mono-spec .cap { font-family: var(--ff-mono); font-size: var(--fs-caption); color: var(--ink-on-dark-muted); text-transform: uppercase; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap" data-od-id="page-typography">
+    <header data-od-id="page-header">
+      <h1>Montserrat Specimen</h1>
+      <p class="lede">One geometric sans across the whole system. Hierarchy is engineered, not decorative — size and weight do the work.</p>
+    </header>
+
+    <p class="fk-overline section-label" data-od-id="label-scale">Type Scale</p>
+    <div data-od-id="scale">
+      <div class="row"><p class="sample" style="font-size: var(--fs-display); font-weight: var(--fw-bold); letter-spacing: var(--tracking-tight);">India's premier 3D printer manufacturer.</p><span class="spec">--fs-display<br>48&ndash;64px / 700</span></div>
+      <div class="row"><p class="sample" style="font-size: var(--fs-h1); font-weight: var(--fw-bold);">Original Additive Manufacturer</p><span class="spec">--fs-h1<br>36&ndash;48px / 700</span></div>
+      <div class="row"><p class="sample" style="font-size: var(--fs-h2); font-weight: var(--fw-bold);">Built in Bangalore since 2013</p><span class="spec">--fs-h2<br>32px / 700</span></div>
+      <div class="row"><p class="sample" style="font-size: var(--fs-h3); font-weight: var(--fw-strong);">Desktop precision to production SLS</p><span class="spec">--fs-h3<br>24px / 600</span></div>
+      <div class="row"><p class="sample" style="font-size: var(--fs-h4); font-weight: var(--fw-strong);">Every machine, designed in-house</p><span class="spec">--fs-h4<br>20px / 600</span></div>
+      <div class="row"><p class="sample" style="font-size: var(--fs-h5); font-weight: var(--fw-strong);">From the ground up</p><span class="spec">--fs-h5<br>18px / 600</span></div>
+      <div class="row"><p class="sample" style="font-size: var(--fs-body-lg); font-weight: var(--fw-regular); color: var(--ink-body);">We design and build every machine in-house, from desktop precision to production-grade SLS.</p><span class="spec">--fs-body-lg<br>18px / 400</span></div>
+      <div class="row"><p class="sample" style="font-size: var(--fs-body); font-weight: var(--fw-regular); color: var(--ink-body);">An Original Additive Manufacturer based in Bangalore. Active voice. Short declarative sentences.</p><span class="spec">--fs-body<br>16px / 400</span></div>
+      <div class="row"><p class="sample" style="font-size: var(--fs-sm); font-weight: var(--fw-regular); color: var(--ink-body);">Specifications subject to change. All machines tested before dispatch.</p><span class="spec">--fs-sm<br>14px / 400</span></div>
+      <div class="row"><p class="sample" style="font-size: var(--fs-caption); font-weight: var(--fw-regular); color: var(--ink-subtle);">Fig. 1 — build volume measured at ambient.</p><span class="spec">--fs-caption<br>12px / 400</span></div>
+      <div class="row"><p class="sample fk-overline" style="margin: 0;">Make in India</p><span class="spec">--fs-overline<br>12px / 600 / 0.14em</span></div>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-weights">Weights</p>
+    <div class="weights" data-od-id="weights">
+      <div class="weight"><span class="g" style="font-weight: 400;">Aa Bb 350</span><span class="l">Regular / 400</span></div>
+      <div class="weight"><span class="g" style="font-weight: 500;">Aa Bb 350</span><span class="l">Medium / 500</span></div>
+      <div class="weight"><span class="g" style="font-weight: 600;">Aa Bb 350</span><span class="l">Strong / 600</span></div>
+      <div class="weight"><span class="g" style="font-weight: 700;">Aa Bb 350</span><span class="l">Bold / 700</span></div>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-mono">Engineering Numerics &middot; tabular-nums</p>
+    <div class="mono-spec" data-od-id="mono-spec">
+      <p class="num">600 &times; 600 &times; 400 mm &nbsp;&middot;&nbsp; 500 mm/sec</p>
+      <p class="cap">var(--ff-mono) &middot; font-variant-numeric: tabular-nums</p>
+    </div>
+  </div>
+</body>
+</html>

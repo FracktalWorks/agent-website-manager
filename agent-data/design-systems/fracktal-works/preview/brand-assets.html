@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fracktal Works — Brand Assets</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { background: var(--canvas); color: var(--ink-body); font-family: var(--ff-body); margin: 0; padding: var(--space-8) var(--space-7); }
+    .wrap { max-width: 1040px; margin: 0 auto; }
+    header { border-bottom: 1px solid var(--border); padding-bottom: var(--space-5); margin-bottom: var(--space-7); }
+    h1 { font-family: var(--ff-display); font-weight: var(--fw-bold); font-size: var(--fs-h1); color: var(--ink); margin: 0 0 var(--space-2); }
+    .lede { font-size: var(--fs-body-lg); color: var(--ink-muted); margin: 0; max-width: 60ch; }
+    .section-label { margin: var(--space-7) 0 var(--space-4); }
+    .logo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--card-gap); }
+    .logo-cell { border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-7); display: flex; align-items: center; justify-content: center; min-height: 120px; }
+    .logo-cell.dark { background: var(--canvas-dark); border-color: var(--canvas-dark); }
+    .logo-cell img { max-width: 100%; max-height: 64px; height: auto; display: block; }
+    .favicons { display: flex; gap: var(--space-5); flex-wrap: wrap; }
+    .fav { border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-4); text-align: center; }
+    .fav img { width: 48px; height: 48px; object-fit: contain; display: block; margin: 0 auto var(--space-3); image-rendering: auto; }
+    .cap { font-family: var(--ff-mono); font-size: var(--fs-caption); color: var(--ink-muted); margin: var(--space-3) 0 0; word-break: break-all; }
+    .img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--card-gap); }
+    .img-cell { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface-2); }
+    .img-cell img { width: 100%; height: 180px; object-fit: cover; display: block; }
+    .img-cell .cap { padding: var(--space-3) var(--space-4); margin: 0; }
+    .note { margin-top: var(--space-7); border-left: 4px solid var(--accent); padding: var(--space-4) var(--space-5); background: var(--accent-tint); }
+    .note p { margin: 0; font-size: var(--fs-body); color: var(--ink-body); }
+    .note strong { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <div class="wrap" data-od-id="page-brand-assets">
+    <header data-od-id="page-header">
+      <h1>Brand Assets</h1>
+      <p class="lede">The real preserved files — logos, favicons, and product photography. Referenced directly, never redrawn.</p>
+    </header>
+
+    <p class="fk-overline section-label" data-od-id="label-logos">Logo &middot; light on dark, dark on white</p>
+    <div class="logo-pair" data-od-id="logos">
+      <div class="logo-cell dark" data-od-id="logo-on-dark">
+        <img src="../logos/Websitesd-Header.png" alt="Fracktal Works header logo (light)">
+      </div>
+      <div class="logo-cell" data-od-id="logo-on-light">
+        <img src="../logos/Website-Header_black.png" alt="Fracktal Works header logo (black)">
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap: var(--card-gap); margin-top: var(--space-3);">
+      <p class="cap">logos/Websitesd-Header.png</p>
+      <p class="cap">logos/Website-Header_black.png</p>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-favicons">Favicons</p>
+    <div class="favicons" data-od-id="favicons">
+      <div class="fav"><img src="../logos/favicon-1.png" alt="Favicon variant 1"><p class="cap">logos/favicon-1.png</p></div>
+      <div class="fav"><img src="../logos/favicon-2.png" alt="Favicon variant 2"><p class="cap">logos/favicon-2.png</p></div>
+      <div class="fav"><img src="../logos/favicon-3.png" alt="Favicon variant 3"><p class="cap">logos/favicon-3.png</p></div>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-imagery">Product Photography</p>
+    <div class="img-grid" data-od-id="imagery">
+      <div class="img-cell"><img src="../imagery/cover-0.webp" alt="Fracktal cover image"><p class="cap">imagery/cover-0.webp</p></div>
+      <div class="img-cell"><img src="../imagery/hero-1.webp" alt="Fracktal hero 1"><p class="cap">imagery/hero-1.webp</p></div>
+      <div class="img-cell"><img src="../imagery/hero-2.png" alt="Fracktal hero 2"><p class="cap">imagery/hero-2.png</p></div>
+      <div class="img-cell"><img src="../imagery/hero-3.png" alt="Fracktal hero 3"><p class="cap">imagery/hero-3.png</p></div>
+      <div class="img-cell"><img src="../imagery/hero-4.png" alt="Fracktal hero 4"><p class="cap">imagery/hero-4.png</p></div>
+      <div class="img-cell"><img src="../imagery/hero-5.png" alt="Fracktal hero 5"><p class="cap">imagery/hero-5.png</p></div>
+      <div class="img-cell"><img src="../imagery/hero-6.webp" alt="Fracktal hero 6"><p class="cap">imagery/hero-6.webp</p></div>
+      <div class="img-cell"><img src="../imagery/hero-7.png" alt="Fracktal hero 7"><p class="cap">imagery/hero-7.png</p></div>
+    </div>
+
+    <div class="note" data-od-id="note-imagery">
+      <p><strong>Real product photography only — never AI-generated imagery.</strong></p>
+    </div>
+  </div>
+</body>
+</html>

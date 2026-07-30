@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fracktal Works — Spacing Scale</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { background: var(--canvas); color: var(--ink-body); font-family: var(--ff-body); margin: 0; padding: var(--space-8) var(--space-7); }
+    .wrap { max-width: 1040px; margin: 0 auto; }
+    header { border-bottom: 1px solid var(--border); padding-bottom: var(--space-5); margin-bottom: var(--space-7); }
+    h1 { font-family: var(--ff-display); font-weight: var(--fw-bold); font-size: var(--fs-h1); color: var(--ink); margin: 0 0 var(--space-2); }
+    .lede { font-size: var(--fs-body-lg); color: var(--ink-muted); margin: 0; max-width: 60ch; }
+    .section-label { margin: var(--space-7) 0 var(--space-4); }
+    .bars { border: 1px solid var(--border); border-radius: var(--radius); }
+    .bar-row { display: grid; grid-template-columns: 16ch 1fr; gap: var(--space-5); align-items: center; padding: var(--space-3) var(--space-5); border-bottom: 1px solid var(--border); }
+    .bar-row:last-child { border-bottom: 0; }
+    .bar-label { font-family: var(--ff-mono); font-size: var(--fs-sm); color: var(--ink-body); }
+    .bar-label .px { color: var(--ink-subtle); }
+    .bar { height: 16px; background: var(--accent); border-radius: var(--radius); }
+    .group-head { padding: var(--space-4) var(--space-5); background: var(--surface-2); border-bottom: 1px solid var(--border); }
+    .group-head .fk-overline { margin: 0; }
+    .footnote { margin-top: var(--space-5); font-family: var(--ff-mono); font-size: var(--fs-caption); color: var(--ink-muted); text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <div class="wrap" data-od-id="page-spacing">
+    <header data-od-id="page-header">
+      <h1>Spacing Scale</h1>
+      <p class="lede">A 4px base. Eight steps for component rhythm, plus fixed tokens for section, card gap, and card padding. Bars are drawn to scale.</p>
+    </header>
+
+    <p class="fk-overline section-label" data-od-id="label-scale">Step Scale (4px base)</p>
+    <div class="bars" data-od-id="bars-scale">
+      <div class="bar-row"><span class="bar-label">--space-1 <span class="px">4px</span></span><div class="bar" style="width: 4px;"></div></div>
+      <div class="bar-row"><span class="bar-label">--space-2 <span class="px">8px</span></span><div class="bar" style="width: 8px;"></div></div>
+      <div class="bar-row"><span class="bar-label">--space-3 <span class="px">12px</span></span><div class="bar" style="width: 12px;"></div></div>
+      <div class="bar-row"><span class="bar-label">--space-4 <span class="px">16px</span></span><div class="bar" style="width: 16px;"></div></div>
+      <div class="bar-row"><span class="bar-label">--space-5 <span class="px">24px</span></span><div class="bar" style="width: 24px;"></div></div>
+      <div class="bar-row"><span class="bar-label">--space-6 <span class="px">32px</span></span><div class="bar" style="width: 32px;"></div></div>
+      <div class="bar-row"><span class="bar-label">--space-7 <span class="px">48px</span></span><div class="bar" style="width: 48px;"></div></div>
+      <div class="bar-row"><span class="bar-label">--space-8 <span class="px">64px</span></span><div class="bar" style="width: 64px;"></div></div>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-layout">Layout Tokens</p>
+    <div class="bars" data-od-id="bars-layout">
+      <div class="bar-row"><span class="bar-label">--card-gap <span class="px">30px</span></span><div class="bar" style="width: 30px;"></div></div>
+      <div class="bar-row"><span class="bar-label">--card (pad) <span class="px">32px</span></span><div class="bar" style="width: 32px;"></div></div>
+      <div class="bar-row"><span class="bar-label">--section-mobile <span class="px">60px</span></span><div class="bar" style="width: 60px;"></div></div>
+      <div class="bar-row"><span class="bar-label">--section <span class="px">80px</span></span><div class="bar" style="width: 80px;"></div></div>
+    </div>
+
+    <p class="footnote" data-od-id="footnote">Base unit 4px &middot; --card padding maps to --space-6 (32px) &middot; bars rendered 1:1 at token width</p>
+  </div>
+</body>
+</html>

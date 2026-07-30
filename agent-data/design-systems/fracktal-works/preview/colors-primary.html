@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fracktal Works — Primary &amp; Functional Color</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { background: var(--canvas); color: var(--ink-body); font-family: var(--ff-body); margin: 0; padding: var(--space-8) var(--space-7); }
+    .wrap { max-width: 1040px; margin: 0 auto; }
+    header { border-bottom: 1px solid var(--border); padding-bottom: var(--space-5); margin-bottom: var(--space-7); }
+    h1 { font-family: var(--ff-display); font-weight: var(--fw-bold); font-size: var(--fs-h1); color: var(--ink); margin: 0 0 var(--space-2); }
+    .lede { font-size: var(--fs-body-lg); color: var(--ink-muted); margin: 0; max-width: 60ch; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--card-gap); }
+    .swatch { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+    .chip { height: 120px; border-bottom: 1px solid var(--border); }
+    .meta { padding: var(--space-4); }
+    .name { font-family: var(--ff-display); font-weight: var(--fw-strong); font-size: var(--fs-body); color: var(--ink); margin: 0 0 var(--space-1); }
+    .hex { font-family: var(--ff-mono); font-variant-numeric: tabular-nums; font-size: var(--fs-sm); color: var(--ink-body); margin: 0 0 2px; text-transform: uppercase; }
+    .tok { font-family: var(--ff-mono); font-size: var(--fs-caption); color: var(--ink-muted); margin: 0 0 var(--space-3); }
+    .prov { font-family: var(--ff-display); font-weight: var(--fw-medium); font-size: var(--fs-caption); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-subtle); }
+    .prov.measured { color: var(--accent-strong); }
+    .section-label { margin: var(--space-7) 0 var(--space-4); }
+    .note { margin-top: var(--space-7); border-left: 4px solid var(--accent); padding: var(--space-4) var(--space-5); background: var(--accent-tint); }
+    .note p { margin: 0; font-size: var(--fs-body); color: var(--ink-body); }
+    .note strong { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <div class="wrap" data-od-id="page-colors-primary">
+    <header data-od-id="page-header">
+      <h1>Primary &amp; Functional Color</h1>
+      <p class="lede">One red accent carries the brand. Functional colors signal state only — never decoration. All hex measured from source unless marked inferred.</p>
+    </header>
+
+    <p class="fk-overline section-label" data-od-id="label-accent">The Accent</p>
+    <div class="grid" data-od-id="grid-accent">
+      <div class="swatch" data-od-id="swatch-accent">
+        <div class="chip" style="background: var(--accent);"></div>
+        <div class="meta">
+          <p class="name">Accent</p>
+          <p class="hex">#f25e50</p>
+          <p class="tok">var(--accent)</p>
+          <p class="prov measured">Measured &times;16</p>
+        </div>
+      </div>
+      <div class="swatch" data-od-id="swatch-accent-strong">
+        <div class="chip" style="background: var(--accent-strong);"></div>
+        <div class="meta">
+          <p class="name">Accent Strong</p>
+          <p class="hex">#be2922</p>
+          <p class="tok">var(--accent-strong)</p>
+          <p class="prov measured">Measured &times;7 &middot; hover / active</p>
+        </div>
+      </div>
+      <div class="swatch" data-od-id="swatch-accent-tint">
+        <div class="chip" style="background: var(--accent-tint);"></div>
+        <div class="meta">
+          <p class="name">Accent Tint</p>
+          <p class="hex">#fff4f0</p>
+          <p class="tok">var(--accent-tint)</p>
+          <p class="prov">Inferred &middot; focus / badge wash</p>
+        </div>
+      </div>
+      <div class="swatch" data-od-id="swatch-on-accent">
+        <div class="chip" style="background: var(--on-accent); border-bottom: 1px solid var(--border);"></div>
+        <div class="meta">
+          <p class="name">On Accent</p>
+          <p class="hex">#ffffff</p>
+          <p class="tok">var(--on-accent)</p>
+          <p class="prov measured">Measured &middot; text on accent fills</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="fk-overline section-label" data-od-id="label-functional">Functional / State</p>
+    <div class="grid" data-od-id="grid-functional">
+      <div class="swatch" data-od-id="swatch-ok">
+        <div class="chip" style="background: var(--ok);"></div>
+        <div class="meta">
+          <p class="name">OK</p>
+          <p class="hex">#2e7d32</p>
+          <p class="tok">var(--ok)</p>
+          <p class="prov">Inferred &middot; success state only</p>
+        </div>
+      </div>
+      <div class="swatch" data-od-id="swatch-warn">
+        <div class="chip" style="background: var(--warn);"></div>
+        <div class="meta">
+          <p class="name">Warn</p>
+          <p class="hex">#b8860b</p>
+          <p class="tok">var(--warn)</p>
+          <p class="prov">Inferred &middot; caution state only</p>
+        </div>
+      </div>
+      <div class="swatch" data-od-id="swatch-error">
+        <div class="chip" style="background: var(--error);"></div>
+        <div class="meta">
+          <p class="name">Error</p>
+          <p class="hex">#be2922</p>
+          <p class="tok">var(--error)</p>
+          <p class="prov measured">Measured &middot; reuses emphasis red</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="note" data-od-id="note-usage">
+      <p><strong>Rule:</strong> accent only for CTAs, dividers, emphasis — never body backgrounds.</p>
+    </div>
+  </div>
+</body>
+</html>
