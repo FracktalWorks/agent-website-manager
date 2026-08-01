@@ -59,3 +59,10 @@ outputs/*/site/assets/fonts/
 # Live-editor version timeline — machine-local working state, not site content.
 # The site itself is versioned in git; this is the in-session undo history.
 outputs/*/site/.versions/
+
+# Live-editor feedback notes — per-session review scratch, not site content.
+outputs/*/site/.feedback/
+
+# Claude Code: settings.json IS shared (hooks the whole team needs).
+# settings.local.json is per-machine — MCP enable/disable, local permissions.
+.claude/settings.local.json

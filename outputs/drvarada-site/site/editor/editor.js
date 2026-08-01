@@ -21,6 +21,18 @@
     "TIME", "EM", "STRONG", "SMALL", "DIV"]);
 
   const slug = location.pathname.replace(/^\/|\.html$/g, "") || "index";
+  // This same script runs twice in device preview: once in the page that owns
+  // the toolbar (the host) and once inside the device iframe. The frame keeps
+  // every editing affordance but cedes its chrome and its live-reload duty to
+  // the host, which can reach in through __odApi because both are same-origin.
+  const framed = (() => {
+    // parent, not top: the host is always the immediate parent, and top would
+    // misidentify both pages if the editor itself ever runs inside a frame
+    // (a test harness, a VS Code webview).
+    try { return window.self !== window.parent && !!window.parent.__odEditor; }
+    catch (e) { return false; }
+  })();
+  if (framed) document.documentElement.classList.add("od-in-frame");
   let mode = sessionStorage.getItem("odEditMode") === "1" ||
     location.search.indexOf("od-edit") !== -1;
   let editing = null;      // element being text-edited
@@ -34,12 +46,17 @@
   ui.innerHTML =
     '<div id="od-bar">' +
       '<button id="od-toggle" type="button"></button>' +
+      '<button id="od-pages" type="button" title="All pages">Pages</button>' +
+      '<button id="od-device" type="button" title="Preview at a device width"></button>' +
+      '<button id="od-notebtn" type="button" title="Pin a change to an element — builds into the agent prompt">Note</button>' +
+      '<button id="od-fbbtn" type="button" title="Every pinned change as one prompt to paste into your agent chat">⚑ Agent</button>' +
       '<button id="od-tokens" type="button" title="Design tokens">Tokens</button>' +
       '<button id="od-site" type="button" title="Practo links, phone, WhatsApp">Site</button>' +
       '<button id="od-undo" type="button" title="Undo (Ctrl+Z)">Undo</button>' +
       '<button id="od-redo" type="button" title="Redo (Ctrl+Shift+Z)">Redo</button>' +
       '<button id="od-versions" type="button" title="Version history">Versions</button>' +
     '</div>' +
+    '<div id="od-devmenu" hidden></div>' +
     '<div id="od-hl" hidden><span id="od-hl-tag"></span></div>' +
     '<div id="od-sectools" hidden></div>' +
     '<aside id="od-panel" hidden></aside>' +
@@ -210,6 +227,23 @@
       '<div class="od-body">' + html + "</div>";
     panel.hidden = false;
     panel.querySelector("#od-close").onclick = closePanel;
+    // Open Design's inspector is a draggable card, and it earns it: a panel
+    // that opens over the one element you needed to see has to be movable.
+    panel.querySelector("header").onpointerdown = (e) => {
+      if (e.target.tagName === "BUTTON") return;
+      const dx = panel.offsetLeft - e.clientX, dy = panel.offsetTop - e.clientY;
+      const move = (ev) => {
+        panel.style.left = Math.max(4, dx + ev.clientX) + "px";
+        panel.style.top = Math.max(4, dy + ev.clientY) + "px";
+      };
+      const up = () => {
+        removeEventListener("pointermove", move);
+        removeEventListener("pointerup", up);
+      };
+      addEventListener("pointermove", move);
+      addEventListener("pointerup", up);
+      e.preventDefault();
+    };
     if (place) {
       const r = place.getBoundingClientRect();
       const top = Math.max(8, Math.min(r.top + scrollY, scrollY + innerHeight - 380));
@@ -424,6 +458,13 @@
       const commit = (i, value) => {
         // paint it immediately; the rebuild that follows makes it permanent
         document.documentElement.style.setProperty(res.tokens[i].name, value);
+        const fw = frameWin();
+        if (fw) {
+          try {
+            fw.document.documentElement.style.setProperty(
+              res.tokens[i].name, value);
+          } catch (e) { /* the rebuild reload will carry it */ }
+        }
         return post("/api/token-set", { name: res.tokens[i].name, value: value })
           .then((r) => r.error ? toast(r.error, "err")
             : toast(res.tokens[i].name + " → " + value, "ok"));
@@ -573,13 +614,484 @@
       });
   }
 
+  /* ---------- device preview ---------- */
+  // Ported from Open Design's FileViewer: the page loads into an iframe laid
+  // out at TRUE device pixels and only visually scaled to fit (never up), so
+  // media queries, vw units and innerWidth are all honest and scrolling works
+  // like on the real device. Three layers, exactly theirs: a scrolling stage,
+  // a clip sized at scaled pixels (the bezel), and a shell at device pixels
+  // carrying transform: scale(). The widths are not theirs though — they are
+  // the widths verify.py actually tests, because those are where this
+  // stylesheet makes its decisions.
+  const DEVICES = [["Phone", 390, 844], ["Tablet", 768, 1024],
+    ["Laptop", 1040, 800], ["Wide", 1240, 800], ["Desktop", 1440, 900]];
+  const devmenu = $("#od-devmenu"), devBtn = $("#od-device");
+  let device = null, stage = null, frame = null;
+
+  const frameWin = () => {
+    try { return frame && frame.contentWindow; } catch (e) { return null; }
+  };
+
+  function frameReload() {
+    const fw = frameWin();
+    if (!fw) return;
+    // The frame's own overlay saves its scroll and open panel before
+    // reloading; a bare reload is the fallback if it isn't ready yet.
+    try { fw.__odApi ? fw.__odApi.reload() : fw.location.reload(); }
+    catch (e) { frame.src = frame.src; }
+  }
+
+  const paintDevice = () => {
+    devBtn.textContent = device ? "⛶ " + device.name : "⛶ Screen";
+    devBtn.classList.toggle("on", !!device);
+  };
+
+  function layoutStage() {
+    if (!device || !stage) return;
+    const w = device.rot ? device.h : device.w;
+    const h = device.rot ? device.w : device.h;
+    // Open Design's zoom model: an auto "fit" that never upscales, and
+    // discrete manual levels. Unlike theirs, a manual level may exceed fit —
+    // the stage scrolls, which is what you want when reading 390px small
+    // print on a laptop.
+    const fit = Math.max(.3, Math.min(1, (innerWidth - 48) / w,
+                                         (innerHeight - 128) / h));
+    const s = (!device.zoom || device.zoom === "fit")
+      ? fit : (+device.zoom) / 100;
+    stage.style.setProperty("--od-vw", w + "px");
+    stage.style.setProperty("--od-vh", h + "px");
+    stage.style.setProperty("--od-scale", s);
+    $("#od-stage-label").textContent = device.name + " · " + w + " × " + h +
+      " · " + Math.round(s * 100) + "%";
+  }
+
+  // verify.py's most important measurement, live: content wider than the
+  // viewport means the page scrolls sideways on this device.
+  function measureFrame() {
+    const chip = $("#od-stage-warn"), fw = frameWin();
+    if (!chip || !fw) return;
+    setTimeout(() => {
+      try {
+        const sw = fw.document.documentElement.scrollWidth;
+        const over = sw > fw.innerWidth + 1;
+        chip.hidden = !over;
+        if (over) chip.textContent =
+          "⚠ scrolls sideways — content is " + sw + "px wide";
+      } catch (e) { /* frame was mid-navigation; next load re-measures */ }
+    }, 450);
+  }
+
+  function enterDevice(d) {
+    if (editing) finish(false);
+    device = d;
+    sessionStorage.setItem("odDevice", JSON.stringify(d));
+    document.documentElement.classList.add("od-device-on");
+    hl.hidden = true;
+    sectools.hidden = true;
+    if (!stage) {
+      stage = document.createElement("div");
+      stage.id = "od-stage";
+      stage.innerHTML =
+        '<div id="od-stage-head"><span id="od-stage-label"></span>' +
+          '<span id="od-stage-page"></span>' +
+          '<span id="od-stage-warn" hidden></span>' +
+          '<select id="od-zoom" title="Zoom">' +
+            '<option value="fit">Fit</option>' +
+            ["50", "75", "100", "125", "150", "200"].map((z) =>
+              '<option value="' + z + '">' + z + "%</option>").join("") +
+          "</select>" +
+          '<button id="od-rotate" type="button" title="Rotate device">⟳</button>' +
+          '<button id="od-exit" type="button" title="Back to full width">✕</button>' +
+        '</div>' +
+        '<div id="od-clip"><div id="od-shell">' +
+          '<iframe id="od-frame" title="device preview"></iframe></div></div>';
+      ui.appendChild(stage);
+      frame = stage.querySelector("#od-frame");
+      frame.src = location.pathname + location.search;
+      stage.querySelector("#od-rotate").onclick = () => {
+        device.rot = !device.rot;
+        enterDevice(device);          // resize only — the frame never reloads
+      };
+      stage.querySelector("#od-zoom").onchange = (ev) => {
+        device.zoom = ev.target.value;
+        sessionStorage.setItem("odDevice", JSON.stringify(device));
+        layoutStage();
+      };
+      stage.querySelector("#od-exit").onclick = exitDevice;
+      if (d.zoom) stage.querySelector("#od-zoom").value = d.zoom;
+      frame.addEventListener("load", () => {
+        const fw = frameWin();
+        try {
+          $("#od-stage-page").textContent =
+            fw.location.pathname.replace(/^\/|\.html$/g, "") || "index";
+          if (fw.__odApi) fw.__odApi.setMode(mode);
+        } catch (e) { /* noop */ }
+        measureFrame();
+      });
+    }
+    stage.classList.toggle("od-stage-phone", Math.min(d.w, d.h) < 500);
+    layoutStage();
+    measureFrame();
+    paintDevice();
+  }
+
+  function exitDevice() {
+    device = null;
+    sessionStorage.removeItem("odDevice");
+    // The host page ignored every rebuild while the frame handled them, so
+    // its own document may be stale — reload rather than reveal it.
+    location.reload();
+  }
+
+  function toggleDevMenu() {
+    if (!devmenu.hidden) { devmenu.hidden = true; return; }
+    devmenu.innerHTML = DEVICES.map((d, i) =>
+      '<button data-i="' + i + '"' +
+        (device && device.name === d[0] ? ' class="on"' : "") + ">" + d[0] +
+        " <span>" + d[1] + " × " + d[2] + "</span></button>").join("") +
+      '<button data-i="-1"' + (device ? "" : ' class="on"') +
+        '>Full width <span>this window</span></button>';
+    devmenu.hidden = false;
+    devmenu.querySelectorAll("button").forEach((b) => {
+      b.onclick = () => {
+        devmenu.hidden = true;
+        const i = +b.dataset.i;
+        if (i < 0) { if (device) exitDevice(); return; }
+        enterDevice({ name: DEVICES[i][0], w: DEVICES[i][1], h: DEVICES[i][2],
+          rot: device && device.name === DEVICES[i][0] ? device.rot : false });
+      };
+    });
+  }
+
+  /* ---------- pages ---------- */
+  function pagesPanel() {
+    post("/api/inspect", { slug: slug, wantSlugs: true }).then((res) => {
+      if (res.error) { toast(res.error, "err"); return; }
+      let current = slug;
+      const fw = frameWin();
+      if (device && fw) {
+        try {
+          current = fw.location.pathname.replace(/^\/|\.html$/g, "") || "index";
+        } catch (e) { /* noop */ }
+      }
+      const rows = (res.slugs || []).map((s) =>
+        '<button class="od-page' + (s === current ? " on" : "") +
+        '" data-s="' + esc(s) + '">' + esc(s) + "</button>").join("");
+      openPanel("Pages",
+        '<p class="od-note">' + (res.slugs || []).length + " pages. " +
+          (device ? "Opens inside the device preview." : "") + "</p>" +
+        '<div class="od-pages">' + rows + "</div>", null, "pages");
+      panel.querySelectorAll(".od-page").forEach((b) => {
+        b.onclick = () => {
+          const url = "/" + (b.dataset.s === "index" ? "" : b.dataset.s + ".html");
+          if (device && frame) { frame.src = url; closePanel(); }
+          else location.href = url;
+        };
+      });
+    });
+  }
+
+  /* ---------- feedback for the agent ----------
+   * Two gestures, one destination. Right-click any element to copy a reference
+   * to it — page, data address, source file and line — straight into a chat.
+   * Note pins "change this to that" to an element; the ⚑ Agent panel turns
+   * every pinned note into a single prompt covering all of them.
+   *
+   * Mark and Shot used to live here. Drawing on the page only fed the
+   * screenshot, and the screenshot only recreated something the user can
+   * capture themselves. Neither could say which value in which file a pixel
+   * came from, which is the one thing the agent cannot work out on its own. */
+  let noting = false;
+  const noteBtn = $("#od-notebtn"), fbBtn = $("#od-fbbtn");
+
+  const noteCount = (n) => {
+    fbBtn.textContent = n ? "⚑ Agent (" + n + ")" : "⚑ Agent";
+    fbBtn.classList.toggle("has", !!n);
+  };
+
+  /* Clipboard, three ways down.
+   * VS Code's Simple Browser — the pane this editor usually runs in — refuses
+   * navigator.clipboard.writeText outright. execCommand("copy") over a
+   * selected textarea still works there. When even that is blocked the text is
+   * left on screen, selected, for a manual Ctrl+C: a copy button that silently
+   * copies nothing is worse than one that hands you the text. */
+  function copyText(text, host, onOk) {
+    const done = () => { if (onOk) onOk(true); };
+    const fallback = () => {
+      let ta = host.querySelector(".od-copybox");
+      if (!ta) {
+        ta = document.createElement("textarea");
+        ta.className = "od-ta od-copybox";
+        ta.rows = Math.min(14, text.split("\n").length + 1);
+        ta.readOnly = true;
+        host.appendChild(ta);
+      }
+      ta.value = text;
+      ta.focus();
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      // The box exists to be copied from by hand. Once execCommand has taken
+      // the text it has no job left, and leaving it up next to a "Copied"
+      // toast reads as though the copy did not happen.
+      if (ok) { ta.remove(); done(); } else if (onOk) onOk(false);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText)
+      navigator.clipboard.writeText(text).then(done, fallback);
+    else fallback();
+  }
+
+  function fbPanel() {
+    post("/api/notes", {}).then((res) => {
+      if (!res.ok) return;
+      noteCount(res.count);
+      const rows = res.notes.map((n, i) => {
+        const where = n.addr || n.sel || "";
+        const src = n.file ? n.file + ":" + n.line : "";
+        return '<div class="od-fb-item" data-id="' + esc(n.id) + '">' +
+          '<div class="od-fb-meta"><b>' + (i + 1) + "</b> " + esc(n.slug) +
+          " · <code>" + esc(where) + "</code>" +
+          (src ? ' · <code>' + esc(src) + "</code>" : "") +
+          " · " + esc(n.ts) + "</div>" +
+          '<div class="od-ver-what">' + esc(n.text) + "</div>" +
+          '<div class="od-acts"><button class="od-fb-res" type="button">' +
+          "Resolve</button></div></div>";
+      }).join("");
+      openPanel("Queued for your agent",
+        (res.count
+          ? '<p class="od-note">' + res.count + " pinned change(s). Copy the " +
+            "prompt and paste it into your agent chat — it names the page, the " +
+            "data address and the source line for every one.<br>" +
+            "<b>Claude Code</b> also sees them automatically with your next " +
+            "prompt.</p>" +
+            '<div class="od-acts"><button id="od-fb-copy" class="od-primary" ' +
+            'type="button">Copy prompt for all ' + res.count + "</button>" +
+            '<button id="od-fb-show" type="button">Show</button></div>'
+          : '<p class="od-note">Nothing pinned. Press <b>Note</b>, then click ' +
+            "any element to say what should change there. Right-click any " +
+            "element to copy a reference to it without pinning anything.</p>") +
+        rows, null, "feedback");
+      const copyBtn = panel.querySelector("#od-fb-copy");
+      if (copyBtn) {
+        copyBtn.onclick = () => {
+          const host = copyBtn.parentElement;
+          copyText(res.prompt, host, (ok) => {
+            copyBtn.textContent = ok ? "Copied — paste it into the chat"
+              : "Select the text below and press Ctrl+C";
+            setTimeout(() => {
+              copyBtn.textContent = "Copy prompt for all " + res.count;
+            }, 3000);
+          });
+        };
+        panel.querySelector("#od-fb-show").onclick = (e) => {
+          const host = e.target.parentElement;
+          let ta = host.querySelector(".od-copybox");
+          if (ta) { ta.remove(); return; }
+          ta = document.createElement("textarea");
+          ta.className = "od-ta od-copybox";
+          ta.rows = 14;
+          ta.readOnly = true;
+          ta.value = res.prompt;
+          host.appendChild(ta);
+        };
+      }
+      panel.querySelectorAll(".od-fb-res").forEach((b) => {
+        b.onclick = () =>
+          post("/api/note-done",
+            { id: b.closest(".od-fb-item").dataset.id }).then((r2) => {
+            if (r2.error) { toast(r2.error, "err"); return; }
+            renderPins();
+            fbPanel();
+          });
+      });
+    });
+  }
+  fbBtn.onclick = fbPanel;
+
+  /* Right-click → a reference to this element, on the clipboard.
+   * Left-click is already taken by editing, and this has to work whether or
+   * not edit mode is on: wanting to talk to the agent about an element is not
+   * the same as wanting to change it here. */
+  function refPanel(el) {
+    const a = addr(el) || addr(el, "img") || addr(el, "link") || "";
+    post("/api/ref", { slug: slug, addr: a, sel: cssPath(el),
+      kind: kindOf(el),
+      context: (el.textContent || "").trim().slice(0, 120) }).then((res) => {
+      if (res.error) { toast(res.error, "err"); return; }
+      openPanel("Reference for your agent",
+        '<p class="od-note">Paste this into the chat. It names the page, the ' +
+        "data address and the source line, so the agent does not have to " +
+        "search for what you meant.</p>" +
+        '<pre class="od-ref">' + esc(res.ref) + "</pre>" +
+        '<div class="od-acts"><button id="od-ref-copy" class="od-primary" ' +
+        'type="button">Copy</button>' +
+        (res.target && res.target.file
+          ? '<button id="od-ref-open" type="button">Open in code</button>'
+          : "") + "</div>", el, "note");
+      const btn = panel.querySelector("#od-ref-copy");
+      btn.onclick = () => copyText(res.ref, btn.parentElement, (ok) => {
+        btn.textContent = ok ? "Copied" : "Select below, Ctrl+C";
+        setTimeout(() => { btn.textContent = "Copy"; }, 2500);
+      });
+      const open = panel.querySelector("#od-ref-open");
+      if (open) open.onclick = () =>
+        openInCode(res.target.file, res.target.line);
+      // Copy on open, so the common case is right-click then paste. The panel
+      // is the fallback for when the browser refuses the clipboard.
+      copyText(res.ref, panel, (ok) => {
+        if (ok) toast("Reference copied — paste it into the chat.", "ok");
+      });
+    });
+  }
+
+  document.addEventListener("contextmenu", (e) => {
+    if (ui.contains(e.target)) return;
+    const el = pick(e.target) || (e.target.nodeType === 1 ? e.target : null);
+    if (!el) return;
+    e.preventDefault();
+    refPanel(el);
+  });
+
+  function cssPath(el) {
+    const parts = [];
+    for (let n = el; n && n.nodeType === 1 && parts.length < 5
+         && n !== document.body; n = n.parentElement) {
+      let bit = n.tagName.toLowerCase();
+      const cls = (typeof n.className === "string" &&
+        n.className.trim().split(/\s+/)[0]) || "";
+      if (cls) bit += "." + cls;
+      const sibs = n.parentElement
+        ? [...n.parentElement.children].filter((c) => c.tagName === n.tagName)
+        : [];
+      if (sibs.length > 1) bit += ":nth-of-type(" + (sibs.indexOf(n) + 1) + ")";
+      parts.unshift(bit);
+      if (n.id) { parts[0] = "#" + n.id; break; }
+    }
+    return parts.join(" > ");
+  }
+
+  function notePanel(el) {
+    const a = addr(el) || addr(el, "img") || addr(el, "link") || "";
+    openPanel("What should change here?",
+      '<p class="od-note">Pinned to <code>' + esc(a || cssPath(el)) +
+      "</code></p>" +
+      '<textarea id="od-note-text" class="od-ta" rows="4" ' +
+      'placeholder="e.g. shorten this to one line and drop the dash"></textarea>' +
+      '<div class="od-acts"><button id="od-note-save" class="od-primary">' +
+      "Pin it</button></div>" +
+      '<p class="od-note">Pin as many as you like, then <b>⚑ Agent</b> turns ' +
+      "them into one prompt — every element and its change together.</p>",
+      el, "note");
+    panel.querySelector("#od-note-text").focus();
+    panel.querySelector("#od-note-save").onclick = () => {
+      post("/api/note", { slug: slug, addr: a, sel: cssPath(el),
+        kind: kindOf(el),
+        context: (el.textContent || "").trim().slice(0, 120),
+        text: panel.querySelector("#od-note-text").value })
+        .then((res) => {
+          if (res.error) { toast(res.error, "err"); return; }
+          noteCount(res.open);
+          closePanel();
+          renderPins();
+          const where = res.note && res.note.file
+            ? " → " + res.note.file + ":" + res.note.line : "";
+          toast("Pinned" + where + " · " + res.open + " waiting. ⚑ Agent to "
+            + "copy the prompt.", "ok");
+        });
+    };
+  }
+
+  function renderPins() {
+    ui.querySelectorAll(".od-pin").forEach((p) => p.remove());
+    // Every open note, not just this page's: the pin number has to be the
+    // number the copied prompt gives that item, and the prompt is numbered
+    // across the whole site. Asking for one page's notes made pin 1 here
+    // item 4 in the prompt, which is a confusing way to discuss a change.
+    post("/api/notes", {}).then((res) => {
+      if (!res.ok) return;
+      noteCount(res.count);
+      res.notes.forEach((n, i) => {
+        if (n.slug !== slug) return;
+        let el = null;
+        if (n.addr) {
+          el = document.querySelector(
+            '[data-od="' + n.addr + '"],[data-od-img="' + n.addr +
+            '"],[data-od-link="' + n.addr + '"]');
+        }
+        if (!el && n.sel) { try { el = document.querySelector(n.sel); } catch (e) {} }
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        const pin = document.createElement("button");
+        pin.className = "od-pin";
+        pin.textContent = i + 1;
+        pin.style.left = (r.right + scrollX - 9) + "px";
+        pin.style.top = (r.top + scrollY - 9) + "px";
+        pin.onclick = () => {
+          openPanel("Pinned change " + (i + 1),
+            '<p class="od-note">' + esc(n.ts) +
+            (n.file ? " · <code>" + esc(n.file) + ":" + esc(n.line) + "</code>"
+              : "") + "</p>" +
+            '<div class="od-ver-what">' + esc(n.text) + "</div>" +
+            '<div class="od-acts"><button id="od-note-res" class="od-primary">' +
+            "Resolve</button>" +
+            (n.file ? '<button id="od-note-open" type="button">Open in code' +
+              "</button>" : "") + "</div>", el, "note");
+          panel.querySelector("#od-note-res").onclick = () =>
+            post("/api/note-done", { id: n.id }).then((r2) => {
+              if (r2.error) { toast(r2.error, "err"); return; }
+              noteCount(r2.open);
+              closePanel();
+              renderPins();
+            });
+          const open = panel.querySelector("#od-note-open");
+          if (open) open.onclick = () => openInCode(n.file, n.line);
+        };
+        ui.appendChild(pin);
+      });
+    });
+  }
+
+  noteBtn.onclick = () => {
+    noting = noteBtn.classList.toggle("on");
+    if (noting) toast("Click any element to say what should change there. Esc to stop.");
+  };
+
+  // Registered before the edit-mode click handler, so a note click never
+  // falls through into text editing.
+  document.addEventListener("click", (e) => {
+    if (!noting || ui.contains(e.target)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    notePanel(pick(e.target) || e.target);
+  }, true);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && noting) {
+      noting = false;
+      noteBtn.classList.remove("on");
+    }
+  }, true);
+
   /* ---------- events ---------- */
   toggle.onclick = () => {
     mode = !mode;
     sessionStorage.setItem("odEditMode", mode ? "1" : "0");
     if (!mode) finish(false);
     paintToggle();
+    const fw = frameWin();
+    if (fw && fw.__odApi) {
+      try { fw.__odApi.setMode(mode); } catch (e) { /* noop */ }
+    }
   };
+  $("#od-pages").onclick = pagesPanel;
+  devBtn.onclick = toggleDevMenu;
+  paintDevice();
+  addEventListener("resize", layoutStage);
+  document.addEventListener("click", (e) => {
+    if (!devmenu.hidden && !devmenu.contains(e.target) && e.target !== devBtn)
+      devmenu.hidden = true;
+  });
   $("#od-tokens").onclick = () => { if (!mode) toggle.click(); tokensPanel(); };
   $("#od-site").onclick = () => { if (!mode) toggle.click(); sitePanel(); };
   $("#od-undo").onclick = undo;
@@ -620,6 +1132,7 @@
       if (e.key === "Escape") finish(false);
       return;
     }
+    if (e.key === "Escape" && !devmenu.hidden) { devmenu.hidden = true; return; }
     if (!mode) return;
     if (e.key === "Escape") closePanel();
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z" &&
@@ -649,24 +1162,80 @@
     location.reload();
   };
 
-  const es = new EventSource("/api/events");
-  es.onmessage = (ev) => {
-    const d = JSON.parse(ev.data);
-    if (ver === null) { ver = d.version; return; }
-    if (d.version === ver) return;
-    ver = d.version;
-    if (d.error) { toast("Build failed:\n" + d.error, "err"); return; }
-    // Never reload over someone's typing. A rebuild triggered by the agent
-    // editing code, or by a token change, would otherwise wipe an in-progress
-    // edit with no warning and no way to get the text back.
-    if (editing) {
-      toast("The page was rebuilt while you were editing. Your text is still "
-        + "here — finish or press Esc, then reload.", "",
-        [{ label: "Reload now", fn: () => { finish(false); reload(); } }]);
-      return;
+  if (framed) {
+    // The frame owns no reload stream — the host page holds the single SSE
+    // connection and reaches in here when a rebuild lands. What the frame
+    // offers back is exactly what the host needs: a reload that preserves
+    // scroll and panel state, and a switch for edit mode.
+    window.__odApi = {
+      reload: reload,
+      editing: () => !!editing,
+      setMode: (m) => {
+        if (mode === !!m) return;
+        if (!m && editing) finish(false);
+        mode = !!m;
+        paintToggle();
+      },
+    };
+  } else {
+    const es = new EventSource("/api/events");
+    es.onmessage = (ev) => {
+      const d = JSON.parse(ev.data);
+      if (ver === null) { ver = d.version; return; }
+      if (d.version === ver) return;
+      ver = d.version;
+      if (d.error) { toast("Build failed:\n" + d.error, "err"); return; }
+      if (device && frame) {
+        // Edits made inside the device frame come back through here: reload
+        // the frame, not the (hidden, deliberately stale) host document — and
+        // keep the host's Undo/Redo buttons truthful, since the responses
+        // that carried the new history state went to the frame.
+        post("/api/history").then(showHistory);
+        const fw = frameWin();
+        if (fw && fw.__odApi && fw.__odApi.editing && fw.__odApi.editing()) {
+          // Same rule as below: never reload over someone's typing.
+          toast("The site was rebuilt while you were editing in the preview — "
+            + "finish or press Esc, then reload.", "",
+            [{ label: "Reload preview", fn: frameReload }]);
+          return;
+        }
+        frameReload();
+        return;
+      }
+      // Never reload over someone's typing. A rebuild triggered by the agent
+      // editing code, or by a token change, would otherwise wipe an in-progress
+      // edit with no warning and no way to get the text back.
+      if (editing) {
+        toast("The page was rebuilt while you were editing. Your text is still "
+          + "here — finish or press Esc, then reload.", "",
+          [{ label: "Reload now", fn: () => { finish(false); reload(); } }]);
+        return;
+      }
+      setTimeout(reload, toastBox.hidden ? 0 : 600);
+    };
+  }
+
+  // The workspace shell (hub.py) embeds this editor in a cross-origin iframe
+  // (different port), where it deliberately keeps its full chrome — but the
+  // shell's page list still needs to know which page is showing. postMessage
+  // is the only channel that crosses that origin line; announcing the slug
+  // costs nothing when nobody is listening.
+  if (!framed && window.parent !== window) {
+    try {
+      window.parent.postMessage(
+        { od: "page", slug: slug, title: document.title }, "*");
+    } catch (e) { /* noop */ }
+  }
+
+  // A chosen device outlives reloads: the whole point of previewing at 390px
+  // is to keep working there while edits rebuild the site underneath.
+  if (!framed) {
+    const savedDev = sessionStorage.getItem("odDevice");
+    if (savedDev) {
+      try { enterDevice(JSON.parse(savedDev)); }
+      catch (e) { sessionStorage.removeItem("odDevice"); }
     }
-    setTimeout(reload, toastBox.hidden ? 0 : 600);
-  };
+  }
 
   const reopen = sessionStorage.getItem("odPanel");
   if (reopen) {
@@ -681,4 +1250,5 @@
     requestAnimationFrame(() => scrollTo(0, +savedScroll));
   }
   paintToggle();
+  renderPins();
 })();

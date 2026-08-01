@@ -41,6 +41,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+import siteconf
 import datapatch
 import media
 import linkscan
@@ -49,7 +50,16 @@ import versions
 
 ROOT = Path(__file__).parent
 DIST = ROOT / "dist"
-PORT = 8789
+# A reference the user pastes into a chat has to say which site it came from —
+# the repo holds several, and "index" is a page in all of them. Derived rather
+# than hard-coded so a scaffolded site names itself correctly with no edit.
+SITE_NAME = ROOT.parent.name
+SITE_DIR = f"outputs/{SITE_NAME}/site"
+# One editor per site; the hub starts each site's editor on its own port so
+# several can run side by side. 8789 stays the default for this site — the
+# parity tests and a year of muscle memory point at it.
+PORT = (int(sys.argv[sys.argv.index("--port") + 1])
+        if "--port" in sys.argv else 8789)
 
 # Files whose change should rebuild and reload the browser. The design system
 # is included: editing a token there must re-skin the open page immediately.
@@ -69,6 +79,7 @@ _lock = threading.Lock()          # one edit/build at a time
 _version = 0                      # bumped on every successful build
 _cond = threading.Condition()
 _last_error = ""                  # last build failure text, "" when green
+_building = True                  # True until the first build lands
 
 
 # ── build + notify ───────────────────────────────────────────────────────────
@@ -82,10 +93,11 @@ def build() -> tuple[bool, str]:
 
 
 def bump(error: str = "") -> None:
-    global _version, _last_error
+    global _version, _last_error, _building
     with _cond:
         _version += 1
         _last_error = error
+        _building = False
         _cond.notify_all()
 
 
@@ -446,8 +458,8 @@ def handle_link(req: dict) -> dict:
     """Retarget a link — this one, or every use of the same destination.
 
     An internal link is a slug; an external one is a URL. When the current
-    target is one of `chrome.py`'s shared constants (`PRACTO`, `PHONE`,
-    `WHATSAPP`), the address points at a tuple element holding a *name*, not a
+    target is one of `chrome.py`'s shared constants (`WHATSAPP`, `PHONE`,
+    `PRACTO_REVIEWS`), the address points at a tuple element holding a *name*, not a
     string — so we edit the constant instead, which correctly updates every CTA
     on the site at once rather than detaching this one from the others.
     """
@@ -542,13 +554,13 @@ def handle_link(req: dict) -> dict:
 
 
 def handle_constants(req: dict) -> dict:
-    """Read or write the site-wide constants (Practo links, phone, WhatsApp).
+    """Read or write the site-wide constants (WhatsApp, phones, Practo, address).
 
-    These are the outstanding TODOs; a form is a far better way to close them
-    than asking someone to find nine places in the source.
+    WHATSAPP is the one that matters most: it is the only booking path, so it is
+    on every page twice over, and a form is a far better way to change it than
+    asking someone to find it in the source.
     """
-    names = ["PRACTO", "PRACTO_JH", "PRACTO_WM", "PRACTO_ONLINE", "PHONE",
-             "WHATSAPP", "REVIEWER", "REVIEWED"]
+    names = list(siteconf.EDITABLE_CONSTANTS)
     chrome_py = ROOT / "chrome.py"
     current = datapatch.read_constants(chrome_py, names)
 
@@ -564,8 +576,7 @@ def handle_constants(req: dict) -> dict:
         for name, value in req["set"].items():
             if name not in names or not isinstance(value, str) or not value:
                 continue
-            if name in ("PRACTO", "PRACTO_JH", "PRACTO_WM", "PRACTO_ONLINE",
-                        "PHONE", "WHATSAPP"):
+            if name in siteconf.EDITABLE_URLS:
                 # These land inside href="…" on all 45 pages. Restrict them to
                 # the schemes they are allowed to be, and reject anything that
                 # could close the attribute.
@@ -699,6 +710,215 @@ def handle_token_set(req: dict) -> dict:
     return transaction(f"{name} = {value}", apply)
 
 
+# ── feedback: element references and notes FOR THE AGENT ─────────────────────
+# Open Design's comment/mark/screenshot tools exist to give its agent context.
+# Here the consumer is the coding agent working in this repo, so feedback is
+# written to a plain file it can read: `.feedback/notes.jsonl`, one JSON object
+# per line, `status: open|done`. Read it before working on the site; resolve
+# items via /api/note-done or by editing the file.
+#
+# Marks and screenshots used to live here too. They were removed 2026-07-31:
+# drawing on the page only ever fed the screenshot, and the screenshot only
+# ever recreated something the user can take themselves and paste straight
+# into chat. What no screenshot can supply is *which value in which file* a
+# pixel came from — so what stayed is the part that carries an address.
+
+FEEDBACK = ROOT / ".feedback"
+
+
+def locate(slug: str, addr: str) -> tuple[str, int] | None:
+    """Repo-relative source file and line for a data address, if it resolves."""
+    if not addr:
+        return None
+    try:
+        site, page = datapatch.find_page(slug)
+        node = datapatch.walk(page, addr)
+    except Exception:
+        return None
+    return str(site.file.relative_to(ROOT)).replace("\\", "/"), node.lineno
+
+
+def current_value(slug: str, addr: str) -> str:
+    """The value living at an address right now, flattened to one short line."""
+    if not addr:
+        return ""
+    try:
+        val = datapatch.read(slug, addr)
+    except Exception:
+        return ""
+    if isinstance(val, dict):
+        val = val.get("src") or val.get("alt") or json.dumps(val, ensure_ascii=False)
+    return " ".join(str(val).split())[:240]
+
+
+def describe_target(req: dict) -> dict:
+    """Everything the agent needs to find one element, resolved server-side.
+
+    The browser knows *which* element was picked; only this process can say
+    which source line it came from. Doing it here also means the reference the
+    user copies and the note they save are built from one function, so the two
+    can never drift into describing the same element differently.
+    """
+    slug = req.get("slug") or "index"
+    addr = (req.get("addr") or "")[:200]
+    out: dict = {"slug": slug, "addr": addr,
+                 "sel": (req.get("sel") or "")[:400],
+                 "context": (req.get("context") or "")[:280],
+                 "kind": (req.get("kind") or "")[:20]}
+    where = locate(slug, addr)
+    if where:
+        out["file"], out["line"] = where
+    val = current_value(slug, addr)
+    if val:
+        out["value"] = val
+    return out
+
+
+def ref_text(t: dict) -> str:
+    """A reference block the user pastes into a chat with their coding agent.
+
+    Deliberately plain text on four short lines rather than JSON: it is going
+    into a chat message, where it has to stay readable to the person sending it
+    and unambiguous to the agent receiving it. `[site-ref]` leads so an agent
+    scanning a long message can find it.
+    """
+    head = f"[site-ref] {SITE_NAME} · page {t['slug']}"
+    lines = [f"{head} · {t['addr']}" if t.get("addr") else
+             f"{head} · (no data address — chrome/template markup)"]
+    if t.get("file"):
+        lines.append(f"source: {SITE_DIR}/{t['file']}:{t['line']}")
+    elif t.get("addr"):
+        lines.append("source: address did not resolve — rebuild, then retry")
+    else:
+        lines.append("source: chrome.py (shared template) — find it by the text below")
+    if t.get("kind"):
+        lines.append(f"kind: {t['kind']}")
+    if t.get("value"):
+        lines.append(f'current: "{t["value"]}"')
+    elif t.get("context"):
+        lines.append(f'text: "{t["context"]}"')
+    if not t.get("addr") and t.get("sel"):
+        lines.append(f"css: {t['sel']}")
+    return "\n".join(lines)
+
+
+def handle_ref(req: dict) -> dict:
+    """Right-click on any element → a pasteable reference to it."""
+    t = describe_target(req)
+    return {"ok": True, "ref": ref_text(t), "target": t}
+
+
+def _notes_all() -> list[dict]:
+    f = FEEDBACK / "notes.jsonl"
+    out = []
+    if f.exists():
+        for line in f.read_text(encoding="utf-8").splitlines():
+            try:
+                out.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+    return out
+
+
+def _notes_save(items: list[dict]) -> None:
+    FEEDBACK.mkdir(exist_ok=True)
+    (FEEDBACK / "notes.jsonl").write_text(
+        "".join(json.dumps(n, ensure_ascii=False) + "\n" for n in items),
+        encoding="utf-8")
+
+
+def handle_note(req: dict) -> dict:
+    """Pin one 'change this to that' to one element.
+
+    The source file and line are resolved and stored now, not when the agent
+    reads the note. An address is only meaningful against the data it was
+    written from; resolving later means resolving against a file the user has
+    since edited, which is how a note ends up pointing at the wrong line.
+    """
+    text = (req.get("text") or "").strip()
+    if not text:
+        return {"error": "An empty note helps nobody — say what should change."}
+    note = {"id": __import__("secrets").token_urlsafe(8),
+            "ts": time.strftime("%Y-%m-%d %H:%M"),
+            **describe_target(req),
+            "text": text[:2000], "status": "open"}
+    items = _notes_all()
+    items.append(note)
+    _notes_save(items)
+    return {"ok": True, "note": note,
+            "open": sum(1 for n in items if n.get("status") == "open")}
+
+
+def handle_notes(req: dict) -> dict:
+    notes = [n for n in _notes_all() if n.get("status") == "open"]
+    slug = req.get("slug")
+    return {"ok": True, "count": len(notes),
+            "prompt": note_prompt(notes),
+            "notes": [n for n in notes
+                      if not slug or n.get("slug") == slug]}
+
+
+def note_prompt(notes: list[dict]) -> str:
+    """Every open note as one prompt: per element, what it is and what to do.
+
+    This is the whole point of the queue. One note pasted by hand is a
+    sentence the agent has to go and locate; the full set, each carrying its
+    own address, source line and current value, is a work list it can execute
+    without a single search.
+    """
+    if not notes:
+        return ""
+    lines = [f"{len(notes)} change(s) to make on the {SITE_NAME} site "
+             f"(in {SITE_DIR}). Each item gives the page, the data address to "
+             "patch, and the source line it lives on — patch the address, "
+             "don't match on text.", ""]
+    for i, n in enumerate(notes, 1):
+        head = f"{i}. page {n.get('slug', '?')}"
+        if n.get("addr"):
+            head += f" · {n['addr']}"
+        else:
+            head += " · chrome/template markup (no data address)"
+        lines.append(head)
+        if n.get("file"):
+            lines.append(f"   source:  {SITE_DIR}/{n['file']}:{n['line']}")
+        elif not n.get("addr"):
+            lines.append(f"   source:  {SITE_DIR}/chrome.py (shared template)")
+        if n.get("value"):
+            lines.append(f'   current: "{n["value"]}"')
+        elif n.get("context"):
+            lines.append(f'   text:    "{n["context"]}"')
+        if not n.get("addr") and n.get("sel"):
+            lines.append(f"   css:     {n['sel']}")
+        lines.append(f"   change:  {' '.join(n.get('text', '').split())}")
+        lines.append(f"   note id: {n.get('id')}")
+        lines.append("")
+    lines.append(f"Afterwards run `python build.py` in {SITE_DIR}, then "
+                 "`python verify.py --all`. Resolve each note you handled by "
+                 "setting its status to \"done\" with a \"resolved\" timestamp "
+                 f"in {SITE_DIR}/.feedback/notes.jsonl — the editor draws open "
+                 "notes as pins, so stale ones mislead.")
+    return "\n".join(lines)
+
+
+def handle_note_prompt(_req: dict) -> dict:
+    notes = [n for n in _notes_all() if n.get("status") == "open"]
+    return {"ok": True, "count": len(notes), "prompt": note_prompt(notes)}
+
+
+def handle_note_done(req: dict) -> dict:
+    items, hit = _notes_all(), False
+    for n in items:
+        if n.get("id") == req.get("id") and n.get("status") == "open":
+            n["status"] = "done"
+            n["resolved"] = time.strftime("%Y-%m-%d %H:%M")
+            hit = True
+    if not hit:
+        return {"error": "That note is gone already."}
+    _notes_save(items)
+    return {"ok": True,
+            "open": sum(1 for n in items if n.get("status") == "open")}
+
+
 # ── inspection: what the panel needs to know about a target ──────────────────
 
 def handle_inspect(req: dict) -> dict:
@@ -756,6 +976,11 @@ ROUTES = {
     "/api/inspect": handle_inspect,
     "/api/locate": handle_locate,
     "/api/open": handle_open,
+    "/api/ref": handle_ref,
+    "/api/note": handle_note,
+    "/api/notes": handle_notes,
+    "/api/note-prompt": handle_note_prompt,
+    "/api/note-done": handle_note_done,
     "/api/undo": handle_undo,
     "/api/redo": handle_redo,
     "/api/history": handle_history,
@@ -766,6 +991,21 @@ ROUTES = {
 class Handler(SimpleHTTPRequestHandler):
     def log_message(self, fmt, *args):               # keep the console readable
         pass
+
+    def handle_one_request(self):
+        """Swallow the client hanging up mid-response.
+
+        A browser cancels requests constantly and legitimately — you navigate
+        away, the SSE reload fires while a page is still streaming, the Simple
+        Browser pane is closed. Each one surfaced as a `ConnectionAbortedError`
+        traceback from deep inside `socketserver`, which made a perfectly
+        healthy editor look like it had crashed. There is nothing to recover:
+        the peer is gone, and the next request is unaffected.
+        """
+        try:
+            super().handle_one_request()
+        except (ConnectionAbortedError, ConnectionResetError, BrokenPipeError):
+            self.close_connection = True
 
     def _json(self, payload: dict, status: int = 200) -> None:
         body = json.dumps(payload).encode("utf-8")
@@ -830,8 +1070,24 @@ class Handler(SimpleHTTPRequestHandler):
         if DIST.resolve() not in file.parents:
             self.send_error(404)
             return
+        if file.suffix == ".html" and not file.is_file() and _building:
+            # A cold start: the server is up (so a preview pane opened the
+            # moment it was launched gets an answer) but the first build has
+            # not landed yet. Refresh until it has.
+            self._bytes(b'<!doctype html><meta charset="utf-8">'
+                        b'<meta http-equiv="refresh" content="1">'
+                        b'<title>building\xe2\x80\xa6</title>'
+                        b'<body style="font:14px/1.5 system-ui;padding:2rem">'
+                        b'Building the site\xe2\x80\xa6 this page reloads itself.',
+                        "text/html; charset=utf-8")
+            return
         if file.suffix == ".html" and file.is_file():
             html = file.read_text(encoding="utf-8")
+            # `od-shot=1` used to serve the page bare here, so a second
+            # headless Chrome could screenshot it with the marker strokes
+            # painted in. Both went with the Shot and Mark buttons: the user
+            # can screenshot their own screen and paste it into chat, which is
+            # fewer moving parts than a browser driving a browser.
             html = html.replace(
                 "</body>",
                 '<link rel="stylesheet" href="/__editor__/editor.css">'
@@ -875,11 +1131,42 @@ class Handler(SimpleHTTPRequestHandler):
             self._json({"error": f"{type(exc).__name__}: {exc}"}, 500)
 
 
+def in_vscode() -> bool:
+    """Started from a VS Code terminal (or by the Claude Code extension)."""
+    return (os.environ.get("TERM_PROGRAM") == "vscode"
+            or "vscode" in os.environ.get("CLAUDE_CODE_ENTRYPOINT", ""))
+
+
 def main() -> int:
-    ok, out = build()
+    url = f"http://127.0.0.1:{PORT}/"
+
+    # One editor per port, detected by asking rather than by bind failure:
+    # HTTPServer sets SO_REUSEADDR, and on Windows that makes a second bind on
+    # a live port *succeed*, silently splitting requests between two servers.
+    import socket
+    probe = socket.socket()
+    probe.settimeout(0.4)
+    alive = probe.connect_ex(("127.0.0.1", PORT)) == 0
+    probe.close()
+    if alive:
+        print(f"an editor is already serving {url} — reusing it")
+        return 0
+
+    # Bind before building. A preview pane opened the instant the process
+    # starts (the VS Code task does exactly that) must find a listening socket,
+    # not a connection refused; until the first build lands it gets the
+    # self-refreshing "building…" page instead of a 404.
+    server = ThreadingHTTPServer(("127.0.0.1", PORT),
+                                 partial(Handler, directory=str(DIST)))
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    print(f"live editor at {url}  (Ctrl+C to stop)")
+
+    with _lock:
+        ok, out = build()
     print(out.splitlines()[-1] if ok else out)
     if not ok:
         return 1
+    bump()
 
     # Capture whatever is on disk before the first edit can bury it. This is
     # Open Design's `ensureCurrentProjectFileVersion`, and it earns its keep in
@@ -891,15 +1178,17 @@ def main() -> int:
           + ("  (captured the current files as a new version)" if seeded else ""))
 
     threading.Thread(target=watch_sources, daemon=True).start()
-    handler = partial(Handler, directory=str(DIST))
-    server = ThreadingHTTPServer(("127.0.0.1", PORT), handler)
-    url = f"http://127.0.0.1:{PORT}/"
-    print(f"live editor at {url}  (Ctrl+C to stop)")
-    print('in VS Code: Ctrl+Shift+P -> "Simple Browser: Show" -> paste the URL')
-    if "--no-open" not in sys.argv:
+    if in_vscode() and "--open" not in sys.argv:
+        # Opening the OS browser from inside VS Code yanks focus away from the
+        # editor. The repo's task opens the page in VS Code's own browser pane;
+        # point at it rather than fighting it.
+        print('to view inside VS Code: Terminal > Run Task > '
+              '"drvarada: live editor (preview in VS Code)"')
+        print('or Ctrl+Shift+P > "Simple Browser: Show" > ' + url)
+    elif "--no-open" not in sys.argv:
         webbrowser.open(url)
     try:
-        server.serve_forever()
+        threading.Event().wait()
     except KeyboardInterrupt:
         print("\nstopped")
     return 0

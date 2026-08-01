@@ -144,3 +144,101 @@
 /* ---- link scope ---- */
 .od-scope { margin-top: 10px; display: grid; gap: 4px; }
 .od-scope label { display: flex; align-items: center; gap: 7px; font-size: 13px; }
+
+/* ── frame mode: the copy of this overlay running inside the device iframe
+   keeps every editing affordance but cedes its chrome to the host page ── */
+html.od-in-frame #od-bar { display: none !important; }
+
+/* ── device preview stage ──
+   Open Design's three layers (styles/viewer/core.css): a scrolling stage with
+   a checkerboard backdrop, a clip sized at SCALED pixels acting as the device
+   bezel, and a shell laid out at TRUE device pixels that is only visually
+   scaled — so the page inside genuinely believes it is that wide. */
+html.od-device-on body > :not(#od-ui) { display: none !important; }
+#od-stage { position: fixed; inset: 0; z-index: 99990; overflow: auto;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  padding: 14px 24px 84px;
+  background:
+    linear-gradient(45deg, #171a21 25%, transparent 25%),
+    linear-gradient(-45deg, #171a21 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #171a21 75%),
+    linear-gradient(-45deg, transparent 75%, #171a21 75%), #1c2027;
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0; }
+#od-stage-head { display: flex; align-items: center; gap: 12px; flex: 0 0 auto;
+  font: 600 12px/1 system-ui, sans-serif; color: #cfd5e1; }
+#od-stage-page { opacity: .6; font: 500 12px/1 ui-monospace, monospace; }
+#od-stage-warn { color: #ffb3ad; }
+#od-stage-head button { font: 600 13px/1 system-ui, sans-serif; width: 26px;
+  height: 24px; border-radius: 6px; border: 1px solid #3a4150;
+  background: #1d222c; color: #e8ebf2; cursor: pointer; }
+#od-stage-head button:hover { background: #2a3140; }
+#od-stage-head select { font: 600 11.5px/1 system-ui, sans-serif; height: 24px;
+  border-radius: 6px; border: 1px solid #3a4150; background: #1d222c;
+  color: #e8ebf2; cursor: pointer; padding: 0 4px; }
+#od-clip { width: calc(var(--od-vw) * var(--od-scale));
+  height: calc(var(--od-vh) * var(--od-scale)); flex: 0 0 auto;
+  border: 1px solid #3a4150; border-radius: 18px; overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .45); background: #fff; }
+#od-stage.od-stage-phone #od-clip { border-radius: 28px; }
+#od-shell { width: var(--od-vw); height: var(--od-vh);
+  transform: scale(var(--od-scale)); transform-origin: 0 0; }
+#od-frame { width: 100%; height: 100%; border: 0; display: block;
+  background: #fff; }
+
+/* ── device menu ── */
+#od-devmenu { position: fixed; right: 16px; bottom: 60px; z-index: 100003;
+  min-width: 200px; display: grid; gap: 2px; background: var(--od-bg);
+  border: 1px solid var(--od-line); border-radius: 12px; padding: 6px;
+  box-shadow: 0 10px 34px rgba(0, 0, 0, .45); }
+#od-devmenu button { display: flex; justify-content: space-between; gap: 18px;
+  font: 600 12.5px/1 system-ui, sans-serif; padding: 8px 10px;
+  border-radius: 8px; border: 0; background: none; color: var(--od-fg);
+  cursor: pointer; text-align: left; }
+#od-devmenu button span { color: var(--od-mut); font-weight: 500; }
+#od-devmenu button:hover { background: #2a3140; }
+#od-devmenu button.on { background: var(--od-blue); color: #fff; }
+#od-devmenu button.on span { color: #dfe8ff; }
+#od-device.on { background: #7c4dff; border-color: #7c4dff; color: #fff; }
+
+/* ── pages list ── */
+.od-pages { display: grid; gap: 2px; max-height: 58vh; overflow: auto; }
+.od-pages .od-page { text-align: left;
+  font: 500 12.5px/1.3 ui-monospace, monospace; padding: 7px 9px;
+  border-radius: 7px; border: 0; background: none; color: var(--od-fg);
+  cursor: pointer; }
+.od-pages .od-page:hover { background: #2a3140; }
+.od-pages .od-page.on { background: var(--od-blue); color: #fff; }
+
+/* the inspector header doubles as the drag handle */
+#od-panel header { cursor: grab; user-select: none; touch-action: none; }
+
+/* ── feedback: note pins, marker canvas, note textarea ── */
+.od-pin { position: absolute; z-index: 99997; width: 20px; height: 20px;
+  border-radius: 50%; border: 2px solid #fff; background: #ff3355;
+  color: #fff; font: 700 10px/1 system-ui, sans-serif; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .4); }
+.od-pin:hover { transform: scale(1.15); }
+#od-bar #od-notebtn.on { background: #ff3355;
+  border-color: #ff3355; color: #fff; }
+/* The reference block is meant to be read before it is pasted, so it keeps its
+ * line breaks and wraps rather than scrolling — a path cut off at the panel
+ * edge is the one part you most need to see. */
+.od-ref { font: 400 11.5px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: #0e1116; border: 1px solid var(--od-line); border-radius: 8px;
+  padding: 10px 12px; margin: 0 0 10px; white-space: pre-wrap;
+  word-break: break-word; }
+/* Shown only when the browser refuses the clipboard; selected and ready for a
+ * manual Ctrl+C. */
+.od-copybox { margin-top: 10px; font: 400 11.5px/1.5 ui-monospace, monospace; }
+#od-bar #od-fbbtn.has { color: #ff3355; border-color: #ff3355; font-weight: 700; }
+.od-fb-item { padding: 8px 0 2px; border-top: 1px solid var(--od-line); margin-top: 8px; }
+.od-fb-item .od-fb-meta { font: 400 11px/1.4 system-ui, sans-serif; opacity: .75;
+  margin-bottom: 4px; }
+.od-fb-item code { word-break: break-all; }
+.od-fb-item .od-acts .od-fb-res { flex: 0 0 auto; padding: 6px 10px; }
+.od-ta { width: 100%; font: 400 13px/1.5 system-ui, sans-serif;
+  padding: 8px 10px; border-radius: 8px; border: 1px solid var(--od-line);
+  background: #0e1116; color: var(--od-fg); resize: vertical;
+  margin-bottom: 10px; }
+.od-ta:focus { outline: none; border-color: var(--od-blue); }
