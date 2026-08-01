@@ -3,37 +3,69 @@
     "hostinger-hosting": {
       "type": "stdio",
       "command": "npx",
-      "args": ["--yes", "--package=hostinger-api-mcp@latest", "hostinger-hosting-mcp"]
+      "args": [
+        "--yes",
+        "--package=hostinger-api-mcp@latest",
+        "hostinger-hosting-mcp"
+      ]
     },
     "hostinger-wordpress": {
       "type": "stdio",
       "command": "npx",
-      "args": ["--yes", "--package=hostinger-api-mcp@latest", "hostinger-wordpress-mcp"]
+      "args": [
+        "--yes",
+        "--package=hostinger-api-mcp@latest",
+        "hostinger-wordpress-mcp"
+      ]
     },
     "hostinger-domains": {
       "type": "stdio",
       "command": "npx",
-      "args": ["--yes", "--package=hostinger-api-mcp@latest", "hostinger-domains-mcp"]
+      "args": [
+        "--yes",
+        "--package=hostinger-api-mcp@latest",
+        "hostinger-domains-mcp"
+      ]
     },
     "hostinger-dns": {
       "type": "stdio",
       "command": "npx",
-      "args": ["--yes", "--package=hostinger-api-mcp@latest", "hostinger-dns-mcp"]
+      "args": [
+        "--yes",
+        "--package=hostinger-api-mcp@latest",
+        "hostinger-dns-mcp"
+      ]
     },
     "hostinger-billing": {
       "type": "stdio",
       "command": "npx",
-      "args": ["--yes", "--package=hostinger-api-mcp@latest", "hostinger-billing-mcp"]
+      "args": [
+        "--yes",
+        "--package=hostinger-api-mcp@latest",
+        "hostinger-billing-mcp"
+      ]
     },
     "hostinger-reach": {
       "type": "stdio",
       "command": "npx",
-      "args": ["--yes", "--package=hostinger-api-mcp@latest", "hostinger-reach-mcp"]
+      "args": [
+        "--yes",
+        "--package=hostinger-api-mcp@latest",
+        "hostinger-reach-mcp"
+      ]
     },
     "hostinger-vps": {
       "type": "stdio",
       "command": "npx",
-      "args": ["--yes", "--package=hostinger-api-mcp@latest", "hostinger-vps-mcp"]
+      "args": [
+        "--yes",
+        "--package=hostinger-api-mcp@latest",
+        "hostinger-vps-mcp"
+      ]
+    },
+    "higgsfield": {
+      "type": "http",
+      "url": "https://mcp.higgsfield.ai/mcp"
     }
   }
 }
