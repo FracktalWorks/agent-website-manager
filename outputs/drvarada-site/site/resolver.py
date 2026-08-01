@@ -24,21 +24,22 @@ Matching rules:
 from __future__ import annotations
 
 import ast
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
 ROOT = Path(__file__).parent
+sys.path.insert(0, str(ROOT))
 # urls.py is deliberately absent: its strings are slugs and URL paths, and a copy
 # edit must never rewrite the information architecture by accident.
-SEARCH_FILES = [
-    ROOT / "content" / "brand.py",
-    ROOT / "content" / "vitiligo.py",
-    ROOT / "content" / "psoriasis.py",
-    ROOT / "content" / "hyderabad_medical.py",
-    ROOT / "content" / "hyderabad_skin.py",
-    ROOT / "content" / "languages.py",
-    ROOT / "chrome.py",
-]
+# Derived from siteconf, not listed again. This was the fourth copy of the same
+# module list, and the one that failed most obscurely: a page whose module was
+# missing here produced "No page declares slug 'index'" — a message that sounds
+# like the page is wrong rather than the search path.
+import siteconf                                    # noqa: E402
+
+SEARCH_FILES = [ROOT / "content" / f"{name}.py" for name in siteconf.MODULES]
+SEARCH_FILES.append(ROOT / "chrome.py")
 
 MAX_LINE = 96  # wrap rewritten literals so files stay diffable
 

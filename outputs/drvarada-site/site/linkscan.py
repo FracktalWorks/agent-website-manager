@@ -5,12 +5,12 @@ WHY THIS EXISTS
   writes `href` back into that one element (`set-link` in
   `apps/web/src/edit-mode/source-patches.ts`). That is the right model for a
   single standalone artifact, and it is exactly the wrong one for a 45-page
-  site: the Practo button appears 90 times, and retargeting it one anchor at a
+  site: the WhatsApp button appears on every page, and retargeting it one anchor at a
   time is both unbearable and impossible to get right.
 
   Because our pages are data rather than markup, the same click can answer a
   question OD cannot even ask — "where else does this destination appear?" —
-  and act on all of them. So the inspector gains a scope: this one, or all 90.
+  and act on all of them. So the inspector gains a scope: this one, or all of them.
 
   The scan walks the page data through the *same positions the renderer reads*
   rather than grepping the source for a matching string. That distinction is
@@ -30,13 +30,13 @@ ROOT = Path(__file__).parent
 sys.path.insert(0, str(ROOT))
 
 import datapatch                                   # noqa: E402
+import siteconf                                    # noqa: E402
 
 CHROME = ROOT / "chrome.py"
 
 # Module constants that hold a destination. Editing one of these is already the
 # "everywhere" case by construction, which is why the site details form exists.
-CONSTANTS = ("PRACTO", "PRACTO_JH", "PRACTO_WM", "PRACTO_ONLINE",
-             "PHONE", "WHATSAPP")
+CONSTANTS = siteconf.LINK_CONSTANTS
 
 
 @dataclass(frozen=True)
@@ -67,8 +67,7 @@ def _fresh(name: str):
     return importlib.reload(mod)
 
 
-CONTENT_MODULES = ("brand", "vitiligo", "psoriasis", "hyderabad_medical",
-                   "hyderabad_skin", "languages")
+CONTENT_MODULES = siteconf.MODULES
 
 
 def _pages() -> list[dict]:
@@ -141,6 +140,14 @@ def chrome_links() -> list[Link]:
             if got:
                 out.append(Link(got[1], got[0], f"footer › {group}: {got[0]}",
                                 "", "", sub=f"{i}.1.{j}.1", const="FOOTER"))
+    # The language alternates moved out of FOOTER into their own constant. They
+    # are still footer links on every page, so they still have to be scannable —
+    # a list the scanner does not know about is a link nobody can retarget.
+    for i, row in enumerate(chrome.LANGUAGES):
+        got = _pair(row, 1)
+        if got:
+            out.append(Link(got[1], got[0], f"footer › language: {got[0]}",
+                            "", "", sub=f"{i}.1", const="LANGUAGES"))
     return out
 
 
@@ -170,6 +177,17 @@ def normalize(href: str) -> str:
     tail = href.rstrip("/").rsplit("/", 1)[-1]
     if tail.endswith(".html"):
         return tail[:-5]
+    # A production build emits nested paths (`/locations/secunderabad/`), and
+    # the last segment is NOT the slug — `locations-secunderabad` is. So the URL
+    # map is consulted rather than the path guessed. Without this a scan run
+    # against a production render answers "used once" for a link used on 21
+    # pages, which is the failure mode that makes retarget-everywhere unsafe.
+    if href.startswith("/"):
+        from content.urls import URLS               # noqa: PLC0415
+        want = href if href.endswith("/") else href + "/"
+        for slug, path in URLS.items():
+            if path == want:
+                return slug
     return href
 
 

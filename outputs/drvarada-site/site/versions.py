@@ -369,5 +369,134 @@ class Versions:
 
     def note_restored(self, files: dict[Path, str], restored: dict,
                       prompt: str | None = None) -> dict:
-        return self.create(files, source="restore", restore_from=restored["id"],
-                           prompt=prompt or f"restored {restored['label']}")
+        """Record that `files` came from an earlier version.
+
+        Takes either the entry itself or the whole result of `restore()`. The
+        two look nearly identical — both carry `label` — so the obvious call
+        `note_restored(files, restore(id))` used to raise KeyError on `id` and
+        lose the provenance of the restore it was recording. Accepting both
+        costs one line and removes a trap.
+        """
+        entry = restored.get("entry", restored)
+        return self.create(files, source="restore", restore_from=entry["id"],
+                           prompt=prompt or f"restored {entry['label']}")
+
+
+# ── recovery from the command line ───────────────────────────────────────────
+#
+# WHY THIS EXISTS
+#   On 2026-07-30 a test restored the oldest entry in a store that still held a
+#   version from the previous session, and an hour of source edits went back to
+#   how they had been that morning. The model did its job — the newer state was
+#   still in the timeline, exactly as append-only promises — but getting it back
+#   meant hand-writing a script against `Versions` internals while the working
+#   tree sat wrong. That is the wrong thing to be composing under pressure.
+#
+#   So: recovery is a command. `python versions.py list` shows what is holdable
+#   and `python versions.py restore <n>` puts it back. Neither needs the editor
+#   to be running, which matters because the usual reason you want this is that
+#   something about the editor has gone wrong.
+
+def _store_root(start: Path) -> tuple[Path, Path]:
+    """Locate the store. It lives beside the site, and its paths are relative
+    to the site's PARENT — a distinction that has already cost one incident, so
+    it is resolved in one place and never re-derived by a caller."""
+    site = start.resolve()
+    store = site / ".versions"
+    if not store.exists():
+        raise SystemExit(f"no version store at {store}")
+    return site.parent, store
+
+
+def _cli(argv: list[str]) -> int:
+    import argparse                                 # noqa: PLC0415
+
+    ap = argparse.ArgumentParser(
+        prog="versions.py", description="Inspect and recover site versions.")
+    ap.add_argument("--site", default=".", help="site directory (default: cwd)")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    sub.add_parser("where", help="where the store is and what it tracks")
+    sub.add_parser("list", help="every version, newest first")
+    p = sub.add_parser("show", help="what one version holds")
+    p.add_argument("version", type=int)
+    p = sub.add_parser("restore", help="write a version's files back to disk")
+    p.add_argument("version", type=int)
+    p.add_argument("--dry-run", action="store_true",
+                   help="report which files would change, and change nothing")
+    p = sub.add_parser("export", help="copy a version's files to a directory")
+    p.add_argument("version", type=int)
+    p.add_argument("dest")
+    args = ap.parse_args(argv)
+
+    project, store = _store_root(Path(args.site))
+    v = Versions(project, store)
+    if not v.entries:
+        print("the store is empty")
+        return 0
+
+    def pick(n: int) -> dict:
+        hit = next((e for e in v.entries if e["version"] == n), None)
+        if hit is None:
+            raise SystemExit(f"no version {n} — try `list`")
+        return hit
+
+    if args.cmd == "where":
+        print(f"store    {store}")
+        print(f"paths in it are relative to  {project}")
+        print(f"versions {len(v.entries)}, standing on "
+              f"v{v.entries[v.cursor]['version'] if 0 <= v.cursor < len(v.entries) else '?'}")
+        print(f"tracked  {len(v.entries[-1]['files'])} files")
+        return 0
+
+    if args.cmd == "list":
+        for e in reversed(v.entries):
+            here = "→" if v.entries.index(e) == v.cursor else " "
+            when = time.strftime("%d %b %H:%M", time.localtime(e["created_at"]))
+            print(f" {here} v{e['version']:<4} {when}  {e['source']:<8} "
+                  f"{(e['prompt'] or e['label'])[:58]}")
+        return 0
+
+    entry = pick(args.version)
+
+    if args.cmd == "show":
+        print(f"v{entry['version']}  {entry['label']}")
+        print(f"  {entry['prompt'] or ''}")
+        for rel in sorted(entry["files"]):
+            print(f"  {rel}")
+        return 0
+
+    files = v.content(entry)
+
+    if args.cmd == "export":
+        dest = Path(args.dest)
+        for rel, text in files.items():
+            out = dest / rel
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(text, encoding="utf-8")
+        print(f"v{entry['version']} → {dest}  ({len(files)} files)")
+        return 0
+
+    # restore: say what will change before changing it, because the operation
+    # that made this command necessary was one that changed more than expected.
+    changed = [rel for rel, text in files.items()
+               if not (project / rel).exists()
+               or (project / rel).read_text(encoding="utf-8") != text]
+    if not changed:
+        print(f"v{entry['version']} is already what is on disk")
+        return 0
+    print(f"v{entry['version']}  {entry['label']}")
+    for rel in sorted(changed):
+        print(f"  would rewrite  {rel}" if args.dry_run else f"  rewrote  {rel}")
+    if args.dry_run:
+        return 0
+    for rel in changed:
+        out = project / rel
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(files[rel], encoding="utf-8")
+    print(f"{len(changed)} file(s) restored — rebuild to see it")
+    return 0
+
+
+if __name__ == "__main__":
+    import sys                                      # noqa: PLC0415
+    raise SystemExit(_cli(sys.argv[1:]))

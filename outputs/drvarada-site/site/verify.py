@@ -38,10 +38,11 @@ ROOT = Path(__file__).parent
 DIST = ROOT / "dist"
 
 # Widths that correspond to real decisions in the stylesheet, not round numbers:
-# 390 is the common phone, 768 is where the nav collapses, 1040 is the dropdown
-# breakpoint, 1440 is the design width.
+# 390 is the common phone, 768 is where the nav collapses, 1040 and 1240 sit
+# either side of the 1200px dropdown breakpoint, 1440 is the design width.
 VIEWPORTS = [("phone", 390, 844), ("tablet", 768, 1024),
-             ("laptop", 1040, 800), ("desktop", 1440, 900)]
+             ("laptop", 1040, 800), ("wide", 1240, 800),
+             ("desktop", 1440, 900)]
 
 # One page per template, plus the layouts most likely to break: the widest table
 # and the page with the most cards.
