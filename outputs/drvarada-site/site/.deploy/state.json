@@ -1,0 +1,394 @@
+{
+ "pages": {
+  "index": {
+   "id": 31,
+   "hash": "43ede957aa19e731",
+   "url": "https://drvarada.com/"
+  },
+  "acne-scar-treatment-hyderabad": {
+   "id": 32,
+   "hash": "906cff7eb20c5a4f",
+   "url": "https://drvarada.com/acne-scar-treatment-hyderabad/"
+  },
+  "acne-treatment-hyderabad": {
+   "id": 33,
+   "hash": "84d9d78e6221ab6a",
+   "url": "https://drvarada.com/acne-treatment-hyderabad/"
+  },
+  "alopecia-areata-treatment-india": {
+   "id": 34,
+   "hash": "f4a96944f3fecafc",
+   "url": "https://drvarada.com/alopecia-areata-treatment-india/"
+  },
+  "alopecia-treatment-hyderabad": {
+   "id": 35,
+   "hash": "18fdb198829501b3",
+   "url": "https://drvarada.com/alopecia-treatment-hyderabad/"
+  },
+  "anti-aging-botox-hyderabad": {
+   "id": 36,
+   "hash": "e1dadc4e1c20f8cf",
+   "url": "https://drvarada.com/anti-aging-botox-hyderabad/"
+  },
+  "areas-we-serve": {
+   "id": 37,
+   "hash": "e280ad1a08b7138c",
+   "url": "https://drvarada.com/areas-we-serve/"
+  },
+  "blog": {
+   "id": 38,
+   "hash": "d61d315890389317",
+   "url": "https://drvarada.com/blog/"
+  },
+  "chemical-peels-hyderabad": {
+   "id": 39,
+   "hash": "62acd8d86e85dd5f",
+   "url": "https://drvarada.com/chemical-peels-hyderabad/"
+  },
+  "dandruff-treatment": {
+   "id": 40,
+   "hash": "4af8ea89b11e0f38",
+   "url": "https://drvarada.com/dandruff-treatment/"
+  },
+  "dermal-fillers-hyderabad": {
+   "id": 41,
+   "hash": "0036a5f444af4f80",
+   "url": "https://drvarada.com/dermal-fillers-hyderabad/"
+  },
+  "dermatosurgery-hyderabad": {
+   "id": 42,
+   "hash": "4290e3d39aa10e22",
+   "url": "https://drvarada.com/dermatosurgery-hyderabad/"
+  },
+  "ear-lobe-repair-hyderabad": {
+   "id": 43,
+   "hash": "6fc1a2d70318c457",
+   "url": "https://drvarada.com/ear-lobe-repair-hyderabad/"
+  },
+  "eczema-atopic-dermatitis-treatment": {
+   "id": 44,
+   "hash": "67818bdcb556e151",
+   "url": "https://drvarada.com/eczema-atopic-dermatitis-treatment/"
+  },
+  "fungal-infection-treatment-hyderabad": {
+   "id": 45,
+   "hash": "4bd7c647af119d71",
+   "url": "https://drvarada.com/fungal-infection-treatment-hyderabad/"
+  },
+  "hair-grafting-hyderabad": {
+   "id": 46,
+   "hash": "d801dc2ab50a484c",
+   "url": "https://drvarada.com/hair-grafting-hyderabad/"
+  },
+  "hair-loss-treatment-hyderabad": {
+   "id": 47,
+   "hash": "65b195c37a158e4e",
+   "url": "https://drvarada.com/hair-loss-treatment-hyderabad/"
+  },
+  "hair-loss-treatment-secunderabad": {
+   "id": 48,
+   "hash": "a6d6458bf46d0e60",
+   "url": "https://drvarada.com/hair-loss-treatment-secunderabad/"
+  },
+  "keloid-treatment-hyderabad": {
+   "id": 49,
+   "hash": "6332e7ab21085520",
+   "url": "https://drvarada.com/keloid-treatment-hyderabad/"
+  },
+  "laser-hair-reduction-hyderabad": {
+   "id": 50,
+   "hash": "47f9721c9f3e7041",
+   "url": "https://drvarada.com/laser-hair-reduction-hyderabad/"
+  },
+  "mesotherapy-hyderabad": {
+   "id": 51,
+   "hash": "e83f491b9dd09685",
+   "url": "https://drvarada.com/mesotherapy-hyderabad/"
+  },
+  "nail-treatment-hyderabad": {
+   "id": 52,
+   "hash": "e57216f478debeaa",
+   "url": "https://drvarada.com/nail-treatment-hyderabad/"
+  },
+  "online-consultation": {
+   "id": 53,
+   "hash": "5ab92a3741695719",
+   "url": "https://drvarada.com/online-consultation/"
+  },
+  "patient-stories": {
+   "id": 54,
+   "hash": "b7b45c96ec63bd80",
+   "url": "https://drvarada.com/patient-stories/"
+  },
+  "premature-greying-treatment": {
+   "id": 55,
+   "hash": "05b27ab930bef16f",
+   "url": "https://drvarada.com/premature-greying-treatment/"
+  },
+  "prp-hair-treatment-hyderabad": {
+   "id": 56,
+   "hash": "4dff835c7abac44d",
+   "url": "https://drvarada.com/prp-hair-treatment-hyderabad/"
+  },
+  "psoriasis": {
+   "id": 57,
+   "hash": "1560146c5e872934",
+   "url": "https://drvarada.com/psoriasis/"
+  },
+  "psoriasis-treatment-hyderabad": {
+   "id": 58,
+   "hash": "1f02d31728c5bdb7",
+   "url": "https://drvarada.com/psoriasis-treatment-hyderabad/"
+  },
+  "psoriasis-treatment-secunderabad": {
+   "id": 59,
+   "hash": "b46fa59c465af9d1",
+   "url": "https://drvarada.com/psoriasis-treatment-secunderabad/"
+  },
+  "results": {
+   "id": 60,
+   "hash": "bb8f5c99cf77a0e2",
+   "url": "https://drvarada.com/results/"
+  },
+  "rf-skin-tightening-hyderabad": {
+   "id": 61,
+   "hash": "4794971a02ecc083",
+   "url": "https://drvarada.com/rf-skin-tightening-hyderabad/"
+  },
+  "skin-allergy-rashes-treatment": {
+   "id": 62,
+   "hash": "70b9f6dcb2303020",
+   "url": "https://drvarada.com/skin-allergy-rashes-treatment/"
+  },
+  "skin-boosters-hyderabad": {
+   "id": 63,
+   "hash": "b29837ff42232d1f",
+   "url": "https://drvarada.com/skin-boosters-hyderabad/"
+  },
+  "thread-lift-hyderabad": {
+   "id": 64,
+   "hash": "9e9656fb0799bfcb",
+   "url": "https://drvarada.com/thread-lift-hyderabad/"
+  },
+  "travelling-for-treatment": {
+   "id": 65,
+   "hash": "9352adc8a18e09aa",
+   "url": "https://drvarada.com/travelling-for-treatment/"
+  },
+  "treatments": {
+   "id": 66,
+   "hash": "62bcab585ca83d67",
+   "url": "https://drvarada.com/treatments/"
+  },
+  "vitiligo": {
+   "id": 67,
+   "hash": "384169ab8b875f54",
+   "url": "https://drvarada.com/vitiligo/"
+  },
+  "vitiligo-treatment-hyderabad": {
+   "id": 68,
+   "hash": "e8a92554e133f0f6",
+   "url": "https://drvarada.com/vitiligo-treatment-hyderabad/"
+  },
+  "vitiligo-treatment-secunderabad": {
+   "id": 69,
+   "hash": "5b7c6d038cde363e",
+   "url": "https://drvarada.com/vitiligo-treatment-secunderabad/"
+  },
+  "about-dr-khagendra-varada": {
+   "id": 70,
+   "hash": "f0402254ebbe4e4b",
+   "url": "https://drvarada.com/about/dr-khagendra-varada/"
+  },
+  "hi-psoriasis": {
+   "id": 71,
+   "hash": "ec37874fd962fbe3",
+   "url": "https://drvarada.com/hi/psoriasis/"
+  },
+  "hi-vitiligo": {
+   "id": 72,
+   "hash": "adfa104df9416dc7",
+   "url": "https://drvarada.com/hi/vitiligo/"
+  },
+  "locations-secunderabad": {
+   "id": 73,
+   "hash": "f18cf753602aef59",
+   "url": "https://drvarada.com/locations/secunderabad/"
+  },
+  "psoriasis-biologics": {
+   "id": 74,
+   "hash": "ae838c55128100ba",
+   "url": "https://drvarada.com/psoriasis/biologics/"
+  },
+  "psoriasis-cost": {
+   "id": 75,
+   "hash": "f61007af2b07974c",
+   "url": "https://drvarada.com/psoriasis/cost/"
+  },
+  "psoriasis-online-consultation": {
+   "id": 76,
+   "hash": "36ce4555b577e6c7",
+   "url": "https://drvarada.com/psoriasis/online-consultation/"
+  },
+  "psoriasis-phototherapy": {
+   "id": 77,
+   "hash": "36f82e35d607ce88",
+   "url": "https://drvarada.com/psoriasis/phototherapy/"
+  },
+  "psoriasis-scalp": {
+   "id": 78,
+   "hash": "6bdd92a7f0a048a0",
+   "url": "https://drvarada.com/psoriasis/scalp/"
+  },
+  "psoriasis-triggers-and-diet": {
+   "id": 79,
+   "hash": "59c158376a29d562",
+   "url": "https://drvarada.com/psoriasis/triggers-and-diet/"
+  },
+  "psoriasis-types": {
+   "id": 80,
+   "hash": "9524c65fa800629a",
+   "url": "https://drvarada.com/psoriasis/types/"
+  },
+  "te-psoriasis": {
+   "id": 81,
+   "hash": "b9a6030e34f333e4",
+   "url": "https://drvarada.com/te/psoriasis/"
+  },
+  "te-vitiligo": {
+   "id": 82,
+   "hash": "7a0a4b9d7afc8da4",
+   "url": "https://drvarada.com/te/vitiligo/"
+  },
+  "vitiligo-children": {
+   "id": 83,
+   "hash": "c2a973605caf096f",
+   "url": "https://drvarada.com/vitiligo/children/"
+  },
+  "vitiligo-cost": {
+   "id": 84,
+   "hash": "482c30d92aa571f6",
+   "url": "https://drvarada.com/vitiligo/cost/"
+  },
+  "vitiligo-diet-and-myths": {
+   "id": 85,
+   "hash": "349b5a12e3821bd8",
+   "url": "https://drvarada.com/vitiligo/diet-and-myths/"
+  },
+  "vitiligo-excimer-laser": {
+   "id": 86,
+   "hash": "d3a3fb93f78d55d1",
+   "url": "https://drvarada.com/vitiligo/excimer-laser/"
+  },
+  "vitiligo-graft-surgery": {
+   "id": 87,
+   "hash": "3d25fce86c322e4e",
+   "url": "https://drvarada.com/vitiligo/graft-surgery/"
+  },
+  "vitiligo-online-consultation": {
+   "id": 88,
+   "hash": "84b0f09833e93093",
+   "url": "https://drvarada.com/vitiligo/online-consultation/"
+  },
+  "vitiligo-phototherapy": {
+   "id": 89,
+   "hash": "e8d2847299311767",
+   "url": "https://drvarada.com/vitiligo/phototherapy/"
+  },
+  "vitiligo-types-and-stages": {
+   "id": 90,
+   "hash": "36fec20afe1d69ad",
+   "url": "https://drvarada.com/vitiligo/types-and-stages/"
+  },
+  "contact": {
+   "id": 9,
+   "hash": "c7f145e7637ec2f8",
+   "url": "https://drvarada.com/contact/"
+  }
+ },
+ "stubs": {
+  "__stub__locations": {
+   "id": 28,
+   "hash": "22861ab923d5ff82",
+   "url": "https://drvarada.com/locations/"
+  },
+  "__stub__te": {
+   "id": 29,
+   "hash": "8d00bf2daa7dd436",
+   "url": "https://drvarada.com/te/"
+  },
+  "__stub__hi": {
+   "id": 30,
+   "hash": "2f09a6e65a3f04c7",
+   "url": "https://drvarada.com/hi/"
+  },
+  "__stub__about": {
+   "id": 7,
+   "hash": "2075183c32486a53",
+   "url": "https://drvarada.com/about/"
+  }
+ },
+ "last_push": [
+  "about-dr-khagendra-varada",
+  "acne-scar-treatment-hyderabad",
+  "acne-treatment-hyderabad",
+  "alopecia-areata-treatment-india",
+  "alopecia-treatment-hyderabad",
+  "anti-aging-botox-hyderabad",
+  "areas-we-serve",
+  "blog",
+  "chemical-peels-hyderabad",
+  "contact",
+  "dandruff-treatment",
+  "dermal-fillers-hyderabad",
+  "dermatosurgery-hyderabad",
+  "ear-lobe-repair-hyderabad",
+  "eczema-atopic-dermatitis-treatment",
+  "fungal-infection-treatment-hyderabad",
+  "hair-grafting-hyderabad",
+  "hair-loss-treatment-hyderabad",
+  "hair-loss-treatment-secunderabad",
+  "hi-psoriasis",
+  "hi-vitiligo",
+  "index",
+  "keloid-treatment-hyderabad",
+  "laser-hair-reduction-hyderabad",
+  "locations-secunderabad",
+  "mesotherapy-hyderabad",
+  "nail-treatment-hyderabad",
+  "online-consultation",
+  "patient-stories",
+  "premature-greying-treatment",
+  "prp-hair-treatment-hyderabad",
+  "psoriasis",
+  "psoriasis-biologics",
+  "psoriasis-cost",
+  "psoriasis-online-consultation",
+  "psoriasis-phototherapy",
+  "psoriasis-scalp",
+  "psoriasis-treatment-hyderabad",
+  "psoriasis-treatment-secunderabad",
+  "psoriasis-triggers-and-diet",
+  "psoriasis-types",
+  "results",
+  "rf-skin-tightening-hyderabad",
+  "skin-allergy-rashes-treatment",
+  "skin-boosters-hyderabad",
+  "te-psoriasis",
+  "te-vitiligo",
+  "thread-lift-hyderabad",
+  "travelling-for-treatment",
+  "treatments",
+  "vitiligo",
+  "vitiligo-children",
+  "vitiligo-cost",
+  "vitiligo-diet-and-myths",
+  "vitiligo-excimer-laser",
+  "vitiligo-graft-surgery",
+  "vitiligo-online-consultation",
+  "vitiligo-phototherapy",
+  "vitiligo-treatment-hyderabad",
+  "vitiligo-treatment-secunderabad",
+  "vitiligo-types-and-stages"
+ ]
+}
