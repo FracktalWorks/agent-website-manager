@@ -9,7 +9,7 @@ irreversible and joint symptoms are routinely dismissed as unrelated, so every
 relevant page carries the warning rather than hiding it on one.
 """
 
-from chrome import PRACTO, PRACTO_ONLINE, WHATSAPP
+from chrome import PHONE, WHATSAPP
 
 CROSS = ("psoriasis-treatment-hyderabad", "Psoriasis treatment in Hyderabad",
          "If you can reach the clinic: phototherapy, systemics and regular review.")
@@ -22,7 +22,7 @@ ARTHRITIS = {
     "body": "Up to a third of people with psoriasis develop psoriatic arthritis, and the "
             "joint damage it causes does not reverse. Morning stiffness lasting over "
             "30 minutes, a swollen finger or toe, heel pain, or low back pain that improves "
-            "with movement all need reporting — early treatment protects the joint.",
+            "with movement all need reporting. Early treatment protects the joint.",
 }
 
 PAGES = [
@@ -31,22 +31,22 @@ PAGES = [
 {
     "slug": "psoriasis", "template": "T2", "condition": "Psoriasis",
     "crumbs": [("Psoriasis", None)],
-    "title": "Psoriasis Treatment in India — Types & Control | Dr. Varada",
-    "meta": "Psoriasis explained by a dermatologist of 45 years: what it is, the types, "
-            "what triggers flares, which treatments control it, and when systemic therapy "
-            "or biologics are appropriate. Online consultation across India.",
+    "title": "Psoriasis Treatment in India: Types & Control | Dr. Varada",
+    "meta": "Psoriasis treatment by a dermatologist of 45 years: the types, what triggers "
+            "flares, which treatments control it, and when biologics are appropriate.",
     "eyebrow": "The psoriasis section",
     "h1": "Psoriasis, and how it is actually controlled.",
     "lede": "Psoriasis is not a skin infection, not contagious, and not curable. It is an "
-            "immune condition that flares and settles — and the aim of good treatment is a "
+            "immune condition that flares and settles, and the aim of good treatment is a "
             "longer gap between flares, not a photograph of clear skin taken once.",
-    "acts": [("Consult online", PRACTO_ONLINE), ("Send photographs", WHATSAPP)],
+    "acts": [("Consult online", WHATSAPP), ("Call the clinic", PHONE)],
+    "sources": ["niams-psoriasis", "aad-psoriasis", "dermnet-psoriasis", "nice-psoriasis", "who-psoriasis", "npf"],
     "glance": [
         ("What it is", "An immune-driven inflammatory skin disease"),
-        ("Curable", "No — but often well controlled"),
+        ("Curable", "No, but often well controlled"),
         ("Course", "Flares and remissions over years"),
         ("Main treatments", "Topicals, phototherapy, systemics, biologics"),
-        ("Watch for", "Joint pain — psoriatic arthritis"),
+        ("Watch for", "Joint pain: psoriatic arthritis"),
         ("Associated with", "Metabolic and cardiovascular risk"),
     ],
     "sections": [
@@ -57,10 +57,10 @@ PAGES = [
              "epidermis to the surface and shed. In psoriasis that journey takes a few days. "
              "The cells pile up before they mature, and the result is the thickened, "
              "silvery-scaled plaque that gives the disease its appearance.",
-             "The acceleration is driven by the immune system — specific inflammatory "
-             "signals, which is precisely why the newer treatments that block those signals "
-             "work so well. It is not an infection, it is not caused by poor hygiene, and "
-             "it cannot be caught from anyone.",
+             "The acceleration is driven by the immune system: specific inflammatory signals, "
+             "which is precisely why the newer treatments that block those signals work so "
+             "well. It is not an infection, it is not caused by poor hygiene, and it cannot be "
+             "caught from anyone.",
              "It is also more than a skin disease. Psoriasis carries a meaningful "
              "association with joint disease, with metabolic syndrome, and with "
              "cardiovascular risk. A consultation that only looks at the plaques is an "
@@ -91,8 +91,8 @@ PAGES = [
          ]},
 
         {"kind": "table", "eyebrow": "Treatment", "h2": "The ladder, and where you enter it",
-         "intro": "Treatment is chosen by how much skin is involved and how much the disease "
-                  "is affecting your life — not by how it looks in a photograph.",
+         "intro": "Treatment is chosen by how much skin is involved and how much the disease is "
+                  "affecting your life. Not by how it looks in a photograph.",
          "head": ["Treatment", "What it does", "Typically for"],
          "rows": [
              ["Emollients", "Reduces scale, cracking and itch", "Everyone, always, alongside"],
@@ -113,10 +113,10 @@ PAGES = [
 
         {"kind": "split", "eyebrow": "The honest framing",
          "h2": "Clearance is easy. Staying clear is the work.",
-         "body": ["Almost any potent treatment will clear a plaque. Steroids clear plaques. "
-                  "The question that separates good psoriasis care from bad is what happens "
-                  "in month four — whether the disease is quietly rebounding because a "
-                  "strong topical was used for too long without a maintenance plan.",
+         "body": ["Almost any potent treatment will clear a plaque. Steroids clear plaques. The "
+                  "question that separates good psoriasis care from bad is what happens in "
+                  "month four, whether the disease is quietly rebounding because a strong "
+                  "topical was used for too long without a maintenance plan.",
                   "So treatment here is written as a sequence: what clears the flare, what "
                   "holds it, when to step down, and what to do at the first sign of the "
                   "next one. Patients who have that written down flare less."],
@@ -133,19 +133,19 @@ PAGES = [
         {"kind": "checklist", "eyebrow": "Beyond the skin",
          "h2": "What a proper psoriasis review checks.",
          "items": [
-             "<b>Joints</b> — stiffness, swelling, heel and back pain",
-             "<b>Nails</b> — pitting and lifting predict joint disease",
-             "<b>Blood pressure, sugar and lipids</b> — the metabolic association",
-             "<b>Weight</b> — it changes how well treatment works",
-             "<b>Alcohol and smoking</b> — both worsen disease and limit drug choice",
-             "<b>Mood</b> — psoriasis carries a real burden and it is asked about",
+             "<b>Joints</b>: stiffness, swelling, heel and back pain",
+             "<b>Nails</b>: pitting and lifting predict joint disease",
+             "<b>Blood pressure, sugar and lipids</b>: the metabolic association",
+             "<b>Weight</b>: it changes how well treatment works",
+             "<b>Alcohol and smoking</b>: both worsen disease and limit drug choice",
+             "<b>Mood</b>: psoriasis carries a real burden and it is asked about",
          ]},
 
         {"kind": "cards", "eyebrow": "Read next", "h2": "The rest of this section",
          "items": [
              {"title": "Understanding it",
               "list": ["Types of psoriasis in detail",
-                       "Scalp psoriasis — and telling it from dandruff",
+                       "Scalp psoriasis, and telling it from dandruff",
                        "Triggers and diet"]},
              {"title": "The treatments",
               "list": ["Phototherapy for psoriasis",
@@ -161,8 +161,8 @@ PAGES = [
         ("Can psoriasis be cured?",
          ["No. Psoriasis is a long-term immune condition, and no treatment available cures "
           "it. Any clinic offering a permanent cure is making a claim it cannot support.",
-          "What treatment does achieve, often very well, is remission — skin that is clear "
-          "or nearly clear, held there with maintenance, sometimes for years at a time."]),
+          "What treatment does achieve, often very well, is remission: skin that is clear or "
+          "nearly clear, held there with maintenance, sometimes for years at a time."]),
         ("Is psoriasis contagious?",
          "No. It cannot be caught by touch, by sharing a towel or a swimming pool, or by any "
          "other contact. It is an immune condition, not an infection."),
@@ -189,30 +189,30 @@ PAGES = [
     ],
     "related": [CROSS, ONLINE,
                 ("psoriasis-cost", "What psoriasis treatment costs",
-                 "Topicals, light, systemics and biologics — how each is priced.")],
+                 "Topicals, light, systemics and biologics: how each is priced.")],
 },
 
 # ══════════════════════════════════════════════════════════════════════════════
 {
     "slug": "psoriasis-types", "template": "T2", "condition": "Psoriasis",
     "crumbs": [("Psoriasis", "psoriasis"), ("Types", None)],
-    "title": "Types of Psoriasis — Plaque, Scalp, Guttate, Nail | Dr. Varada",
+    "title": "Types of Psoriasis: Plaque, Scalp, Guttate | Dr. Varada",
     "meta": "The types of psoriasis and how they differ: plaque, guttate, inverse, nail, "
-            "palmoplantar, erythrodermic and pustular. What each looks like and how "
-            "treatment changes between them.",
+            "palmoplantar, erythrodermic and pustular.",
     "eyebrow": "Psoriasis",
     "h1": "Types of psoriasis",
-    "lede": "The type is not a label — it changes the treatment. Guttate disease often "
-            "clears completely with light; inverse disease is ruined by the same treatment "
-            "that helps plaques; pustular disease can be a medical emergency.",
-    "acts": [("Consult online", PRACTO_ONLINE), ("Back to the psoriasis hub", "psoriasis")],
+    "lede": "The type is not a label. It changes the treatment. Guttate disease often clears "
+            "completely with light; inverse disease is ruined by the same treatment that helps "
+            "plaques; pustular disease can be a medical emergency.",
+    "acts": [("Consult online", WHATSAPP), ("Back to the psoriasis hub", "psoriasis")],
+    "sources": ["dermnet-psoriasis", "niams-psoriasis", "aad-psoriasis", "dermnet-psa"],
     "glance": [
         ("Plaque", "80–90% of all psoriasis"),
         ("Guttate", "Post-infection; may fully resolve"),
         ("Inverse", "In folds; misdiagnosed as fungal"),
         ("Nail", "Predicts psoriatic arthritis"),
         ("Palmoplantar", "Disabling out of proportion to area"),
-        ("Erythrodermic / pustular", "Urgent — needs same-day care"),
+        ("Erythrodermic / pustular", "Urgent: needs same-day care"),
     ],
     "sections": [
         {"kind": "cards", "eyebrow": "The common ones", "h2": "What you are most likely to have",
@@ -248,13 +248,13 @@ PAGES = [
              ["Scalp psoriasis", "Thick adherent scale, often past the hairline",
               "Very common; needs descaling before anything else will penetrate"],
              ["Palmoplantar", "Thickened, fissured palms and soles",
-              "Small area, large disability — affects work and walking"],
+              "Small area, large disability: affects work and walking"],
              ["Pustular (localised)", "Sterile pustules on palms or soles",
               "Not infection; often linked to smoking"],
              ["Generalised pustular", "Widespread pustules with fever and malaise",
-              "A medical emergency — same-day assessment"],
+              "A medical emergency: same-day assessment"],
              ["Erythrodermic", "Redness and scaling over most of the body",
-              "Emergency — risk of fluid, temperature and infection problems"],
+              "Emergency: risk of fluid, temperature and infection problems"],
          ],
          "note": "The last two rows are the reason this page names them. Both are "
                  "uncommon, both can follow abrupt withdrawal of oral steroids, and both "
@@ -268,13 +268,13 @@ PAGES = [
                   "Scalp psoriasis treated as dandruff gets a shampoo that cannot penetrate "
                   "the scale.",
                   "All three are ordinary, frequent errors, and all three are settled by "
-                  "examination — looking for psoriasis elsewhere on the body, checking the "
+                  "examination, looking for psoriasis elsewhere on the body, checking the "
                   "nails, and looking at the scale rather than the redness."],
          "cta": ("Telling scalp psoriasis from dandruff", "psoriasis-scalp"),
          "items": [
              {"title": "Check the nails, always",
               "body": "Nail changes in someone with an unclear rash frequently settle the "
-                      "diagnosis — and flag arthritis risk at the same time."},
+                      "diagnosis, and flag arthritis risk at the same time."},
              {"title": "Check the whole skin",
               "body": "A single confusing patch in a fold is much easier to name when there "
                       "are typical plaques on the elbows."},
@@ -285,20 +285,20 @@ PAGES = [
     "faq_h2": "About the types",
     "faqs": [
         ("Can I have more than one type at once?",
-         "Yes, and it is common — plaque psoriasis with scalp and nail involvement is "
-         "probably the most frequent combination seen in clinic."),
+         "Yes, and it is common. Plaque psoriasis with scalp and nail involvement is probably "
+         "the most frequent combination seen in clinic."),
         ("Does guttate psoriasis become plaque psoriasis?",
          "Sometimes. Many first episodes clear completely and never return. A proportion of "
          "people go on to develop chronic plaque disease later, but a single guttate episode "
          "is not a guarantee of that."),
         ("Why does my psoriasis have no scale?",
-         "Most likely because it is in a body fold. Inverse psoriasis stays moist, so it "
-         "looks smooth and red rather than silvery — and is often mistaken for a fungal "
-         "infection as a result."),
+         "Most likely because it is in a body fold. Inverse psoriasis stays moist, so it looks "
+         "smooth and red rather than silvery, and is often mistaken for a fungal infection as a "
+         "result."),
         ("Is nail psoriasis treatable?",
-         "Yes, though it is slow because nails grow slowly — expect to judge results over "
-         "six to twelve months. It matters beyond appearance, because nail disease is "
-         "associated with psoriatic arthritis."),
+         "Yes, though it is slow because nails grow slowly. Expect to judge results over six to "
+         "twelve months. It matters beyond appearance, because nail disease is associated with "
+         "psoriatic arthritis."),
         ("What makes psoriasis an emergency?",
          "Redness and scaling covering most of the body, or widespread pustules with fever "
          "and feeling unwell. Both need same-day medical assessment rather than a routine "
@@ -315,21 +315,21 @@ PAGES = [
 {
     "slug": "psoriasis-scalp", "template": "T2", "condition": "Scalp psoriasis",
     "crumbs": [("Psoriasis", "psoriasis"), ("Scalp", None)],
-    "title": "Scalp Psoriasis — Treatment & Telling It From Dandruff | Dr. Varada",
+    "title": "Scalp Psoriasis or Dandruff? | Dr. Varada",
     "meta": "Scalp psoriasis: how to tell it from dandruff and seborrhoeic dermatitis, why "
-            "ordinary shampoo doesn't work, the descale-then-treat sequence, and whether it "
-            "causes hair loss.",
+            "ordinary shampoo fails, the descale-then-treat sequence, and hair loss.",
     "eyebrow": "Psoriasis",
     "h1": "Scalp psoriasis",
     "lede": "The scalp is the commonest site of psoriasis and the one most often treated "
-            "wrongly — because thick adherent scale blocks every medicine applied on top of "
-            "it. The order of treatment matters more than the choice of it.",
-    "acts": [("Consult online", PRACTO_ONLINE), ("Back to the psoriasis hub", "psoriasis")],
+            "wrongly, because thick adherent scale blocks every medicine applied on top of it. "
+            "The order of treatment matters more than the choice of it.",
+    "acts": [("Consult online", WHATSAPP), ("Back to the psoriasis hub", "psoriasis")],
+    "sources": ["dermnet-scalp-psoriasis", "aad-psoriasis", "nice-psoriasis", "dermnet-seb-derm"],
     "glance": [
         ("How common", "Affects around half of psoriasis patients"),
         ("Key sign", "Scale extending past the hairline"),
         ("Confused with", "Dandruff, seborrhoeic dermatitis"),
-        ("First step", "Descale — nothing works through scale"),
+        ("First step", "Descale: nothing works through scale"),
         ("Hair loss", "Usually temporary, from scratching and picking"),
         ("Review", "6–8 weeks"),
     ],
@@ -347,21 +347,21 @@ PAGES = [
              ["Elsewhere", "Often plaques on elbows, knees; nail pitting", "Face, eyebrows, chest"],
              ["Response to anti-dandruff shampoo", "Partial at best", "Usually good"],
          ],
-         "note": "The two can coexist — 'sebopsoriasis' is a genuine overlap. Where it is "
+         "note": "The two can coexist. 'Sebopsoriasis' is a genuine overlap. Where it is "
                  "unclear, the elbows, knees and nails usually settle it."},
 
         {"kind": "steps", "eyebrow": "The sequence", "h2": "Descale first, then treat",
          "items": [
              {"title": "Soften the scale",
-              "body": "A salicylic acid or oil-based preparation applied to the scalp and "
-                      "left on — often overnight — to lift adherent scale. This step is "
-                      "skipped constantly and is why treatments 'don't work'."},
+              "body": "A salicylic acid or oil-based preparation applied to the scalp and left "
+                      "on, often overnight, to lift adherent scale. This step is skipped "
+                      "constantly and is why treatments 'don't work'."},
              {"title": "Wash it out properly",
               "body": "A tar or ketoconazole shampoo, worked into the scalp rather than the "
                       "hair, and left for several minutes before rinsing."},
              {"title": "Now apply the active treatment",
-              "body": "A steroid or vitamin D scalp application — which can finally reach "
-                      "skin instead of sitting on scale."},
+              "body": "A steroid or vitamin D scalp application, which can finally reach skin "
+                      "instead of sitting on scale."},
              {"title": "Step down to maintenance",
               "body": "Reduce frequency once controlled rather than stopping. Abrupt "
                       "stopping is the commonest cause of a rebound."},
@@ -369,13 +369,13 @@ PAGES = [
 
         {"kind": "split", "eyebrow": "Hair",
          "h2": "Does scalp psoriasis cause hair loss?",
-         "body": ["Usually yes, temporarily — and usually not because of the psoriasis "
-                  "itself. Hair is lost from scratching, from picking scale off (which pulls "
-                  "hairs with it), and from the inflammation of a severe flare. It regrows "
-                  "once the scalp settles.",
-                  "Permanent loss is uncommon and results from prolonged severe "
-                  "inflammation or repeated trauma to the same area. The practical message "
-                  "is not to pick the scale — soften it and let it come away."],
+         "body": ["Usually yes, temporarily, and usually not because of the psoriasis itself. "
+                  "Hair is lost from scratching, from picking scale off (which pulls hairs with "
+                  "it), and from the inflammation of a severe flare. It regrows once the scalp "
+                  "settles.",
+                  "Permanent loss is uncommon and results from prolonged severe inflammation or "
+                  "repeated trauma to the same area. The practical message is not to pick the "
+                  "scale. Soften it and let it come away."],
          "cta": ("If hair loss persists", "hair-loss-treatment-hyderabad"),
          "items": [
              {"title": "Don't pick, soften",
@@ -389,10 +389,10 @@ PAGES = [
         {"kind": "checklist", "eyebrow": "Practical",
          "h2": "What makes scalp treatment actually work.",
          "items": [
-             "<b>Treat the scalp, not the hair</b> — part it and apply to skin",
-             "<b>Give it contact time</b> — minutes, not a rinse",
+             "<b>Treat the scalp, not the hair</b>: part it and apply to skin",
+             "<b>Give it contact time</b>: minutes, not a rinse",
              "<b>Overnight oil</b> before wash days during a flare",
-             "<b>Don't stop abruptly</b> — step down the frequency",
+             "<b>Don't stop abruptly</b>: step down the frequency",
              "<b>Behind the ears and nape</b> are missed constantly",
              "<b>Colouring hair</b> is fine when the scalp is calm, not during a flare",
          ]},
@@ -414,9 +414,8 @@ PAGES = [
          "and picking rather than the disease destroying follicles, and it regrows once the "
          "scalp is controlled."),
         ("Can I colour or chemically treat my hair?",
-         "When the scalp is calm, generally yes. During an active flare, colouring and "
-         "chemical straightening will sting on cracked skin and can aggravate it — wait "
-         "until it settles."),
+         "When the scalp is calm, generally yes. During an active flare, colouring and chemical "
+         "straightening will sting on cracked skin and can aggravate it. Wait until it settles."),
         ("Is scalp psoriasis a sign of worse disease elsewhere?",
          "Not necessarily, but it is worth a full skin and nail examination. Nail pitting in "
          "particular matters, because nail involvement is associated with psoriatic "
@@ -433,16 +432,16 @@ PAGES = [
 {
     "slug": "psoriasis-triggers-and-diet", "template": "T2", "condition": "Psoriasis",
     "crumbs": [("Psoriasis", "psoriasis"), ("Triggers and diet", None)],
-    "title": "Psoriasis Triggers & Diet — Managing Flares | Dr. Varada",
-    "meta": "What actually triggers psoriasis flares — infections, stress, medications, "
-            "smoking, alcohol, weather and skin injury — and what the evidence really says "
-            "about diet, weight and supplements.",
+    "title": "Psoriasis Triggers & Diet: Managing Flares | Dr. Varada",
+    "meta": "What triggers psoriasis flares (infection, stress, medication, smoking, alcohol, "
+            "weather, skin injury), and what the evidence says about diet and weight.",
     "eyebrow": "Psoriasis",
     "h1": "Triggers, diet and keeping flares apart",
     "lede": "Most people can name their own trigger within a month of being asked to keep a "
-            "record. The value is not academic — a known trigger turns a flare from "
-            "something that happens to you into something you can get ahead of.",
-    "acts": [("Consult online", PRACTO_ONLINE), ("Back to the psoriasis hub", "psoriasis")],
+            "record. The value is not academic. A known trigger turns a flare from something "
+            "that happens to you into something you can get ahead of.",
+    "acts": [("Consult online", WHATSAPP), ("Back to the psoriasis hub", "psoriasis")],
+    "sources": ["niams-psoriasis", "nhs-psoriasis", "npf", "who-psoriasis"],
     "glance": [
         ("Strongest triggers", "Throat infection, stopping treatment, injury"),
         ("Diet that cures it", "None"),
@@ -462,11 +461,11 @@ PAGES = [
              ["Skin injury", "New plaque exactly at the site (Koebner)",
               "Protect skin; treat cuts promptly"],
              ["Certain medications", "Flare weeks after starting",
-              "Beta blockers, lithium, antimalarials — never stop without advice"],
+              "Beta blockers, lithium, antimalarials: never stop without advice"],
              ["Smoking", "Worse disease; strong link to palmoplantar pustulosis",
               "Stopping improves both disease and drug options"],
              ["Alcohol", "Worse disease; restricts methotrexate use",
-              "Reduce — it changes what can be prescribed"],
+              "Reduce: it changes what can be prescribed"],
              ["Stress", "Flare during or after a difficult period",
               "Recognised trigger; worth naming"],
              ["Cold, dry weather", "Seasonal worsening", "Increase emollients pre-emptively"],
@@ -481,12 +480,12 @@ PAGES = [
              "of a quality that would change a prescription.",
              "Two things do have real support. The first is weight: in people who are "
              "overweight, losing weight improves psoriasis severity and improves how well "
-             "treatments — including systemic drugs — work. This is one of the few "
-             "lifestyle changes with a genuinely measurable effect on the disease.",
+             "treatments, including systemic drugs, work. This is one of the few lifestyle "
+             "changes with a genuinely measurable effect on the disease.",
              "The second is alcohol. Heavy use worsens psoriasis and, more practically, "
-             "restricts what can safely be prescribed — methotrexate and alcohol together "
-             "are a liver problem waiting to happen. Reducing intake widens your treatment "
-             "options as well as improving your skin.",
+             "restricts what can safely be prescribed. Methotrexate and alcohol together are a "
+             "liver problem waiting to happen. Reducing intake widens your treatment options as "
+             "well as improving your skin.",
          ]},
 
         {"kind": "split", "eyebrow": "The flare plan",
@@ -498,7 +497,7 @@ PAGES = [
                   "So every psoriasis patient here leaves with that written down: the early "
                   "sign to watch for, what to apply, how long to give it, and the point at "
                   "which to call rather than continue."],
-         "cta": ("Get a written flare plan", PRACTO_ONLINE),
+         "cta": ("Get a written flare plan", WHATSAPP),
          "items": [
              {"title": "Keep a simple record",
               "body": "Date, what flared, what happened in the fortnight before. Most people "
@@ -510,12 +509,12 @@ PAGES = [
 
         {"kind": "checklist", "eyebrow": "Worth doing", "h2": "The evidence-based short list.",
          "items": [
-             "<b>Lose excess weight</b> — the change with the clearest effect",
-             "<b>Reduce alcohol</b> — improves disease and widens drug options",
-             "<b>Stop smoking</b> — particularly for palms and soles",
+             "<b>Lose excess weight</b>: the change with the clearest effect",
+             "<b>Reduce alcohol</b>: improves disease and widens drug options",
+             "<b>Stop smoking</b>: particularly for palms and soles",
              "<b>Emollient daily</b>, not only during flares",
              "<b>Treat throat infections</b> promptly",
-             "<b>Never stop treatment abruptly</b> — step it down",
+             "<b>Never stop treatment abruptly</b>: step it down",
          ]},
 
         ARTHRITIS,
@@ -535,8 +534,8 @@ PAGES = [
          "in people who already have it. Many patients can date a flare to a specific "
          "difficult period."),
         ("Which medicines can make psoriasis worse?",
-         "Beta blockers, lithium, antimalarials and abrupt withdrawal of oral steroids are "
-         "the recognised ones. Never stop a prescribed medicine on your own — tell the "
+         "Beta blockers, lithium, antimalarials and abrupt withdrawal of oral steroids are the "
+         "recognised ones. Never stop a prescribed medicine on your own. Tell the "
          "dermatologist, who will work with the prescriber."),
         ("Does sunlight help?",
          "Moderate natural sunlight improves psoriasis in most people, which is the same "
@@ -558,16 +557,16 @@ PAGES = [
 {
     "slug": "psoriasis-phototherapy", "template": "T2", "condition": "Psoriasis",
     "crumbs": [("Psoriasis", "psoriasis"), ("Phototherapy", None)],
-    "title": "Phototherapy for Psoriasis — NB-UVB Explained | Dr. Varada",
+    "title": "Phototherapy for Psoriasis: NB-UVB Explained | Dr. Varada",
     "meta": "Narrowband UVB phototherapy for psoriasis: how it works, how many sessions it "
-            "takes, what remission looks like afterwards, and how it compares with systemic "
-            "treatment.",
+            "takes, what remission looks like, and how it compares with systemic drugs.",
     "eyebrow": "Psoriasis · Treatment",
     "h1": "Phototherapy for psoriasis",
     "lede": "The treatment that sits between creams and tablets: effective for widespread "
             "disease, without suppressing the whole immune system. Its cost is not money so "
-            "much as time — two or three visits a week for a couple of months.",
-    "acts": [("Consult online", PRACTO_ONLINE), ("Back to the psoriasis hub", "psoriasis")],
+            "much as time. Two or three visits a week for a couple of months.",
+    "acts": [("Consult online", WHATSAPP), ("Back to the psoriasis hub", "psoriasis")],
+    "sources": ["dermnet-phototherapy", "nice-psoriasis", "aad-psoriasis", "dermnet-psoriasis"],
     "glance": [
         ("What it is", "311 nm narrowband ultraviolet B"),
         ("Frequency", "2–3 sessions a week"),
@@ -585,9 +584,9 @@ PAGES = [
              "tablets: no whole-body immune suppression, no liver monitoring, no drug "
              "interactions.",
              "It suits widespread disease particularly well, because treating forty plaques "
-             "with creams is impractical and treating them with a systemic drug is more "
-             "than many patients need. Guttate psoriasis — dozens of small spots after a "
-             "throat infection — is close to an ideal indication and often clears completely.",
+             "with creams is impractical and treating them with a systemic drug is more than "
+             "many patients need. Guttate psoriasis, dozens of small spots after a throat "
+             "infection, is close to an ideal indication and often clears completely.",
              "The limitation is logistics. A course means two or three clinic visits a week "
              "for two to three months, and courses abandoned halfway are the commonest "
              "reason phototherapy is judged not to have worked.",
@@ -615,7 +614,7 @@ PAGES = [
              ["Immune effect", "Skin only", "Whole body"],
              ["Blood monitoring", "None routinely", "Regular, ongoing"],
              ["Time cost", "2–3 clinic visits weekly", "Tablets at home"],
-             ["Works on joints", "No", "Yes — methotrexate treats arthritis too"],
+             ["Works on joints", "No", "Yes: methotrexate treats arthritis too"],
              ["Pregnancy", "Generally acceptable", "Methotrexate absolutely contraindicated"],
              ["Remission after stopping", "Often months", "Usually returns on stopping"],
              ["Best for", "Widespread skin-only disease", "Joint disease, resistant disease"],
@@ -627,18 +626,18 @@ PAGES = [
         {"kind": "split", "eyebrow": "Practicalities",
          "h2": "The reason courses fail is almost never the light.",
          "body": ["Phototherapy has good evidence and a good safety record. What it does not "
-                  "have is convenience — and adherence is the strongest predictor of whether "
-                  "a course works.",
+                  "have is convenience, and adherence is the strongest predictor of whether a "
+                  "course works.",
                   "So the practical conversation happens before the first session: whether "
                   "you can realistically attend twice a week for two months, whether the "
                   "clinic timings fit your work, and whether a systemic drug would actually "
                   "suit your life better. Choosing the treatment you will finish beats "
                   "choosing the one that scores best on paper."],
-         "cta": ("Discuss which suits you", PRACTO_ONLINE),
+         "cta": ("Discuss which suits you", WHATSAPP),
          "items": [
              {"title": "Timings decide adherence",
-              "body": "Sessions are short. It is the travel that people cannot sustain — "
-                      "worth being honest about before starting."},
+              "body": "Sessions are short. It is the travel that people cannot sustain. Worth "
+                      "being honest about before starting."},
              {"title": "Cumulative dose is tracked",
               "body": "Lifetime session counts are recorded, as with any ultraviolet "
                       "treatment."},
@@ -653,15 +652,15 @@ PAGES = [
     "faq_h2": "Phototherapy questions",
     "faqs": [
         ("How many phototherapy sessions will I need for psoriasis?",
-         "Most courses run 20 to 36 sessions at two to three a week — so roughly two to "
-         "three months. Improvement usually begins by week three or four."),
+         "Most courses run 20 to 36 sessions at two to three a week, so roughly two to three "
+         "months. Improvement usually begins by week three or four."),
         ("How long does remission last afterwards?",
          "Often several months after a completed course, and sometimes longer. It varies "
          "considerably. Stopping halfway generally means a rapid relapse."),
         ("Is phototherapy safer than methotrexate?",
          "It avoids whole-body immune suppression and routine blood monitoring, which many "
-         "patients prefer. But it does nothing for joint disease, and it demands far more "
-         "of your time. Neither is simply safer — they suit different situations."),
+         "patients prefer. But it does nothing for joint disease, and it demands far more of "
+         "your time. Neither is simply safer. They suit different situations."),
         ("Can I have phototherapy during pregnancy?",
          "Narrowband UVB is generally considered acceptable in pregnancy and is often the "
          "preferred option, because most systemic psoriasis drugs are not. This is decided "
@@ -685,15 +684,15 @@ PAGES = [
     "slug": "psoriasis-biologics", "template": "T2", "condition": "Psoriasis",
     "crumbs": [("Psoriasis", "psoriasis"), ("Systemics and biologics", None)],
     "title": "Systemic & Biologic Treatment for Psoriasis | Dr. Varada",
-    "meta": "Methotrexate, ciclosporin, acitretin, apremilast and biologics for psoriasis — "
-            "when systemic treatment is appropriate, what monitoring is required, and what "
-            "the realistic trade-offs are.",
+    "meta": "Methotrexate, ciclosporin, acitretin, apremilast and biologics for psoriasis, when "
+            "systemic treatment is appropriate, and what monitoring it requires.",
     "eyebrow": "Psoriasis · Treatment",
     "h1": "Systemic treatment and biologics",
-    "lede": "When psoriasis is extensive, disabling, or attacking the joints, treating it "
-            "from the outside stops being enough. These are the drugs that work from the "
-            "inside — powerful, well-evidenced, and requiring proper monitoring.",
-    "acts": [("Discuss your options", PRACTO_ONLINE), ("Back to the psoriasis hub", "psoriasis")],
+    "lede": "When psoriasis is extensive, disabling, or attacking the joints, treating it from "
+            "the outside stops being enough. These are the drugs that work from the inside: "
+            "powerful, well-evidenced, and requiring proper monitoring.",
+    "acts": [("Discuss your options", WHATSAPP), ("Back to the psoriasis hub", "psoriasis")],
+    "sources": ["dermnet-biologics", "dermnet-methotrexate", "nice-psoriasis", "aad-psoriasis"],
     "glance": [
         ("Considered when", "Extensive, disabling, or joint disease"),
         ("First-line systemic", "Usually methotrexate"),
@@ -707,10 +706,9 @@ PAGES = [
          "h2": "When creams and light stop being the right answer.",
          "body": [
              "Systemic treatment is considered when disease is extensive, when it has failed "
-             "adequate topical and phototherapy trials, when it is disabling out of "
-             "proportion to its area — palms and soles are the classic example — or when "
-             "there is psoriatic arthritis, because joints do not respond to anything "
-             "applied to skin.",
+             "adequate topical and phototherapy trials, when it is disabling out of proportion "
+             "to its area, palms and soles are the classic example, or when there is psoriatic "
+             "arthritis, because joints do not respond to anything applied to skin.",
              "That last point deserves emphasis. Joint damage in psoriatic arthritis is "
              "irreversible, and the window in which treatment prevents it is early. A "
              "patient with joint symptoms is not someone to try another cream on.",
@@ -733,9 +731,9 @@ PAGES = [
              ["Apremilast", "Moderate disease where monitoring is difficult",
               "No routine blood monitoring; nausea and weight loss common early"],
          ],
-         "note": "Choice depends on your other conditions as much as on the psoriasis — "
-                 "liver, kidneys, blood pressure, alcohol use and pregnancy plans all "
-                 "narrow the list before anything else is considered."},
+         "note": "Choice depends on your other conditions as much as on the psoriasis: liver, "
+                 "kidneys, blood pressure, alcohol use and pregnancy plans all narrow the list "
+                 "before anything else is considered."},
 
         {"kind": "cards", "eyebrow": "Biologics", "h2": "Targeted, and how they differ",
          "accent": "chronic",
@@ -763,10 +761,10 @@ PAGES = [
                   "exists because the problems it catches are silent until they are not. "
                   "Methotrexate can affect blood counts and the liver without any symptom "
                   "at all until damage is done.",
-                  "So treatment is not started unless the monitoring is realistic for you — "
-                  "which for patients outside Hyderabad means agreeing where blood tests "
-                  "will be done locally and how results will reach the clinic."],
-         "cta": ("Arrange a systemic-therapy review", PRACTO_ONLINE),
+                  "So treatment is not started unless the monitoring is realistic for you, "
+                  "which for patients outside Hyderabad means agreeing where blood tests will "
+                  "be done locally and how results will reach the clinic."],
+         "cta": ("Arrange a systemic-therapy review", WHATSAPP),
          "items": [
              {"title": "Baseline before starting",
               "body": "Bloods, and screening where a biologic is planned. Nothing starts "
@@ -777,20 +775,20 @@ PAGES = [
          ]},
 
         {"kind": "callout", "warn": True, "title": "Oral steroids are not a psoriasis treatment",
-         "body": "Systemic steroids clear psoriasis impressively and are still prescribed "
-                 "for it. Withdrawal frequently causes a severe rebound, and generalised "
-                 "pustular psoriasis — a medical emergency — can follow. If you have been "
-                 "given oral steroids for psoriasis, raise it at your next appointment "
-                 "rather than stopping them yourself."},
+         "body": "Systemic steroids clear psoriasis impressively and are still prescribed for "
+                 "it. Withdrawal frequently causes a severe rebound, and generalised pustular "
+                 "psoriasis, a medical emergency, can follow. If you have been given oral "
+                 "steroids for psoriasis, raise it at your next appointment rather than "
+                 "stopping them yourself."},
 
         ARTHRITIS,
     ],
     "faq_h2": "Systemic treatment",
     "faqs": [
         ("When is methotrexate needed for psoriasis?",
-         "When disease is extensive, has failed adequate topical and phototherapy treatment, "
-         "or when psoriatic arthritis is present — methotrexate treats both skin and joints, "
-         "which phototherapy does not."),
+         "When disease is extensive, has failed adequate topical and phototherapy treatment, or "
+         "when psoriatic arthritis is present. Methotrexate treats both skin and joints, which "
+         "phototherapy does not."),
         ("Is methotrexate dangerous?",
          "It requires respect rather than fear. Regular blood monitoring catches the "
          "problems that matter, alcohol must be limited, and it is absolutely avoided in "
@@ -807,7 +805,7 @@ PAGES = [
          "the decision balances how long remission has held against the burden of "
          "continuing. It is never stopped abruptly."),
         ("Can I take these if I want to become pregnant?",
-         "Several are absolutely contraindicated — methotrexate and acitretin in particular, "
+         "Several are absolutely contraindicated: methotrexate and acitretin in particular, "
          "with acitretin requiring pregnancy avoidance for years after stopping. Tell the "
          "clinic about pregnancy plans before starting anything, not after."),
     ],
@@ -823,31 +821,31 @@ PAGES = [
     "slug": "psoriasis-cost", "template": "T2", "condition": "Psoriasis",
     "crumbs": [("Psoriasis", "psoriasis"), ("Cost", None)],
     "title": "Psoriasis Treatment Cost in India | Dr. Varada",
-    "meta": "What psoriasis treatment costs in India: how topicals, phototherapy, "
-            "methotrexate and biologics are priced, what monitoring adds, and how to "
-            "compare one clinic's quote with another.",
+    "meta": "What psoriasis treatment costs in India: how topicals, phototherapy, methotrexate "
+            "and biologics are priced, and how to compare one clinic's quote.",
     "eyebrow": "Psoriasis",
     "h1": "What psoriasis treatment costs",
-    "lede": "Psoriasis is a lifetime condition treated in episodes, so the useful question "
-            "is not the price of one prescription — it is the annual cost of keeping the "
-            "disease quiet, including the monitoring nobody quotes for.",
-    "acts": [("Ask for your costing", PRACTO_ONLINE), ("Back to the psoriasis hub", "psoriasis")],
+    "lede": "Psoriasis is a lifetime condition treated in episodes, so the useful question is "
+            "not the price of one prescription. It is the annual cost of keeping the disease "
+            "quiet, including the monitoring nobody quotes for.",
+    "acts": [("Ask for your costing", WHATSAPP), ("Back to the psoriasis hub", "psoriasis")],
+    "sources": ["nice-psoriasis", "dermnet-biologics", "dermnet-methotrexate"],
     "glance": [
         ("Topicals", "Monthly, at the pharmacy"),
         ("Phototherapy", "Per session, 20–36 per course"),
         ("Methotrexate", "Low drug cost; monitoring adds"),
         ("Biologics", "The largest cost by a wide margin"),
-        ("Monitoring", "Recurring — quote it separately"),
+        ("Monitoring", "Recurring: quote it separately"),
         ("Quoted", "After examination, in writing"),
     ],
     "sections": [
         {"kind": "prose", "eyebrow": "How pricing works",
          "h2": "The cost that gets forgotten is the monitoring.",
          "body": [
-             "Psoriasis costs split into three streams that behave differently. Medication "
-             "is a recurring pharmacy cost. Procedures — phototherapy — are per session "
-             "across a defined course. And monitoring is a recurring laboratory cost that "
-             "almost nobody includes when they compare quotes.",
+             "Psoriasis costs split into three streams that behave differently. Medication is a "
+             "recurring pharmacy cost. Procedures, phototherapy, are per session across a "
+             "defined course. And monitoring is a recurring laboratory cost that almost nobody "
+             "includes when they compare quotes.",
              "That last one matters most for systemic drugs. Methotrexate itself is "
              "inexpensive; the blood tests that make it safe are not free, and they recur "
              "for as long as you take it. A quote that names only the tablet price is "
@@ -868,15 +866,15 @@ PAGES = [
               "Body surface treated; which agents"],
              ["Medicated shampoos", "Monthly", "Scalp involvement"],
              ["NB-UVB phototherapy", "Per session", "20–36 sessions per course"],
-             ["Methotrexate", "Monthly — low", "Drug cost is small"],
+             ["Methotrexate", "Monthly: low", "Drug cost is small"],
              ["Blood monitoring", "Per test round, recurring",
               "The cost most often left out of a quote"],
              ["Biologics", "Per dose, ongoing", "Which agent; biosimilar availability"],
              ["Pre-biologic screening", "One-off", "TB and hepatitis screening"],
          ],
          "note": "Rupee figures are quoted after examination and deliberately not published "
-                 "here — the right treatment depends on how much skin is involved and "
-                 "whether your joints are affected, and so therefore does the cost."},
+                 "here. The right treatment depends on how much skin is involved and whether "
+                 "your joints are affected, and so therefore does the cost."},
 
         {"kind": "checklist", "eyebrow": "Before you commit",
          "h2": "Questions worth asking about any psoriasis quote.",
@@ -897,13 +895,13 @@ PAGES = [
                   "cheaper even if the monthly cost looks higher.",
                   "That is the calculation worth doing, and it is rarely the one presented. "
                   "It is also why the plan here is written as a year, not as a prescription."],
-         "cta": ("Get a costed plan", PRACTO_ONLINE),
+         "cta": ("Get a costed plan", WHATSAPP),
          "items": [
              {"title": "Count the flares",
               "body": "How many per year, and what each one costs you in treatment and in "
                       "days. That number is the real baseline."},
              {"title": "Maintenance is cheaper than rescue",
-              "body": "Almost always — and it is also less disruptive, which is the part no "
+              "body": "Almost always, and it is also less disruptive, which is the part no "
                       "invoice shows."},
          ]},
 
@@ -916,12 +914,12 @@ PAGES = [
     "faq_h2": "Cost questions",
     "faqs": [
         ("Why aren't rupee figures listed here?",
-         "Because the right treatment — and therefore the cost — depends on how much skin is "
-         "involved, whether your joints are affected, and what has already been tried. "
-         "Costs are quoted in writing after examination, including after a video consultation."),
+         "Because the right treatment, and therefore the cost, depends on how much skin is "
+         "involved, whether your joints are affected, and what has already been tried. Costs "
+         "are quoted in writing after examination, including after a video consultation."),
         ("What is the most expensive psoriasis treatment?",
-         "Biologics, by a wide margin. Biosimilars have reduced the gap. Everything else — "
-         "topicals, phototherapy, conventional systemics — sits in a much lower range."),
+         "Biologics, by a wide margin. Biosimilars have reduced the gap. Everything else "
+         "(topicals, phototherapy, conventional systemics), sits in a much lower range."),
         ("Is phototherapy or methotrexate cheaper?",
          "Methotrexate is usually cheaper in drug cost, but requires recurring blood "
          "monitoring. Phototherapy has no monitoring cost but requires 20–36 clinic visits, "
@@ -930,7 +928,7 @@ PAGES = [
          "Usually not for routine outpatient care. Cover is more likely where admission is "
          "needed or where psoriatic arthritis is being treated. Read your policy wording."),
         ("Can I reduce costs without compromising treatment?",
-         "Often yes — by using generics and biosimilars where clinically equivalent, by "
+         "Often yes, by using generics and biosimilars where clinically equivalent, by "
          "completing a phototherapy course properly so it delivers a real remission, and by "
          "having monitoring bloods done locally rather than at a hospital laboratory."),
     ],
@@ -946,17 +944,17 @@ PAGES = [
     "slug": "psoriasis-online-consultation", "template": "T2", "condition": "Psoriasis",
     "crumbs": [("Psoriasis", "psoriasis"), ("Online consultation", None)],
     "title": "Online Psoriasis Consultation Across India | Dr. Varada",
-    "meta": "Consult a dermatologist of 45 years about psoriasis by video, from anywhere in "
-            "India. Second opinions, flare plans, systemic-therapy reviews and "
-            "arthritis screening.",
+    "meta": "Consult a dermatologist of 45 years about psoriasis by video, anywhere in India. "
+            "Second opinions, flare plans, systemic reviews and arthritis screening.",
     "eyebrow": "Psoriasis",
     "h1": "Consult about psoriasis from anywhere in India",
-    "lede": "Psoriasis is managed by decisions far more than by procedures — which treatment, "
-            "at what point, for how long, and when to escalate. Almost all of that can be "
-            "done properly over video.",
-    "acts": [("Book a video consultation", PRACTO_ONLINE), ("Send photographs", WHATSAPP)],
+    "lede": "Psoriasis is managed by decisions far more than by procedures, which treatment, at "
+            "what point, for how long, and when to escalate. Almost all of that can be done "
+            "properly over video.",
+    "acts": [("Book a video consultation", WHATSAPP), ("Call the clinic", PHONE)],
+    "sources": ["niams-psoriasis", "nice-psoriasis", "dermnet-psa"],
     "glance": [
-        ("Platform", "Practo video consultation"),
+        ("Booking", "WhatsApp: video link sent back"),
         ("Good for", "Second opinions, flare plans, systemic reviews"),
         ("Not for", "Phototherapy, procedures, joint examination"),
         ("You'll need", "Photographs, prescriptions, recent bloods"),
@@ -975,10 +973,10 @@ PAGES = [
              "All of those can be assessed from a good history, clear photographs and recent "
              "blood results. And they are exactly the questions patients outside major "
              "cities most often cannot get answered.",
-             "The commonest single finding in these consultations is not a missed diagnosis. "
-             "It is a patient using a potent topical steroid month after month with no "
-             "maintenance plan and no review — controlled just enough not to complain, and "
-             "heading for a rebound.",
+             "The commonest single finding in these consultations is not a missed diagnosis. It "
+             "is a patient using a potent topical steroid month after month with no maintenance "
+             "plan and no review. Controlled just enough not to complain, and heading for a "
+             "rebound.",
          ]},
 
         {"kind": "cards", "eyebrow": "Scope", "h2": "What a video consultation can settle",
@@ -1011,8 +1009,8 @@ PAGES = [
               "body": "Names, strengths, how long each was used and whether it worked. "
                       "'Some cream from the chemist' cannot be assessed."},
              {"title": "Bring recent bloods",
-              "body": "Especially if you are on or considering methotrexate — liver "
-                      "function and blood counts."},
+              "body": "Especially if you are on or considering methotrexate. Liver function and "
+                      "blood counts."},
              {"title": "Note your joints",
               "body": "Morning stiffness and how long it lasts, any swollen finger or toe, "
                       "heel pain, back pain that eases with movement."},
@@ -1026,10 +1024,10 @@ PAGES = [
                   "and those have to be practical where you live. So part of the "
                   "consultation is agreeing the arrangement: which laboratory, how often, "
                   "and how the results reach the clinic before the next review.",
-                  "Where that cannot be arranged reliably, the honest answer is that "
-                  "systemic therapy should be supervised by someone you can reach — and "
-                  "that is said rather than avoided."],
-         "cta": ("Book a review", PRACTO_ONLINE),
+                  "Where that cannot be arranged reliably, the honest answer is that systemic "
+                  "therapy should be supervised by someone you can reach, and that is said "
+                  "rather than avoided."],
+         "cta": ("Book a review", WHATSAPP),
          "items": [
              {"title": "Local bloods, remote review",
               "body": "Standard practice for out-of-state patients, and it works when it is "
@@ -1042,19 +1040,18 @@ PAGES = [
     "faq_h2": "Online consultation",
     "faqs": [
         ("Can psoriasis really be treated over video?",
-         "Managed, yes — psoriasis care is mostly decisions rather than procedures. What "
-         "cannot be done remotely is phototherapy, joint examination, and biopsy of an "
-         "unclear rash."),
+         "Managed, yes: psoriasis care is mostly decisions rather than procedures. What cannot "
+         "be done remotely is phototherapy, joint examination, and biopsy of an unclear rash."),
         ("What photographs should I send?",
          "Daylight, no flash or filter. Wide shots of each affected area plus close shots of "
-         "representative plaques, and specifically include scalp, nails and any skin folds — "
-         "those three change the diagnosis most often."),
+         "representative plaques, and specifically include scalp, nails and any skin folds. "
+         "Those three change the diagnosis most often."),
         ("Can I be started on methotrexate after a video consultation?",
          "Sometimes, provided baseline bloods are available and ongoing monitoring can be "
          "arranged reliably where you live. If that cannot be arranged, you will be told so "
          "rather than started on it anyway."),
         ("Can you tell if I have psoriatic arthritis over video?",
-         "The history is highly informative — morning stiffness over 30 minutes, a swollen "
+         "The history is highly informative, morning stiffness over 30 minutes, a swollen "
          "finger or toe, heel pain, inflammatory back pain. If those are present you will be "
          "advised to be examined, usually by a rheumatologist, without delay."),
         ("Do I need to come to Hyderabad at all?",

@@ -9,7 +9,7 @@ may imply otherwise.** The vocabulary is repigmentation, stability, control and
 spread. It is also the correct clinical vocabulary, so this costs nothing.
 """
 
-from chrome import PRACTO, PRACTO_ONLINE, WHATSAPP
+from chrome import PHONE, WHATSAPP
 
 CROSS = ("vitiligo-treatment-hyderabad", "Vitiligo treatment in Hyderabad",
          "If you can reach the clinic: phototherapy, excimer and the grafting list.")
@@ -22,19 +22,19 @@ PAGES = [
 {
     "slug": "vitiligo", "template": "T2", "condition": "Vitiligo",
     "crumbs": [("Vitiligo", None)],
-    "title": "Vitiligo Treatment in India — Light & Surgery | Dr. Varada",
-    "meta": "Vitiligo treatment explained by a dermatologist of 45 years: what causes white "
-            "patches, which treatments repigment skin, when surgery is possible, and what "
-            "it costs. Online consultation across India.",
+    "title": "Vitiligo Treatment in India: Light & Surgery | Dr. Varada",
+    "meta": "Vitiligo treatment by a dermatologist of 45 years: what causes white patches, "
+            "which treatments repigment skin, when surgery works, and what it costs.",
     "eyebrow": "The vitiligo section",
     "h1": "Vitiligo, explained properly.",
     "lede": "White patches are the visible part. What decides your treatment is invisible: "
             "whether the disease is still spreading, how long each patch has been there, "
             "and where on the body it sits. This section covers all of it.",
-    "acts": [("Consult online", PRACTO_ONLINE), ("Send photographs", WHATSAPP)],
+    "acts": [("Consult online", WHATSAPP), ("Call the clinic", PHONE)],
+    "sources": ["niams-vitiligo", "aad-vitiligo-tx", "dermnet-vitiligo", "nhs-vitiligo", "iadvl-vitiligo-surgery", "gvf"],
     "glance": [
         ("Also called", "Leucoderma, white patches, safed daag"),
-        ("Curable", "No — but repigmentation is common"),
+        ("Curable", "No, but repigmentation is common"),
         ("Main treatments", "Topicals, NB-UVB, excimer, surgery"),
         ("Timeline", "Months, reviewed every 6–8 weeks"),
         ("Surgery needs", "Disease stable for 12 months"),
@@ -44,18 +44,18 @@ PAGES = [
         {"kind": "prose", "eyebrow": "What it is",
          "h2": "An immune system that stopped recognising your pigment cells.",
          "body": [
-             "Vitiligo is an autoimmune condition. The melanocytes — the cells that make "
-             "pigment — are destroyed or switched off in patches, and the skin left behind "
-             "has no colour. It is not an infection, it is not caused by anything you ate, "
-             "and it cannot be passed to anyone else by touch.",
-             "It affects roughly one person in a hundred worldwide, and India carries one "
-             "of the highest burdens of any country. Around a fifth of patients have a "
-             "close relative with it, so a family history is common without being "
-             "deterministic — most children of a parent with vitiligo never develop it.",
+             "Vitiligo is an autoimmune condition. The melanocytes, the cells that make "
+             "pigment, are destroyed or switched off in patches, and the skin left behind has "
+             "no colour. It is not an infection, it is not caused by anything you ate, and it "
+             "cannot be passed to anyone else by touch.",
+             "It affects roughly one person in a hundred worldwide, and India carries one of "
+             "the highest burdens of any country. Around a fifth of patients have a close "
+             "relative with it, so a family history is common without being deterministic. Most "
+             "children of a parent with vitiligo never develop it.",
              "The clinically important distinction is not how big the patches are. It is "
-             "whether the disease is <b>active</b> — still producing new patches or "
-             "expanding old ones — or <b>stable</b>. Almost every treatment decision on "
-             "this page follows from that one answer.",
+             "whether the disease is <b>active</b>, still producing new patches or expanding "
+             "old ones, or <b>stable</b>. Almost every treatment decision on this page follows "
+             "from that one answer.",
          ]},
 
         {"kind": "cards", "eyebrow": "The two questions", "h2": "What the first visit settles",
@@ -72,19 +72,19 @@ PAGES = [
               "body": "Face and neck respond best; hands, feet and lips respond least, "
                       "because they have the fewest pigment reservoirs to repopulate from. "
                       "Patches present for many years respond more slowly.",
-              "list": ["Site — face, trunk, extremities", "Duration of each patch",
+              "list": ["Site: face, trunk, extremities", "Duration of each patch",
                        "Hair colour inside the patch"]},
          ]},
 
         {"kind": "callout", "title": "Why the hair inside a patch matters",
          "body": "Pigment cells survive in hair follicles even when they are gone from the "
-                 "surrounding skin, and repigmentation usually starts as small dark dots "
-                 "around each hair. If the hairs inside a patch have turned white too, that "
-                 "reservoir is depleted — which is why those patches respond poorly to "
-                 "creams and light, and why surgery exists."},
+                 "surrounding skin, and repigmentation usually starts as small dark dots around "
+                 "each hair. If the hairs inside a patch have turned white too, that reservoir "
+                 "is depleted, which is why those patches respond poorly to creams and light, "
+                 "and why surgery exists."},
 
         {"kind": "table", "eyebrow": "Treatments",
-         "h2": "What each treatment does — and who it suits",
+         "h2": "What each treatment does, and who it suits",
          "intro": "There is no single vitiligo treatment. There is a sequence, and where "
                   "you enter it depends on activity, site and duration.",
          "head": ["Treatment", "What it does", "Best suited to"],
@@ -92,7 +92,7 @@ PAGES = [
              ["Topical steroids", "Suppresses the immune attack; halts spread",
               "Recent, active, limited patches"],
              ["Calcineurin inhibitors", "Immune-modulating without steroid thinning",
-              "Face, eyelids, folds — thin skin"],
+              "Face, eyelids, folds: thin skin"],
              ["Topical JAK inhibitors", "Blocks the specific immune signal in vitiligo",
               "Facial and limited non-segmental disease"],
              ["NB-UVB phototherapy", "Stimulates surviving melanocytes to repopulate",
@@ -106,15 +106,15 @@ PAGES = [
              ["Punch / blister grafting", "Transplants pigmented skin fragments",
               "Small stable patches, lips, extremities"],
          ],
-         "note": "Nothing on this list cures vitiligo. Each is a way of stopping the "
-                 "disease, restoring colour, or both — and most patients need more than one."},
+         "note": "Nothing on this list cures vitiligo. Each is a way of stopping the disease, "
+                 "restoring colour, or both, and most patients need more than one."},
 
         {"kind": "steps", "eyebrow": "The sequence", "h2": "How treatment is actually ordered",
          "items": [
              {"title": "Stop the spread",
-              "body": "Active disease is quietened first — usually topicals, sometimes a "
-                      "short oral course. Repigmenting skin while new patches appear is "
-                      "running up a down escalator."},
+              "body": "Active disease is quietened first: usually topicals, sometimes a short "
+                      "oral course. Repigmenting skin while new patches appear is running up a "
+                      "down escalator."},
              {"title": "Repigment medically",
               "body": "Phototherapy, targeted light and topicals, given long enough to "
                       "judge. Six to eight weeks is a check, not a verdict; three to six "
@@ -132,10 +132,9 @@ PAGES = [
          "body": ["Melanocyte transplant and punch grafting move your own pigment cells "
                   "into skin that has none left. For stable patches on hands, lips and "
                   "other stubborn sites, it is often the only thing that will work.",
-                  "It requires an operating list, the skill to harvest and place cells, and "
-                  "the judgement to refuse patients whose disease is not stable. This "
-                  "practice has done it for decades — and it began life as a vitiligo "
-                  "hospital, which is why."],
+                  "It requires an operating list, the skill to harvest and place cells, and the "
+                  "judgement to refuse patients whose disease is not stable. This practice has "
+                  "done it for decades, and it began life as a vitiligo hospital, which is why."],
          "cta": ("How graft surgery works", "vitiligo-graft-surgery"),
          "items": [
              {"title": "Stability is the gate",
@@ -149,7 +148,7 @@ PAGES = [
         {"kind": "cards", "eyebrow": "Read next", "h2": "The rest of this section",
          "items": [
              {"title": "Understanding your vitiligo",
-              "list": ["Types and stages — segmental, non-segmental, stable, unstable",
+              "list": ["Types and stages: segmental, non-segmental, stable, unstable",
                        "Vitiligo in children",
                        "Diet, myths and what actually has evidence"]},
              {"title": "The treatments in detail",
@@ -168,8 +167,8 @@ PAGES = [
          ["No. No treatment available anywhere cures vitiligo, and any clinic promising a "
           "cure is making a claim it cannot support.",
           "What treatment does reliably achieve is stopping the spread, and repigmenting a "
-          "significant proportion of affected skin in many patients — particularly on the "
-          "face and trunk, and particularly when treated early."]),
+          "significant proportion of affected skin in many patients. Particularly on the face "
+          "and trunk, and particularly when treated early."]),
         ("Is vitiligo contagious?",
          "No. It is an autoimmune condition, not an infection. It cannot spread by touch, "
          "by sharing food, by using the same towel, or by any other contact."),
@@ -196,28 +195,28 @@ PAGES = [
     ],
     "related": [CROSS, ONLINE,
                 ("vitiligo-cost", "What vitiligo treatment costs",
-                 "How the money actually works — per session, per course, per graft.")],
+                 "How the money actually works: per session, per course, per graft.")],
 },
 
 # ══════════════════════════════════════════════════════════════════════════════
 {
     "slug": "vitiligo-types-and-stages", "template": "T2", "condition": "Vitiligo",
     "crumbs": [("Vitiligo", "vitiligo"), ("Types and stages", None)],
-    "title": "Types & Stages of Vitiligo — Stable or Active | Dr. Varada",
-    "meta": "Segmental versus non-segmental vitiligo, and stable versus unstable disease — "
-            "what the difference means for your treatment, and how a dermatologist tells "
-            "which one you have.",
+    "title": "Types & Stages of Vitiligo: Stable or Active | Dr. Varada",
+    "meta": "Segmental vs non-segmental vitiligo, stable vs unstable disease. What the "
+            "difference means for treatment, and how a dermatologist tells which you have.",
     "eyebrow": "Vitiligo",
     "h1": "Types and stages of vitiligo",
-    "lede": "Two classifications matter clinically. One describes the pattern — segmental or "
-            "non-segmental. The other describes the moment — active or stable. Between "
-            "them they decide almost everything about your treatment.",
-    "acts": [("Consult online", PRACTO_ONLINE), ("Back to the vitiligo hub", "vitiligo")],
+    "lede": "Two classifications matter clinically. One describes the pattern. Segmental or "
+            "non-segmental. The other describes the moment. Active or stable. Between them they "
+            "decide almost everything about your treatment.",
+    "acts": [("Consult online", WHATSAPP), ("Back to the vitiligo hub", "vitiligo")],
+    "sources": ["niams-vitiligo", "dermnet-vitiligo", "aad-vitiligo", "iadvl-vitiligo-surgery"],
     "glance": [
         ("Non-segmental", "Symmetrical, both sides, most common"),
         ("Segmental", "One side, one nerve territory, young onset"),
         ("Active", "New or expanding patches within 6–12 months"),
-        ("Stable", "No change for 12 months — the surgical gate"),
+        ("Stable", "No change for 12 months: the surgical gate"),
         ("Assessed by", "History, Wood's lamp, dated photographs"),
         ("Why it matters", "It picks the treatment"),
     ],
@@ -228,9 +227,9 @@ PAGES = [
                   "one name.",
          "items": [
              {"eyebrow": "About 90% of cases", "title": "Non-segmental vitiligo",
-              "body": "Symmetrical — if it appears on one knee it tends to appear on the "
-                      "other. Comes and goes in waves over years, often starting on the "
-                      "hands, face, or around the eyes and mouth.",
+              "body": "Symmetrical, if it appears on one knee it tends to appear on the other. "
+                      "Comes and goes in waves over years, often starting on the hands, face, "
+                      "or around the eyes and mouth.",
               "list": ["Both sides of the body", "Unpredictable course",
                        "Autoimmune associations more common",
                        "Responds to phototherapy"]},
@@ -243,19 +242,19 @@ PAGES = [
          ]},
 
         {"kind": "callout", "title": "Segmental vitiligo is the surgical success story",
-         "body": "Because it stabilises reliably and rarely returns, segmental disease is "
-                 "where grafting gives its most durable results. It also responds poorly to "
-                 "phototherapy — so recognising it early saves patients months of light "
+         "body": "Because it stabilises reliably and rarely returns, segmental disease is where "
+                 "grafting gives its most durable results. It also responds poorly to "
+                 "phototherapy, so recognising it early saves patients months of light "
                  "treatment that was never going to work."},
 
-        {"kind": "prose", "eyebrow": "By activity", "h2": "Active or stable — the real question",
+        {"kind": "prose", "eyebrow": "By activity", "h2": "Active or stable: the real question",
          "body": [
              "Every treatment decision hangs on this. Active disease must be quietened "
              "before anything is rebuilt; stable disease can be rebuilt, including "
              "surgically. Getting it wrong in either direction wastes months.",
-             "There is no blood test for stability. It is a clinical judgement made from "
-             "the history, the appearance of the patch margins, and — most reliably — "
-             "photographs taken at intervals and compared properly.",
+             "There is no blood test for stability. It is a clinical judgement made from the "
+             "history, the appearance of the patch margins, and, most reliably, photographs "
+             "taken at intervals and compared properly.",
          ]},
 
         {"kind": "table", "eyebrow": "Telling them apart",
@@ -285,8 +284,8 @@ PAGES = [
                   "donor site can develop its own patch.",
                   "Twelve months without a new patch, without expansion at any margin, and "
                   "without koebnerisation is the accepted threshold. It is not an arbitrary "
-                  "wait — it is the interval that separates a graft that takes from a graft "
-                  "that fails."],
+                  "wait. It is the interval that separates a graft that takes from a graft that "
+                  "fails."],
          "cta": ("What graft surgery involves", "vitiligo-graft-surgery"),
          "items": [
              {"title": "The clock restarts",
@@ -300,21 +299,21 @@ PAGES = [
         {"kind": "checklist", "eyebrow": "Other patterns you may be told",
          "h2": "Terms that appear in reports.",
          "items": [
-             "<b>Focal</b> — one or a few patches, not yet classifiable",
-             "<b>Acrofacial</b> — face plus fingers and toes",
-             "<b>Mucosal</b> — lips and genitals; notoriously stubborn",
-             "<b>Universal</b> — over 80% of the body depigmented",
-             "<b>Trichrome</b> — three shades in one patch; a sign of activity",
-             "<b>Halo naevus</b> — a pale ring around a mole; often coexists",
+             "<b>Focal</b>: one or a few patches, not yet classifiable",
+             "<b>Acrofacial</b>: face plus fingers and toes",
+             "<b>Mucosal</b>: lips and genitals; notoriously stubborn",
+             "<b>Universal</b>: over 80% of the body depigmented",
+             "<b>Trichrome</b>: three shades in one patch; a sign of activity",
+             "<b>Halo naevus</b>: a pale ring around a mole; often coexists",
          ]},
     ],
     "faq_h2": "Types and stages",
     "faqs": [
         ("How do I know if my vitiligo is stable?",
-         "If no new patch has appeared and no existing patch has grown for twelve months, "
-         "and cuts or scratches have not turned white, it is likely stable. It is confirmed "
-         "clinically with a Wood's lamp and by comparing dated photographs — not by how it "
-         "feels to you."),
+         "If no new patch has appeared and no existing patch has grown for twelve months, and "
+         "cuts or scratches have not turned white, it is likely stable. It is confirmed "
+         "clinically with a Wood's lamp and by comparing dated photographs. Not by how it feels "
+         "to you."),
         ("Which type of vitiligo responds best to treatment?",
          "Non-segmental vitiligo on the face and trunk responds best to phototherapy. "
          "Segmental vitiligo responds poorly to light but does very well with surgery once "
@@ -324,13 +323,13 @@ PAGES = [
          "then usually stops permanently. That predictability is what makes it a good "
          "surgical candidate."),
         ("What is the Koebner phenomenon?",
-         "New vitiligo appearing exactly where the skin was injured — a cut, a scratch, a "
-         "burn, a tight strap. It is a marker of active disease and an argument against "
-         "operating until things settle."),
+         "New vitiligo appearing exactly where the skin was injured: a cut, a scratch, a burn, "
+         "a tight strap. It is a marker of active disease and an argument against operating "
+         "until things settle."),
         ("Can the type change over time?",
-         "Segmental disease does not usually become non-segmental. But a person can have "
-         "both, and focal disease that has not declared itself may evolve into either — "
-         "which is why the first classification is sometimes provisional."),
+         "Segmental disease does not usually become non-segmental. But a person can have both, "
+         "and focal disease that has not declared itself may evolve into either, which is why "
+         "the first classification is sometimes provisional."),
     ],
     "related": [
         ("vitiligo-graft-surgery", "Graft surgery", "What stable disease makes possible."),
@@ -344,16 +343,15 @@ PAGES = [
     "slug": "vitiligo-phototherapy", "template": "T2", "condition": "Vitiligo",
     "crumbs": [("Vitiligo", "vitiligo"), ("Phototherapy", None)],
     "title": "Narrowband UVB Phototherapy for Vitiligo | Dr. Varada",
-    "meta": "How narrowband UVB works for vitiligo, how many sessions it takes, what "
-            "results to expect by body site, and whether home units are worth it. "
-            "Explained by a dermatologist of 45 years.",
+    "meta": "How narrowband UVB works for vitiligo, how many sessions it takes, what results to "
+            "expect by body site, and whether home units are worth it.",
     "eyebrow": "Vitiligo · Treatment",
     "h1": "Narrowband UVB phototherapy",
+    "sources": ["aad-vitiligo-tx", "dermnet-phototherapy", "dermnet-vitiligo", "niams-vitiligo"],
     "lede": "The most widely used vitiligo treatment in the world, and the one with the most "
-            "evidence behind it. It works by waking up the pigment cells still living in "
-            "your hair follicles — which is also the reason it works on some sites and not "
-            "others.",
-    "acts": [("Consult online", PRACTO_ONLINE), ("Back to the vitiligo hub", "vitiligo")],
+            "evidence behind it. It works by waking up the pigment cells still living in your "
+            "hair follicles, which is also the reason it works on some sites and not others.",
+    "acts": [("Consult online", WHATSAPP), ("Back to the vitiligo hub", "vitiligo")],
     "glance": [
         ("What it is", "311 nm ultraviolet B, whole-body or targeted"),
         ("Frequency", "2–3 sessions a week"),
@@ -366,19 +364,19 @@ PAGES = [
         {"kind": "prose", "eyebrow": "How it works",
          "h2": "Light that recruits the cells you still have.",
          "body": [
-             "Narrowband UVB is ultraviolet light at a very specific wavelength — around "
-             "311 nanometres. At that wavelength it does two useful things at once: it "
-             "damps down the local immune attack that is destroying pigment cells, and it "
-             "stimulates the melanocytes that survive in hair follicles to multiply and "
-             "migrate up into the skin surface.",
+             "Narrowband UVB is ultraviolet light at a very specific wavelength. Around 311 "
+             "nanometres. At that wavelength it does two useful things at once: it damps down "
+             "the local immune attack that is destroying pigment cells, and it stimulates the "
+             "melanocytes that survive in hair follicles to multiply and migrate up into the "
+             "skin surface.",
              "That second mechanism explains the pattern of results. Repigmentation "
              "typically appears first as small dark dots scattered inside the patch, each "
              "one centred on a hair. Those dots enlarge and merge. It is slow, and it looks "
              "odd halfway through, and it is exactly what success looks like.",
-             "It also explains the failures. Skin with few hair follicles — fingertips, "
-             "the backs of the hands, lips — has little to recruit from. And a patch whose "
-             "hairs have themselves gone white has lost its reservoir. Those are the "
-             "patches that need surgery rather than more light.",
+             "It also explains the failures. Skin with few hair follicles (fingertips, the "
+             "backs of the hands, lips), has little to recruit from. And a patch whose hairs "
+             "have themselves gone white has lost its reservoir. Those are the patches that "
+             "need surgery rather than more light.",
          ]},
 
         {"kind": "steps", "eyebrow": "A course", "h2": "What the schedule looks like",
@@ -403,7 +401,7 @@ PAGES = [
                   "one most patients are never shown.",
          "head": ["Body site", "Typical response", "Why"],
          "rows": [
-             ["Face and neck", "Best — often substantial",
+             ["Face and neck", "Best: often substantial",
               "Dense hair follicles, good blood supply"],
              ["Trunk", "Good", "Adequate follicular reservoir"],
              ["Upper arms and thighs", "Moderate", "Fewer follicles, slower migration"],
@@ -412,8 +410,8 @@ PAGES = [
              ["Lips", "Very poor", "No hair follicles at all"],
              ["Patches with white hairs", "Poor at any site", "Reservoir already lost"],
          ],
-         "note": "Sites in the bottom half of this table are where melanocyte transplant "
-                 "and punch grafting are considered instead — not as a fallback, but as the "
+         "note": "Sites in the bottom half of this table are where melanocyte transplant and "
+                 "punch grafting are considered instead. Not as a fallback, but as the "
                  "appropriate first choice."},
 
         {"kind": "split", "eyebrow": "Home units",
@@ -426,7 +424,7 @@ PAGES = [
                   "patches are countable and reachable, and when someone is prepared to "
                   "keep a log. They are not appropriate as a first step, unsupervised, or "
                   "for widespread disease."],
-         "cta": ("Ask whether a home unit suits you", PRACTO_ONLINE),
+         "cta": ("Ask whether a home unit suits you", WHATSAPP),
          "items": [
              {"title": "Dose is set in clinic first",
               "body": "The starting dose depends on your skin type and your response. "
@@ -438,12 +436,12 @@ PAGES = [
 
         {"kind": "checklist", "eyebrow": "Safety", "h2": "What to expect, and what to report.",
          "items": [
-             "<b>Mild pinkness</b> that fades in a day — expected, and the target",
-             "<b>Dryness and itch</b> — common, managed with moisturiser",
-             "<b>Burning or blistering</b> — report it; the dose is too high",
-             "<b>Tanning of normal skin</b> — expected; contrast increases before it decreases",
-             "<b>Eye protection</b> — goggles at every session, no exceptions",
-             "<b>Photosensitising drugs</b> — tell the clinic about every medicine you take",
+             "<b>Mild pinkness</b> that fades in a day. Expected, and the target",
+             "<b>Dryness and itch</b>: common, managed with moisturiser",
+             "<b>Burning or blistering</b>: report it; the dose is too high",
+             "<b>Tanning of normal skin</b>: expected; contrast increases before it decreases",
+             "<b>Eye protection</b>: goggles at every session, no exceptions",
+             "<b>Photosensitising drugs</b>: tell the clinic about every medicine you take",
          ]},
 
         {"kind": "callout", "warn": True, "title": "Contrast gets worse before it gets better",
@@ -466,15 +464,15 @@ PAGES = [
          "311 nm narrowband wavelength, they raise skin cancer risk, and they will not "
          "repigment vitiligo."),
         ("Does phototherapy hurt?",
-         "No. A session is short — seconds to a few minutes — and feels like standing in "
-         "warm light. Mild pinkness afterwards is the intended endpoint; pain or blistering "
-         "means the dose needs reducing."),
+         "No. A session is short, seconds to a few minutes, and feels like standing in warm "
+         "light. Mild pinkness afterwards is the intended endpoint; pain or blistering means "
+         "the dose needs reducing."),
         ("Will the colour stay after I stop?",
          "Often yes, particularly if the course is tapered rather than stopped abruptly and "
          "the disease is stable. Some patients lose a proportion of the repigmentation and "
          "need maintenance sessions."),
         ("Can I combine it with creams?",
-         "Yes — combining phototherapy with a topical calcineurin inhibitor or a topical JAK "
+         "Yes, combining phototherapy with a topical calcineurin inhibitor or a topical JAK "
          "inhibitor generally works better than either alone, particularly on the face."),
     ],
     "related": [
@@ -488,16 +486,16 @@ PAGES = [
 {
     "slug": "vitiligo-excimer-laser", "template": "T2", "condition": "Vitiligo",
     "crumbs": [("Vitiligo", "vitiligo"), ("Excimer laser", None)],
-    "title": "Excimer Laser for Vitiligo — Who It Suits | Dr. Varada",
+    "title": "Excimer Laser for Vitiligo: Who It Suits | Dr. Varada",
     "meta": "Excimer laser for vitiligo: how 308 nm targeted light differs from full-body "
-            "NB-UVB, who it suits, how many sessions it takes, and how the two compare on "
-            "cost and result.",
+            "NB-UVB, who it suits, how many sessions, and how the two compare on cost.",
     "eyebrow": "Vitiligo · Treatment",
     "h1": "Excimer laser for vitiligo",
-    "lede": "Same idea as phototherapy, delivered differently: a 308 nm beam aimed only at "
-            "the patch. That precision buys higher doses and faster results on small areas "
-            "— and makes it the wrong tool for widespread disease.",
-    "acts": [("Consult online", PRACTO_ONLINE), ("Back to the vitiligo hub", "vitiligo")],
+    "lede": "Same idea as phototherapy, delivered differently: a 308 nm beam aimed only at the "
+            "patch. That precision buys higher doses and faster results on small areas, and "
+            "makes it the wrong tool for widespread disease.",
+    "acts": [("Consult online", WHATSAPP), ("Back to the vitiligo hub", "vitiligo")],
+    "sources": ["aad-vitiligo-tx", "dermnet-phototherapy", "dermnet-vitiligo", "nhs-vitiligo"],
     "glance": [
         ("What it is", "308 nm targeted ultraviolet light"),
         ("Best for", "A few small patches, especially facial"),
@@ -513,21 +511,21 @@ PAGES = [
              "Narrowband UVB treats the whole body, which means the dose is limited by what "
              "your normal skin can tolerate. Excimer treats only the patch, so the dose can "
              "be pushed considerably higher without burning the skin around it.",
-             "Two practical consequences follow. Results generally come faster — facial "
-             "patches often show the first pigment within eight to twelve sessions rather "
-             "than three months. And the normal skin is not tanned, so the contrast problem "
-             "that makes early phototherapy look discouraging largely disappears.",
+             "Two practical consequences follow. Results generally come faster. Facial patches "
+             "often show the first pigment within eight to twelve sessions rather than three "
+             "months. And the normal skin is not tanned, so the contrast problem that makes "
+             "early phototherapy look discouraging largely disappears.",
              "The trade is coverage. Treating a large surface patch by patch is slow and "
              "expensive, which is why excimer is chosen for a handful of stubborn areas and "
-             "narrowband UVB for anything widespread. Many patients have both — full-body "
-             "light for the general disease, excimer for the two patches that won't shift.",
+             "narrowband UVB for anything widespread. Many patients have both. Full-body light "
+             "for the general disease, excimer for the two patches that won't shift.",
          ]},
 
         {"kind": "table", "eyebrow": "Side by side", "h2": "Excimer or NB-UVB?",
          "head": ["", "Excimer laser", "Narrowband UVB"],
          "rows": [
              ["Area treated", "Individual patches only", "Whole body or large regions"],
-             ["Dose per session", "Higher — normal skin spared", "Limited by normal skin"],
+             ["Dose per session", "Higher: normal skin spared", "Limited by normal skin"],
              ["First visible change", "Often 8–12 sessions", "Usually 2–3 months"],
              ["Normal skin tanning", "Minimal", "Expected"],
              ["Best for", "Few, small, localised patches", "Widespread disease"],
@@ -543,7 +541,7 @@ PAGES = [
               "body": "The first session establishes how your skin responds. Everything "
                       "after is titrated against that."},
              {"title": "Twice a week",
-              "body": "Sessions are short — the beam is applied patch by patch, often only "
+              "body": "Sessions are short: the beam is applied patch by patch, often only "
                       "seconds each. Most appointments take minutes."},
              {"title": "Reviewed at 12 sessions",
               "body": "Facial patches showing perifollicular dots by then are on track. No "
@@ -556,8 +554,8 @@ PAGES = [
         {"kind": "split", "eyebrow": "Honest limits",
          "h2": "Where excimer will not help.",
          "body": ["Excimer is light, and light works by recruiting pigment cells from hair "
-                  "follicles. Where that reservoir is gone, more light — however precisely "
-                  "aimed — does not create it.",
+                  "follicles. Where that reservoir is gone, more light, however precisely "
+                  "aimed, does not create it.",
                   "Patches with white hairs, lips, and fingertips remain poor responders "
                   "with excimer just as they are with narrowband UVB. Being told that at "
                   "the start saves twenty sessions of finding out."],
@@ -583,9 +581,9 @@ PAGES = [
          "patches on the limbs need more, and some need to be reassessed for surgery "
          "instead."),
         ("Is excimer better than phototherapy?",
-         "Not better — different. Excimer is faster and more precise for a few small "
-         "patches. Narrowband UVB is the right choice for widespread disease. For many "
-         "patients the correct plan uses both."),
+         "Not better. Different. Excimer is faster and more precise for a few small patches. "
+         "Narrowband UVB is the right choice for widespread disease. For many patients the "
+         "correct plan uses both."),
         ("Does excimer laser hurt?",
          "Very little. Most patients describe warmth. Mild pinkness for a day afterwards is "
          "the intended response; blistering means the dose was too high and is adjusted."),
@@ -608,18 +606,18 @@ PAGES = [
     "slug": "vitiligo-graft-surgery", "template": "T2", "condition": "Vitiligo",
     "crumbs": [("Vitiligo", "vitiligo"), ("Graft surgery", None)],
     "title": "Vitiligo Graft Surgery & Melanocyte Transplant | Dr. Varada",
-    "meta": "Melanocyte transplant, punch grafting and blister grafting for stable "
-            "vitiligo — who qualifies, how each technique works, what recovery involves, "
-            "and why stability decides everything.",
+    "meta": "Melanocyte transplant, punch and blister grafting for stable vitiligo, who "
+            "qualifies, how each technique works, recovery, and why stability decides it.",
     "eyebrow": "Vitiligo · Surgery",
     "h1": "Vitiligo graft surgery",
-    "lede": "When a patch has no pigment cells left to wake up, the only remaining option is "
-            "to bring them from somewhere else on your own body. That is what these "
-            "operations do — and they only work on disease that has stopped moving.",
-    "acts": [("Send photographs first", WHATSAPP), ("Consult online", PRACTO_ONLINE)],
+    "lede": "When a patch has no pigment cells left to wake up, the only remaining option is to "
+            "bring them from somewhere else on your own body. That is what these operations do, "
+            "and they only work on disease that has stopped moving.",
+    "acts": [("Send photographs first", WHATSAPP), ("Call the clinic", PHONE)],
+    "sources": ["iadvl-vitiligo-surgery", "iadvl-vitiligo-surgery-std", "aad-vitiligo-tx", "dermnet-vitiligo"],
     "glance": [
         ("Who qualifies", "Stable for 12 months, no koebnerisation"),
-        ("Techniques", "Melanocyte transplant, punch, blister"),
+        ("Techniques", "Melanocyte, punch, blister, follicular unit"),
         ("Donor site", "Usually the thigh or buttock"),
         ("Anaesthesia", "Local"),
         ("Colour appears", "Weeks to a few months"),
@@ -630,9 +628,9 @@ PAGES = [
          "h2": "Moving your own pigment cells, not adding dye.",
          "body": [
              "These are transplant operations, not tattoos. Healthy pigmented skin is taken "
-             "from an inconspicuous donor site — usually the thigh — and the melanocytes "
-             "within it are transferred to the depigmented patch, where they establish "
-             "themselves and start producing pigment again.",
+             "from an inconspicuous donor site, usually the thigh, and the melanocytes within "
+             "it are transferred to the depigmented patch, where they establish themselves and "
+             "start producing pigment again.",
              "Because the cells are your own, the colour they produce is your own. It "
              "matures over weeks to months, and a good result is one you stop noticing.",
              "The absolute requirement is stability. Transplanted melanocytes are the same "
@@ -641,7 +639,7 @@ PAGES = [
              "why the assessment is more important than the operation.",
          ]},
 
-        {"kind": "cards", "eyebrow": "The techniques", "h2": "Three operations, different jobs",
+        {"kind": "cards", "eyebrow": "The techniques", "h2": "Four operations, different jobs",
          "accent": "chronic",
          "items": [
              {"eyebrow": "Cell suspension", "title": "Melanocyte transplant",
@@ -661,6 +659,13 @@ PAGES = [
                       "and laid onto the patch after its surface is removed.",
               "list": ["Very good colour match", "Minimal donor scarring",
                        "Limited by blister size"]},
+             {"eyebrow": "Hair follicle", "title": "Follicular unit transplant",
+              "body": "Follicular units are transplanted into the patch. The reservoir of "
+                      "pigment cells sits in the hair follicle itself, so this addresses the "
+                      "one problem the other three cannot. White hair growing within the patch.",
+              "list": ["For leucotrichia: white hair in the patch",
+                       "Suits eyebrow, beard and scalp sites",
+                       "Repigments the hair as well as the skin"]},
          ]},
 
         {"kind": "steps", "eyebrow": "The pathway", "h2": "From first photograph to result",
@@ -695,19 +700,19 @@ PAGES = [
               "body": "It burns out reliably, which is why it produces the most durable "
                       "surgical results."},
              {"title": "Lips and fingertips are the point",
-              "body": "These sites barely respond to light. Surgery is not the fallback "
-                      "there — it is the appropriate first choice."},
+              "body": "These sites barely respond to light. Surgery is not the fallback there. "
+                      "It is the appropriate first choice."},
          ]},
 
         {"kind": "checklist", "eyebrow": "Before you travel",
          "h2": "If you are coming from outside Hyderabad.",
          "items": [
-             "<b>Send photographs first</b> — daylight, close and wide, of every patch",
+             "<b>Send photographs first</b>: daylight, close and wide, of every patch",
              "<b>Say when each patch appeared</b> and when it last changed",
              "<b>Send older photographs</b> if you have them; they date the stability",
-             "<b>Expect two visits</b> — assessment, then the procedure",
-             "<b>Allow for review</b> — grafts are checked after healing",
-             "<b>Be prepared to be told to wait</b> — it is a common outcome",
+             "<b>Expect two visits</b>: assessment, then the procedure",
+             "<b>Allow for review</b>: grafts are checked after healing",
+             "<b>Be prepared to be told to wait</b>: it is a common outcome",
          ]},
 
         {"kind": "callout", "warn": True, "title": "What surgery does not do",
@@ -718,9 +723,9 @@ PAGES = [
     "faq_h2": "Graft surgery questions",
     "faqs": [
         ("Am I a candidate for vitiligo surgery?",
-         ["Only if your disease has been stable for about twelve months — no new patches, no "
-          "expansion of existing ones, and no depigmentation appearing where skin has been "
-          "cut or scratched.",
+         ["Only if your disease has been stable for about twelve months: no new patches, no "
+          "expansion of existing ones, and no depigmentation appearing where skin has been cut "
+          "or scratched.",
           "Segmental vitiligo that has burnt out is the classic good candidate. Patches on "
           "the lips, fingertips and other sites that light cannot reach are the usual "
           "reason for choosing surgery."]),
@@ -737,35 +742,36 @@ PAGES = [
          "concealed area. The donor site is chosen so that anything visible is hidden by "
          "clothing."),
         ("Is it done under general anaesthetic?",
-         "No — local anaesthetic, as a day procedure. You go home the same day."),
+         "No. Local anaesthetic, as a day procedure. You go home the same day."),
         ("How soon will I see colour?",
          "Pigment usually starts appearing within a few weeks and continues to spread and "
          "even out for several months. Judging the result before three months is premature."),
         ("What if my vitiligo isn't stable yet?",
          "Then surgery is deferred and the disease is treated medically first. The waiting "
-         "period is not wasted — it is used to stop the spread and to build the photographic "
+         "period is not wasted. It is used to stop the spread and to build the photographic "
          "record that establishes when the clock started."),
     ],
     "related": [CROSS,
                 ("vitiligo-types-and-stages", "Stable or unstable?",
                  "How the twelve-month judgement is actually made."),
-                ("vitiligo-cost", "What it costs", "How grafting is priced, and by what.")],
+                ("travelling-for-treatment", "Travelling here for surgery",
+                 "What to send before you book, and how a staged visit works.")],
 },
 
 # ══════════════════════════════════════════════════════════════════════════════
 {
     "slug": "vitiligo-children", "template": "T2", "condition": "Vitiligo",
     "crumbs": [("Vitiligo", "vitiligo"), ("In children", None)],
-    "title": "Vitiligo in Children — Treatment & What to Expect | Dr. Varada",
-    "meta": "Childhood vitiligo: how it differs from adult disease, which treatments are "
-            "safe in children, what to tell the school, and why early treatment matters "
-            "more here than anywhere else.",
+    "title": "Vitiligo in Children: Treatment Guide | Dr. Varada",
+    "meta": "Childhood vitiligo: how it differs from adult disease, which treatments are safe "
+            "in children, what to tell the school, and why early treatment matters.",
     "eyebrow": "Vitiligo",
     "h1": "Vitiligo in children",
     "lede": "Around half of all vitiligo begins before the age of twenty. Children respond "
-            "better to treatment than adults do — and carry more of the social weight of "
-            "the condition, which makes treating it early doubly worth doing.",
-    "acts": [("Consult online", PRACTO_ONLINE), ("Send photographs", WHATSAPP)],
+            "better to treatment than adults do, and carry more of the social weight of the "
+            "condition, which makes treating it early doubly worth doing.",
+    "acts": [("Consult online", WHATSAPP), ("Call the clinic", PHONE)],
+    "sources": ["niams-vitiligo", "aad-vitiligo", "dermnet-vitiligo", "nhs-vitiligo"],
     "glance": [
         ("Onset", "About half of cases start under 20"),
         ("Common type", "Segmental more frequent than in adults"),
@@ -778,11 +784,10 @@ PAGES = [
         {"kind": "prose", "eyebrow": "How it differs",
          "h2": "Not simply adult vitiligo in a smaller person.",
          "body": [
-             "Childhood vitiligo has its own pattern. Segmental disease — confined to one "
-             "side of the body — is proportionally more common than in adults. A family "
-             "history is found more often. And a personal or family history of thyroid "
-             "disease is common enough that thyroid function is checked as a matter of "
-             "routine.",
+             "Childhood vitiligo has its own pattern. Segmental disease, confined to one side "
+             "of the body, is proportionally more common than in adults. A family history is "
+             "found more often. And a personal or family history of thyroid disease is common "
+             "enough that thyroid function is checked as a matter of routine.",
              "The encouraging part is that children generally respond better. Skin heals "
              "faster, follicular reservoirs are richer, and disease caught in its first "
              "months responds better than disease that has been present for years. Early "
@@ -798,7 +803,7 @@ PAGES = [
          "rows": [
              ["Topical steroids", "Yes, short courses",
               "Potency and duration limited; skin thinning is the risk"],
-             ["Calcineurin inhibitors", "Yes — often first choice on the face",
+             ["Calcineurin inhibitors", "Yes: often first choice on the face",
               "No skin thinning; suits eyelids and folds"],
              ["Topical JAK inhibitors", "In selected older children",
               "Prescribed and monitored case by case"],
@@ -817,10 +822,9 @@ PAGES = [
 
         {"kind": "split", "eyebrow": "Beyond the skin",
          "h2": "The part of the consultation that isn't dermatology.",
-         "body": ["Children with visible vitiligo report being asked about it constantly, "
-                  "being avoided, and — in India especially — encountering adults who "
-                  "believe it is contagious or a punishment. None of that is treated by a "
-                  "cream.",
+         "body": ["Children with visible vitiligo report being asked about it constantly, being "
+                  "avoided, and, in India especially, encountering adults who believe it is "
+                  "contagious or a punishment. None of that is treated by a cream.",
                   "What helps is giving the child a short, accurate sentence they can say "
                   "themselves, and giving the school the same information in writing. "
                   "Children who can explain their condition confidently are asked about it "
@@ -837,12 +841,12 @@ PAGES = [
 
         {"kind": "checklist", "eyebrow": "Practical", "h2": "What parents ask about most.",
          "items": [
-             "<b>Sun protection</b> — depigmented skin burns; sunscreen daily",
-             "<b>Swimming and sport</b> — no restriction whatsoever",
-             "<b>Camouflage</b> — cosmetic cover is reasonable if the child wants it",
-             "<b>Diet</b> — no food causes it; no restriction helps",
-             "<b>Thyroid</b> — checked at diagnosis and periodically",
-             "<b>Photographs</b> — take dated ones; they settle the stability question",
+             "<b>Sun protection</b>: depigmented skin burns; sunscreen daily",
+             "<b>Swimming and sport</b>: no restriction whatsoever",
+             "<b>Camouflage</b>: cosmetic cover is reasonable if the child wants it",
+             "<b>Diet</b>: no food causes it; no restriction helps",
+             "<b>Thyroid</b>: checked at diagnosis and periodically",
+             "<b>Photographs</b>: take dated ones; they settle the stability question",
          ]},
 
         {"kind": "callout", "warn": True, "title": "Steroid creams bought without a prescription",
@@ -859,22 +863,22 @@ PAGES = [
          "Non-segmental disease is less predictable, which is why active disease is treated "
          "promptly."),
         ("Is vitiligo in children curable?",
-         "No — vitiligo is not curable at any age. But children repigment more readily than "
+         "No. Vitiligo is not curable at any age. But children repigment more readily than "
          "adults, and patches treated within the first year commonly respond well."),
         ("Is it caused by something I did during pregnancy or feeding?",
          "No. Vitiligo is autoimmune. Nothing a parent ate, did or failed to do causes it, "
          "and no dietary restriction prevents or reverses it."),
         ("Is phototherapy safe for a child?",
          "Narrowband UVB is used in children where it is needed. The practical question is "
-         "usually cooperation — whether the child will stand still wearing goggles. Excimer "
-         "is often preferred for a few patches because exposure is limited to the patch."),
+         "usually cooperation, whether the child will stand still wearing goggles. Excimer is "
+         "often preferred for a few patches because exposure is limited to the patch."),
         ("Should I tell the school?",
          "Yes. A short written note that vitiligo is not contagious and needs no restriction "
          "prevents most of the difficulties children report."),
         ("Can my child have graft surgery?",
-         "Not while the disease is active. Once it has been stable for about twelve months — "
-         "which segmental vitiligo reliably becomes — surgery can be considered, and "
-         "children heal well."),
+         "Not while the disease is active. Once it has been stable for about twelve months, "
+         "which segmental vitiligo reliably becomes, surgery can be considered, and children "
+         "heal well."),
     ],
     "related": [
         ("vitiligo-types-and-stages", "Types and stages", "Where segmental disease fits."),
@@ -887,18 +891,18 @@ PAGES = [
 {
     "slug": "vitiligo-diet-and-myths", "template": "T2", "condition": "Vitiligo",
     "crumbs": [("Vitiligo", "vitiligo"), ("Diet and myths", None)],
-    "title": "Vitiligo Diet & Myths — What the Evidence Says | Dr. Varada",
-    "meta": "Does diet change vitiligo? Is it contagious? Should you avoid milk and citrus "
-            "together? A dermatologist of 45 years answers the questions patients and "
-            "relatives actually ask, and names the myths worth ignoring.",
+    "title": "Vitiligo Diet & Myths: What the Evidence Says | Dr. Varada",
+    "meta": "Does diet change vitiligo? Is it contagious? A dermatologist of 45 years answers "
+            "what patients and relatives actually ask, and names the myths to ignore.",
     "eyebrow": "Vitiligo",
     "h1": "Vitiligo: diet, myths and what actually has evidence",
     "lede": "Almost every patient arrives having been told to stop eating something. Almost "
-            "none of that advice has evidence behind it — and some of it does real harm by "
+            "none of that advice has evidence behind it, and some of it does real harm by "
             "delaying treatment during the months when treatment works best.",
-    "acts": [("Consult online", PRACTO_ONLINE), ("Back to the vitiligo hub", "vitiligo")],
+    "acts": [("Consult online", WHATSAPP), ("Back to the vitiligo hub", "vitiligo")],
+    "sources": ["niams-vitiligo", "aad-vitiligo", "nhs-vitiligo", "gvf"],
     "glance": [
-        ("Causes vitiligo", "An autoimmune process — not food"),
+        ("Causes vitiligo", "An autoimmune process: not food"),
         ("Diet that reverses it", "None demonstrated"),
         ("Contagious", "No, in any way"),
         ("Worth checking", "Thyroid function, vitamin D, B12"),
@@ -912,12 +916,12 @@ PAGES = [
              "Vitiligo is an autoimmune condition: the immune system destroys or disables "
              "the cells that make pigment. Diet does not initiate that process, and no "
              "dietary change has been shown in any reliable study to reverse it.",
-             "The most persistent piece of advice in India — do not eat sour foods with "
-             "milk, avoid citrus, avoid fish with dairy — has no basis in evidence. It is "
-             "folklore, repeated confidently, and it is harmless only in the sense that the "
-             "food restriction itself rarely hurts. The harm is elsewhere: months spent "
-             "adjusting a diet are months not spent treating active disease, and those are "
-             "exactly the months in which treatment works best.",
+             "The most persistent piece of advice in India: do not eat sour foods with milk, "
+             "avoid citrus, avoid fish with dairy: has no basis in evidence. It is folklore, "
+             "repeated confidently, and it is harmless only in the sense that the food "
+             "restriction itself rarely hurts. The harm is elsewhere: months spent adjusting a "
+             "diet are months not spent treating active disease, and those are exactly the "
+             "months in which treatment works best.",
              "What does matter nutritionally is unremarkable: eat a normal balanced diet, "
              "correct a documented deficiency if one is found. Vitamin D and B12 are worth "
              "checking because deficiency is common in the general population, not because "
@@ -942,7 +946,7 @@ PAGES = [
              ["It means you will get cancer",
               "There is no increased skin cancer risk; if anything, slightly lower."],
              ["Nothing can be done",
-              "Untrue, and the most damaging myth of all — treatment often repigments skin."],
+              "Untrue, and the most damaging myth of all. Treatment often repigments skin."],
          ],
          "note": "The last row is why this page exists. Patients told nothing can be done "
                  "present years later with disease that would have responded early."},
@@ -950,11 +954,11 @@ PAGES = [
         {"kind": "split", "eyebrow": "What does have evidence",
          "h2": "The short list of things actually worth doing.",
          "body": ["Stripped of folklore, the evidence-based advice for someone living with "
-                  "vitiligo is brief — and almost all of it is about protecting skin and "
+                  "vitiligo is brief, and almost all of it is about protecting skin and "
                   "catching associated conditions rather than about food.",
                   "It is a shorter list than most patients expect, and it is more effective "
                   "than the long one they were given."],
-         "cta": ("Start with a proper assessment", PRACTO_ONLINE),
+         "cta": ("Start with a proper assessment", WHATSAPP),
          "items": [
              {"title": "Sunscreen on depigmented skin",
               "body": "Skin without pigment has no protection and burns readily. Daily "
@@ -967,18 +971,18 @@ PAGES = [
         {"kind": "checklist", "eyebrow": "Reasonable", "h2": "Advice worth following.",
          "items": [
              "<b>Broad-spectrum sunscreen daily</b> on all depigmented skin",
-             "<b>Avoid deliberate tanning</b> — it widens the contrast",
-             "<b>Protect from injury</b> — cuts can trigger new patches",
-             "<b>Treat early</b> — the strongest predictor of response",
+             "<b>Avoid deliberate tanning</b>: it widens the contrast",
+             "<b>Protect from injury</b>: cuts can trigger new patches",
+             "<b>Treat early</b>: the strongest predictor of response",
              "<b>Check thyroid</b>, vitamin D and B12 once",
-             "<b>Cosmetic camouflage</b> if you want it — it is a legitimate choice",
+             "<b>Cosmetic camouflage</b> if you want it: it is a legitimate choice",
          ]},
 
         {"kind": "callout", "warn": True, "title": "About 'natural cure' treatments",
-         "body": "Herbal preparations, unregulated oral supplements and psoralen taken "
-                 "without supervision cause real harm — liver injury and severe burns are "
-                 "both documented. Psoralen with light is a genuine medical treatment; "
-                 "psoralen bought online and used in the sun is not the same thing."},
+         "body": "Herbal preparations, unregulated oral supplements and psoralen taken without "
+                 "supervision cause real harm. Liver injury and severe burns are both "
+                 "documented. Psoralen with light is a genuine medical treatment; psoralen "
+                 "bought online and used in the sun is not the same thing."},
     ],
     "faq_h2": "Diet and myths",
     "faqs": [
@@ -997,12 +1001,12 @@ PAGES = [
          "single most damaging misconception the condition carries."),
         ("Can stress cause vitiligo?",
          "Stress does not cause it. Some patients report a flare after a period of severe "
-         "stress or illness, and stress is a plausible trigger for activity in someone "
-         "already predisposed — but it is not the cause."),
+         "stress or illness, and stress is a plausible trigger for activity in someone already "
+         "predisposed, but it is not the cause."),
         ("Is there any truth to Ayurvedic or homeopathic cures?",
          "No treatment from any system has been shown to cure vitiligo. Some traditional "
-         "preparations contain psoralens, which are genuinely active — and genuinely "
-         "dangerous when used without supervised light dosing."),
+         "preparations contain psoralens, which are genuinely active, and genuinely dangerous "
+         "when used without supervised light dosing."),
     ],
     "related": [
         ("vitiligo", "The vitiligo hub", "What the condition is and how it is treated."),
@@ -1015,18 +1019,18 @@ PAGES = [
 {
     "slug": "vitiligo-cost", "template": "T2", "condition": "Vitiligo",
     "crumbs": [("Vitiligo", "vitiligo"), ("Cost", None)],
-    "title": "Vitiligo Treatment Cost in India — Honest Breakdown | Dr. Varada",
-    "meta": "What vitiligo treatment actually costs in India: how phototherapy, excimer and "
-            "graft surgery are priced, what a full course adds up to, and the questions to "
-            "ask before paying for a package.",
+    "title": "Vitiligo Treatment Cost in India | Dr. Varada",
+    "meta": "What vitiligo treatment costs in India: how phototherapy, excimer and graft "
+            "surgery are priced, and the questions to ask before paying for a package.",
     "eyebrow": "Vitiligo",
     "h1": "What vitiligo treatment costs",
-    "lede": "Vitiligo is treated over months, so the number that matters is not the price of "
-            "a session — it is what a course adds up to, and what happens to the money if "
-            "the patch does not respond.",
-    "acts": [("Ask for your costing", PRACTO_ONLINE), ("Back to the vitiligo hub", "vitiligo")],
+    "lede": "Vitiligo is treated over months, so the number that matters is not the price of a "
+            "session. It is what a course adds up to, and what happens to the money if the "
+            "patch does not respond.",
+    "acts": [("Ask for your costing", WHATSAPP), ("Back to the vitiligo hub", "vitiligo")],
+    "sources": ["aad-vitiligo-tx", "iadvl-vitiligo-surgery", "dermnet-vitiligo"],
     "glance": [
-        ("Priced by", "Session, area, or graft — not by outcome"),
+        ("Priced by", "Session, area, or graft: not by outcome"),
         ("Phototherapy", "Per session; courses run months"),
         ("Excimer", "Per session, by area treated"),
         ("Surgery", "Per procedure, by area and technique"),
@@ -1046,14 +1050,14 @@ PAGES = [
              "quotes only the per-session figure is quoting the smallest honest number "
              "available.",
              "Costs are given here after examination and in writing. Before an examination "
-             "nobody can tell you how many sessions your particular patches will need, "
-             "because that depends on site, duration and activity — the same three things "
-             "that decide the treatment itself.",
+             "nobody can tell you how many sessions your particular patches will need, because "
+             "that depends on site, duration and activity. The same three things that decide "
+             "the treatment itself.",
          ]},
 
         {"kind": "table", "eyebrow": "The structure", "h2": "What you are charged for",
-         "intro": "Current figures are confirmed at consultation. What does not change is "
-                  "the structure — which is what lets you compare one clinic with another.",
+         "intro": "Current figures are confirmed at consultation. What does not change is the "
+                  "structure, which is what lets you compare one clinic with another.",
          "head": ["Item", "Charged", "What drives the total"],
          "rows": [
              ["Consultation", "Per visit", "First visit and reviews"],
@@ -1067,8 +1071,8 @@ PAGES = [
              ["Review visits", "Per visit", "Every 6–8 weeks while active"],
          ],
          "note": "Actual rupee figures are quoted by the clinic after examination and are "
-                 "deliberately not published here — a number without your diagnosis "
-                 "attached to it is not information, it is an advertisement."},
+                 "deliberately not published here. A number without your diagnosis attached to "
+                 "it is not information, it is an advertisement."},
 
         {"kind": "checklist", "eyebrow": "Before you pay",
          "h2": "Six questions worth asking any clinic.",
@@ -1090,7 +1094,7 @@ PAGES = [
                   "The alternative is to price the plan, review at defined intervals, and "
                   "change course when the review says to. It costs the clinic predictability "
                   "and it costs the patient nothing."],
-         "cta": ("Get a plan and a costing", PRACTO_ONLINE),
+         "cta": ("Get a plan and a costing", WHATSAPP),
          "items": [
              {"title": "Reviewed at 6–8 weeks",
               "body": "If nothing has moved on a site that should have responded, the plan "
@@ -1101,10 +1105,10 @@ PAGES = [
          ]},
 
         {"kind": "callout", "title": "Cost is not the only currency",
-         "body": "Phototherapy demands two to three visits a week for months. For many "
-                 "patients travel time and time off work outweigh the session fee — which "
-                 "is why a supervised home unit, or excimer for a handful of patches, can "
-                 "be the cheaper option overall even at a higher per-session price."},
+         "body": "Phototherapy demands two to three visits a week for months. For many patients "
+                 "travel time and time off work outweigh the session fee, which is why a "
+                 "supervised home unit, or excimer for a handful of patches, can be the cheaper "
+                 "option overall even at a higher per-session price."},
     ],
     "faq_h2": "Cost questions",
     "faqs": [
@@ -1113,17 +1117,16 @@ PAGES = [
          "sessions your patches need depends on their site, size, duration and activity. "
          "Costs are quoted in writing after examination, including for online consultations."),
         ("Is vitiligo treatment covered by insurance in India?",
-         "Generally not — most policies treat it as a chronic dermatological condition "
-         "rather than an admissible one, and surgical repigmentation is often classed as "
-         "cosmetic. Check your specific policy before assuming either way."),
+         "Generally not. Most policies treat it as a chronic dermatological condition rather "
+         "than an admissible one, and surgical repigmentation is often classed as cosmetic. "
+         "Check your specific policy before assuming either way."),
         ("Is a package cheaper than paying per session?",
          "Sometimes on paper. The risk is that a package fixes the number of sessions before "
          "anyone knows whether your patches respond, and creates pressure to continue "
          "treatment that a review says should change."),
         ("What is the most expensive part of treatment?",
-         "Usually the cumulative cost of a long phototherapy course, not any single "
-         "procedure — because it runs for months. Surgery is a larger single number but a "
-         "one-off."),
+         "Usually the cumulative cost of a long phototherapy course, not any single procedure, "
+         "because it runs for months. Surgery is a larger single number but a one-off."),
         ("Can I do part of the treatment at home to reduce cost?",
          "Sometimes. A home narrowband UVB unit can be appropriate once the dose has been "
          "established in clinic and the patches are countable and reachable. It is not "
@@ -1141,17 +1144,17 @@ PAGES = [
     "slug": "vitiligo-online-consultation", "template": "T2", "condition": "Vitiligo",
     "crumbs": [("Vitiligo", "vitiligo"), ("Online consultation", None)],
     "title": "Online Vitiligo Consultation Anywhere in India | Dr. Varada",
-    "meta": "Consult a vitiligo specialist of 45 years by video, from anywhere in India. "
-            "What a video consultation can settle, what it can't, how to photograph your "
-            "patches, and when travel is worth it.",
+    "meta": "Consult a vitiligo specialist of 45 years by video, anywhere in India. What a "
+            "video consult can settle, how to photograph patches, and when to travel.",
     "eyebrow": "Vitiligo",
     "h1": "Consult about vitiligo from anywhere in India",
     "lede": "Vitiligo is a condition people travel for, often without knowing in advance "
             "whether the journey is worth making. A video consultation answers that question "
-            "first — and for many patients it is the whole answer.",
-    "acts": [("Book a video consultation", PRACTO_ONLINE), ("Send photographs", WHATSAPP)],
+            "first, and for many patients it is the whole answer.",
+    "acts": [("Book a video consultation", WHATSAPP), ("Call the clinic", PHONE)],
+    "sources": ["niams-vitiligo", "aad-vitiligo-tx", "dermnet-vitiligo"],
     "glance": [
-        ("Platform", "Practo video consultation"),
+        ("Booking", "WhatsApp: video link sent back"),
         ("Good for", "Diagnosis review, plan, second opinion"),
         ("Not for", "Procedures, grafting assessment in isolation"),
         ("You'll need", "Daylight photographs, old prescriptions"),
@@ -1162,16 +1165,16 @@ PAGES = [
         {"kind": "prose", "eyebrow": "Why this exists",
          "h2": "Most of vitiligo care is decisions, not procedures.",
          "body": [
-             "The things that determine a vitiligo outcome — whether the disease is active, "
-             "whether the current treatment is the right one, whether a patch is a "
-             "candidate for surgery, whether the diet advice you were given matters — are "
-             "all judgements. Almost none of them requires being in the room.",
+             "The things that determine a vitiligo outcome, whether the disease is active, "
+             "whether the current treatment is the right one, whether a patch is a candidate "
+             "for surgery, whether the diet advice you were given matters. Are all judgements. "
+             "Almost none of them requires being in the room.",
              "India has among the highest vitiligo prevalence in the world and a very "
              "uneven distribution of dermatologists who treat it in depth. A patient in a "
              "district town is frequently told either that nothing can be done, or that a "
              "cure is available for a fee. Both answers are wrong and both are common.",
              "A video consultation is a way to get a considered opinion without a "
-             "thousand-kilometre trip — and, when travel is genuinely warranted, to arrive "
+             "thousand-kilometre trip, and, when travel is genuinely warranted, to arrive "
              "knowing exactly what for.",
          ]},
 
@@ -1187,7 +1190,7 @@ PAGES = [
                        "Answer diet and myth questions properly"]},
              {"eyebrow": "Needs a visit", "title": "What it can't",
               "list": ["Wood's lamp examination",
-                       "Any procedure — light, laser or surgery",
+                       "Any procedure: light, laser or surgery",
                        "Final surgical assessment on its own",
                        "Dermatoscopy of an uncertain lesion",
                        "Anything requiring touch"]},
@@ -1203,8 +1206,8 @@ PAGES = [
               "body": "Near a window, no flash, no filter. One wide shot showing the body "
                       "region and one close shot of each patch."},
              {"title": "Include a scale and a date",
-              "body": "A coin or a ruler beside the patch. And older photographs if you "
-                      "have any — they establish whether it is spreading."},
+              "body": "A coin or a ruler beside the patch. And older photographs if you have "
+                      "any. They establish whether it is spreading."},
              {"title": "List what you've used",
               "body": "Every cream, tablet and course of light, with rough dates and how "
                       "long each was continued."},
@@ -1215,10 +1218,10 @@ PAGES = [
 
         {"kind": "split", "eyebrow": "When to travel",
          "h2": "The reason people come to Hyderabad.",
-         "body": ["Surgical repigmentation — melanocyte transplant and punch grafting — is "
-                  "the treatment patients travel for, because comparatively few centres in "
-                  "India perform it and because it is the only option for patches that "
-                  "light cannot reach.",
+         "body": ["Surgical repigmentation, melanocyte transplant and punch grafting, is the "
+                  "treatment patients travel for, because comparatively few centres in India "
+                  "perform it and because it is the only option for patches that light cannot "
+                  "reach.",
                   "The consultation exists to establish whether you are a candidate before "
                   "you buy a ticket. A significant proportion of people who ask are told to "
                   "wait until their disease is stable, and hearing that on a video call "
@@ -1241,20 +1244,21 @@ PAGES = [
     "faq_h2": "Online consultation",
     "faqs": [
         ("How do I book an online vitiligo consultation?",
-         "Through Practo video consultation. It is the same diary the clinic uses for "
-         "in-person appointments, so the slot you take is real."),
+         "Message the clinic on WhatsApp and ask for a video consultation. The team confirm a "
+         "time and send the link back on the same thread. One conversation, so nothing is lost "
+         "between booking and consulting."),
         ("Can vitiligo really be assessed over video?",
-         "A great deal of it can — activity, distribution, whether the current treatment "
-         "makes sense, and whether surgery is worth investigating. What cannot be done "
-         "remotely is a Wood's lamp examination or any procedure."),
+         "A great deal of it can: activity, distribution, whether the current treatment makes "
+         "sense, and whether surgery is worth investigating. What cannot be done remotely is a "
+         "Wood's lamp examination or any procedure."),
         ("What photographs should I send?",
          "Daylight, no flash, no filter. One wide shot per body region and one close shot "
          "per patch, with a coin or ruler for scale. Older photographs are especially "
          "valuable because they show whether the patches have grown."),
         ("Will I get a prescription?",
-         "Where it is appropriate, yes — with a written plan. Some medications require "
-         "in-person examination and monitoring before starting, and those will not be "
-         "prescribed remotely."),
+         "Where it is appropriate, yes, with a written plan. Some medications require in-person "
+         "examination and monitoring before starting, and those will not be prescribed "
+         "remotely."),
         ("Can I get phototherapy near my home town?",
          "Often yes. Part of the consultation is identifying what is available locally and "
          "specifying the protocol so a nearby centre can run it, with reviews done by video."),
@@ -1264,7 +1268,8 @@ PAGES = [
     "related": [CROSS,
                 ("vitiligo-graft-surgery", "Graft surgery",
                  "The treatment most out-of-state patients are asking about."),
-                ("vitiligo-cost", "What it costs", "Including what a video consult covers.")],
+                ("online-consultation", "Consult online, any condition",
+                 "What a video consultation settles, and what it cannot.")],
 },
 
 ]

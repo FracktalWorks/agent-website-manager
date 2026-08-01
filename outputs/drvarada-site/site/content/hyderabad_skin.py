@@ -7,7 +7,7 @@ these pages sell instead is judgement: what a treatment does, what it does not d
 and when the answer is not to have it.
 """
 
-from chrome import PRACTO, PRACTO_JH, PRACTO_ONLINE, WHATSAPP
+from chrome import PHONE, WHATSAPP
 from content.hyderabad_medical import CRED, VISIT
 
 PAGES = [
@@ -17,20 +17,20 @@ PAGES = [
     "slug": "skin-allergy-rashes-treatment", "template": "T1", "condition": "Skin allergy",
     "crumbs": [("Skin allergy and rashes", None)],
     "title": "Skin Allergy & Rash Treatment in Hyderabad | Dr. Varada",
-    "meta": "Skin allergy, hives and rash treatment in Hyderabad — including itchy rashes "
-            "in children, contact allergy and chronic urticaria. Diagnosed before it is "
-            "treated. Book on Practo.",
+    "meta": "Skin allergy, hives and rash treatment in Hyderabad, including itchy rashes in "
+            "children, contact allergy and chronic urticaria.",
     "eyebrow": "Hyderabad",
     "h1": "Skin allergy and rash treatment in Hyderabad",
     "lede": "A rash is a sign, not a diagnosis. Two rashes that look identical can be an "
-            "allergy, an infection or a chronic inflammatory disease — and the antihistamine "
+            "allergy, an infection or a chronic inflammatory disease, and the antihistamine "
             "that helps one does nothing for the others.",
-    "acts": [("Book on Practo", PRACTO), ("Send photographs", WHATSAPP)],
+    "acts": [("Book on WhatsApp", WHATSAPP), ("Call the clinic", PHONE)],
     "creds": CRED,
+    "sources": ["dermnet-urticaria", "dermnet-contact-dermatitis", "dermnet-eczema"],
     "glance": [
         ("Covers", "Hives, contact allergy, drug rash, itchy rashes"),
         ("In children", "Common and usually straightforward"),
-        ("Chronic urticaria", "Over 6 weeks — needs proper assessment"),
+        ("Chronic urticaria", "Over 6 weeks: needs proper assessment"),
         ("Patch testing", "For suspected contact allergy"),
         ("Red flags", "Fever, blistering, lip or tongue swelling"),
         ("First step", "Identify what it actually is"),
@@ -39,21 +39,21 @@ PAGES = [
         {"kind": "callout", "warn": True, "title": "When not to wait for an appointment",
          "body": "Swelling of the lips, tongue or throat, difficulty breathing, a rash with "
                  "high fever, blistering or skin peeling in sheets, or a rash that does not "
-                 "fade when pressed — all need emergency care the same day, not a clinic "
+                 "fade when pressed. All need emergency care the same day, not a clinic "
                  "booking."},
 
         {"kind": "prose", "eyebrow": "The problem",
          "h2": "Most rashes are treated before they are named.",
          "body": [
-             "The usual sequence for a rash in India is a topical steroid-antifungal-"
-             "antibiotic combination cream bought over the counter, applied for weeks. Those "
-             "combinations suppress appearance without treating cause, and they change how "
-             "the rash looks — so by the time it is examined properly, the diagnosis has "
-             "been obscured as well as delayed.",
+             "The usual sequence for a rash in India is a topical steroid-antifungal-antibiotic "
+             "combination cream bought over the counter, applied for weeks. Those combinations "
+             "suppress appearance without treating cause, and they change how the rash looks, "
+             "so by the time it is examined properly, the diagnosis has been obscured as well "
+             "as delayed.",
              "The alternative takes one appointment. Where it started, how it spreads, what "
-             "makes it worse, whether it itches or burns, whether individual spots last "
-             "hours or days — that history plus an examination names most rashes without "
-             "any test at all.",
+             "makes it worse, whether it itches or burns, whether individual spots last hours "
+             "or days. That history plus an examination names most rashes without any test at "
+             "all.",
              "Where a test is needed it is a specific one: patch testing for suspected "
              "contact allergy, a scraping for suspected fungus, occasionally a biopsy. Not "
              "a broad allergy panel, which in chronic hives generates false positives and "
@@ -68,11 +68,11 @@ PAGES = [
              ["Rash exactly where something touched skin", "Contact dermatitis",
               "Identify the contact; patch testing if unclear"],
              ["Widespread rash days after a new medicine", "Drug reaction",
-              "Review the medicine urgently — do not simply treat the skin"],
+              "Review the medicine urgently: do not simply treat the skin"],
              ["Itchy rash in a child, flexures and cheeks", "Atopic dermatitis",
               "Emollients and anti-inflammatory treatment"],
              ["Ring-shaped, scaly, spreading edge", "Fungal infection",
-              "Antifungal — steroid creams make it worse and spread it"],
+              "Antifungal: steroid creams make it worse and spread it"],
              ["Intense night-time itch, whole family affected", "Scabies",
               "Treat everyone in the household simultaneously"],
          ],
@@ -82,10 +82,10 @@ PAGES = [
 
         {"kind": "split", "eyebrow": "Chronic hives",
          "h2": "Hives for more than six weeks are a different problem.",
-         "body": ["Acute hives usually have a trigger and settle. Chronic urticaria — weals "
-                  "coming and going for more than six weeks — usually does not have an "
-                  "external trigger at all, which is why the extensive food-allergy testing "
-                  "patients often demand is unhelpful and frequently harmful.",
+         "body": ["Acute hives usually have a trigger and settle. Chronic urticaria. Weals "
+                  "coming and going for more than six weeks. Usually does not have an external "
+                  "trigger at all, which is why the extensive food-allergy testing patients "
+                  "often demand is unhelpful and frequently harmful.",
                   "It is managed rather than chased: antihistamines at properly optimised "
                   "doses, a limited set of blood tests, and escalation where that is not "
                   "enough. Most cases eventually resolve, though it can take a long time, "
@@ -111,8 +111,8 @@ PAGES = [
          "allergic at all."),
         ("Should I get allergy testing done?",
          "Only where it will change the treatment. Patch testing is genuinely useful for "
-         "suspected contact allergy. Broad food-allergy panels in chronic hives are not — "
-         "they generate false positives and unnecessary dietary restriction."),
+         "suspected contact allergy. Broad food-allergy panels in chronic hives are not. They "
+         "generate false positives and unnecessary dietary restriction."),
         ("My child has an itchy rash. Is it serious?",
          "Most childhood rashes are not, and most are straightforward once named. Seek care "
          "the same day if there is fever, the rash does not fade when pressed, there is "
@@ -133,8 +133,8 @@ PAGES = [
     "related": [
         ("eczema-atopic-dermatitis-treatment", "Eczema and atopic dermatitis",
          "The commonest chronic itchy rash, especially in children."),
+        ("fungal-infection-treatment-hyderabad", "Fungal infections", "If it is ring-shaped and spreading."),
         ("psoriasis-treatment-hyderabad", "Psoriasis", "If the rash is scaly and persistent."),
-        ("dandruff-treatment", "Seborrhoeic dermatitis", "Facial and scalp redness with scaling."),
     ],
 },
 
@@ -143,24 +143,24 @@ PAGES = [
     "slug": "eczema-atopic-dermatitis-treatment", "template": "T1",
     "condition": "Atopic dermatitis",
     "crumbs": [("Eczema and atopic dermatitis", None)],
-    "title": "Eczema & Atopic Dermatitis Treatment in Hyderabad | Dr. Varada",
-    "meta": "Eczema and atopic dermatitis treatment in Hyderabad for children and adults — "
-            "the emollient-first approach, using steroids correctly, and breaking the "
-            "itch-scratch cycle. Book on Practo.",
+    "title": "Eczema & Atopic Dermatitis in Hyderabad | Dr. Varada",
+    "meta": "Eczema and atopic dermatitis treatment in Hyderabad for children and adults: the "
+            "emollient-first approach, using steroids correctly, and the itch cycle.",
     "eyebrow": "Hyderabad",
     "h1": "Eczema and atopic dermatitis treatment",
     "lede": "Eczema is a barrier problem before it is an inflammation problem. Treatment "
             "that only suppresses the flare and never repairs the barrier produces exactly "
             "the pattern most families describe: better for a week, back within a month.",
-    "acts": [("Book on Practo", PRACTO), ("Consult online", PRACTO_ONLINE)],
+    "acts": [("Book on WhatsApp", WHATSAPP), ("Call the clinic", PHONE)],
     "creds": CRED,
+    "sources": ["niams-eczema", "dermnet-eczema", "nhs-eczema"],
     "glance": [
-        ("Curable", "No — but usually well controlled"),
+        ("Curable", "No, but usually well controlled"),
         ("In children", "Most improve substantially with age"),
         ("Foundation", "Emollients, used generously and daily"),
         ("Flares", "Anti-inflammatory treatment, then step down"),
         ("Steroid phobia", "A bigger problem than steroid overuse"),
-        ("Watch for", "Infection — weeping, crusting, sudden worsening"),
+        ("Watch for", "Infection: weeping, crusting, sudden worsening"),
     ],
     "sections": [
         {"kind": "prose", "eyebrow": "The mechanism",
@@ -170,10 +170,9 @@ PAGES = [
              "irritants out well. Water escapes, the skin dries and cracks, irritants and "
              "allergens get in, and the immune system reacts. The itch that follows leads to "
              "scratching, scratching damages the barrier further, and the cycle continues.",
-             "That is why moisturiser is not supportive care in eczema — it is the "
-             "treatment. Applied generously and daily, including on skin that currently "
-             "looks fine, it reduces the number of flares and the amount of steroid needed "
-             "over a year.",
+             "That is why moisturiser is not supportive care in eczema: it is the treatment. "
+             "Applied generously and daily, including on skin that currently looks fine, it "
+             "reduces the number of flares and the amount of steroid needed over a year.",
              "Most families use far too little. A child with widespread eczema needs "
              "emollient measured in hundreds of grams a month, not a small tube that lasts "
              "the season.",
@@ -182,8 +181,8 @@ PAGES = [
         {"kind": "steps", "eyebrow": "The protocol", "h2": "How eczema is managed",
          "items": [
              {"title": "Emollient, generously, daily",
-              "body": "Applied several times a day, and always after bathing on damp skin. "
-                      "On good days as well as bad — that is what prevents the next flare."},
+              "body": "Applied several times a day, and always after bathing on damp skin. On "
+                      "good days as well as bad. That is what prevents the next flare."},
              {"title": "Treat a flare properly",
               "body": "An anti-inflammatory of the right potency for the site, used for "
                       "long enough to actually clear it. Under-treating prolongs everything."},
@@ -197,10 +196,10 @@ PAGES = [
 
         {"kind": "split", "eyebrow": "Steroid fear",
          "h2": "The bigger problem is under-treatment.",
-         "body": ["Almost every family arrives worried about steroid creams, and the worry "
-                  "is understandable — potent steroids used carelessly on thin skin do cause "
-                  "harm. But in practice far more eczema is damaged by treating it too "
-                  "little and too briefly than by treating it too much.",
+         "body": ["Almost every family arrives worried about steroid creams, and the worry is "
+                  "understandable. Potent steroids used carelessly on thin skin do cause harm. "
+                  "But in practice far more eczema is damaged by treating it too little and too "
+                  "briefly than by treating it too much.",
                   "Used at the right potency for the site, for a defined period, and "
                   "stepped down properly, topical steroids are safe and are the reason "
                   "eczema became manageable. Where the face or eyelids are involved, "
@@ -218,8 +217,8 @@ PAGES = [
         {"kind": "callout", "warn": True, "title": "When eczema is infected",
          "body": "Weeping, golden crusting, sudden worsening or painful clustered blisters "
                  "suggest bacterial or viral infection on top of the eczema. That needs "
-                 "assessing promptly — eczema herpeticum in particular is a genuine "
-                 "emergency in a child."},
+                 "assessing promptly. Eczema herpeticum in particular is a genuine emergency in "
+                 "a child."},
 
         VISIT,
     ],
@@ -234,9 +233,9 @@ PAGES = [
          "flare, and treatment is stepped down rather than stopped abruptly. Under-treating "
          "eczema causes more harm in practice than appropriate steroid use."),
         ("How much moisturiser should we be using?",
-         "Far more than most families expect — for a child with widespread eczema, hundreds "
-         "of grams a month. It is applied several times daily and continued on clear skin, "
-         "because that is what prevents the next flare."),
+         "Far more than most families expect, for a child with widespread eczema, hundreds of "
+         "grams a month. It is applied several times daily and continued on clear skin, because "
+         "that is what prevents the next flare."),
         ("Does food cause eczema?",
          "Food allergy is a genuine trigger in a minority of children with severe eczema, "
          "and worth investigating in that group. In most people diet is not the driver, and "
@@ -264,37 +263,37 @@ PAGES = [
     "slug": "anti-aging-botox-hyderabad", "template": "T1",
     "crumbs": [("Botox and anti-ageing", None)],
     "title": "Botox & Anti-Ageing Treatment in Hyderabad | Dr. Varada",
-    "meta": "Botulinum toxin and anti-ageing treatment in Hyderabad — what it treats, what "
-            "it cannot, how long it lasts, and why conservative dosing is the point. "
-            "Administered by a dermatologist of 45 years.",
+    "meta": "Botulinum toxin and anti-ageing treatment in Hyderabad: what it treats, what it "
+            "cannot, how long it lasts, and why conservative dosing is the point.",
     "eyebrow": "Hyderabad",
     "h1": "Botox and anti-ageing treatment in Hyderabad",
     "lede": "Botulinum toxin relaxes the specific muscles that fold skin into lines. It does "
-            "that well and it does nothing else — which is why the useful conversation is "
-            "about whether your concern is actually a muscle problem.",
-    "acts": [("Book a consultation", PRACTO_JH), ("See the clinic", "locations-jubilee-hills")],
+            "that well and it does nothing else, which is why the useful conversation is about "
+            "whether your concern is actually a muscle problem.",
+    "acts": [("Book a consultation", WHATSAPP), ("See the clinic", "locations-secunderabad")],
     "creds": CRED,
+    "sources": ["dermnet-botulinum"],
     "glance": [
         ("Treats", "Lines caused by muscle movement"),
         ("Does not treat", "Volume loss, laxity, pigmentation, texture"),
         ("Onset", "3–7 days, full effect around 2 weeks"),
         ("Lasts", "Typically 3–4 months"),
-        ("Where", "Jubilee Hills clinic"),
-        ("Approach", "Conservative — movement retained"),
+        ("Where", "Secunderabad clinic"),
+        ("Approach", "Conservative: movement retained"),
     ],
     "sections": [
         {"kind": "prose", "eyebrow": "What it actually does",
          "h2": "One mechanism, and its honest limits.",
          "body": [
              "Botulinum toxin temporarily reduces the contraction of specific small facial "
-             "muscles. Where a line is created by repeated folding — frown lines, forehead "
-             "lines, crow's feet — relaxing that muscle allows the line to soften and "
-             "prevents it deepening further.",
+             "muscles. Where a line is created by repeated folding (frown lines, forehead "
+             "lines, crow's feet), relaxing that muscle allows the line to soften and prevents "
+             "it deepening further.",
              "Where a line is not caused by movement, it does nothing. Lines from volume "
              "loss, skin laxity, sun damage or texture are different problems with different "
              "answers, and treating them with toxin produces disappointment at some expense.",
              "It also has genuine medical uses that patients often do not realise are "
-             "available — excessive underarm or palm sweating responds to it well.",
+             "available. Excessive underarm or palm sweating responds to it well.",
              "The approach here is deliberately conservative: enough to soften the line, not "
              "enough to remove expression. A face that cannot move does not read as younger. "
              "It reads as treated.",
@@ -312,7 +311,7 @@ PAGES = [
               "Peels, topicals, sun protection"],
              ["Open pores and rough texture", "Texture", "Resurfacing and peels"],
              ["Excessive sweating", "Overactive sweat glands",
-              "Botulinum toxin — a genuine medical indication"],
+              "Botulinum toxin: a genuine medical indication"],
          ],
          "note": "Half the value of the consultation is this table. Being told your concern "
                  "is not a toxin problem saves you the cost of finding out."},
@@ -322,10 +321,10 @@ PAGES = [
          "body": ["The first treatment is deliberately under-dosed and reviewed at two "
                   "weeks. Adding a little more is straightforward; waiting three months for "
                   "an over-treated forehead to recover is not.",
-                  "It is also a medical procedure with real anatomy behind it. Injected in "
-                  "the wrong plane or the wrong place it produces a drooping eyelid or a "
-                  "heavy brow — temporary, but months of temporary. Who is holding the "
-                  "syringe matters more than which brand is in it."],
+                  "It is also a medical procedure with real anatomy behind it. Injected in the "
+                  "wrong plane or the wrong place it produces a drooping eyelid or a heavy "
+                  "brow. Temporary, but months of temporary. Who is holding the syringe matters "
+                  "more than which brand is in it."],
          "cta": ("For laxity rather than lines", "rf-skin-tightening-hyderabad"),
          "items": [
              {"title": "Reviewed at two weeks",
@@ -338,9 +337,9 @@ PAGES = [
 
         {"kind": "callout", "warn": True, "title": "Who should not have it",
          "body": "Pregnancy and breastfeeding, certain neuromuscular conditions, active "
-                 "infection at the injection site, and unrealistic expectations — the last "
-                 "being the most common reason to decline. Anyone who cannot be talked out "
-                 "of expecting a different face is better served by not having the injection."},
+                 "infection at the injection site, and unrealistic expectations. The last being "
+                 "the most common reason to decline. Anyone who cannot be talked out of "
+                 "expecting a different face is better served by not having the injection."},
 
         VISIT,
     ],
@@ -358,21 +357,21 @@ PAGES = [
          "The injections are very fine and take a few minutes. Most people describe brief "
          "stinging. Small bruises are possible and settle within days."),
         ("What happens if I stop having it?",
-         "Muscle movement gradually returns and lines return to their previous state over a "
-         "few months. Nothing gets worse than it was — that is a persistent myth."),
+         "Muscle movement gradually returns and lines return to their previous state over a few "
+         "months. Nothing gets worse than it was. That is a persistent myth."),
         ("Is it safe long-term?",
          "It has decades of use in both medical and cosmetic indications with a well-"
          "characterised safety profile at the doses used cosmetically. Treated muscles may "
          "weaken slightly with repeated use, which usually means longer gaps between "
          "treatments."),
         ("Can it help excessive sweating?",
-         "Yes, and this is a genuine medical indication that works well — particularly for "
+         "Yes, and this is a genuine medical indication that works well. Particularly for "
          "underarm sweating. Effect typically lasts several months."),
     ],
     "related": [
-        ("skin-boosters-hyderabad", "Skin boosters", "For quality and hydration, not movement."),
+        ("dermal-fillers-hyderabad", "Dermal fillers", "For lost volume, which toxin cannot treat."),
+        ("thread-lift-hyderabad", "Thread lift", "For mild laxity, with the limits stated."),
         ("rf-skin-tightening-hyderabad", "RF skin tightening", "For laxity."),
-        ("chemical-peels-hyderabad", "Chemical peels", "For pigmentation and texture."),
     ],
 },
 
@@ -380,24 +379,24 @@ PAGES = [
 {
     "slug": "skin-boosters-hyderabad", "template": "T1",
     "crumbs": [("Skin boosters", None)],
-    "title": "Skin Boosters in Hyderabad — Hydration & Skin Quality | Dr. Varada",
+    "title": "Skin Boosters in Hyderabad: Skin Quality | Dr. Varada",
     "meta": "Skin boosters in Hyderabad: what they are, how they differ from fillers, what "
-            "change to expect and over how long, and who they suit. Assessed by a "
-            "dermatologist of 45 years.",
+            "change to expect and over how long, and who they suit.",
     "eyebrow": "Hyderabad",
     "h1": "Skin boosters in Hyderabad",
-    "lede": "Skin boosters treat skin quality — hydration, fine texture, that dull tight "
-            "look — rather than shape. They do not add volume and they do not lift. Knowing "
-            "that before you book is most of the value.",
-    "acts": [("Book a consultation", PRACTO_JH), ("See the clinic", "locations-jubilee-hills")],
+    "lede": "Skin boosters treat skin quality (hydration, fine texture, that dull tight look), "
+            "rather than shape. They do not add volume and they do not lift. Knowing that "
+            "before you book is most of the value.",
+    "acts": [("Book a consultation", WHATSAPP), ("See the clinic", "locations-secunderabad")],
     "creds": CRED,
+    "sources": ["dermnet-mesotherapy", "dermnet-fillers"],
     "glance": [
         ("Treats", "Hydration, fine crepiness, dullness"),
         ("Does not treat", "Volume loss, sagging, deep lines"),
         ("Protocol", "Usually a short course, then maintenance"),
-        ("Visible change", "Gradual — weeks, not days"),
+        ("Visible change", "Gradual: weeks, not days"),
         ("Common areas", "Face, neck, décolletage, hands"),
-        ("Where", "Jubilee Hills clinic"),
+        ("Where", "Secunderabad clinic"),
     ],
     "sections": [
         {"kind": "prose", "eyebrow": "What they are",
@@ -407,10 +406,10 @@ PAGES = [
              "across an area rather than shaped in one spot. They hydrate the skin and "
              "stimulate its own repair, improving the way skin reflects light and feels, "
              "without changing the contours of the face.",
-             "Fillers do the opposite job — they add volume to a specific place to restore "
-             "or alter shape. The two are frequently conflated in marketing, and a patient "
-             "who wanted cheek volume and received boosters will be disappointed, as will a "
-             "patient who wanted brighter skin and received filler.",
+             "Fillers do the opposite job: they add volume to a specific place to restore or "
+             "alter shape. The two are frequently conflated in marketing, and a patient who "
+             "wanted cheek volume and received boosters will be disappointed, as will a patient "
+             "who wanted brighter skin and received filler.",
              "The realistic result is that skin looks better rested and better hydrated. It "
              "is a subtle, cumulative change over weeks, not a transformation photographed "
              "the next day.",
@@ -470,9 +469,9 @@ PAGES = [
          "change, and judging it after a single session understates what the full course "
          "does."),
         ("How long do skin boosters last?",
-         "The effect is temporary and maintenance is needed periodically. How often depends "
-         "on your skin, sun exposure and general skin care — it is agreed after the first "
-         "course shows how you respond."),
+         "The effect is temporary and maintenance is needed periodically. How often depends on "
+         "your skin, sun exposure and general skin care. It is agreed after the first course "
+         "shows how you respond."),
         ("Do they help acne scars or open pores?",
          "Skin quality generally improves, which can make texture look better. They are not "
          "a treatment for true scarring, which needs procedural work."),
@@ -480,13 +479,13 @@ PAGES = [
          "Minimal. Small bumps at injection points and occasional bruising for a day or two. "
          "Most people return to normal activity immediately."),
         ("Am I too young or too old for this?",
-         "Neither age is the criterion — what the skin needs is. Someone with genuine volume "
+         "Neither age is the criterion. What the skin needs is. Someone with genuine volume "
          "loss or laxity will be better served by a different treatment regardless of age."),
     ],
     "related": [
-        ("anti-aging-botox-hyderabad", "Botox and anti-ageing", "For movement lines."),
+        ("mesotherapy-hyderabad", "Mesotherapy", "The broader technique, and how it differs."),
+        ("dermal-fillers-hyderabad", "Dermal fillers", "For volume, which boosters do not add."),
         ("chemical-peels-hyderabad", "Chemical peels", "For pigmentation and texture."),
-        ("rf-skin-tightening-hyderabad", "RF skin tightening", "For laxity."),
     ],
 },
 
@@ -494,17 +493,17 @@ PAGES = [
 {
     "slug": "rf-skin-tightening-hyderabad", "template": "T1",
     "crumbs": [("RF skin tightening", None)],
-    "title": "RF Skin Tightening in Hyderabad | Dr. Varada's Skin & Hair Center",
-    "meta": "Radiofrequency skin tightening in Hyderabad — how it works, what degree of "
-            "tightening is realistic, how many sessions it takes, and when surgery is the "
-            "honest answer instead.",
+    "title": "RF Skin Tightening in Hyderabad | Dr. Varada",
+    "meta": "Radiofrequency skin tightening in Hyderabad: how it works, what tightening is "
+            "realistic, how many sessions, and when surgery is the honest answer.",
     "eyebrow": "Hyderabad",
     "h1": "RF skin tightening in Hyderabad",
     "lede": "Radiofrequency heats the deeper layers of skin enough to make collagen contract "
-            "and remodel. It produces a genuine but modest tightening — and it is not a "
+            "and remodel. It produces a genuine but modest tightening, and it is not a "
             "non-surgical facelift, whatever it is marketed as.",
-    "acts": [("Book a consultation", PRACTO_JH), ("See the clinic", "locations-jubilee-hills")],
+    "acts": [("Book a consultation", WHATSAPP), ("See the clinic", "locations-secunderabad")],
     "creds": CRED,
+    "sources": ["dermnet-needling", "dermnet-phototype"],
     "glance": [
         ("Treats", "Mild to moderate laxity"),
         ("Realistic result", "Modest tightening, gradual"),
@@ -522,7 +521,7 @@ PAGES = [
              "and the tissue responds by producing new collagen over the following months. "
              "The immediate change is small; the useful change is the remodelling.",
              "That is why results are judged at three to six months, not at the end of the "
-             "session. It is also why a course is used rather than a single treatment — the "
+             "session. It is also why a course is used rather than a single treatment. The "
              "stimulus is cumulative.",
              "The honest limit is degree. Radiofrequency improves mild to moderate laxity. "
              "It does not reposition tissue that has descended substantially, and no amount "
@@ -538,9 +537,13 @@ PAGES = [
              ["Mild jawline softening", "Reasonable", "Modest improvement is realistic"],
              ["Crepey texture on neck", "Reasonable", "Often combined with skin quality work"],
              ["Significant sagging or excess skin", "Not suitable",
-              "Needs surgical assessment — RF will disappoint"],
+              "Needs surgical assessment: RF will disappoint"],
              ["Lines from muscle movement", "Wrong treatment", "Botulinum toxin addresses these"],
              ["Volume loss in cheeks", "Wrong treatment", "Tightening does not replace volume"],
+             ["Mild laxity on arms or abdomen", "Modest, same as the face",
+              "A longer course; the same collagen response, over a larger area"],
+             ["Fat reduction or weight loss", "Not what this is",
+              "Body RF is sold for this constantly; it does not deliver it"],
          ],
          "note": "Two of these rows say 'wrong treatment' rather than 'no'. Most "
                  "disappointment with tightening treatments comes from using them on a "
@@ -583,17 +586,21 @@ PAGES = [
          "repositions and removes tissue. Radiofrequency modestly tightens what is present. "
          "Different scale of result entirely."),
         ("Can it be combined with other treatments?",
-         "Frequently, yes — laxity, movement lines, pigmentation and skin quality are "
-         "separate problems, and a plan addressing several usually looks better than any one "
-         "treatment pushed too hard."),
+         "Frequently, yes: laxity, movement lines, pigmentation and skin quality are separate "
+         "problems, and a plan addressing several usually looks better than any one treatment "
+         "pushed too hard."),
         ("Is it safe on Indian skin?",
          "Radiofrequency does not target pigment, so it does not carry the pigmentary risk "
          "that some light-based devices do in darker skin types. That makes it a "
          "comparatively safe choice."),
+        ("Can radiofrequency be used on the body?",
+         "For mild laxity on the arms or abdomen, yes: the same modest tightening, over a "
+         "larger area and so across a longer course. What it does not do is reduce fat or "
+         "change your weight, which is what body radiofrequency is most often sold for."),
     ],
     "related": [
         ("skin-boosters-hyderabad", "Skin boosters", "For hydration and quality."),
-        ("anti-aging-botox-hyderabad", "Botox", "For lines caused by movement."),
+        ("thread-lift-hyderabad", "Thread lift", "The other non-surgical option, with its limits."),
         ("chemical-peels-hyderabad", "Chemical peels", "For pigmentation and surface texture."),
     ],
 },
@@ -602,24 +609,24 @@ PAGES = [
 {
     "slug": "chemical-peels-hyderabad", "template": "T1",
     "crumbs": [("Chemical peels", None)],
-    "title": "Chemical Peels in Hyderabad — Cost & What to Expect | Dr. Varada",
-    "meta": "Chemical peels in Hyderabad for pigmentation, acne marks, melasma and texture "
-            "— which peel suits Indian skin, how many sessions, and the pigmentation risk "
-            "of getting it wrong.",
+    "title": "Chemical Peels in Hyderabad: Cost & Sessions | Dr. Varada",
+    "meta": "Chemical peels in Hyderabad for pigmentation, acne marks and melasma, which peel "
+            "suits Indian skin, how many sessions, and the risk of getting it wrong.",
     "eyebrow": "Hyderabad",
     "h1": "Chemical peels in Hyderabad",
     "lede": "A peel is a controlled chemical injury that makes skin renew itself. On Indian "
-            "skin the depth and the aftercare matter more than the ingredient — because the "
-            "same treatment that clears pigmentation can cause it.",
-    "acts": [("Book a consultation", PRACTO_JH), ("See the clinic", "locations-jubilee-hills")],
+            "skin the depth and the aftercare matter more than the ingredient, because the same "
+            "treatment that clears pigmentation can cause it.",
+    "acts": [("Book a consultation", WHATSAPP), ("See the clinic", "locations-secunderabad")],
     "creds": CRED,
+    "sources": ["dermnet-peels", "dermnet-melasma", "dermnet-phototype"],
     "glance": [
         ("Treats", "Pigmentation, acne marks, melasma, texture"),
         ("Sessions", "A course, spaced 2–4 weeks apart"),
         ("Depth", "Superficial to medium in Indian skin"),
         ("Essential", "Daily sunscreen throughout"),
         ("Main risk", "Post-inflammatory pigmentation"),
-        ("Where", "Jubilee Hills clinic"),
+        ("Where", "Secunderabad clinic"),
     ],
     "sections": [
         {"kind": "prose", "eyebrow": "The Indian skin problem",
@@ -630,9 +637,9 @@ PAGES = [
              "with the right aftercare it clears pigmentation; done too deep or without sun "
              "protection afterwards it produces exactly the pigmentation it was meant to "
              "treat.",
-             "This is why peeling protocols for darker skin are conservative — superficial "
-             "to medium depth, built up gradually across a course, with priming beforehand "
-             "and rigorous sun protection throughout. It is slower than the aggressive "
+             "This is why peeling protocols for darker skin are conservative: superficial to "
+             "medium depth, built up gradually across a course, with priming beforehand and "
+             "rigorous sun protection throughout. It is slower than the aggressive "
              "single-session approach, and it is the reason it works.",
              "Melasma deserves a specific warning. It is the commonest reason people ask "
              "about peels, it is genuinely improvable, and it is also prone to rebounding "
@@ -644,7 +651,7 @@ PAGES = [
          "h2": "What a peel is being used for",
          "head": ["Concern", "Realistic outcome", "Notes"],
          "rows": [
-             ["Post-acne brown marks", "Good — often substantial improvement",
+             ["Post-acne brown marks", "Good: often substantial improvement",
               "Often the most satisfying indication"],
              ["Melasma", "Improvement, needs maintenance",
               "Prone to rebound; treated conservatively"],
@@ -661,8 +668,8 @@ PAGES = [
          "items": [
              {"title": "Prime the skin first",
               "body": "Topical preparation for some weeks before the first peel reduces "
-                      "pigmentary complications considerably. It is not an upsell — it is "
-                      "risk reduction."},
+                      "pigmentary complications considerably. It is not an upsell. It is risk "
+                      "reduction."},
              {"title": "Start superficial",
               "body": "Depth is built across sessions based on how your skin responded to "
                       "the last one, rather than fixed in advance."},
@@ -676,9 +683,9 @@ PAGES = [
 
         {"kind": "split", "eyebrow": "Aftercare",
          "h2": "Most peel complications are aftercare failures.",
-         "body": ["Peeling and flaking for a few days is expected — picking at it is not. "
-                  "Skin lifted before it is ready leaves marks that last far longer than "
-                  "the peel would have.",
+         "body": ["Peeling and flaking for a few days is expected, picking at it is not. Skin "
+                  "lifted before it is ready leaves marks that last far longer than the peel "
+                  "would have.",
                   "The other frequent failure is sun. A week of good aftercare followed by a "
                   "sunny afternoon undoes the session and can leave the treated area darker "
                   "than when it started."],
@@ -696,9 +703,9 @@ PAGES = [
     "faq_h2": "Chemical peel questions",
     "faqs": [
         ("How many chemical peel sessions will I need?",
-         "Usually a course spaced two to four weeks apart. The number depends on the "
-         "concern — post-acne pigmentation often responds within a few sessions, melasma "
-         "needs ongoing management."),
+         "Usually a course spaced two to four weeks apart. The number depends on the concern. "
+         "Post-acne pigmentation often responds within a few sessions, melasma needs ongoing "
+         "management."),
         ("Are chemical peels safe for Indian skin?",
          "Yes, when the depth is conservative, the skin is primed beforehand and sun "
          "protection is rigorous. The risk in darker skin is post-inflammatory "
@@ -709,19 +716,19 @@ PAGES = [
          "without a course plan is not a useful comparison."),
         ("Will my skin peel visibly?",
          "Superficial peels usually cause mild flaking for a few days rather than dramatic "
-         "shedding. Deeper peels peel more. Do not pick at it — that is the commonest cause "
-         "of marks afterwards."),
+         "shedding. Deeper peels peel more. Do not pick at it. That is the commonest cause of "
+         "marks afterwards."),
         ("Can peels remove acne scars?",
          "They improve the brown marks left by acne, which many people take for scars. True "
          "indented scars need procedural treatment; peels will not fill them."),
         ("Can I have a peel while on acne treatment?",
-         "It depends on the treatment. Some — particularly oral retinoids — require a gap "
-         "before peeling. Tell the clinic everything you are using."),
+         "It depends on the treatment. Some, particularly oral retinoids, require a gap before "
+         "peeling. Tell the clinic everything you are using."),
     ],
     "related": [
         ("acne-treatment-hyderabad", "Acne treatment", "Control the acne before treating marks."),
+        ("acne-scar-treatment-hyderabad", "Acne scar treatment", "For indented scars, which peels do not fill."),
         ("skin-boosters-hyderabad", "Skin boosters", "For hydration and quality."),
-        ("laser-hair-reduction-hyderabad", "Laser hair reduction", "The other common course-based treatment."),
     ],
 },
 
@@ -729,25 +736,24 @@ PAGES = [
 {
     "slug": "laser-hair-reduction-hyderabad", "template": "T1",
     "crumbs": [("Laser hair reduction", None)],
-    "title": "Laser Hair Reduction in Hyderabad | Dr. Varada's Skin & Hair Center",
-    "meta": "Laser hair reduction in Hyderabad — why it is reduction rather than removal, "
-            "how many sessions it takes, safety on Indian skin, and when facial hair needs "
-            "investigating first.",
+    "title": "Laser Hair Reduction in Hyderabad | Dr. Varada",
+    "meta": "Laser hair reduction in Hyderabad: why it is reduction not removal, how many "
+            "sessions, safety on Indian skin, and when facial hair needs investigating.",
     "eyebrow": "Hyderabad",
     "h1": "Laser hair reduction in Hyderabad",
-    "lede": "It is called reduction rather than removal deliberately. A proper course "
-            "removes most hair in the treated area for a long time, and a proportion returns "
-            "— anyone promising permanent removal is describing something the technology "
-            "does not do.",
-    "acts": [("Book a consultation", PRACTO_JH), ("See the clinic", "locations-jubilee-hills")],
+    "sources": ["dermnet-phototype", "aad-hair-loss"],
+    "lede": "It is called reduction rather than removal deliberately. A proper course removes "
+            "most hair in the treated area for a long time, and a proportion returns. Anyone "
+            "promising permanent removal is describing something the technology does not do.",
+    "acts": [("Book a consultation", WHATSAPP), ("See the clinic", "locations-secunderabad")],
     "creds": CRED,
     "glance": [
         ("Sessions", "Typically 6–8, spaced by body area"),
-        ("Works on", "Dark hair — targets pigment in the follicle"),
+        ("Works on", "Dark hair: targets pigment in the follicle"),
         ("Does not work on", "White, grey and very fine fair hair"),
         ("Indian skin", "Suitable with appropriate device settings"),
         ("Maintenance", "Occasional top-up sessions"),
-        ("Where", "Jubilee Hills clinic"),
+        ("Where", "Secunderabad clinic"),
     ],
     "sections": [
         {"kind": "prose", "eyebrow": "How it works",
@@ -756,14 +762,14 @@ PAGES = [
              "Laser energy is absorbed by the pigment in the hair shaft and converted to "
              "heat, which damages the follicle. Two consequences follow directly from that "
              "mechanism, and they explain almost every question patients ask.",
-             "First, it works on dark hair and does not work on white, grey or very fine "
-             "fair hair — there is no pigment to absorb the energy. Second, because the skin "
-             "also contains pigment, darker skin requires wavelengths and settings that "
-             "target the hair without heating the surrounding skin. Getting that wrong "
-             "causes burns and pigmentation, which is why device choice and operator "
-             "judgement matter more than the brand name.",
+             "First, it works on dark hair and does not work on white, grey or very fine fair "
+             "hair: there is no pigment to absorb the energy. Second, because the skin also "
+             "contains pigment, darker skin requires wavelengths and settings that target the "
+             "hair without heating the surrounding skin. Getting that wrong causes burns and "
+             "pigmentation, which is why device choice and operator judgement matter more than "
+             "the brand name.",
              "Hair also grows in cycles, and only follicles in their active growth phase "
-             "respond. That is why a course is needed — each session catches a different "
+             "respond. That is why a course is needed. Each session catches a different "
              "proportion of the follicles.",
          ]},
 
@@ -783,17 +789,35 @@ PAGES = [
                       "hormonal changes can prompt new growth."},
          ]},
 
+        {"kind": "table", "eyebrow": "The machines",
+         "h2": "Diode, IPL, and what the difference means for you",
+         "head": ["Technology", "How it behaves", "Where it fits"],
+         "rows": [
+             ["Diode laser", "A single wavelength, absorbed efficiently by hair pigment",
+              "The workhorse for coarse hair; well tolerated on Indian skin"],
+             ["IPL", "Broad-spectrum light rather than a laser, filtered to a range",
+              "Less selective; better on fair skin with dark hair"],
+             ["Longer wavelengths", "Penetrate deeper and interact less with skin pigment",
+              "Preferred where skin is darker or has been recently sun-exposed"],
+             ["Home devices", "Low fluence by regulation",
+              "Slower, weaker, and no substitute for a course, but not dangerous"],
+         ],
+         "note": "IPL is routinely advertised as laser and it is not one. On skin that "
+                 "carries pigment the distinction is practical rather than pedantic: a "
+                 "broad-spectrum source is less selective, so the settings that clear hair "
+                 "sit closer to the settings that burn."},
+
         {"kind": "split", "eyebrow": "Facial hair in women",
          "h2": "Sometimes the hair is a symptom.",
          "body": ["New or rapidly increasing coarse hair on the face, chest or abdomen in a "
-                  "woman — particularly with irregular periods, acne or weight change — can "
+                  "woman (particularly with irregular periods, acne or weight change), can "
                   "indicate an underlying hormonal condition, most commonly polycystic ovary "
                   "syndrome.",
                   "Treating the hair with laser without investigating that means treating a "
                   "symptom while the cause continues to produce new hair. It is a "
                   "conversation worth having before a course starts rather than after it "
                   "disappoints."],
-         "cta": ("Book a consultation first", PRACTO_JH),
+         "cta": ("Book a consultation first", WHATSAPP),
          "items": [
              {"title": "Worth investigating first",
               "body": "A short assessment can save an unsatisfying course, and can find "
@@ -804,9 +828,9 @@ PAGES = [
          ]},
 
         {"kind": "callout", "warn": True, "title": "Before each session",
-         "body": "Shave the area rather than waxing, threading or plucking — the laser needs "
-                 "the follicle intact and pigmented. Avoid sun exposure and tanning before "
-                 "and after; tanned skin raises the risk of burns and pigmentation."},
+         "body": "Shave the area rather than waxing, threading or plucking. The laser needs the "
+                 "follicle intact and pigmented. Avoid sun exposure and tanning before and "
+                 "after; tanned skin raises the risk of burns and pigmentation."},
 
         VISIT,
     ],
@@ -824,8 +848,8 @@ PAGES = [
          "have too little to absorb the energy, so they do not respond."),
         ("Is laser hair reduction safe for Indian skin?",
          "Yes, with appropriate wavelength and settings, and a patch test first. Darker skin "
-         "contains more pigment, so incorrect settings risk burns and pigmentation — which "
-         "is why the assessment matters more than the device brand."),
+         "contains more pigment, so incorrect settings risk burns and pigmentation, which is "
+         "why the assessment matters more than the device brand."),
         ("Should I shave or wax before a session?",
          "Shave. Waxing, threading and plucking remove the follicle target the laser needs. "
          "Shaving leaves it intact."),
@@ -847,21 +871,21 @@ PAGES = [
     "crumbs": [("Dermatosurgery", None)],
     "title": "Mole, Wart & Skin Tag Removal in Hyderabad | Dr. Varada",
     "meta": "Mole, wart, skin tag and cyst removal in Hyderabad by a dermatosurgeon of 45 "
-            "years — examined before removal, with histology where indicated. Book on "
-            "Practo.",
+            "years. Examined before removal, with histology where indicated. Book on WhatsApp.",
     "eyebrow": "Hyderabad",
     "h1": "Mole, wart and skin tag removal in Hyderabad",
     "lede": "Small procedures, done properly: examined before removal, removed by the method "
             "that suits the lesion, and sent for histology whenever there is any doubt about "
             "what it was.",
-    "acts": [("Book on Practo", PRACTO_JH), ("Send a photograph", WHATSAPP)],
+    "acts": [("Book on WhatsApp", WHATSAPP), ("Call the clinic", PHONE)],
     "creds": CRED,
+    "sources": ["dermnet-keloid", "dermnet-nail-disorders", "iadvl-vitiligo-surgery-std"],
     "glance": [
         ("Treats", "Moles, warts, skin tags, cysts, corns, keloids"),
         ("Examined first", "Dermatoscopy before any mole is removed"),
         ("Histology", "Whenever there is diagnostic doubt"),
         ("Anaesthesia", "Local, day procedure"),
-        ("Where", "Jubilee Hills clinic"),
+        ("Where", "Secunderabad clinic"),
         ("Scarring", "Discussed before, not after"),
     ],
     "sections": [
@@ -870,7 +894,7 @@ PAGES = [
          "body": [
              "A mole removed at a salon or by cautery without examination destroys the one "
              "thing that could have told you what it was. The overwhelming majority of moles "
-             "are entirely benign — but the way you know that is by examining them with a "
+             "are entirely benign, but the way you know that is by examining them with a "
              "dermatoscope beforehand and, where there is any doubt, sending the tissue for "
              "histology afterwards.",
              "That is the difference between a dermatosurgical removal and a cosmetic one, "
@@ -894,6 +918,8 @@ PAGES = [
               "Leaving the wall behind is why they recur"],
              ["Corns and callus", "Paring and offloading advice",
               "Recurs unless the pressure cause is addressed"],
+             ["Molluscum contagiosum", "Extraction or cautery of each lesion",
+              "Common in children; spreads by contact and scratching"],
              ["Keloids", "Injection-based treatment first",
               "Excising a keloid casually usually makes it worse"],
              ["Dermatosis papulosa nigra", "Fine cautery",
@@ -906,14 +932,14 @@ PAGES = [
         {"kind": "split", "eyebrow": "Before you agree",
          "h2": "Every removal leaves something.",
          "body": ["A removed lesion is replaced by a scar. Usually a small flat pale one, "
-                  "sometimes not — and the risk depends on the site, the size and your own "
-                  "healing. Chest, shoulders and the upper back scar less predictably than "
-                  "the face.",
+                  "sometimes not, and the risk depends on the site, the size and your own "
+                  "healing. Chest, shoulders and the upper back scar less predictably than the "
+                  "face.",
                   "So the conversation happens before the procedure: what mark to expect, "
                   "what the alternatives are including doing nothing, and what would make it "
                   "worth removing regardless. For a lesion being removed for cosmetic "
                   "reasons that conversation decides whether to proceed at all."],
-         "cta": ("Where procedures are done", "locations-jubilee-hills"),
+         "cta": ("Where procedures are done", "locations-secunderabad"),
          "items": [
              {"title": "Site changes the answer",
               "body": "The same lesion is a different decision on the face than on the "
@@ -926,16 +952,16 @@ PAGES = [
         {"kind": "callout", "warn": True, "title": "A mole that has changed needs examining",
          "body": "A mole that is growing, changing colour, developing an irregular border, "
                  "itching, bleeding or looking different from your others should be examined "
-                 "promptly — not removed at a salon, and not watched for another year."},
+                 "promptly. Not removed at a salon, and not watched for another year."},
 
         VISIT,
     ],
     "faq_h2": "Dermatosurgery questions",
     "faqs": [
         ("Will removing a mole leave a scar?",
-         "Yes — every removal leaves some mark, usually small, flat and pale. The site "
-         "matters: chest, shoulders and upper back scar less predictably than the face. This "
-         "is discussed before the procedure, not after."),
+         "Yes: every removal leaves some mark, usually small, flat and pale. The site matters: "
+         "chest, shoulders and upper back scar less predictably than the face. This is "
+         "discussed before the procedure, not after."),
         ("Is mole removal painful?",
          "The area is numbed with local anaesthetic, so the procedure itself is not painful. "
          "There is a sting as the anaesthetic goes in, and mild soreness afterwards for a "
@@ -943,11 +969,11 @@ PAGES = [
         ("Do you send moles for testing?",
          "Whenever there is any diagnostic doubt, and always where the lesion is excised for "
          "clinical rather than purely cosmetic reasons. This is why removal at a salon is "
-         "unwise — it destroys the tissue that would have provided the answer."),
+         "unwise. It destroys the tissue that would have provided the answer."),
         ("Why do my warts keep coming back?",
-         "Warts are viral and recurrence is common — the virus can persist in surrounding "
-         "skin. Repeated treatment is often needed. A lesion that recurs persistently is "
-         "also a reason to confirm the diagnosis."),
+         "Warts are viral and recurrence is common. The virus can persist in surrounding skin. "
+         "Repeated treatment is often needed. A lesion that recurs persistently is also a "
+         "reason to confirm the diagnosis."),
         ("Can skin tags be removed in one visit?",
          "Usually yes. Several can typically be treated in a single sitting under local "
          "anaesthetic, and healing is quick."),
@@ -957,9 +983,9 @@ PAGES = [
          "difference."),
     ],
     "related": [
-        ("acne-treatment-hyderabad", "Acne and acne scars", "For scar-directed procedures."),
-        ("laser-hair-reduction-hyderabad", "Laser hair reduction", "The other procedural service."),
-        ("locations-jubilee-hills", "Jubilee Hills clinic", "Where the surgical list runs."),
+        ("keloid-treatment-hyderabad", "Keloid treatment", "For raised and thickened scars."),
+        ("nail-treatment-hyderabad", "Nail treatment", "Ingrown nails and nail surgery."),
+        ("ear-lobe-repair-hyderabad", "Ear lobe repair", "Split, stretched and torn lobes."),
     ],
 },
 

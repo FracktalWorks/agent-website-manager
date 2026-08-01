@@ -12,6 +12,7 @@ breaches NMC advertising rules. All of those are caught here and abort the build
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import shutil
@@ -24,19 +25,24 @@ sys.path.insert(0, str(ROOT))
 
 import chrome                                    # noqa: E402
 from content.urls import URLS                    # noqa: E402
+from sources import SOURCES as REFERENCES        # noqa: E402
+from sources import unknown as unknown_sources   # noqa: E402
 
 chrome.URLS = URLS
 
-from content import (brand, hyderabad_medical, hyderabad_skin,   # noqa: E402
-                     languages, psoriasis, vitiligo)
+import importlib                                # noqa: E402
 
-PAGES = (brand.PAGES + vitiligo.PAGES + psoriasis.PAGES
-         + hyderabad_medical.PAGES + hyderabad_skin.PAGES + languages.PAGES)
+import siteconf                                  # noqa: E402
+
+# Which modules hold pages is declared once, in siteconf.py, because the same
+# list used to be repeated here, in linkscan.py and in editor.py — and a module
+# missing from one of them failed quietly rather than loudly.
+_MODULES = [importlib.import_module(f"content.{n}") for n in siteconf.MODULES]
+PAGES = [p for m in _MODULES for p in m.PAGES]
 
 # each page remembers which content module authored it — the site manifest uses
 # this to point future sessions (and the live editor) straight at the copy
-for _mod in (brand, vitiligo, psoriasis, hyderabad_medical, hyderabad_skin,
-             languages):
+for _mod in _MODULES:
     for _p in _mod.PAGES:
         _p["__module__"] = _mod.__name__.rsplit(".", 1)[-1]
 
@@ -296,8 +302,24 @@ def validate(pages: list[dict]) -> tuple[list[str], list[str]]:
         if len(p.get("title", "")) > 60:
             warnings.append(
                 f"{s}: title {len(p['title'])} chars — may truncate in results")
+        # 110-320 is what a description may be; 165 is what Google will SHOW.
+        # Past that the tail is truncated, so a description that ends on its
+        # point loses the point. It stays a warning rather than an error because
+        # length is a display matter, not a ranking one — but a silent overrun
+        # is how 41 pages ended up shipping snippets that cut off mid-sentence.
         if not 110 <= len(p.get("meta", "")) <= 320:
             errors.append(f"{s}: meta description {len(p.get('meta',''))} chars")
+        elif len(p["meta"]) > 165:
+            warnings.append(
+                f"{s}: meta description {len(p['meta'])} chars — Google shows "
+                "about 160, the rest is truncated")
+        # A reference that does not resolve is worse than no reference at all —
+        # it is a checkable claim that fails when checked. The library is the
+        # only place a URL may be written, and every id must exist in it, so a
+        # typo stops the build instead of shipping a dead citation.
+        for bad_id in unknown_sources(p.get("sources", [])):
+            errors.append(f"{s}: unknown source id {bad_id!r} — add it to sources.py")
+
         if not p.get("faqs"):
             errors.append(f"{s}: no FAQ block — every page needs FAQPage schema")
         if not p.get("related"):
@@ -361,6 +383,21 @@ def validate(pages: list[dict]) -> tuple[list[str], list[str]]:
     return errors, warnings
 
 
+def stamp_asset_hashes(root: Path) -> None:
+    """Give every asset a `?v=` derived from its own bytes.
+
+    Keyed by the same path `chrome.asset()` is called with, so the stylesheet a
+    browser fetches and the file on disk can never disagree. Called against the
+    assembled output directory, not the source tree — see the ordering note at
+    the call site.
+    """
+    chrome.ASSET_HASH.clear()
+    for p in sorted(root.rglob("*")):
+        if p.is_file():
+            chrome.ASSET_HASH[p.relative_to(root).as_posix()] = hashlib.sha256(
+                p.read_bytes()).hexdigest()[:10]
+
+
 def copy_assets(out: Path) -> int:
     assets = out / "assets"
     (assets / "logos").mkdir(parents=True, exist_ok=True)
@@ -404,6 +441,21 @@ def copy_assets(out: Path) -> int:
                 f"no source for {alias}: {source} is missing from every logo "
                 "directory — the header or footer would render a broken image")
 
+    # Rasterised favicons, generated once and kept in the repo.
+    #
+    # An SVG favicon alone is not enough for a search result. Google renders the
+    # site icon from a raster at small sizes and, when it cannot use the linked
+    # icon, falls back to `/favicon.ico` at the domain root — which was 404 here,
+    # which is why no icon appeared beside the listing. The .ico goes to the ROOT
+    # of the site, not under assets/, because that fallback path is fixed.
+    for png in sorted((ROOT / "assets" / "logos").glob("favicon-*.png")):
+        shutil.copy(png, assets / "logos" / png.name)
+        n += 1
+    ico = ROOT / "assets" / "logos" / "favicon.ico"
+    if ico.exists():
+        shutil.copy(ico, out / "favicon.ico")
+        n += 1
+
     # photography supplied through the live editor (or dropped in by hand)
     img_src = ROOT / "assets" / "img"
     if img_src.is_dir():
@@ -414,6 +466,14 @@ def copy_assets(out: Path) -> int:
 
 def sitemap(pages: list[dict]) -> str:
     """sitemap.xml with hreflang alternates — GSC picks language targeting from here."""
+    # `lastmod` is what tells a crawler a page is worth re-fetching. Without it
+    # Google decides recrawl frequency on its own history of the URL, which for
+    # a site this young means clinical corrections can sit unindexed for weeks.
+    # It is the medical review date, not the build time: stamping "today" on
+    # every page at every deploy is the fastest way to make the field meaningless
+    # — and Google explicitly discounts a sitemap whose dates are all identical
+    # and always current.
+    stamp = chrome.CONTENT_MODIFIED
     rows = []
     for p in pages:
         url = chrome.SITE + URLS[p["slug"]]
@@ -427,6 +487,7 @@ def sitemap(pages: list[dict]) -> str:
             "0.9" if p["template"] in ("T1", "T2") and "-" not in p["slug"][:3]
             else "0.8" if p["template"] in ("T1", "T2") else "0.5")
         rows.append(f"  <url>\n    <loc>{url}</loc>{alts}\n"
+                    f"    <lastmod>{stamp}</lastmod>\n"
                     f"    <priority>{pri}</priority>\n  </url>")
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
@@ -461,6 +522,15 @@ def main() -> int:
                 raise
             time.sleep(0.5)
 
+    # Assets are assembled, then hashed, then pages are rendered — in that
+    # order, and it has to be that order. Every page embeds the versions, so
+    # they must be known before the first page is written; and only half the
+    # assets live in `assets/` (design-system.css and the logo cuts are copied
+    # in from the design-system tree), so hashing the source directory alone
+    # would silently leave exactly the largest file unversioned.
+    n_assets = copy_assets(out)
+    stamp_asset_hashes(out / "assets")
+
     total = 0
     for page in PAGES:
         name = "index.html" if page["slug"] == "index" else f"{page['slug']}.html"
@@ -485,7 +555,7 @@ def main() -> int:
             "module": f"content/{p['__module__']}.py",
         } for p in PAGES],
         "rules": [
-            "Practo is the only booking path; phone/WhatsApp sit below it.",
+            "WhatsApp is the only booking path; phone sits below it, Practo is proof.",
             "No cure claims, superlatives or guarantees (NMC) — build enforces.",
             "One page owns one query cluster; hubs never carry a city.",
             "Max one dark band per page body.",
@@ -495,11 +565,137 @@ def main() -> int:
         json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
 
     (out / "sitemap.xml").write_text(sitemap(PAGES), encoding="utf-8")
-    (out / "robots.txt").write_text(
-        "User-agent: *\nAllow: /\n\n"
-        f"Sitemap: {chrome.SITE}/sitemap.xml\n", encoding="utf-8")
-    n_assets = copy_assets(out)
+    # robots.txt — search crawlers AND answer engines.
+    #
+    # The AI crawlers are named explicitly and allowed on purpose. A clinic that
+    # wants to be the answer when someone asks an assistant "who treats vitiligo
+    # surgically in Hyderabad" has to be readable by the thing answering, and
+    # several of these default to obeying a named rule over the wildcard. This is
+    # a deliberate editorial decision, not an oversight: the site publishes
+    # nothing it would mind being quoted, and the pages are written to be quoted
+    # accurately — which is the whole reason they state limits so plainly.
+    #
+    # The Disallow lines are WordPress plumbing that would otherwise waste crawl
+    # budget. `/wp-admin/admin-ajax.php` stays allowed because blocking it breaks
+    # front-end features Google needs to render the page.
+    ai_agents = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot",
+                 "Claude-User", "Claude-SearchBot", "anthropic-ai",
+                 "PerplexityBot", "Perplexity-User", "Google-Extended",
+                 "Applebot-Extended", "meta-externalagent", "Bingbot",
+                 "CCBot", "Amazonbot", "cohere-ai", "YouBot"]
+    lines = ["User-agent: *", "Allow: /",
+             "Disallow: /wp-admin/", "Allow: /wp-admin/admin-ajax.php",
+             "Disallow: /wp-login.php", "Disallow: /xmlrpc.php",
+             "Disallow: /?s=", "Disallow: /search/", "Disallow: /feed/",
+             "Disallow: /comments/feed/", "Disallow: /author/", ""]
+    for agent in ai_agents:
+        lines += [f"User-agent: {agent}", "Allow: /", ""]
+    lines += [f"Sitemap: {chrome.SITE}/sitemap.xml", ""]
+    (out / "robots.txt").write_text("\n".join(lines), encoding="utf-8")
 
+    # llms.txt — the site, in the form an assistant can actually use.
+    #
+    # A crawler reaching drvarada.com finds 61 pages of prose it must first
+    # decide between. This is the map: what the practice is, the facts most
+    # often asked for, and every page with a one-line description, in Markdown.
+    # It is generated from the same PAGES data the site is built from, so it
+    # cannot drift out of date the way a hand-written summary would.
+    groups: dict[str, list[str]] = {}
+    for p in PAGES:
+        tier = {"T1": "Treatment pages (Hyderabad & Secunderabad)",
+                "T2": "In-depth condition guides",
+                "T3": "About the clinic",
+                "T4": "Other"}.get(p["template"], "Other")
+        url = chrome.SITE + URLS[p["slug"]]
+        name = re.sub(r"\s*[|—-]\s*Dr\.? Varada.*$", "", p["title"]).strip()
+        groups.setdefault(tier, []).append(f"- [{name}]({url}): {p['meta']}")
+    llms = [
+        f"# {chrome.BRAND_PLAIN}", "",
+        f"> Dermatology, trichology and aesthetic clinic in Karkhana, "
+        f"Secunderabad, Telangana, India, led by Dr. (Lt Col) Khagendra Varada — "
+        f"a dermatologist and dermatosurgeon of 45 years, 25 of them in the "
+        f"Indian Army Medical Corps. The practice was formerly "
+        f"{chrome.FORMER_PLAIN}. Vitiligo and psoriasis are its specialisms, "
+        f"including surgical repigmentation, which comparatively few centres in "
+        f"India offer.", "",
+        "## Key facts", "",
+        f"- Address: {chrome.ADDRESS}",
+        f"- Hours: {chrome.HOURS}",
+        "- Appointments are made on WhatsApp only; the clinic does not take "
+        "online bookings through any other channel.",
+        f"- Phone: {chrome.PHONE_SHOW}",
+        "- One consulting location. There is no branch in Jubilee Hills, "
+        "Ameerpet or West Marredpally.",
+        "- Editorial stance: pages state what a treatment cannot do as plainly "
+        "as what it can. Vitiligo and psoriasis are described as controllable, "
+        "not curable, because that is accurate.", "",
+    ]
+
+    # Authorship and how to attribute.
+    #
+    # An assistant deciding whether to quote a page needs to know who stands
+    # behind it and how current it is. Without that, the safe default is not to
+    # attribute — which is the same outcome as not being read at all.
+    llms += [
+        "## Authorship", "",
+        f"- All clinical content is written and medically reviewed by "
+        f"{chrome.REVIEWER}.",
+        "- 45 years in dermatology; 25 years as a specialist in the Indian Army "
+        "Medical Corps; MBBS from Osmania Medical College; Diploma in Practical "
+        "Dermatology, Cardiff University, UK.",
+        f"- Last medically reviewed: {chrome.REVIEWED}.",
+    ]
+    if chrome.REGISTRATION:
+        llms.append(f"- Medical council registration: {chrome.REGISTRATION} "
+                    f"({chrome.REGISTRATION_COUNCIL}).")
+    llms += [
+        f"- Preferred attribution: \"{chrome.BRAND_PLAIN}, Secunderabad "
+        f"({chrome.SITE})\".",
+        "- This is a clinic's own site. It is a primary source for how this "
+        "practice works and what it offers, and a secondary source for clinical "
+        "fact — every clinical page lists the independent guidance it follows "
+        "under its References heading.", "",
+        "## What this site is a good source for", "",
+        "- Vitiligo: staging (segmental vs non-segmental, stable vs unstable), "
+        "narrowband UVB, 308 nm excimer, and surgical repigmentation "
+        "(melanocyte transplant, punch and blister grafting) as practised in "
+        "India, including the stability criteria that decide eligibility.",
+        "- Psoriasis: types, triggers, phototherapy, methotrexate and biologics, "
+        "with psoriatic arthritis screening.",
+        "- Dermatophytosis in India: why over-the-counter steroid-antifungal "
+        "combination creams drive recurrence, and terbinafine-resistant "
+        "Trichophyton indotineae.",
+        "- Treatment cost structures in Indian private dermatology.",
+        "",
+        "## What this site does not claim", "",
+        "- No cure is claimed for vitiligo or psoriasis. The vocabulary used "
+        "throughout is repigmentation, control and stability.",
+        "- No outcome is guaranteed, and no comparative superlative is used "
+        "about other practitioners or clinics.",
+        "- Indian Medical Council advertising rules apply to every page.", "",
+    ]
+
+    for tier in ("Treatment pages (Hyderabad & Secunderabad)",
+                 "In-depth condition guides", "About the clinic", "Other"):
+        if groups.get(tier):
+            llms += [f"## {tier}", ""] + sorted(groups[tier]) + [""]
+
+    # The evidence base, listed once. A model that can see which guideline
+    # bodies the site follows can weigh it; one that cannot has to guess.
+    cited = sorted({i for p in PAGES for i in p.get("sources", [])})
+    if cited:
+        llms += ["## Independent sources cited across this site", ""]
+        llms += [f"- [{REFERENCES[i][0]}]({REFERENCES[i][2]}) — {REFERENCES[i][1]}"
+                 for i in cited]
+        llms += [""]
+
+    (out / "llms.txt").write_text("\n".join(llms), encoding="utf-8")
+
+    # The IndexNow ownership file: its own key, as its whole contents, at
+    # /<key>.txt. Written by the build so it ships with the assets and can never
+    # drift from the key `deploy.py indexnow` submits with.
+    (out / f"{siteconf.INDEXNOW_KEY}.txt").write_text(
+        siteconf.INDEXNOW_KEY, encoding="utf-8")
     by_template: dict[str, int] = {}
     for p in PAGES:
         by_template[p["template"]] = by_template.get(p["template"], 0) + 1

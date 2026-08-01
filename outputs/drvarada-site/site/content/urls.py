@@ -14,12 +14,22 @@ URLS = {
     # ── T3 · brand and utility ───────────────────────────────────────────────
     "index": "/",
     "about-dr-khagendra-varada": "/about/dr-khagendra-varada/",
-    "locations-jubilee-hills": "/locations/jubilee-hills/",
-    "locations-west-marredpally": "/locations/west-marredpally/",
+    # One consulting location, in Karkhana, Secunderabad. The path names the
+    # city rather than the colony because that is the query people type —
+    # "dermatologist in Secunderabad", not "dermatologist in Vikrampuri Colony".
+    "locations-secunderabad": "/locations/secunderabad/",
+    "areas-we-serve": "/areas-we-serve/",
     "contact": "/contact/",
     "results": "/results/",
     "patient-stories": "/patient-stories/",
     "blog": "/blog/",
+
+    # ── pan-India, condition-independent ─────────────────────────────────────
+    # The tier that reaches patients outside Telangana without minting a page
+    # per city. See content/national.py for why a city grid is the wrong answer.
+    "online-consultation": "/online-consultation/",
+    "alopecia-areata-treatment-india": "/alopecia-areata-treatment-india/",
+    "travelling-for-treatment": "/travelling-for-treatment/",
 
     # ── T2 · pan-India vitiligo hub and cluster ──────────────────────────────
     "vitiligo": "/vitiligo/",
@@ -58,6 +68,28 @@ URLS = {
     "laser-hair-reduction-hyderabad": "/laser-hair-reduction-hyderabad/",
     "dermatosurgery-hyderabad": "/dermatosurgery-hyderabad/",
     "dandruff-treatment": "/dandruff-treatment/",
+
+    # ── the procedure catalogue ──────────────────────────────────────────────
+    # Added from the clinic's printed services card (see content/treatments.py).
+    # `/treatments/` is the index a patient holding that card expects to find;
+    # the rest are the ten procedures on it that had demand and no page.
+    "treatments": "/treatments/",
+    "fungal-infection-treatment-hyderabad": "/fungal-infection-treatment-hyderabad/",
+    "keloid-treatment-hyderabad": "/keloid-treatment-hyderabad/",
+    "ear-lobe-repair-hyderabad": "/ear-lobe-repair-hyderabad/",
+    "nail-treatment-hyderabad": "/nail-treatment-hyderabad/",
+    "prp-hair-treatment-hyderabad": "/prp-hair-treatment-hyderabad/",
+    "dermal-fillers-hyderabad": "/dermal-fillers-hyderabad/",
+    "thread-lift-hyderabad": "/thread-lift-hyderabad/",
+    "mesotherapy-hyderabad": "/mesotherapy-hyderabad/",
+    "acne-scar-treatment-hyderabad": "/acne-scar-treatment-hyderabad/",
+
+    # ── Secunderabad · the twin city the clinic is physically in ─────────────
+    # Distinct intent, not a city-swapped clone: these pages are about distance
+    # and adherence, which is what decides a months-long course of light.
+    "vitiligo-treatment-secunderabad": "/vitiligo-treatment-secunderabad/",
+    "psoriasis-treatment-secunderabad": "/psoriasis-treatment-secunderabad/",
+    "hair-loss-treatment-secunderabad": "/hair-loss-treatment-secunderabad/",
     "premature-greying-treatment": "/premature-greying-treatment/",
 
     # ── language layers: Telugu (phase 2), Hindi (phase 3) ───────────────────

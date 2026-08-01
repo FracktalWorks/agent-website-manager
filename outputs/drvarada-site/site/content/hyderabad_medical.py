@@ -9,22 +9,27 @@ Page anatomy is fixed by MASTER_PLAN §5: query-matched H1 → credibility → w
 actually do → protocol with named technology → honest limits → FAQ → related.
 """
 
-from chrome import PRACTO, PRACTO_JH, PRACTO_ONLINE, PRACTO_WM, WHATSAPP
+from chrome import PHONE, WHATSAPP
 
 CRED = ["45 years in dermatology", "Dermatologist & dermatosurgeon",
-        "Two clinics — Jubilee Hills & Secunderabad", "Booking on Practo"]
+        "Karkhana, Secunderabad", "Booking on WhatsApp"]
 
 VISIT = {
-    "kind": "cards", "eyebrow": "Where to book", "h2": "Two clinics, different hours",
+    "kind": "cards", "eyebrow": "Where to book", "h2": "One clinic, in Secunderabad",
+    "intro": "Consulting rooms, phototherapy and the surgical list at one address in "
+             "Secunderabad. The practice was formerly known as BNR Skin & Vitiligo "
+             "Hospital.",
     "items": [
-        {"title": "Jubilee Hills",
-         "body": "Mon–Sat, 1:30 – 8:00 pm. The full clinic — this is where procedures, "
-                 "phototherapy, laser and surgery are done.",
-         "list": ["Serves Banjara Hills, Madhapur, Gachibowli", "All procedures"]},
-        {"title": "West Marredpally",
-         "body": "Mon–Sat, 7:00 – 9:00 am. Early consultations and chronic reviews before "
-                 "the working day.",
-         "list": ["Serves Secunderabad, Trimulgherry, Alwal", "Consultations and reviews"]},
+        {"title": "Where", "icon": "pin",
+         "body": "Plot No D13B, Wellington Rd, Vikrampuri Colony, "
+                 "Karkhana, Secunderabad, Telangana 500009.",
+         "list": ["Serves Trimulgherry, West Marredpally, Bowenpally, Alwal",
+                  "Formerly BNR Skin & Vitiligo Hospital"]},
+        {"title": "How to book", "icon": "chat",
+         "body": "On WhatsApp: one number, answered by the clinic team, who confirm a "
+                 "time and say what to bring.",
+         "list": ["Photographs welcome before you travel",
+                  "Video consultation arranged the same way"]},
     ],
 }
 
@@ -34,22 +39,22 @@ PAGES = [
 {
     "slug": "vitiligo-treatment-hyderabad", "template": "T1", "condition": "Vitiligo",
     "crumbs": [("Vitiligo treatment in Hyderabad", None)],
-    "title": "Vitiligo Treatment in Hyderabad — Light & Surgery | Dr. Varada",
-    "meta": "Vitiligo and leucoderma treatment in Hyderabad — narrowband UVB, excimer "
-            "laser and melanocyte graft surgery with a dermatosurgeon of 45 years. Two "
-            "clinics, Jubilee Hills and Secunderabad. Book on Practo.",
+    "title": "Vitiligo Treatment in Hyderabad | Dr. Varada",
+    "meta": "Vitiligo and leucoderma treatment in Hyderabad. Narrowband UVB, excimer laser and "
+            "melanocyte graft surgery with a dermatosurgeon of 45 years.",
     "eyebrow": "Hyderabad",
     "h1": "Vitiligo treatment in Hyderabad",
     "lede": "A practice that began as a vitiligo hospital, still run by the same "
-            "dermatosurgeon — with the full range under one roof: topical therapy, "
-            "narrowband UVB, excimer laser and surgical repigmentation for stable disease.",
-    "acts": [("Book on Practo", PRACTO), ("Send photographs", WHATSAPP)],
+            "dermatosurgeon, with the full range under one roof: topical therapy, narrowband "
+            "UVB, excimer laser and surgical repigmentation for stable disease.",
+    "acts": [("Book on WhatsApp", WHATSAPP), ("Call the clinic", PHONE)],
     "creds": CRED,
+    "sources": ["niams-vitiligo", "aad-vitiligo-tx", "dermnet-vitiligo", "nhs-vitiligo", "iadvl-vitiligo-surgery"],
     "glance": [
         ("Also called", "Leucoderma, white patches, safed daag"),
         ("Available here", "Topicals, NB-UVB, excimer, graft surgery"),
         ("Surgery", "Melanocyte transplant, punch, blister grafting"),
-        ("Where", "Procedures at Jubilee Hills"),
+        ("Where", "At the Secunderabad clinic"),
         ("First visit", "Diagnosis, activity assessment, plan"),
         ("Review", "Every 6–8 weeks"),
     ],
@@ -58,7 +63,7 @@ PAGES = [
          "h2": "The clinic that still does the surgery.",
          "body": [
              "Most vitiligo in Hyderabad is treated medically, which is correct for most "
-             "patients. But medical treatment reaches a limit — patches on the lips, the "
+             "patients. But medical treatment reaches a limit: patches on the lips, the "
              "fingertips, and any patch whose hairs have turned white have lost the pigment "
              "reservoir that creams and light work by recruiting.",
              "For those patches the option is surgical: melanocyte transplant or punch "
@@ -66,9 +71,9 @@ PAGES = [
              "Comparatively few centres in the city offer it, and it is the reason patients "
              "travel here from outside Telangana.",
              "It is also the reason a first appointment here is an assessment rather than a "
-             "sale. Surgery only works on disease that has been stable for about twelve "
-             "months, and a significant proportion of people who ask about it are told to "
-             "wait — which is a clinical answer, not a scheduling one.",
+             "sale. Surgery only works on disease that has been stable for about twelve months, "
+             "and a significant proportion of people who ask about it are told to wait, which "
+             "is a clinical answer, not a scheduling one.",
          ]},
 
         {"kind": "steps", "eyebrow": "The protocol", "h2": "What treatment looks like here",
@@ -77,22 +82,22 @@ PAGES = [
               "body": "Wood's lamp examination, patch margins, history of new patches, and "
                       "baseline photographs. Active or stable decides everything after."},
              {"title": "Stop the spread",
-              "body": "Active disease is quietened first — topicals, occasionally a short "
-                      "oral course. Repigmenting while new patches appear is wasted effort."},
+              "body": "Active disease is quietened first: topicals, occasionally a short oral "
+                      "course. Repigmenting while new patches appear is wasted effort."},
              {"title": "Repigment medically",
               "body": "Narrowband UVB for widespread disease, excimer for a few patches, "
                       "usually combined with a topical. Reviewed at six to eight weeks."},
              {"title": "Operate if stable",
               "body": "Patches that will not respond to light, on disease quiet for twelve "
-                      "months, are assessed for grafting at Jubilee Hills."},
+                      "months, are assessed for grafting on the surgical list."},
          ]},
 
         {"kind": "split", "eyebrow": "Realistic expectations",
          "h2": "What can be promised, and what cannot.",
-         "body": ["Vitiligo cannot be cured, here or anywhere. What treatment does reliably "
-                  "do is stop the spread in active disease, and repigment a meaningful "
-                  "proportion of affected skin in many patients — best on the face and "
-                  "trunk, least on hands, feet and lips.",
+         "body": ["Vitiligo cannot be cured, here or anywhere. What treatment does reliably do "
+                  "is stop the spread in active disease, and repigment a meaningful proportion "
+                  "of affected skin in many patients: best on the face and trunk, least on "
+                  "hands, feet and lips.",
                   "You will be told at the first visit which category your patches fall "
                   "into, and roughly how long a fair trial takes. Being told that a patch "
                   "is unlikely to respond to light is more useful than six months of "
@@ -103,23 +108,23 @@ PAGES = [
               "body": "Dense follicles, good reservoir. This is where phototherapy earns "
                       "its reputation."},
              {"title": "Hands, feet and lips need surgery",
-              "body": "Not as a fallback — as the appropriate first choice for those sites."},
+              "body": "Not as a fallback, as the appropriate first choice for those sites."},
          ]},
 
         VISIT,
 
         {"kind": "callout", "title": "Coming from outside Hyderabad?",
          "body": "Send photographs by WhatsApp before booking travel, or take a video "
-                 "consultation first. The point is to know whether the trip is warranted — "
-                 "and if surgery is the reason for it, whether your disease is stable enough."},
+                 "consultation first. The point is to know whether the trip is warranted, and "
+                 "if surgery is the reason for it, whether your disease is stable enough."},
     ],
     "faq_h2": "Vitiligo treatment in Hyderabad",
     "faqs": [
         ("Which vitiligo treatments are available at this clinic?",
          "Topical therapy including calcineurin and JAK inhibitors, narrowband UVB "
-         "phototherapy, excimer laser, and surgical repigmentation — melanocyte transplant, "
-         "punch grafting and blister grafting. Procedures are done at the Jubilee Hills "
-         "clinic."),
+         "phototherapy, excimer laser, and surgical repigmentation: melanocyte transplant, "
+         "punch grafting and blister grafting. Every one of them is done at the clinic in "
+         "Secunderabad, so nothing is referred out mid-treatment."),
         ("Can vitiligo be cured in Hyderabad or anywhere else?",
          "No. Vitiligo is not curable. Treatment stops the spread and repigments affected "
          "skin, often substantially. Any clinic in any city promising a cure is making a "
@@ -129,13 +134,13 @@ PAGES = [
          "your patches need depends on their site, size and duration. The pricing structure "
          "is explained on the cost page."),
         ("Do you do vitiligo surgery?",
-         "Yes — melanocyte transplant and punch grafting, for disease that has been stable "
-         "for about twelve months. Assessment for stability comes first, and being told to "
-         "wait is a common outcome."),
-        ("Which clinic should I book for vitiligo?",
-         "Jubilee Hills if you want procedures — phototherapy, excimer and surgery are all "
-         "there. West Marredpally works well for the first consultation and for reviews if "
-         "mornings suit you better."),
+         "Yes: melanocyte transplant and punch grafting, for disease that has been stable for "
+         "about twelve months. Assessment for stability comes first, and being told to wait is "
+         "a common outcome."),
+        ("Where is the clinic, and how do I book?",
+         "Karkhana, Secunderabad: the practice you may know as BNR Skin & Vitiligo Hospital. "
+         "Everything runs at that one address: consultation, phototherapy, excimer and surgery. "
+         "Appointments are arranged on WhatsApp."),
         ("Do you treat children with vitiligo?",
          "Yes. Children generally respond better than adults, and early treatment is the "
          "single biggest variable a family controls."),
@@ -145,8 +150,8 @@ PAGES = [
          "What the disease is, every treatment explained, and what each costs."),
         ("vitiligo-graft-surgery", "Graft surgery",
          "Who qualifies, the three techniques, and what recovery involves."),
-        ("vitiligo-online-consultation", "Consult online first",
-         "Especially if you are travelling — find out whether the trip is warranted."),
+        ("vitiligo-treatment-secunderabad", "Vitiligo treatment in Secunderabad",
+         "The same clinic, and what the journey means for a course of light."),
     ],
 },
 
@@ -154,31 +159,31 @@ PAGES = [
 {
     "slug": "psoriasis-treatment-hyderabad", "template": "T1", "condition": "Psoriasis",
     "crumbs": [("Psoriasis treatment in Hyderabad", None)],
-    "title": "Psoriasis Treatment in Hyderabad | Dr. Varada's Skin & Hair Center",
-    "meta": "Psoriasis treatment in Hyderabad — topical therapy, narrowband UVB "
-            "phototherapy, methotrexate and biologics, with joint screening. 45 years' "
-            "experience, two clinics. Book on Practo.",
+    "title": "Psoriasis Treatment in Hyderabad | Dr. Varada",
+    "meta": "Psoriasis treatment in Hyderabad: topical therapy, narrowband UVB phototherapy, "
+            "methotrexate and biologics, with joint screening.",
     "eyebrow": "Hyderabad",
     "h1": "Psoriasis treatment in Hyderabad",
-    "lede": "Psoriasis is a long-term condition, so it is treated as one: a plan for the "
-            "flare, a plan for maintenance, a written plan for the next flare — and a "
-            "review of your joints, which is the part most often skipped.",
-    "acts": [("Book on Practo", PRACTO), ("Consult online", PRACTO_ONLINE)],
+    "lede": "Psoriasis is a long-term condition, so it is treated as one: a plan for the flare, "
+            "a plan for maintenance, a written plan for the next flare, and a review of your "
+            "joints, which is the part most often skipped.",
+    "acts": [("Book on WhatsApp", WHATSAPP), ("Call the clinic", PHONE)],
     "creds": CRED,
+    "sources": ["niams-psoriasis", "aad-psoriasis", "dermnet-psoriasis", "nice-psoriasis", "who-psoriasis"],
     "glance": [
         ("Available here", "Topicals, NB-UVB, systemics, biologics"),
-        ("Phototherapy", "At the Jubilee Hills clinic"),
+        ("Phototherapy", "At the clinic"),
         ("Screened for", "Psoriatic arthritis, metabolic risk"),
-        ("Reviews", "Morning clinic at West Marredpally"),
+        ("Reviews", "At the Secunderabad clinic"),
         ("Flare plan", "Written, at the first visit"),
-        ("Curable", "No — but often well controlled"),
+        ("Curable", "No, but often well controlled"),
     ],
     "sections": [
         {"kind": "prose", "eyebrow": "The approach",
          "h2": "Clearing a flare is easy. Keeping it away is the job.",
          "body": [
              "Almost any potent steroid will flatten a plaque. What separates good psoriasis "
-             "care from the other kind is what happens in month four — whether there was a "
+             "care from the other kind is what happens in month four, whether there was a "
              "step-down plan, or whether the treatment was simply stopped and the disease "
              "rebounded, sometimes worse than before.",
              "So the first consultation produces three things: what clears the current "
@@ -193,7 +198,7 @@ PAGES = [
         {"kind": "steps", "eyebrow": "The protocol", "h2": "How a course runs",
          "items": [
              {"title": "Diagnose properly",
-              "body": "Including the nails, the scalp and the folds — the three sites where "
+              "body": "Including the nails, the scalp and the folds. The three sites where "
                       "psoriasis is most often called something else."},
              {"title": "Clear the flare",
               "body": "Topical therapy matched to site and severity. Phototherapy where "
@@ -213,9 +218,9 @@ PAGES = [
                   "rather than worsening. Any of those alongside psoriasis needs "
                   "investigating rather than tolerating.",
                   "Joint damage in psoriatic arthritis does not reverse, and the window in "
-                  "which treatment prevents it is early. Where the picture suggests it, you "
-                  "are referred to a rheumatologist promptly — and methotrexate, which "
-                  "treats both skin and joints, becomes the obvious systemic choice."],
+                  "which treatment prevents it is early. Where the picture suggests it, you are "
+                  "referred to a rheumatologist promptly, and methotrexate, which treats both "
+                  "skin and joints, becomes the obvious systemic choice."],
          "cta": ("Systemics and biologics explained", "psoriasis-biologics"),
          "items": [
              {"title": "Nail changes are a warning",
@@ -229,43 +234,43 @@ PAGES = [
         VISIT,
 
         {"kind": "callout", "title": "Second opinions are welcome",
-         "body": "Bring the previous diagnosis, every prescription and any blood results. "
-                 "The commonest finding in a psoriasis second opinion is not a wrong "
-                 "diagnosis — it is a potent steroid that has been running for months "
-                 "without a maintenance plan or a review."},
+         "body": "Bring the previous diagnosis, every prescription and any blood results. The "
+                 "commonest finding in a psoriasis second opinion is not a wrong diagnosis. It "
+                 "is a potent steroid that has been running for months without a maintenance "
+                 "plan or a review."},
     ],
     "faq_h2": "Psoriasis treatment in Hyderabad",
     "faqs": [
         ("Which psoriasis treatments are available at this clinic?",
          "Topical therapy, medicated scalp treatment, narrowband UVB phototherapy at the "
-         "Jubilee Hills clinic, conventional systemics including methotrexate, and biologics "
-         "after appropriate screening."),
+         "Secunderabad clinic, conventional systemics including methotrexate, and "
+         "biologics after appropriate screening."),
         ("Can psoriasis be cured?",
-         "No. It is a long-term immune condition. Treatment aims at remission — skin that is "
+         "No. It is a long-term immune condition. Treatment aims at remission: skin that is "
          "clear or nearly clear, held there with maintenance, sometimes for years."),
         ("Do you offer phototherapy in Hyderabad?",
-         "Yes, narrowband UVB at the Jubilee Hills clinic. A course typically runs 20 to 36 "
+         "Yes, narrowband UVB at the clinic. A course typically runs 20 to 36 "
          "sessions at two to three a week, so it is worth checking the timings suit you "
          "before starting."),
         ("I have joint pain along with psoriasis. Is that related?",
-         "It may well be. Up to a third of people with psoriasis develop psoriatic "
-         "arthritis, and it is important to catch early because joint damage does not "
-         "reverse. Raise it at your appointment — it will be asked about anyway."),
-        ("Which clinic should I book?",
-         "West Marredpally suits chronic reviews and second opinions in the morning. "
-         "Jubilee Hills is where phototherapy runs, so book there if light treatment is "
-         "likely."),
+         "It may well be. Up to a third of people with psoriasis develop psoriatic arthritis, "
+         "and it is important to catch early because joint damage does not reverse. Raise it at "
+         "your appointment. It will be asked about anyway."),
+        ("Where is the clinic, and how do I book?",
+         "Karkhana, Secunderabad. Phototherapy, consultations and reviews all run at "
+         "the same address, so a course of light treatment does not mean travelling "
+         "between sites. Appointments are arranged on WhatsApp."),
         ("Is scalp psoriasis treated here?",
-         "Yes, and it is the commonest site. It needs a descale-then-treat sequence — "
-         "ordinary anti-dandruff shampoo cannot penetrate the adherent scale."),
+         "Yes, and it is the commonest site. It needs a descale-then-treat sequence. Ordinary "
+         "anti-dandruff shampoo cannot penetrate the adherent scale."),
     ],
     "related": [
         ("psoriasis", "The full psoriasis section",
          "Types, triggers, every treatment, and what each costs."),
         ("psoriasis-scalp", "Scalp psoriasis",
          "The commonest site, and how to tell it from dandruff."),
-        ("psoriasis-online-consultation", "Consult online",
-         "Second opinions and flare plans by video, anywhere in India."),
+        ("psoriasis-treatment-secunderabad", "Psoriasis treatment in Secunderabad",
+         "The same clinic, written for patients on the Secunderabad side."),
     ],
 },
 
@@ -273,21 +278,21 @@ PAGES = [
 {
     "slug": "hair-loss-treatment-hyderabad", "template": "T1", "condition": "Hair loss",
     "crumbs": [("Hair loss treatment in Hyderabad", None)],
-    "title": "Hair Loss Treatment in Hyderabad — Diagnosis First | Dr. Varada",
-    "meta": "Hair loss and hair fall treatment in Hyderabad for men and women — diagnosed "
-            "with trichoscopy and blood work before anything is prescribed. 45 years' "
-            "experience. Book on Practo.",
+    "title": "Hair Loss Treatment in Hyderabad | Dr. Varada",
+    "meta": "Hair loss and hair fall treatment in Hyderabad for men and women. Diagnosed with "
+            "trichoscopy and blood work before anything is prescribed.",
     "eyebrow": "Hyderabad",
     "h1": "Hair loss treatment in Hyderabad",
     "lede": "Hair loss has around six common causes and they need different treatments. "
             "The reason most hair treatment fails is that it was started before anyone "
             "established which one you actually have.",
-    "acts": [("Book on Practo", PRACTO), ("Consult online", PRACTO_ONLINE)],
+    "acts": [("Book on WhatsApp", WHATSAPP), ("Call the clinic", PHONE)],
     "creds": CRED,
+    "sources": ["aad-hair-loss", "statpearls-aga", "dermnet-mphl", "dermnet-fphl", "dermnet-telogen-effluvium"],
     "glance": [
         ("Assessed with", "History, pull test, trichoscopy, bloods"),
         ("Common causes", "Pattern loss, telogen effluvium, deficiency, thyroid"),
-        ("Men", "Pattern hair loss — treatable, needs consistency"),
+        ("Men", "Pattern hair loss: treatable, needs consistency"),
         ("Women", "Deficiency and thyroid more often involved"),
         ("First result", "Judged at 3–6 months, not weeks"),
         ("Surgery", "Grafting, if medical treatment is not enough"),
@@ -296,15 +301,14 @@ PAGES = [
         {"kind": "prose", "eyebrow": "The problem with hair treatment",
          "h2": "Shedding and thinning are not the same complaint.",
          "body": [
-             "Someone losing handfuls in the shower and someone whose parting has widened "
-             "over five years have different diseases, and giving them the same serum helps "
-             "neither. Sudden diffuse shedding is usually telogen effluvium — a reaction to "
-             "an illness, a fever, childbirth, a crash diet or severe stress, typically "
-             "three months earlier. It is self-limiting and it needs the cause found, not a "
-             "growth stimulant.",
+             "Someone losing handfuls in the shower and someone whose parting has widened over "
+             "five years have different diseases, and giving them the same serum helps neither. "
+             "Sudden diffuse shedding is usually telogen effluvium: a reaction to an illness, a "
+             "fever, childbirth, a crash diet or severe stress, typically three months earlier. "
+             "It is self-limiting and it needs the cause found, not a growth stimulant.",
              "Gradual thinning at the crown or the parting is pattern hair loss, which is "
-             "progressive, genetic and treatable — but only with consistent long-term "
-             "treatment, and only while treatment continues.",
+             "progressive, genetic and treatable, but only with consistent long-term treatment, "
+             "and only while treatment continues.",
              "Patchy round bald areas are alopecia areata, an autoimmune condition needing "
              "different treatment again. Telling these apart takes an examination and a "
              "trichoscope, and takes about ten minutes.",
@@ -324,9 +328,9 @@ PAGES = [
              ["Thinning with heavy periods or poor diet", "Iron or ferritin deficiency",
               "Confirm on bloods; correct properly, not casually"],
              ["Scaling, itch, redness with loss", "Scalp disease",
-              "Treat the scalp first — hair follows"],
+              "Treat the scalp first: hair follows"],
              ["Loss along the hairline, with tightness", "Traction or scarring alopecia",
-              "Urgent — scarring loss is permanent"],
+              "Urgent: scarring loss is permanent"],
          ],
          "note": "The last row is the one that cannot wait. Scarring alopecias destroy "
                  "follicles permanently, and the difference between early and late "
@@ -338,8 +342,8 @@ PAGES = [
               "body": "Illness, fever, surgery, childbirth, dieting, new medication, stress. "
                       "The cause of today's shedding was usually three months ago."},
              {"title": "Examination and trichoscopy",
-              "body": "A pull test, and magnified examination of the scalp — miniaturised "
-                      "hairs, follicular openings, whether scarring is present."},
+              "body": "A pull test, and magnified examination of the scalp: miniaturised hairs, "
+                      "follicular openings, whether scarring is present."},
              {"title": "Targeted blood tests",
               "body": "Ferritin, thyroid function, vitamin D and B12 where indicated. "
                       "Tested, not assumed."},
@@ -373,20 +377,20 @@ PAGES = [
     "faq_h2": "Hair loss questions",
     "faqs": [
         ("Why is my hair falling out suddenly?",
-         "Sudden diffuse shedding is usually telogen effluvium — a delayed reaction to an "
-         "illness, fever, surgery, childbirth, crash dieting or severe stress, typically "
-         "around three months earlier. It is self-limiting, but the trigger is worth "
-         "identifying and any deficiency worth correcting."),
+         "Sudden diffuse shedding is usually telogen effluvium: a delayed reaction to an "
+         "illness, fever, surgery, childbirth, crash dieting or severe stress, typically around "
+         "three months earlier. It is self-limiting, but the trigger is worth identifying and "
+         "any deficiency worth correcting."),
         ("How long before hair loss treatment shows results?",
          "Three to six months for a fair judgement. Hair grows roughly a centimetre a month "
          "and a follicle re-entering its growth phase takes time to produce visible hair."),
         ("Is hair loss treatment different for men and women?",
-         "The assessment is the same but the answers differ. Iron deficiency, thyroid "
-         "disease and hormonal causes are found more often in women, and some treatments "
-         "used in men are not appropriate for women — particularly if pregnancy is possible."),
+         "The assessment is the same but the answers differ. Iron deficiency, thyroid disease "
+         "and hormonal causes are found more often in women, and some treatments used in men "
+         "are not appropriate for women. Particularly if pregnancy is possible."),
         ("Do I need blood tests?",
-         "Usually a small targeted set — ferritin, thyroid function, and vitamin D or B12 "
-         "where the history suggests it. Not a broad panel for its own sake."),
+         "Usually a small targeted set: ferritin, thyroid function, and vitamin D or B12 where "
+         "the history suggests it. Not a broad panel for its own sake."),
         ("Will I need treatment forever?",
          "For pattern hair loss, treatment holds ground while it continues, and stopping "
          "generally means losing the gain over the following year. Telogen effluvium and "
@@ -398,11 +402,11 @@ PAGES = [
     ],
     "related": [
         ("alopecia-treatment-hyderabad", "Alopecia areata",
-         "Round patches — an autoimmune condition needing different treatment."),
-        ("hair-grafting-hyderabad", "Hair grafting surgery",
-         "When medical treatment is not enough on its own."),
-        ("dandruff-treatment", "Dandruff and scalp disease",
-         "Because an inflamed scalp sheds hair until it is treated."),
+         "Round patches: an autoimmune condition needing different treatment."),
+        ("prp-hair-treatment-hyderabad", "PRP and microneedling",
+         "The adjunct people ask for first: what it does and does not do."),
+        ("hair-loss-treatment-secunderabad", "Hair loss treatment in Secunderabad",
+         "The same workup, for patients on the Secunderabad side."),
     ],
 },
 
@@ -410,23 +414,23 @@ PAGES = [
 {
     "slug": "alopecia-treatment-hyderabad", "template": "T1", "condition": "Alopecia areata",
     "crumbs": [("Alopecia treatment in Hyderabad", None)],
-    "title": "Alopecia Areata, Totalis & Universalis Treatment | Dr. Varada",
-    "meta": "Alopecia areata treatment in Hyderabad — patchy hair loss, alopecia totalis "
-            "and universalis. Intralesional steroids, topical immunotherapy and newer "
-            "options, assessed by a dermatologist of 45 years.",
+    "title": "Alopecia Areata Treatment in Hyderabad | Dr. Varada",
+    "meta": "Alopecia areata treatment in Hyderabad: patchy hair loss, totalis and universalis. "
+            "Intralesional steroids, immunotherapy and newer options assessed.",
     "eyebrow": "Hyderabad",
     "h1": "Alopecia areata treatment in Hyderabad",
     "lede": "Smooth round bald patches that appeared over weeks are not ordinary hair loss. "
-            "Alopecia areata is autoimmune — the follicles are alive but switched off — "
-            "which is why it needs immune-directed treatment and not a growth serum.",
-    "acts": [("Book on Practo", PRACTO), ("Consult online", PRACTO_ONLINE)],
+            "Alopecia areata is autoimmune, the follicles are alive but switched off, which is "
+            "why it needs immune-directed treatment and not a growth serum.",
+    "acts": [("Book on WhatsApp", WHATSAPP), ("Call the clinic", PHONE)],
     "creds": CRED,
+    "sources": ["niams-alopecia-areata", "dermnet-alopecia-areata", "aad-hair-loss"],
     "glance": [
-        ("What it is", "Autoimmune — follicles alive but suppressed"),
+        ("What it is", "Autoimmune: follicles alive but suppressed"),
         ("Pattern", "Smooth round patches, scalp or beard"),
         ("Totalis", "Complete scalp loss"),
         ("Universalis", "All body hair"),
-        ("Regrowth", "Common — often spontaneous in limited disease"),
+        ("Regrowth", "Common: often spontaneous in limited disease"),
         ("Associated", "Thyroid disease, vitiligo"),
     ],
     "sections": [
@@ -437,10 +441,10 @@ PAGES = [
              "into dormancy. Crucially it does not destroy it. That is why regrowth is "
              "possible even after years, and why the treatment is aimed at calling off the "
              "immune attack rather than at stimulating growth.",
-             "Limited patchy disease has a good outlook — a substantial proportion regrows "
-             "within a year even without treatment, though treatment shortens that and "
-             "reduces the psychological weight of waiting. Extensive disease, alopecia "
-             "totalis and universalis, is harder and less predictable.",
+             "Limited patchy disease has a good outlook: a substantial proportion regrows "
+             "within a year even without treatment, though treatment shortens that and reduces "
+             "the psychological weight of waiting. Extensive disease, alopecia totalis and "
+             "universalis, is harder and less predictable.",
              "It is also worth screening for the conditions that travel with it. Autoimmune "
              "thyroid disease is the commonest association, and vitiligo occurs more often "
              "in people with alopecia areata than in the general population.",
@@ -460,7 +464,7 @@ PAGES = [
              ["Newer immune-directed agents", "Severe or extensive disease",
               "Assessed case by case; monitoring required"],
              ["No active treatment", "Small patches, patient preference",
-              "A legitimate choice — many regrow spontaneously"],
+              "A legitimate choice: many regrow spontaneously"],
          ],
          "note": "'Watch and wait' belongs on this list. For a single small patch in an "
                  "adult it is a reasonable plan, provided it is a decision rather than an "
@@ -468,14 +472,14 @@ PAGES = [
 
         {"kind": "split", "eyebrow": "The part that isn't dermatology",
          "h2": "Sudden visible hair loss is not a small thing.",
-         "body": ["Alopecia areata arrives quickly, is highly visible, and has no symptoms "
-                  "— which makes it easy for other people to treat as trivial. It is not. "
-                  "The distress it causes is frequently out of proportion to the area "
-                  "involved, and that is a normal response rather than an overreaction.",
+         "body": ["Alopecia areata arrives quickly, is highly visible, and has no symptoms, "
+                  "which makes it easy for other people to treat as trivial. It is not. The "
+                  "distress it causes is frequently out of proportion to the area involved, and "
+                  "that is a normal response rather than an overreaction.",
                   "Practical measures are part of the plan: what to say to people, whether "
-                  "camouflage or a hairpiece is wanted, and — for children — a note to the "
-                  "school. None of these are consolation prizes; they are the part of "
-                  "treatment that works immediately."],
+                  "camouflage or a hairpiece is wanted, and, for children, a note to the "
+                  "school. None of these are consolation prizes; they are the part of treatment "
+                  "that works immediately."],
          "cta": ("If it is not alopecia areata", "hair-loss-treatment-hyderabad"),
          "items": [
              {"title": "Regrowth is common",
@@ -497,8 +501,8 @@ PAGES = [
     "faq_h2": "Alopecia areata questions",
     "faqs": [
         ("Will my hair grow back?",
-         "In limited patchy alopecia areata, frequently yes — a substantial proportion "
-         "regrows within a year, and treatment shortens that. Extensive disease, totalis and "
+         "In limited patchy alopecia areata, frequently yes: a substantial proportion regrows "
+         "within a year, and treatment shortens that. Extensive disease, totalis and "
          "universalis, is less predictable."),
         ("Is alopecia areata permanent?",
          "The follicles are not destroyed, so regrowth remains possible even after long "
@@ -508,9 +512,8 @@ PAGES = [
          "It is autoimmune, with a genetic component. Stress is often blamed and may act as "
          "a trigger in someone predisposed, but it is not the cause."),
         ("Does it mean I have another autoimmune disease?",
-         "Not necessarily, but the associations are real enough to check for — thyroid "
-         "disease most commonly, and vitiligo occurs more often than in the general "
-         "population."),
+         "Not necessarily, but the associations are real enough to check for. Thyroid disease "
+         "most commonly, and vitiligo occurs more often than in the general population."),
         ("Are steroid injections painful?",
          "There is a brief sting with each injection. Sessions are short and repeated at "
          "intervals of several weeks. Most adults tolerate them without difficulty."),
@@ -521,10 +524,10 @@ PAGES = [
     "related": [
         ("hair-loss-treatment-hyderabad", "Hair loss treatment",
          "If the pattern is thinning rather than round patches."),
-        ("vitiligo", "Vitiligo",
-         "The other autoimmune condition that frequently accompanies it."),
+        ("alopecia-areata-treatment-india", "Alopecia across India",
+         "Totalis and universalis explained, and what treatment can realistically do."),
         ("hair-grafting-hyderabad", "Hair grafting",
-         "Not appropriate in active alopecia areata — and here is why."),
+         "Not appropriate in active alopecia areata, and here is why."),
     ],
 },
 
@@ -532,17 +535,17 @@ PAGES = [
 {
     "slug": "hair-grafting-hyderabad", "template": "T1", "condition": "Hair loss",
     "crumbs": [("Hair grafting in Hyderabad", None)],
-    "title": "Hair Grafting Surgery in Hyderabad | Dr. Varada's Skin & Hair Center",
-    "meta": "Hair grafting and transplant surgery in Hyderabad, assessed by a "
-            "dermatosurgeon of 45 years — who is a candidate, why medical treatment comes "
-            "first, and what a realistic result looks like.",
+    "title": "Hair Grafting Surgery in Hyderabad | Dr. Varada",
+    "meta": "Hair grafting and transplant surgery in Hyderabad by a dermatosurgeon of 45 years, "
+            "who is a candidate, why medical treatment comes first, and results.",
     "eyebrow": "Hyderabad",
     "h1": "Hair grafting surgery in Hyderabad",
-    "lede": "Grafting moves hair you already have to where you no longer have it. It does "
-            "not create new hair, and it does not stop the loss continuing around it — "
-            "which is why medical treatment comes first and surgery second.",
-    "acts": [("Book an assessment", PRACTO), ("Send photographs", WHATSAPP)],
+    "lede": "Grafting moves hair you already have to where you no longer have it. It does not "
+            "create new hair, and it does not stop the loss continuing around it, which is why "
+            "medical treatment comes first and surgery second.",
+    "acts": [("Book an assessment", WHATSAPP), ("Call the clinic", PHONE)],
     "creds": CRED,
+    "sources": ["statpearls-aga", "dermnet-mphl", "dermnet-fphl", "aad-hair-loss"],
     "glance": [
         ("What it is", "Redistribution of your own follicles"),
         ("Assessed first", "Cause of loss, donor density, stability"),
@@ -559,11 +562,11 @@ PAGES = [
              "There is a finite number available, it does not regenerate, and spending it "
              "badly cannot be undone. That single fact is why assessment matters more than "
              "technique.",
-             "Pattern hair loss also continues after surgery. Grafted hairs are taken from "
-             "an area genetically resistant to thinning and generally persist, but the "
-             "native hair around them keeps receding — which is how someone ends up with an "
-             "island of transplanted hair and a new bald zone behind it. Continuing medical "
-             "treatment is not optional; it is what protects the result.",
+             "Pattern hair loss also continues after surgery. Grafted hairs are taken from an "
+             "area genetically resistant to thinning and generally persist, but the native hair "
+             "around them keeps receding, which is how someone ends up with an island of "
+             "transplanted hair and a new bald zone behind it. Continuing medical treatment is "
+             "not optional; it is what protects the result.",
              "For those reasons a great many people who ask about grafting are advised to "
              "treat medically first and reassess in a year. Some never need surgery at all.",
          ]},
@@ -585,8 +588,32 @@ PAGES = [
                       "sixty. Overly low, overly dense hairlines age badly."},
          ]},
 
+        {"kind": "table", "eyebrow": "Techniques",
+         "h2": "FUE, FUT, and the smaller grafts",
+         "head": ["Technique", "What it involves", "Where it suits"],
+         "rows": [
+             ["FUE: follicular unit extraction",
+              "Follicles taken individually from the donor area",
+              "No linear scar; suits short hair and smaller sessions"],
+             ["FUT: follicular unit transplantation",
+              "A donor strip removed, then dissected into units",
+              "Yields more grafts per session; leaves a line scar"],
+             ["Eyebrow grafting", "Single hairs placed at very shallow angles",
+              "Loss from over-plucking, scarring or thyroid disease"],
+             ["Eyelash grafting", "A small number of hairs, meticulously angled",
+              "Selected cases; the transplanted lashes need trimming"],
+             ["Beard and moustache", "Same principle, different angles",
+              "Scarring and patchy growth"],
+             ["Scar and traction loss", "Grafting into stabilised scar tissue",
+              "Only once the underlying cause has stopped"],
+         ],
+         "note": "Neither FUE nor FUT is the better operation in the abstract: they trade donor "
+                 "scar against graft yield, and which trade suits you depends on your donor "
+                 "density, how much you need and how short you wear your hair. Any clinic that "
+                 "offers only one will recommend only one."},
+
         {"kind": "split", "eyebrow": "Expectations",
-         "h2": "What a good result looks like — and when.",
+         "h2": "What a good result looks like, and when.",
          "body": ["Transplanted hairs shed within the first few weeks. This is normal and "
                   "expected, and it is the point at which patients who were not warned "
                   "panic. Regrowth begins around month three or four, and the result is "
@@ -623,15 +650,14 @@ PAGES = [
          "thin if pattern loss is untreated. Medical treatment is what protects the surgical "
          "result over time."),
         ("When will I see the result?",
-         "Transplanted hairs shed within a few weeks — expected and normal. Regrowth starts "
+         "Transplanted hairs shed within a few weeks. Expected and normal. Regrowth starts "
          "around month three or four, and the result is judged at nine to twelve months."),
         ("Does it hurt?",
          "The procedure is done under local anaesthetic. There is discomfort afterwards for "
          "a few days, managed with simple analgesia."),
         ("Can hair grafting treat alopecia areata?",
-         "No — not while it is active. The immune attack that caused the loss would affect "
-         "transplanted follicles as well, and the trauma of surgery can provoke further "
-         "loss."),
+         "No. Not while it is active. The immune attack that caused the loss would affect "
+         "transplanted follicles as well, and the trauma of surgery can provoke further loss."),
         ("Why might I be told to wait?",
          "Because the loss has not stabilised, because medical treatment has not been given "
          "a fair trial, or because your donor supply would be better spent later. Donor hair "
@@ -642,8 +668,8 @@ PAGES = [
          "The medical assessment that comes first."),
         ("alopecia-treatment-hyderabad", "Alopecia areata",
          "Why grafting is not the answer for this one."),
-        ("dermatosurgery-hyderabad", "Dermatosurgery",
-         "The other procedures done on the surgical list."),
+        ("prp-hair-treatment-hyderabad", "PRP and microneedling",
+         "The non-surgical adjunct, framed honestly."),
     ],
 },
 
@@ -652,23 +678,23 @@ PAGES = [
     "slug": "acne-treatment-hyderabad", "template": "T1", "condition": "Acne",
     "crumbs": [("Acne treatment in Hyderabad", None)],
     "title": "Acne & Acne Scar Treatment in Hyderabad | Dr. Varada",
-    "meta": "Acne and acne scar treatment in Hyderabad — medical therapy first, then peels "
-            "and scar work. Treating active acne before scarring is the whole strategy. "
-            "Book on Practo.",
+    "meta": "Acne and acne scar treatment in Hyderabad. Medical therapy first, then peels and "
+            "scar work. Treating active acne before scarring is the whole strategy.",
     "eyebrow": "Hyderabad",
     "h1": "Acne treatment in Hyderabad",
     "lede": "Acne is treated in a specific order for a specific reason: every month of "
             "active inflammation is a month of new scarring, and scarring is far harder to "
             "treat than the acne that caused it.",
-    "acts": [("Book on Practo", PRACTO), ("Consult online", PRACTO_ONLINE)],
+    "acts": [("Book on WhatsApp", WHATSAPP), ("Call the clinic", PHONE)],
     "creds": CRED,
+    "sources": ["niams-acne", "dermnet-acne", "nhs-acne", "dermnet-phototype"],
     "glance": [
         ("First", "Control the active acne"),
-        ("Then", "Marks, then scars — in that order"),
+        ("Then", "Marks, then scars, in that order"),
         ("Available", "Medical therapy, peels, scar procedures"),
         ("Judged at", "8–12 weeks"),
         ("Marks vs scars", "Different problems, different treatments"),
-        ("Where", "Procedures at Jubilee Hills"),
+        ("Where", "At the Secunderabad clinic"),
     ],
     "sections": [
         {"kind": "prose", "eyebrow": "The order matters",
@@ -676,14 +702,13 @@ PAGES = [
          "body": [
              "Patients frequently arrive asking about scar treatment while acne is still "
              "active. Doing scar work on inflamed skin is both less effective and "
-             "counterproductive — new lesions keep arriving, and some procedures aggravate "
-             "them. So the sequence is fixed: control the acne, wait for it to settle, then "
-             "address what it left behind.",
-             "The second thing worth separating is marks from scars. Flat brown or red "
-             "patches left after a spot are post-inflammatory pigmentation — they fade on "
-             "their own over months and respond well to topicals and peels. Indentations "
-             "and raised areas are true scars, they do not fade, and they need procedural "
-             "treatment.",
+             "counterproductive: new lesions keep arriving, and some procedures aggravate them. "
+             "So the sequence is fixed: control the acne, wait for it to settle, then address "
+             "what it left behind.",
+             "The second thing worth separating is marks from scars. Flat brown or red patches "
+             "left after a spot are post-inflammatory pigmentation: they fade on their own over "
+             "months and respond well to topicals and peels. Indentations and raised areas are "
+             "true scars, they do not fade, and they need procedural treatment.",
              "Being told which of the two you have saves a great deal of money. A large "
              "proportion of people who believe they have acne scars have pigmentation that "
              "will resolve with sun protection and time.",
@@ -709,7 +734,7 @@ PAGES = [
          "head": ["What you see", "What it is", "What it needs"],
          "rows": [
              ["Flat brown patches", "Post-inflammatory hyperpigmentation",
-              "Sun protection, topicals, peels — fades with time"],
+              "Sun protection, topicals, peels: fades with time"],
              ["Flat red or purple marks", "Post-inflammatory erythema",
               "Usually settles on its own over months"],
              ["Small deep pits", "Ice-pick scarring", "Procedural; often needs combination"],
@@ -728,9 +753,9 @@ PAGES = [
                   "pigment. That is why acne in Indian skin so often leaves brown marks "
                   "that outlast the spot by months, and why sun exposure makes those marks "
                   "darker and slower to fade.",
-                  "Daily broad-spectrum sunscreen is therefore not a cosmetic "
-                  "recommendation in acne treatment — it is part of the treatment, and it "
-                  "is the step most often skipped."],
+                  "Daily broad-spectrum sunscreen is therefore not a cosmetic recommendation in "
+                  "acne treatment. It is part of the treatment, and it is the step most often "
+                  "skipped."],
          "cta": ("Chemical peels explained", "chemical-peels-hyderabad"),
          "items": [
              {"title": "Sunscreen is treatment",
@@ -753,16 +778,16 @@ PAGES = [
          "Only indentations and raised areas are true scars. A great many people who believe "
          "they have scarring actually have pigmentation."),
         ("Can I have laser or peels while my acne is active?",
-         "Generally no. Scar and resurfacing work is done once the acne is controlled — "
-         "otherwise new lesions keep arriving and some procedures aggravate them."),
+         "Generally no. Scar and resurfacing work is done once the acne is controlled. "
+         "Otherwise new lesions keep arriving and some procedures aggravate them."),
         ("Does diet cause acne?",
          "Evidence is modest. High-glycaemic diets and, in some people, skimmed milk are "
          "associated with worse acne. Diet is not the main driver and dietary change alone "
          "is not a treatment."),
         ("Why does my acne keep coming back after antibiotics?",
-         "Because antibiotics reduce inflammation but do not address the underlying "
-         "follicular blockage. Maintenance treatment, usually a topical retinoid, is what "
-         "prevents relapse — and it is the step most often dropped."),
+         "Because antibiotics reduce inflammation but do not address the underlying follicular "
+         "blockage. Maintenance treatment, usually a topical retinoid, is what prevents "
+         "relapse, and it is the step most often dropped."),
         ("I'm an adult woman with new acne. Is that different?",
          "It can be. Adult-onset acne in women, especially along the jawline and with "
          "irregular cycles, warrants considering a hormonal cause. That changes the "
@@ -771,8 +796,8 @@ PAGES = [
     "related": [
         ("chemical-peels-hyderabad", "Chemical peels",
          "For pigmentation and texture once the acne is settled."),
-        ("dermatosurgery-hyderabad", "Dermatosurgery",
-         "Procedural treatment for true scarring."),
+        ("acne-scar-treatment-hyderabad", "Acne scar treatment",
+         "Subcision, TCA CROSS and resurfacing: once the acne is controlled."),
         ("skin-allergy-rashes-treatment", "Skin allergy and rashes",
          "If the breakout is not actually acne."),
     ],
@@ -783,16 +808,16 @@ PAGES = [
     "slug": "dandruff-treatment", "template": "T1", "condition": "Seborrhoeic dermatitis",
     "crumbs": [("Dandruff treatment", None)],
     "title": "Dandruff & Seborrhoeic Dermatitis Treatment | Dr. Varada",
-    "meta": "Dandruff and seborrhoeic dermatitis treatment in Hyderabad — why it keeps "
-            "coming back, how it differs from scalp psoriasis, and the maintenance "
-            "approach that actually holds it.",
+    "meta": "Dandruff and seborrhoeic dermatitis treatment in Hyderabad: why it keeps coming "
+            "back, how it differs from scalp psoriasis, and the maintenance plan.",
     "eyebrow": "Hyderabad",
     "h1": "Dandruff and seborrhoeic dermatitis treatment",
-    "lede": "Dandruff comes back because it is a chronic condition being treated as an "
-            "acute one. Clearing it takes a fortnight. Keeping it clear takes a maintenance "
-            "routine — and that is the part nobody is usually given.",
-    "acts": [("Book on Practo", PRACTO), ("Consult online", PRACTO_ONLINE)],
+    "lede": "Dandruff comes back because it is a chronic condition being treated as an acute "
+            "one. Clearing it takes a fortnight. Keeping it clear takes a maintenance routine, "
+            "and that is the part nobody is usually given.",
+    "acts": [("Book on WhatsApp", WHATSAPP), ("Call the clinic", PHONE)],
     "creds": CRED,
+    "sources": ["dermnet-seb-derm", "nhs-dandruff", "dermnet-scalp-psoriasis"],
     "glance": [
         ("What it is", "Inflammation with an overgrowth of Malassezia yeast"),
         ("Why it returns", "Chronic condition; needs maintenance"),
@@ -810,9 +835,9 @@ PAGES = [
              "reduces the yeast and the inflammation. Stopping treatment lets both return, "
              "because nothing about your scalp has permanently changed.",
              "That is why the intermittent pattern is so familiar: two weeks of medicated "
-             "shampoo, clear scalp, back to normal shampoo, flakes return within a month. "
-             "The fix is not a stronger product. It is continuing a reduced schedule — "
-             "typically once or twice a week — indefinitely.",
+             "shampoo, clear scalp, back to normal shampoo, flakes return within a month. The "
+             "fix is not a stronger product. It is continuing a reduced schedule, typically "
+             "once or twice a week, indefinitely.",
              "It is also worth checking whether it is dandruff at all. Thick adherent "
              "silvery scale in sharply bordered patches, extending past the hairline, is "
              "scalp psoriasis and needs different treatment.",
@@ -824,9 +849,9 @@ PAGES = [
               "body": "Seborrhoeic dermatitis, scalp psoriasis, or a fungal infection. They "
                       "look similar at a glance and are treated differently."},
              {"title": "Clear the flare",
-              "body": "An antifungal shampoo — ketoconazole, zinc pyrithione or "
-                      "selenium — used correctly, with a short anti-inflammatory course if "
-                      "the scalp is very inflamed."},
+              "body": "An antifungal shampoo (ketoconazole, zinc pyrithione or selenium), used "
+                      "correctly, with a short anti-inflammatory course if the scalp is very "
+                      "inflamed."},
              {"title": "Use it properly",
               "body": "Applied to the scalp, not the hair, and left for several minutes. "
                       "Most treatment failure is application failure."},
@@ -837,10 +862,9 @@ PAGES = [
 
         {"kind": "split", "eyebrow": "Beyond the scalp",
          "h2": "The places it goes that people don't connect.",
-         "body": ["Redness and fine scaling at the sides of the nose, in the eyebrows, "
-                  "behind the ears, in the beard and on the central chest are the same "
-                  "condition — and are frequently treated as unrelated dry skin or as a "
-                  "fungal rash for months.",
+         "body": ["Redness and fine scaling at the sides of the nose, in the eyebrows, behind "
+                  "the ears, in the beard and on the central chest are the same condition, and "
+                  "are frequently treated as unrelated dry skin or as a fungal rash for months.",
                   "Recognising them as one condition simplifies treatment considerably, and "
                   "explains why the facial redness improves when the scalp is treated "
                   "properly."],
@@ -867,7 +891,7 @@ PAGES = [
         ("Why does my dandruff always come back?",
          "Because it is a chronic condition treated as an acute one. The yeast and the oily "
          "conditions it thrives in do not go away, so treatment has to continue at a reduced "
-         "frequency — usually once or twice a week — rather than stopping when the flakes do."),
+         "frequency, usually once or twice a week, rather than stopping when the flakes do."),
         ("Is it dandruff or scalp psoriasis?",
          "Psoriasis scale is thicker, silvery and stuck down, forms sharply bordered "
          "patches, and typically extends past the hairline. Dandruff is finer and more "
@@ -881,9 +905,9 @@ PAGES = [
          "once the scalp is controlled. Loss that continues after the scalp is calm needs "
          "separate assessment."),
         ("Can I treat it with oil?",
-         "Coconut and similar oils can worsen it, because Malassezia feeds on the lipids. "
-         "Oil is useful only for softening thick adherent scale before washing it out — not "
-         "as a leave-in treatment."),
+         "Coconut and similar oils can worsen it, because Malassezia feeds on the lipids. Oil "
+         "is useful only for softening thick adherent scale before washing it out. Not as a "
+         "leave-in treatment."),
         ("Is it contagious?",
          "No. The yeast involved lives on everyone's skin. What differs is the inflammatory "
          "reaction to it, and that is not transmissible."),
@@ -899,20 +923,20 @@ PAGES = [
 {
     "slug": "premature-greying-treatment", "template": "T1", "condition": "Canities",
     "crumbs": [("Premature greying", None)],
-    "title": "Premature Greying — Causes & Treatment | Dr. Varada",
-    "meta": "Premature greying of hair: what actually causes it, which deficiencies are "
-            "worth testing for, what treatment can and cannot do, and the claims to "
-            "distrust. Assessed by a dermatologist of 45 years.",
+    "title": "Premature Greying: Causes & Treatment | Dr. Varada",
+    "meta": "Premature greying of hair: what actually causes it, which deficiencies are worth "
+            "testing for, what treatment can and cannot do, and the claims to distrust.",
     "eyebrow": "Hyderabad",
     "h1": "Premature greying of hair",
-    "lede": "Greying before thirty is worth investigating, because a small proportion of "
-            "cases have a correctable cause. The rest are genetic — and it is more useful "
-            "to be told that clearly than to be sold a treatment for it.",
-    "acts": [("Book on Practo", PRACTO), ("Consult online", PRACTO_ONLINE)],
+    "lede": "Greying before thirty is worth investigating, because a small proportion of cases "
+            "have a correctable cause. The rest are genetic, and it is more useful to be told "
+            "that clearly than to be sold a treatment for it.",
+    "acts": [("Book on WhatsApp", WHATSAPP), ("Call the clinic", PHONE)],
     "creds": CRED,
+    "sources": ["aad-hair-loss", "nhs-hair-loss"],
     "glance": [
         ("Defined as", "Greying before 20 (Asian), 25 (African)"),
-        ("Commonest cause", "Genetics — by a wide margin"),
+        ("Commonest cause", "Genetics, by a wide margin"),
         ("Worth testing", "B12, ferritin, thyroid, vitamin D"),
         ("Reversible", "Only where a deficiency is found and corrected"),
         ("Smoking", "An established, avoidable contributor"),
@@ -922,20 +946,19 @@ PAGES = [
         {"kind": "prose", "eyebrow": "What happens",
          "h2": "The pigment factory in each follicle winds down.",
          "body": [
-             "Each hair follicle has its own population of pigment cells that colour the "
-             "hair as it grows. Over time those cells exhaust, and hair grows without "
-             "pigment. The age at which this happens is largely inherited — which is why "
-             "the most informative question in the consultation is when your parents went "
-             "grey.",
+             "Each hair follicle has its own population of pigment cells that colour the hair "
+             "as it grows. Over time those cells exhaust, and hair grows without pigment. The "
+             "age at which this happens is largely inherited, which is why the most informative "
+             "question in the consultation is when your parents went grey.",
              "A minority of early greying has a contributing cause worth finding: vitamin "
              "B12 deficiency, iron deficiency, thyroid disease, and vitamin D deficiency all "
              "appear in the literature. Smoking is an established and avoidable "
              "contributor. Where one of these is found and corrected, some improvement is "
              "possible.",
-             "Where none is found — which is the majority — the honest position is that "
-             "greying does not reverse, and the useful conversation is about colouring "
-             "safely and about the hair that remains. Saying so is not defeatism; it is the "
-             "alternative to selling a course of treatment for a genetic trait.",
+             "Where none is found, which is the majority, the honest position is that greying "
+             "does not reverse, and the useful conversation is about colouring safely and about "
+             "the hair that remains. Saying so is not defeatism; it is the alternative to "
+             "selling a course of treatment for a genetic trait.",
          ]},
 
         {"kind": "table", "eyebrow": "Assessment", "h2": "What is worth testing",
@@ -944,7 +967,7 @@ PAGES = [
              ["Vitamin B12", "Deficiency is associated with early greying",
               "Correct it properly; some improvement reported"],
              ["Ferritin", "Iron deficiency is common and often silent",
-              "Correct and recheck — also helps hair shedding"],
+              "Correct and recheck: also helps hair shedding"],
              ["Thyroid function", "Both under- and overactive thyroid are associated",
               "Treat the thyroid"],
              ["Vitamin D", "Commonly deficient; association reported",
@@ -953,16 +976,16 @@ PAGES = [
              ["Smoking history", "Established and avoidable contributor",
               "Stopping helps; it will not reverse what has greyed"],
          ],
-         "note": "This is a short, targeted panel — not a broad screen. Testing everything "
+         "note": "This is a short, targeted panel. Not a broad screen. Testing everything "
                  "generates incidental findings that lead nowhere."},
 
         {"kind": "split", "eyebrow": "Claims to distrust",
          "h2": "Why this condition attracts so much nonsense.",
-         "body": ["Greying is visible, distressing, and has no reliable medical reversal — "
-                  "which is precisely the combination that attracts unsupported claims. Oils "
-                  "that 'restore melanin', supplements promising reversal in weeks, and "
-                  "treatments claiming to reverse genetic greying all have the same "
-                  "evidence base, which is none.",
+         "body": ["Greying is visible, distressing, and has no reliable medical reversal, which "
+                  "is precisely the combination that attracts unsupported claims. Oils that "
+                  "'restore melanin', supplements promising reversal in weeks, and treatments "
+                  "claiming to reverse genetic greying all have the same evidence base, which "
+                  "is none.",
                   "The things that genuinely help are unglamorous: correct a deficiency if "
                   "you have one, stop smoking, and treat the scalp if it is inflamed. Beyond "
                   "that, colouring hair safely is a legitimate and effective answer, and it "
@@ -982,7 +1005,7 @@ PAGES = [
     "faq_h2": "Premature greying questions",
     "faqs": [
         ("Can grey hair turn black again?",
-         "Only where a correctable cause is found and treated — a B12 or iron deficiency, or "
+         "Only where a correctable cause is found and treated: a B12 or iron deficiency, or "
          "thyroid disease. Genetic greying does not reverse, and no treatment currently "
          "available changes that."),
         ("What deficiency causes premature greying?",
@@ -993,15 +1016,15 @@ PAGES = [
          "No. That is a myth. Plucking affects only that follicle, and repeated plucking can "
          "damage it."),
         ("Can stress turn hair grey?",
-         "Not overnight — hair that has already grown cannot lose its colour. Severe stress "
-         "can trigger shedding, which makes existing grey hairs more noticeable, and stress "
-         "may contribute to the process over longer periods."),
+         "Not overnight: hair that has already grown cannot lose its colour. Severe stress can "
+         "trigger shedding, which makes existing grey hairs more noticeable, and stress may "
+         "contribute to the process over longer periods."),
         ("Do any oils or supplements reverse greying?",
          "None with credible evidence. Supplements help only where they correct a "
          "demonstrated deficiency. Claims of restoring pigment to genetically grey hair are "
          "not supported."),
         ("Is hair colouring safe to do regularly?",
-         "For most people, yes, with sensible precautions — a patch test before first use, "
+         "For most people, yes, with sensible precautions: a patch test before first use, "
          "avoiding application to broken or inflamed scalp, and stopping if irritation "
          "develops. Allergy to hair dye is real and worth taking seriously."),
     ],
