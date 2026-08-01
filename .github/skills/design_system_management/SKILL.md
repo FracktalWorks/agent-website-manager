@@ -292,6 +292,31 @@ Open Design's implementation is TypeScript inside its daemon and is **not vendor
 Then: `validate <id>` → `tokens <id>` (0 missing) → `quality <id>` (aim 100) →
 `python .tmp/scripts/build_ds_index.py` to put it in the index.
 
+## 4b. Site-owned ("yours") systems — kept apart from the corpus
+
+A system built FOR a site (the Dr. Varada system is the reference case) does
+**not** go into `agent-data/design-systems/` — that directory is the vendored
+corpus and nothing in it is live-edited. A site's own system lives with the
+site at `outputs/<site>/design-system/` and stays there, because the site's
+live editor writes its tokens (`system/variables.css`) on every Tokens-panel
+edit; a copy in the corpus would silently drift.
+
+The workspace shell (`hub.py`) discovers site-owned systems automatically and
+shows them first, badged **yours**, with swatches re-read on every request so
+they track live edits. The ingestion contract — what makes a directory appear
+in the shell:
+
+| File | Required? | Used for |
+|---|---|---|
+| `system/variables.css` (or `kit/colors_and_type.css`) | **yes** | the `:root` tokens — swatches + the file the live editor edits |
+| `kit/metadata.json` (`title`, `category`, `status`) | no | card name and grouping |
+| `brand.json` (`title`, `tagline`) | no | card name fallback + blurb |
+| `kit/preview/*.html` | no | the pages the shell displays (colors-primary, typography-specimens and components-* lead; the rest alphabetical) |
+
+When creating a new site-owned system, emit this shape and it is browsable in
+the shell with zero registration. `brandkit.py apply <id>` applies **corpus**
+ids only; a site-owned system needs no applying — it already is the site.
+
 ## 5. Quality rubric
 
 `quality <id>` scores any **rich** package — one declaring at least one of
@@ -395,8 +420,8 @@ Honesty about the gaps, so the contract with the linter stays truthful:
   colour outside `:root`" and anti-slop gates on every build.
 - **`elementor_builder`** — map tokens onto an Elementor Global Kit so WP-editable
   pages inherit the same identity.
-- **`open_design_integration`** — only when Open Design is actually running. This
-  skill is the offline path and does not need it.
+- **`html_deploy`** — takes the HTML a design system produced and publishes it to
+  WordPress. Neither skill needs Open Design; it was retired on 2026-07-30.
 - **`website_analysis`** — its report design system is a *report* identity, separate
   from a site's brand system. Don't cross them.
 

@@ -31,27 +31,120 @@ and deterministic scripts do the rendering, validation and persistence.
 |------|------|
 | `content/*.py` | Pages as data dicts — copy, sections, images, FAQs, links. **The only place content lives.** |
 | `content/urls.py` | slug → production URL. The only place IA is defined. |
+| `siteconf.py` | What THIS site is made of: content modules, editable constants, link constants. Read by `build.py`, `linkscan.py`, `editor.py` and `resolver.py` — it exists because that list used to be written out in all four, and a module missing from one of them failed silently. |
 | `chrome.py` | ALL markup: header, nav, footer, block renderers, schema.org, `img()`/`slot()`/`at()`. One edit fixes every page. |
 | `build.py` | Assembler + validator + sitemap/robots + `site-manifest.json`. Validation is not optional. |
 | `datapatch.py` | Edits page data **by address** (`sections.4.items.0.before`) via AST spans — creates missing keys, reorders/duplicates/removes list items, rewrites module constants. |
-| `versions.py` | Version timeline, ported from Open Design's `project-file-versions.ts`: append-only, restore-writes-forward, content-addressed blobs, parent links so undo follows the edit lineage. |
+| `versions.py` | Version timeline, ported from Open Design's `project-file-versions.ts`: append-only, restore-writes-forward, content-addressed blobs, parent links so undo follows the edit lineage. Also a recovery CLI — `where` / `list` / `show <n>` / `restore <n> [--dry-run]` / `export <n> <dir>` — which works with the editor stopped, because that is usually why you want it. |
 | `linkscan.py` | Every link on the site by walking the *renderer's* positions in the page data. `where <target>` / `audit`; powers the inspector's this-one-or-all-N choice. |
 | `resolver.py` | Edits copy **by value** — the fallback for text with no address. Also owns `char_col`, the UTF-8 byte→character column conversion every span write must use. |
 | `media.py` | Upload pipeline: verify by decoding, bake EXIF orientation, strip all metadata, cap the long edge, re-encode, report dimensions. |
 | `editor.py` | Live-edit server: injects the overlay, applies edits inside a transaction that reverts source *and deletes uploaded files* if the build fails, watches sources, SSE-reloads every tab. |
-| `editor/editor.js\|css` | The injected overlay: hover-pick, in-place text editing, inspector panels (image/link/tokens/site), section toolbar, undo/redo, open-in-code. Never part of a build. |
+| `editor/editor.js\|css` | The injected overlay: hover-pick, in-place text editing, inspector panels (image/link/tokens/site/pages), section toolbar, undo/redo, open-in-code, and a device preview (Screen button — phone/tablet/laptop/wide/desktop at verify.py's exact widths, in a scaled iframe so media queries are honest; editing keeps working inside it). Never part of a build. |
 | `brandkit.py` | Drives the site from any corpus design system: reads its canonical `:root`, derives this site's tokens in OKLCH, repairs contrast, writes `assets/brand.css`. `list` / `show <id>` / `apply <id>` / `apply --native` / `calibrate` / `check`. |
 | `preview.py` | Plain build+serve, no editing. |
 | `verify.py` | Renders every built page in real Chrome at 390/768/1040/1440px and fails on horizontal scroll or broken images. Measures inside an iframe of the exact width because Chrome on Windows clamps windows to ~500px, and ignores elements clipped by a scrolling ancestor so intentional marquees and scrollable tables don't false-positive. |
 
 Run: `python build.py` (preview), `python build.py --links=production`,
-`python editor.py` (live editing at http://127.0.0.1:8789),
-`python preview.py` (plain preview at http://127.0.0.1:8788).
+`python editor.py` (live editing at http://127.0.0.1:8789; `--port N` for a
+non-default port), `python preview.py` (plain preview at http://127.0.0.1:8788).
 
-**In VS Code:** start `python editor.py`, then `Ctrl+Shift+P → "Simple
-Browser: Show" → http://127.0.0.1:8789/`. The user edits the page in the
-editor pane; saved edits land in `content/*.py` in the same window. Alt+click
-anything jumps VS Code to the exact source line.
+**The workspace shell** — `python hub.py` at the repo root
+(http://127.0.0.1:8780, VS Code task "workspace hub (preview in VS Code)") —
+is the app window Open Design used to be, with its navigation model: a
+persistent tab bar whose pinned ⌂ Home is always one click away, one tab per
+opened project or design system (kept-alive iframes — switching tabs never
+reloads an editor mid-edit), hash routing so browser back/forward walks tabs,
+and tabs restored across reloads from localStorage. Home shows every
+`outputs/*/site` as a card (live scaled-iframe thumbnail via OD's
+`100cqw/1280px` 16/9 trick, sorted by last build, relative updated-at) with
+Start&nbsp;&amp;&nbsp;open spawning that site's editor on its own port (drvarada keeps
+8789, others 8791+), plus the searchable 152-package design-system corpus. A
+project tab gets a filterable sidebar of every page from
+`site-manifest.json` — the editor announces its current page to the shell
+over cross-origin postMessage — and a design-system tab gets the package's
+`components.html` with its colour/type/spacing previews and an all-systems
+quick switcher. **Ctrl+P / Ctrl+K** (or the ⌕ button) opens a quick switcher
+across every page, project and design system, with recents. Site-owned
+design systems (`outputs/<site>/design-system/`, see
+[design_system_management §4b](../design_system_management/SKILL.md)) appear
+first badged **yours**, swatches read live from `system/variables.css`;
+vendored systems offer an **Apply to project** action that runs the site's
+`brandkit.py apply` from the shell. The editor's device stage also carries
+zoom presets (Fit / 50–200%). The shell's **+ New project** scaffolds a real
+site via `new_site.py` (with an optional corpus brand applied on creation),
+and **+ Create** (design systems) writes an agent brief to `inputs/briefs/`.
+
+### Feedback loop — right-click a reference, or Note a change
+
+Two gestures, both producing something an agent can act on without searching:
+
+- **Right-click any element** (edit mode or not) → a reference block on the
+  clipboard, ready to paste into a chat:
+
+  ```
+  [site-ref] drvarada-site · page index · sections.0.h2
+  source: outputs/drvarada-site/site/content/brand.py:45
+  kind: text
+  current: "What brings you in?"
+  ```
+
+  Use it to talk about one element right now. Nothing is stored.
+
+- **Note** (toolbar) → pin "what should change here" to an element. Pin as
+  many as you like across as many pages as you like, then **⚑ Agent** turns
+  the whole queue into a single numbered prompt — every element with its
+  address, source line, current value and requested change — to paste into
+  any chat. Pins render on the page with a Resolve button.
+
+Notes land in `<site>/.feedback/notes.jsonl` (`status: open|done`). The source
+file and line are resolved **at pin time** and stored, because an address is
+only meaningful against the data it was written from. **Agent contract: read
+`.feedback/` before improving a site; mark items `done` after acting** (see
+the site's AGENTS.md).
+
+**Mark** (drawing on the page) and **Shot** (server-side screenshots) were
+removed 2026-07-31, along with `shot-*.png` and the `get_screenshot` MCP tool.
+Both existed to show the agent the user's view, which a normal screenshot
+pasted into chat does with fewer moving parts. What survives is the half no
+image can supply: which value, in which file, on which line.
+
+**How feedback reaches the chat sidebars:**
+
+- **Push, Claude Code only**: a `UserPromptSubmit` hook
+  (`.claude/hooks/feedback_context.py`, wired in `.claude/settings.json`)
+  injects all open items into every prompt — the user annotates in the
+  browser, switches to the Claude sidebar, and just types "fix these".
+  Silent (zero tokens) when nothing is open; caps at 15 items.
+- **Pull, any agent**: the editor's **⚑ Agent** bar chip shows the open count
+  and opens a panel with every item, a Resolve button each, and **Copy prompt
+  for all N** — the whole queue as one numbered brief. Clipboard degrades
+  clipboard API → `execCommand("copy")` over a selected textarea → leave the
+  textarea up for a manual Ctrl+C. VS Code's Simple Browser webview refuses
+  `clipboard-write` AND swallows `window.prompt`, so never use a blocking
+  modal as the fallback.
+
+A `site-feedback` MCP server (`.tmp/scripts/feedback_mcp.py`) used to front
+this folder for both sidebars. **Unregistered 2026-07-31** — its two tools
+were a process and two tool schemas per session wrapping a JSONL file any
+agent can already read and edit. Reading and resolving are file operations.
+The script is still on disk if it is ever wanted back; re-add it to
+`.mcp.json` and `.vscode/mcp.json`.
+
+**In VS Code:** run the task **"drvarada: live editor (preview in VS Code)"**
+(Terminal → Run Task) — it starts the server if needed and opens the page in
+VS Code's own browser pane in one step. The mechanism, since no CLI can invoke
+an editor command: a `tasks.json` input of `"type": "command"` running
+`simpleBrowser.show` with the URL as args, referenced as the task's
+`${input:…}` command. `editor.py` cooperates by binding its port *before* the
+first build (an instantly-opened pane gets a self-refreshing "building…" page,
+never a connection refused) and by exiting 0 with a message when another
+instance already serves the port — so the task is safe to re-run. Manual
+route: `Ctrl+Shift+P → "Simple Browser: Show" → http://127.0.0.1:8789/`.
+When `editor.py` detects a VS Code terminal (`TERM_PROGRAM=vscode`) it prints
+these hints instead of yanking focus to the OS browser (`--open` forces it).
+The user edits the page in the editor pane; saved edits land in `content/*.py`
+in the same window. Alt+click anything jumps VS Code to the exact source line.
 
 ### What the editor can change
 
@@ -65,6 +158,23 @@ anything jumps VS Code to the exact source line.
 | Site-wide details | Site panel: Practo links, phone, WhatsApp, reviewer | module constants in `chrome.py` |
 | Any of it, undone | Undo/Redo (Ctrl+Z / Ctrl+Shift+Z) and a **Versions** panel | an append-only timeline under `site/.versions/`, surviving restarts |
 | A link, everywhere | the Link inspector's scope: *just this one* or *all N pointing here* | every occurrence at once, found by walking the page data |
+
+### Device preview (ported from Open Design's FileViewer)
+
+The **⛶ Screen** button previews the page at phone 390×844, tablet 768×1024,
+laptop 1040×800, wide 1240×800 or desktop 1440×900 — the widths `verify.py`
+tests, because they are where this stylesheet makes its decisions. The
+mechanism is Open Design's three-layer stage: an iframe laid out at *true*
+device pixels inside a clip sized at *scaled* pixels, `transform: scale()`
+fitted to the window and never upscaled — so media queries, `vw` units and
+`innerWidth` inside the frame are all honest, and scrolling behaves like the
+real device. Additions OD does not have: a rotate button, a live "scrolls
+sideways" warning (verify.py's key measurement, computed on every load), and
+**editing keeps working inside the frame** — the framed overlay hides its
+toolbar and hands reload/mode control to the host page via `window.__odApi`,
+while the host holds the single SSE connection and reloads only the frame on
+rebuilds. The chosen device survives reloads (sessionStorage), and the
+**Pages** panel navigates within the frame while it is up.
 
 ### Addressing reach — how much the editor can name exactly
 
@@ -234,21 +344,36 @@ colours and typeface.
 
 ## Building a NEW site with this pattern
 
+**Scaffold it — do not copy a folder by hand.**
+
+```bash
+python .github/skills/site_generator/scripts/new_site.py acme --title "Acme Ltd"
+cd outputs/acme-site/site && python build.py && python verify.py --all
+```
+
+That produces a site which **builds, verifies, edits and versions on the first
+run**. The engine modules are copied verbatim (they are genuinely site-agnostic);
+the three things that are not — `siteconf.py`, `chrome.py`, `content/` — are
+generated fresh and minimal, so you are not deleting a dermatology clinic out of
+your new client's navigation. `PORTING.md` in the new directory lists what to
+replace, in order.
+
+Then:
+
 1. **Design system first.** Either pick one from the 152-package corpus or
    author one — see [design_system_management](../design_system_management/SKILL.md)
    (`python .tmp/scripts/design_systems.py search "<brief>"`, then `show <id>
    --root` for the `:root` block to paste). The site's own CSS is layout-only;
    raw colours outside a `:root` component-token block fail the build.
-2. Copy the reference `site/` folder; empty the `content/` modules; write
-   `urls.py` from the keyword/IA map FIRST (one page, one query cluster).
-3. Rewrite the domain compliance list in `build.py` (`BANNED`/`NEGATION`)
-   for the client's regulatory reality; keep the `SLOP` list as is.
+2. Write `content/urls.py` from the keyword/IA map FIRST — one page, one query
+   cluster.
+3. Add domain compliance rules to `build.py` (`BANNED`/`NEGATION`) for the
+   client's regulatory reality; keep the `SLOP` list as is. The reference site's
+   `build.py` is where to copy the richer gates from.
 4. Author content as data, applying `references/craft.md` and the fuller
    rulebooks in `agent-data/design-systems/_craft/`. Brand tokens win on value
    conflicts; craft rules cover everything the brand does not override.
-5. Two edits wire the editor to the new site: `resolver.SEARCH_FILES` and
-   `datapatch.CONTENT_FILES` (the latter derives from the former).
-6. Run `python verify.py --all` before shipping, and screenshot-verify the
+5. Run `python verify.py --all` before shipping, and screenshot-verify the
    result. Static checks pass pages that render broken: Open Design learned
    this when a 5-phase static audit reported "42/45 requirements, 0 defects"
    and live rendering then found three runtime bugs, one of which blanked the
@@ -278,6 +403,17 @@ auto-checked vs guidance so the contract with the linter stays honest.
 
 ## Ported from / still to port (Open Design provenance)
 
+**Open Design itself is retired** (2026-07-30). Nothing in this skill requires it
+to be running, and no new work should start it. What it used to provide lives
+here: page generation (this skill), design systems (`agent-data/design-systems/`,
+152 vendored), version history (`versions.py`), visual editing (`editor.py`).
+Publishing to WordPress is [html_deploy](../html_deploy/SKILL.md), which was
+called `open_design_integration` and never needed the app either.
+
+The engine gate is `python -m pytest tests/test_site_engine.py` — run it after
+touching `versions.py`, `datapatch.py`, `resolver.py` or `linkscan.py`.
+`tests/live_editor_parity.py` covers the HTTP surface against a running editor.
+
 Ported: content/renderer split, always-validating builder, anti-slop
 constants + token-scope CSS lint (`lint-artifact.ts`), layout-rhythm caps
 (taste-skill §4.7), `site-manifest.json` (design-manifest idea), live-edit
@@ -288,7 +424,12 @@ Also ported since: the token tier model (A1/A2/slot/extension) and a
 derive step — `brandkit.py` derives a full site palette from a brand's
 canonical tokens, which is Open Design's seed→derive idea applied at the
 consumer end rather than the authoring end, and adds a contrast-repair pass
-they do not have.
+they do not have. And (2026-07-30) the FileViewer device preview — their
+scaled-iframe stage at our verify.py widths, plus rotation, a live overflow
+warning and in-frame editing, none of which upstream has; their draggable
+inspector card; and a Pages navigator. Upstream has **no** VS Code
+integration at all — the Simple Browser task in `.vscode/tasks.json` is
+original (see "In VS Code" above).
 
 Worth porting when needed: authoring-side **seed → derive** (a ~20-field
 seed.json that derives a design system's own palette ladders, type scale and

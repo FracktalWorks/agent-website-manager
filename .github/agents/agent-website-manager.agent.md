@@ -13,7 +13,6 @@ tools:
     web,
     browser,
     "higgsfield/*",
-    "open-design/*",
     "hostinger-wordpress/*",
     todo,
   ]

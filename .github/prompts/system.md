@@ -87,7 +87,7 @@ its REST API to manage content, Elementor designs, plugins, themes, SEO, backups
 | `woocommerce_management` | `.github/skills/woocommerce_management/SKILL.md` | WooCommerce products, orders, customers, coupons |
 | `media_cleanup` | `.github/skills/media_cleanup/SKILL.md` | Unused image detection, media optimization, WebP |
 | `performance_optimization` | `.github/skills/performance_optimization/SKILL.md` | Page speed, LSCache, CSS/JS minify, CDN, DB cleanup |
-| `open_design_integration` | `.github/skills/open_design_integration/SKILL.md` | Open Design ↔ WordPress design→deploy pipeline |
+| `html_deploy` | `.github/skills/html_deploy/SKILL.md` | Publish finished HTML to WordPress — canvas (default) or Elementor widgets |
 | `website_analysis` | `.github/skills/website_analysis/SKILL.md` | Decision-oriented site reports — health, SEO, linking/orphans, architecture, page opportunities |
 | `site_generator` | `.github/skills/site_generator/SKILL.md` | In-repo site generation — pages as data, validating builder, live browser editor that writes back to source |
 | `design_system_management` | `.github/skills/design_system_management/SKILL.md` | Choose/load/use/validate/create design systems from the 152-package corpus — token tiers, paste-the-`:root` rule, quality rubric |
@@ -143,10 +143,11 @@ You have access to these tools automatically — do NOT re-implement them:
 3. Update widgets, sections, and responsive settings
 4. Publish changes
 
-### Design a New Page with Open Design (fewest steps)
-See `open_design_integration/SKILL.md` for the full instructions — summary:
-1. Ask Open Design to generate the page HTML from a design system; save to
-   `outputs/design_pages/[slug].html`.
+### Design and Publish a New Page (fewest steps)
+See `html_deploy/SKILL.md` for the full instructions — summary:
+1. Generate the page HTML **in this repo** — `site_generator` builds it from page
+   data against a design system from `agent-data/design-systems/`. Save to
+   `outputs/design_pages/[slug].html`. (Open Design is retired; do not start it.)
 2. **Default: `open_design_bridge.py deploy-canvas`** — publishes the HTML verbatim as a
    Custom HTML block on the chrome-free `elementor_canvas` template. One REST write,
    near-pixel-perfect fidelity, live immediately, no conversion / kit / CSS-regen / manual

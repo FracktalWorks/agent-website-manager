@@ -14,3 +14,11 @@ on Hostinger using the DOE Framework (Directive, Orchestration, Execution).
 - `.tmp/scripts/` — Shared utilities on PYTHONPATH
 
 **Architecture:** Skills (what to do) → Orchestration (decision making) → Execution (doing the work)
+
+**User feedback on generated sites:** the live editor's **Note** tool queues
+requested changes in `outputs/<site>/site/.feedback/notes.jsonl`, each line
+carrying the element's `data-od` address, the source `file:line` it resolved
+to, and its current value. Before improving any generated site, read that file
+and act on every `status: "open"` item, then set its `status` to `"done"` with
+a `resolved` timestamp. Patch the address, not the text. The user expects
+pinned feedback to be seen without re-explaining it in chat.

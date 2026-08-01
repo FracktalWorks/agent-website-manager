@@ -20,7 +20,7 @@
 | Performance Optimization | `.github/skills/performance_optimization/SKILL.md` | Page speed, LSCache, minification, CDN, DB optimization |
 | Memory Management | `.github/skills/memory_management/SKILL.md` | Persistent agent memory, FTS5 search, STM/LTM |
 | Infrastructure Tools | `.github/skills/infrastructure_tools/SKILL.md` | Tool registry, task graphs, execution traces, approval gates |
-| Open Design Integration | `.github/skills/open_design_integration/SKILL.md` | Design→Deploy pipeline, Open Design ↔ WordPress bridge |
+| HTML → WordPress | `.github/skills/html_deploy/SKILL.md` | Publish finished HTML to WP — canvas (default) or Elementor widgets. Was `open_design_integration` |
 | Website Analysis & Reporting | `.github/skills/website_analysis/SKILL.md` | Decision-oriented site reports: health, SEO, linking/orphans, architecture, page opportunities |
 | Site Generator & Live Editor | `.github/skills/site_generator/SKILL.md` | In-repo site generation: pages as data, validating builder, live browser editor writing back to source |
 | Design System Management | `.github/skills/design_system_management/SKILL.md` | Choose/load/use/validate/create design systems from the 152-package corpus: token tiers, paste-the-`:root` rule, quality rubric, craft rules |
@@ -42,6 +42,23 @@
 - `inputs/` — User-provided files: design briefs, content drafts, media assets
 - `outputs/` — Campaign results, generated website content, design page drafts
 - `tests/` — pytest suite — CI gate
+- `hub.py` — workspace shell at http://127.0.0.1:8780 (projects, pages, design systems)
+
+## Directory contracts (read the local AGENTS.md before editing there)
+
+Deeper contracts load on demand so this file stays small. Before editing in a
+directory that has one, read it — it says what the directory owns, where new
+work belongs, and which gate to run:
+
+| Directory | Contract covers |
+|---|---|
+| `outputs/drvarada-site/site/` | the site engine: placement table (content vs chrome vs engine), silent-failure invariants, test gates |
+| `agent-data/design-systems/` | `INDEX.md` — the 152-system corpus and its CLI |
+
+**Place before building:** name the kind of thing you are adding, find the
+directory that owns that kind in the table above, and put it there — never in
+whatever file is already open. If nothing owns it, add a new scope with its own
+contract rather than an orphan file.
 
 ## Quick Start
 
@@ -51,7 +68,8 @@
    - "Set up a new WordPress site on Hostinger for my business"
    - "Create a landing page with Elementor for my product launch"
    - "Update all my WordPress plugins and run a security scan"
-   - "Redesign the homepage using the fracktal-works design system via Open Design"
+   - "Redesign the homepage using the fracktal-works design system"
+   - "Scaffold a new site for Acme and build the homepage"
    - "Build a blog section with 5 SEO-optimized posts"
 
 ## Self-annealing loop

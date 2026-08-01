@@ -43,7 +43,7 @@ Reserve the LLM for judgment, content, and strategy. Use scripts for determinist
 | Deployment Manager | [.github/skills/deployment_manager/SKILL.md](.github/skills/deployment_manager/SKILL.md) |
 | Memory Management | [.github/skills/memory_management/SKILL.md](.github/skills/memory_management/SKILL.md) |
 | Infrastructure Tools | [.github/skills/infrastructure_tools/SKILL.md](.github/skills/infrastructure_tools/SKILL.md) |
-| Open Design Integration | [.github/skills/open_design_integration/SKILL.md](.github/skills/open_design_integration/SKILL.md) |
+| HTML → WordPress deploy | [.github/skills/html_deploy/SKILL.md](.github/skills/html_deploy/SKILL.md) |
 | Website Analysis & Reporting | [.github/skills/website_analysis/SKILL.md](.github/skills/website_analysis/SKILL.md) |
 | Site Generator & Live Editor | [.github/skills/site_generator/SKILL.md](.github/skills/site_generator/SKILL.md) |
 | Design System Management | [.github/skills/design_system_management/SKILL.md](.github/skills/design_system_management/SKILL.md) |
@@ -67,10 +67,31 @@ platform tool, use the Claude Code equivalent:
 | `save_note` / `recall_notes` | file-based memory (see below) |
 | `hostinger-*` MCP tools | `mcp__hostinger-*` MCP tools (Hostinger domains, DNS, hosting, VPS, email, billing) |
 | `emcp-tools/*` (Elementor MCP) | the Elementor MCP tools if connected; otherwise WordPress REST API + skill scripts |
-| `open-design/*` (Open Design MCP) | `mcp__open-design_*` — create_project, start_run, get_artifact, etc. |
+| `open-design/*` (Open Design MCP) | **retired 2026-07-30** — design happens in-repo now. See the site generation section below. |
 
 The Hostinger MCP servers exposed to Claude Code map 1:1 to the `hostinger-*` tools in the
 agent allow-list — use them for domains, DNS, hosting, VPS, email marketing, and billing.
+
+## Generating sites — everything happens in this repo
+
+**Open Design is retired.** Do not start it, and do not reach for its MCP tools. Page
+design, visual editing, version history and design systems all live here now:
+
+| Need | Use |
+|------|-----|
+| See all projects + browse design systems | `python hub.py` at the repo root → http://127.0.0.1:8780 (the workspace landing page; live project thumbnails, one-click editor launch per site, 152 design systems with previews) |
+| Build a site from page data | [site_generator](.github/skills/site_generator/SKILL.md) — `python build.py` |
+| Edit a rendered page visually | `python editor.py` in the site directory → http://127.0.0.1:8789 (in VS Code: Run Task → "drvarada: live editor (preview in VS Code)" opens it in the Simple Browser pane; the ⛶ Screen button previews phone/tablet/laptop/desktop widths) |
+| Undo / redo / restore a past state | the editor's Versions panel, or `python versions.py list` then `restore <n>` |
+| Find and retarget every link to a destination | `python linkscan.py where <target>` / `audit` |
+| Prove the pages render clean | `python verify.py --all` (4 widths, overflow + broken images) |
+| Pick or create a design system | [design_system_management](.github/skills/design_system_management/SKILL.md) — 152 vendored |
+| Restyle a whole site into a brand | `python brandkit.py apply <id>` (OKLab derivation, AA-checked) |
+| Publish the result to WordPress | [html_deploy](.github/skills/html_deploy/SKILL.md) — `deploy-canvas` |
+| Start a NEW site | `python .github/skills/site_generator/scripts/new_site.py <name>` |
+
+The engine gate is `python -m pytest tests/test_site_engine.py` — run it after touching
+`versions.py`, `datapatch.py`, `resolver.py` or `linkscan.py`.
 
 ## Credentials
 

@@ -31,6 +31,107 @@
       "runOptions": {
         "runOn": "folderOpen"
       }
+    },
+    {
+      // Starts (or reuses) the live-editor server. editor.py binds its port
+      // before the first build and exits 0 when another instance already owns
+      // it, so this task is safe to run repeatedly.
+      "label": "drvarada: live editor server",
+      "type": "shell",
+      "command": "python editor.py --no-open",
+      "options": {
+        "cwd": "${workspaceFolder}/outputs/drvarada-site/site"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^__never_matches__$",
+          "file": 1,
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "live editor at http|already serving"
+        }
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated"
+      }
+    },
+    {
+      // The workspace landing page: every project with a live thumbnail,
+      // one-click editor launch, and the 152-package design-system browser.
+      "label": "workspace hub server",
+      "type": "shell",
+      "command": "python hub.py --no-open",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^__never_matches__$",
+          "file": 1,
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "workspace hub at http|already serving"
+        }
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "workspace hub (preview in VS Code)",
+      "dependsOn": [
+        "workspace hub server"
+      ],
+      "command": "${input:odOpenHub}",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never",
+        "close": true
+      }
+    },
+    {
+      // One click: server up + page open in VS Code's own browser pane.
+      // The command is an input variable on purpose — resolving it runs
+      // simpleBrowser.show with the URL (the only way a task can invoke a
+      // VS Code command).
+      "label": "drvarada: live editor (preview in VS Code)",
+      "dependsOn": [
+        "drvarada: live editor server"
+      ],
+      "command": "${input:odOpenPreview}",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never",
+        "close": true
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "odOpenPreview",
+      "type": "command",
+      "command": "simpleBrowser.show",
+      "args": [
+        "http://127.0.0.1:8789/"
+      ]
+    },
+    {
+      "id": "odOpenHub",
+      "type": "command",
+      "command": "simpleBrowser.show",
+      "args": [
+        "http://127.0.0.1:8780/"
+      ]
     }
   ]
 }

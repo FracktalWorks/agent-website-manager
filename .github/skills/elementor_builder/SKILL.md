@@ -26,7 +26,7 @@ Elementor templates, kits, global settings, and responsive breakpoints.
 
 ## Converting HTML/CSS mockups to Elementor (preferred path)
 
-When the source is HTML+CSS — an Open Design artifact, an AI-generated mockup, a
+When the source is HTML+CSS — a page from `site_generator`, an AI-generated mockup, a
 Tailwind page — **use `scripts/html2elementor/` instead of hand-building or
 round-tripping through emcp-tools' `build-page`/`export-page`**. It parses the CSS
 cascade locally (no LLM guessing at widget structure) and resolves Elementor's
@@ -34,11 +34,11 @@ non-obvious quirks automatically: shared system-color globals bleeding across pa
 lazy-load hiding below-the-fold backgrounds, row-container widths collapsing to 0,
 and stale CSS cache after `_elementor_data` updates.
 
-**One-command path (default):** if the source came from Open Design (or any HTML file
+**One-command path (default):** for any HTML file
 on disk you want deployed as a new/updated page), use
 `.tmp/scripts/open_design_bridge.py deploy-elementor` — it calls this same converter
 in-process and also does both import invariants below automatically. See
-[open_design_integration/SKILL.md](../open_design_integration/SKILL.md) for the full
+[html_deploy/SKILL.md](../html_deploy/SKILL.md) for the full
 generate → deploy → verify flow. Only use the manual three-step flow below if you need
 the intermediate `layout.json`/`kit.json` for inspection, or you're editing the converter
 itself.
