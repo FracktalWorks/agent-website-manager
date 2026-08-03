@@ -209,6 +209,44 @@ AREAS_SERVED = (
 )
 STREET = "Plot No D13B, Wellington Rd, Vikrampuri Colony, Karkhana"
 PINCODE = "500009"
+
+# THE PIN, as coordinates.
+#
+# Read on 2026-08-03 out of the clinic's own Google listing share link
+# (maps.app.goo.gl/jupe1y2kiuCHtWn76), which resolves to
+# .../@17.454502,78.4991008,...!3d17.454502!4d78.4991008. The `!3d/!4d` pair is
+# the PLACE's coordinate, not the viewport centre — both agree here, so this is
+# the verified pin and not a reading of where the map happened to be scrolled.
+#
+# Why it has to be stated. Without `geo`, Google places the pin by string-
+# matching the address, and Wellington Road plot numbers are not reliably in its
+# data — so the practice ends up somewhere along the road. This is the "right
+# site, wrong pin" failure in the launch runbook, and it is the one thing on
+# this domain that presence_check.py graded a hard FAIL.
+GEO_LAT = 17.454502
+GEO_LNG = 78.4991008
+GEO = {"@type": "GeoCoordinates", "latitude": GEO_LAT, "longitude": GEO_LNG}
+
+# The listing's own stable identifiers, decoded from that same share link.
+#
+# CID is the `0x...:0x<cid>` pair's second half; PLACE_ID is that pair encoded
+# the way Google's Places API names it. Both were verified to resolve (HTTP 200)
+# on 2026-08-03 before being written here.
+#
+# These are worth stating because they are unambiguous. Every other link to this
+# business is a text query that Google has to resolve, and a text query can
+# resolve to the WRONG listing — there are two for this practice, and the dead
+# one is described at GOOGLE_REVIEWS above. An id cannot land on the corpse.
+GOOGLE_CID = "7996326770529110793"
+GOOGLE_PLACE_ID = "ChIJTWOK1MuQyzsRCYtV2dSo-G4"
+# Canonical, id-addressed URL for the listing. Goes in `sameAs`, where it is the
+# strongest single signal that this site and that listing are one business.
+GOOGLE_LISTING_URL = f"https://www.google.com/maps?cid={GOOGLE_CID}"
+# Where to send a patient who agrees to leave a review. Deep-links straight to
+# the review box on the CORRECT listing, skipping the search-and-hope step that
+# loses most people who meant to write one.
+GOOGLE_REVIEW_LINK = ("https://search.google.com/local/writereview"
+                      f"?placeid={GOOGLE_PLACE_ID}")
 SERVES = ("Karkhana, Vikrampuri Colony, Trimulgherry, West Marredpally, "
           "Bowenpally, Alwal and greater Secunderabad")
 
@@ -1833,6 +1871,7 @@ def faq_html(page: dict, links: str) -> str:
       <div class="byline">
         <span>Medically reviewed by <b>{REVIEWER}</b></span>
         <span class="dot"></span><span>Last reviewed {REVIEWED}</span>
+        <span class="dot"></span><span>{REGISTRATION_SHOW}</span>
       </div>
     </div>
   </div>
@@ -1912,7 +1951,16 @@ CLINICS = [
                     "addressRegion": "Telangana", "addressCountry": "IN"},
         # Primary first: Google reads the first entry as the number to show.
         "telephone": [PHONE_SHOW, PHONE_ALT_SHOW, "+91 40 7964 5852"],
+        "geo": GEO,
         "hasMap": MAPS,
+        # The id-addressed listing URL alongside Practo. `sameAs` is how the
+        # site says "that listing and this site are the same business"; a CID
+        # link says it without Google having to resolve a name.
+        "sameAs": [PRACTO_REVIEWS, GOOGLE_LISTING_URL],
+        # Currently the doctor's portrait, because it is the only photograph the
+        # practice has supplied. A clinic exterior shot belongs here the moment
+        # one exists — it is also the missing input for the Business Profile.
+        "image": SITE + "/assets/img/dr-varada-hero.webp",
         "openingHours": HOURS_SCHEMA,
         # The consultation fee band, machine-readable. Google shows priceRange
         # in the local panel, and an absent one gets filled in by guesswork from
@@ -1948,16 +1996,26 @@ CLINICS = [
     },
 ]
 
-# The medical council registration number.
+# The medical council registration number. Supplied by the clinic 2026-08-03.
 #
-# Left empty until the clinic supplies it, and deliberately NOT invented. It is
-# the one credential a reader can independently verify against a public
+# It is the one credential a reader can independently verify against a public
 # register, which makes it the strongest single authorship signal on a medical
 # site — and it is also required of Indian practitioners by the National Medical
-# Commission's advertising code. When it arrives, set it here: it appears in the
-# doctor's schema, on the about page and in the footer, from this one constant.
-REGISTRATION = ""          # e.g. "TSMC/FMR/12345"
-REGISTRATION_COUNCIL = "Telangana State Medical Council"
+# Commission's advertising code.
+#
+# THE COUNCIL IS "HYDERABAD", NOT "TELANGANA", AND THAT IS NOT A TYPO. This file
+# assumed Telangana State Medical Council until the certificate was read. The
+# doctor registered decades before Telangana existed as a state, so the issuing
+# body named on the certificate is the historical one. Naming today's successor
+# council would be tidier and would not match the register anyone checks it
+# against, which defeats the entire point of publishing it.
+REGISTRATION = "10461"
+REGISTRATION_COUNCIL = "Hyderabad State Medical Council"
+# The reader-facing form, spelled once. Registration is only an authority signal
+# if a HUMAN can see it — an identifier that exists solely inside JSON-LD is
+# invisible to the patient deciding whether to trust the page, and to the
+# advertising code that asks for it.
+REGISTRATION_SHOW = f"Reg. No. {REGISTRATION}, {REGISTRATION_COUNCIL}"
 
 
 def _credential(name: str) -> dict:
@@ -1997,7 +2055,26 @@ PHYSICIAN = {
     ],
     "worksFor": {"@type": "MedicalClinic", "@id": SITE + "/#clinic",
                  "name": BRAND_PLAIN, "url": SITE},
-    "sameAs": [PRACTO_REVIEWS],
+    # Where this doctor actually practises, on the doctor entity itself.
+    #
+    # `worksFor` alone is a reference: it tells a crawler the clinic exists but
+    # makes the physician's own location resolvable only by following the link
+    # and hoping. Google's doctor results are a LOCAL surface — "dermatologist
+    # near me" ranks a person against a place — so the person needs the place's
+    # address, phone, pin and hours on their own node, not one hop away.
+    "address": CLINICS[0]["address"],
+    "telephone": [PHONE_SHOW, PHONE_ALT_SHOW],
+    "geo": GEO,
+    "hasMap": MAPS,
+    "openingHours": HOURS_SCHEMA,
+    "priceRange": f"{FEE_ONLINE_SHOW}–{FEE_CLINIC_SHOW}",
+    "availableService": [
+        {"@type": "MedicalProcedure", "name": "Vitiligo surgery"},
+        {"@type": "MedicalProcedure", "name": "Melanocyte transplantation"},
+        {"@type": "MedicalTherapy", "name": "Narrowband UVB phototherapy"},
+        {"@type": "MedicalTherapy", "name": "Excimer laser"},
+    ],
+    "sameAs": [PRACTO_REVIEWS, GOOGLE_LISTING_URL],
 }
 
 if REGISTRATION:
@@ -2028,8 +2105,12 @@ def schema(page: dict) -> str:
             "location": CLINICS,
             "address": CLINICS[0]["address"],
             "telephone": CLINICS[0]["telephone"],
+            "geo": GEO,
+            "image": SITE + "/assets/img/dr-varada-hero.webp",
+            "openingHours": HOURS_SCHEMA,
+            "priceRange": f"{FEE_ONLINE_SHOW}–{FEE_CLINIC_SHOW}",
             "hasMap": MAPS,
-            "sameAs": [PRACTO_REVIEWS, MAPS],
+            "sameAs": [PRACTO_REVIEWS, GOOGLE_LISTING_URL],
             # Appointments are taken in a WhatsApp conversation and nowhere else,
             # so that is what the machine-readable booking action has to say.
             "potentialAction": {
@@ -2066,7 +2147,7 @@ def schema(page: dict) -> str:
                      "width": 512, "height": 512},
             "telephone": PHONE_SHOW,
             "address": CLINICS[0]["address"],
-            "sameAs": [PRACTO_REVIEWS, MAPS],
+            "sameAs": [PRACTO_REVIEWS, GOOGLE_LISTING_URL],
         })
     elif page.get("schema_type") == "Physician":
         graph.append(PHYSICIAN)
@@ -2132,9 +2213,13 @@ def schema(page: dict) -> str:
             "url": SITE,
             "address": CLINICS[0]["address"],
             "telephone": CLINICS[0]["telephone"],
+            "geo": GEO,
+            "image": SITE + "/assets/img/dr-varada-hero.webp",
+            "openingHours": HOURS_SCHEMA,
+            "priceRange": f"{FEE_ONLINE_SHOW}–{FEE_CLINIC_SHOW}",
             "medicalSpecialty": ["Dermatology", "Dermatologic Surgery"],
             "hasMap": MAPS,
-            "sameAs": [PRACTO_REVIEWS, MAPS],
+            "sameAs": [PRACTO_REVIEWS, GOOGLE_LISTING_URL],
         })
 
     if page.get("crumbs"):

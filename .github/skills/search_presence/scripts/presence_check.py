@@ -220,6 +220,28 @@ def walk(node, out: list[dict]) -> None:
             walk(v, out)
 
 
+# A node that only points at an entity defined elsewhere in the same graph.
+#
+# Correct JSON-LD says an entity once and refers to it by `@id` everywhere else,
+# so `"worksFor": {"@type": "MedicalClinic", "@id": ".../#clinic", "name": ...}`
+# is the RIGHT way to attach a doctor to a clinic — the clinic's address, pin and
+# hours live on the node that shares that `@id`. Grading the pointer as though it
+# were the entity reported this site as missing eight fields it actually had, and
+# raised a red `geo` gate against coordinates that were present twice on the same
+# page. A gate that cries wolf is worse than no gate: it teaches you to ship past
+# red. So a stub is skipped, but ONLY when the graph really does define it
+# elsewhere — an `@id` pointing at nothing is a genuine fault and still counts.
+REF_KEYS = {"@type", "@id", "name", "url"}
+
+
+def is_reference(node: dict, nodes: list[dict]) -> bool:
+    ref_id = node.get("@id")
+    if not ref_id or not set(node).issubset(REF_KEYS):
+        return False
+    return any(o is not node and o.get("@id") == ref_id
+               and not set(o).issubset(REF_KEYS) for o in nodes)
+
+
 def check_schema(html: str, local: bool) -> None:
     blocks = re.findall(
         r'<script[^>]+type="application/ld\+json"[^>]*>(.*?)</script>',
@@ -239,6 +261,7 @@ def check_schema(html: str, local: bool) -> None:
         return
     biz = [n for n in nodes
            if any(t in str(n.get("@type")) for t in LOCAL_TYPES)]
+    biz = [n for n in biz if not is_reference(n, nodes)]
     if not biz:
         row(FAIL, "LocalBusiness", "no local business type on the homepage")
         return

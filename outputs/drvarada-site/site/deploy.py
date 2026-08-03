@@ -757,6 +757,80 @@ def cmd_indexnow(e: dict, changed_only: bool = True) -> None:
         print(f"    unexpected response {code}")
 
 
+def cmd_settings(e: dict, apply: bool = False) -> None:
+    """Make WordPress's own options agree with the site's constants.
+
+    The pages are ours, but the OPTIONS TABLE is not — it still holds whatever
+    was typed into Settings → General when the install was made, and nothing in
+    the build ever touches it. That is how `blogname` came to read "Dr Varada's
+    Skin Center" while every page, the schema and the Google listing said
+    "Dr. Varada's Skin & Hair Center": a third spelling of the brand, injected
+    by WordPress into feed titles, the RSS `<title>`, and anywhere a plugin asks
+    for the site name. Answer engines quote whatever they find, and a business
+    with three names is three businesses to a machine trying to reconcile them.
+
+    Ping and comment defaults are here for a different reason. Every existing
+    page already has both closed, so this is not a live problem — it is a
+    LATENT one: the defaults apply to whatever is created next, and a medical
+    site that grows a comment form grows comment spam, which is a ranking
+    liability rather than a cosmetic one.
+
+    Read-only by default. `--apply` writes.
+    """
+    import html as _html
+
+    import chrome as C
+    wp = WP(e)
+
+    def same(stored, wanted: str) -> bool:
+        """Compare a stored option against what we asked for.
+
+        WordPress core's `sanitize_option()` runs `wp_kses_post()` and then
+        `esc_html()` over `blogname` and `blogdescription` before saving, so a
+        brand containing `&` or an apostrophe comes back as
+        `Dr. Varada&#039;s Skin &amp; Hair Center`. It renders correctly — WP
+        decodes on output — but a naive `stored == wanted` reports the write as
+        having failed, every time, forever. That is a false alarm that would
+        send the next reader hunting for a plugin that does not exist.
+        """
+        return _html.unescape(str(stored)) == wanted
+    want = {
+        "title": C.BRAND_PLAIN,
+        # The tagline is empty on this install. WordPress's own default is
+        # "Just another WordPress site"; empty is better than that and worse
+        # than the truth, and it surfaces in feeds and search snippets.
+        "description": f"Dermatologist in {C.LOCALITY}, {C.CITY} — "
+                       f"vitiligo, psoriasis, skin and hair",
+        "default_comment_status": "closed",
+        "default_ping_status": "closed",
+    }
+    have = wp.call("wp/v2/settings")
+    drift = {k: v for k, v in want.items() if not same(have.get(k), v)}
+    print(f"\n  settings on {wp.site}")
+    for k, v in want.items():
+        cur = have.get(k)
+        ok = same(cur, v)
+        print(f"    {'ok ' if ok else '->'} {k:24} {cur!r}")
+        if not ok:
+            print(f"       {'':24} {v!r}")
+    if not drift:
+        print("\n    nothing to change.")
+        return
+    if not apply:
+        print(f"\n    {len(drift)} to change — dry run. "
+              "`settings --apply` writes.")
+        return
+    wp.call("wp/v2/settings", method="POST", data=drift)
+    after = wp.call("wp/v2/settings")
+    bad = [k for k, v in want.items() if not same(after.get(k), v)]
+    # Read back rather than trusting the write. Some options are filtered by a
+    # plugin or a mu-plugin on save, so a 200 does not prove the value stuck.
+    if bad:
+        die("applied, but these did not stick (a plugin may be filtering "
+            f"them): {', '.join(bad)}")
+    print(f"\n    applied {len(drift)}, verified by read-back.")
+
+
 def main() -> int:
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -780,6 +854,8 @@ def main() -> int:
         cmd_purge(e)
     elif cmd == "indexnow":
         cmd_indexnow(e, changed_only="--all" not in sys.argv)
+    elif cmd == "settings":
+        cmd_settings(e, apply="--apply" in sys.argv)
     elif cmd == "retire":
         cmd_retire(e); cmd_purge(e)
     elif cmd == "all":

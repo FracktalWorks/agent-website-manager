@@ -10,7 +10,8 @@ patients" is not, so it does not appear.
 from chrome import (ADDRESS, FEE_CLINIC_SHOW, FEE_ONLINE_SHOW, FEE_TAX,
                     GOOGLE_LISTING, GOOGLE_LISTING_PLAIN, HOURS,
                     MAPS, PATIENTS, PHONE, PHONE_ALT_SHOW, PHONE_LANDLINE_SHOW,
-                    PHONE_SHOW, PRACTO_REVIEWS, RATING, REVIEWS, WHATSAPP)
+                    PHONE_SHOW, PRACTO_REVIEWS, RATING, REGISTRATION,
+                    REGISTRATION_COUNCIL, REVIEWS, WHATSAPP)
 from content.cases import cases
 from content.fees import FEE_FAQS, fees_block
 
@@ -58,6 +59,9 @@ CREDS = [
     "25 yrs · Army Medical Corps",
     "Dip. Practical Dermatology · Cardiff, UK",
     "Dip. Dermatology · AAAM",
+    # The only entry on this list a reader can check against a public register,
+    # which is exactly why it belongs on it.
+    f"Reg. No. {REGISTRATION} · {REGISTRATION_COUNCIL}",
 ]
 
 PAGES = [
@@ -758,7 +762,7 @@ PAGES = [
              "<b>Plot D13B</b>, Vikrampuri Colony, on Wellington Road",
              "<b>Karkhana</b>, a short way from Trimulgherry and Marredpally",
              f"<b>Listed on Google</b> as {GOOGLE_LISTING}",
-             "<b>Parking</b>: TODO, to be confirmed by the clinic",
+             "<b>Parking</b>: outside the clinic gate",
              "<b>Message first</b> if you are travelling any distance",
          ]},
 
@@ -787,7 +791,7 @@ PAGES = [
          "tightening, botulinum toxin, skin boosters, and the dermatosurgery list including "
          "vitiligo grafting and mole, wart and skin tag removal."),
         ("Is parking available?",
-         "TODO, to be confirmed by the clinic before this page goes live."),
+         "Yes. There is parking outside the clinic's gate."),
     ],
     "related": [
         ("contact", "Contact and directions",
