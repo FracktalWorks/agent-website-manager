@@ -46,6 +46,8 @@ from html import escape
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+import artifacts
+
 ROOT = Path(__file__).parent
 OUTPUTS = ROOT / "outputs"
 CORPUS = ROOT / "agent-data" / "design-systems"
@@ -99,7 +101,12 @@ def discover_projects() -> list[dict]:
             site_url = m.get("site", "")
         except (OSError, json.JSONDecodeError):
             site_url = ""
+        # Which artefact kinds this brand owns, beyond the website. Cheap —
+        # a directory existence check per kind, not a walk.
+        kinds = [k for k, _, rel in artifacts.KINDS
+                 if (site.parent / rel).is_dir()]
         out.append({"id": pid, "dir": str(site), "title": title,
+                    "kinds": kinds,
                     "pages": pages, "port": port, "site": site_url,
                     "mtime": manifest.stat().st_mtime
                     if manifest.exists() else 0.0})
@@ -414,6 +421,12 @@ def render_home(projects: list[dict]) -> str:
             '<div class="acts">'
             '<button class="btn primary" data-open>'
             + ("Open" if running else "Start &amp; open") + "</button>"
+            # A project is a brand, not only a site — this is the way in to
+            # everything it owns that has no URL. Counted live, so a project
+            # with nothing but a website still says so honestly.
+            + (f'<a class="btn" href="/collateral/{escape(p["id"])}"'
+               f' target="_blank">Collateral</a>'
+               if p.get("kinds") else "")
             + ('<button class="btn" data-stop>Stop</button>'
                if running and p["id"] in _spawned else "")
             + '</div></div>'
@@ -1324,7 +1337,143 @@ MIME = {".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8",
         ".js": "text/javascript; charset=utf-8", ".json": "application/json",
         ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg",
         ".webp": "image/webp", ".woff2": "font/woff2", ".woff": "font/woff",
-        ".md": "text/plain; charset=utf-8"}
+        ".md": "text/plain; charset=utf-8", ".jpeg": "image/jpeg",
+        # Without this a press PDF is served as octet-stream and downloads
+        # instead of opening, which is the wrong default for a proof.
+        ".pdf": "application/pdf"}
+
+
+COLLATERAL_CSS = """
+:root { --bg:#0f1218; --panel:#14171e; --line:#2a2f3a; --fg:#e8ebf2;
+  --mut:#8b93a4; --blue:#2f6df6; --ok:#3ddc97; --wait:#f2b544; }
+* { box-sizing:border-box }
+body { margin:0; background:var(--bg); color:var(--fg);
+  font:14px/1.5 system-ui,-apple-system,Segoe UI,sans-serif }
+header { padding:22px 28px 0; }
+header a.back { color:var(--mut); text-decoration:none; font-size:13px }
+header h1 { margin:10px 0 2px; font-size:24px; font-weight:700 }
+header p { margin:0; color:var(--mut); font-size:13px }
+nav { display:flex; gap:4px; padding:18px 28px 0; border-bottom:1px solid var(--line) }
+nav a { padding:9px 14px; border:1px solid transparent; border-bottom:0;
+  border-radius:8px 8px 0 0; color:var(--mut); text-decoration:none; font-size:13px }
+nav a.on { background:var(--panel); border-color:var(--line); color:var(--fg) }
+nav a b { color:var(--mut); font-weight:400; margin-left:6px; font-size:12px }
+main { padding:22px 28px 60px }
+.grid { display:grid; gap:14px;
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr)) }
+.card { background:var(--panel); border:1px solid var(--line); border-radius:10px;
+  overflow:hidden; text-decoration:none; color:inherit; display:block }
+.card .shot { height:170px; background:#fff center/contain no-repeat;
+  border-bottom:1px solid var(--line) }
+.card .m { padding:9px 11px; display:flex; justify-content:space-between;
+  align-items:center; gap:8px }
+.card .m span { font-size:12.5px; overflow:hidden; text-overflow:ellipsis;
+  white-space:nowrap }
+.pill { font-size:10.5px; padding:2px 7px; border-radius:99px; white-space:nowrap }
+.pill.ok { background:rgba(61,220,151,.14); color:var(--ok) }
+.pill.wait { background:rgba(242,181,68,.14); color:var(--wait) }
+.tree { font:13px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace }
+.tree .row { display:flex; gap:10px; align-items:baseline; padding:2px 0;
+  border-bottom:1px solid rgba(42,47,58,.5) }
+.tree .row:hover { background:#161a22 }
+.tree a { color:var(--fg); text-decoration:none }
+.tree a:hover { color:var(--blue) }
+.tree .t { color:var(--mut); font-family:system-ui,sans-serif; font-size:12.5px;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+.tree .stub { color:var(--wait) }
+.tree .kidcount { color:var(--mut); font-size:11.5px }
+.gal { display:grid; gap:10px;
+  grid-template-columns:repeat(auto-fill,minmax(130px,1fr)) }
+.gal a { background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:8px; text-align:center; text-decoration:none; color:var(--mut);
+  font-size:11px; overflow:hidden }
+.gal img { width:100%; height:96px; object-fit:contain; background:#fff;
+  border-radius:4px; margin-bottom:6px }
+.empty { color:var(--mut) }
+"""
+
+
+def render_collateral(project: dict, kind_id: str = "") -> str:
+    """Every artefact a project owns, grouped by kind.
+
+    The hub's home page answers "which projects are there"; this answers "what
+    has this brand actually got" — which stopped being the same question when
+    the first thing without a URL was made.
+    """
+    root = Path(project["dir"]).parent
+    ks = artifacts.kinds(root)
+    if not ks:
+        body = '<p class="empty">Nothing built yet.</p>'
+        kind_id = ""
+    else:
+        kind_id = kind_id if any(k["id"] == kind_id for k in ks) else ks[0]["id"]
+        kind = next(k for k in ks if k["id"] == kind_id)
+        body = _collateral_body(project, kind)
+    tabs = "".join(
+        f'<a class="{"on" if k["id"] == kind_id else ""}" '
+        f'href="/collateral/{project["id"]}/{k["id"]}">{escape(k["label"])}'
+        f'<b>{k["count"]}</b></a>' for k in ks)
+    return f"""<!doctype html><html><meta charset="utf-8">
+<title>{escape(project["title"])} — collateral</title>
+<style>{COLLATERAL_CSS}</style>
+<header>
+  <a class="back" href="/">&larr; workspace</a>
+  <h1>{escape(project["title"])}</h1>
+  <p>{escape(str(root))}</p>
+</header>
+<nav>{tabs}</nav>
+<main>{body}</main>
+</html>"""
+
+
+def _collateral_body(project: dict, kind: dict) -> str:
+    pid = project["id"]
+    if kind["kind"] == "pages":
+        return _sitemap_html(project, kind)
+    if kind["kind"] == "press":
+        cards = []
+        for i in kind["items"]:
+            shot = (f'background-image:url(/art/{pid}/{i["proof"]})'
+                    if i.get("proof") else "")
+            badge = ('<i class="pill ok">press-ready</i>' if i["ready"]
+                     else '<i class="pill wait">proof only</i>')
+            href = f'/art/{pid}/{i["pdf"] or i["proof"]}'
+            cards.append(
+                f'<a class="card" href="{href}" target="_blank">'
+                f'<div class="shot" style="{shot}"></div>'
+                f'<div class="m"><span>{escape(i["name"])}</span>{badge}</div>'
+                f'</a>')
+        return f'<div class="grid">{"".join(cards)}</div>'
+    tiles = "".join(
+        f'<a href="/art/{pid}/{i["rel"]}" target="_blank">'
+        f'<img src="/art/{pid}/{i["rel"]}" loading="lazy" alt="">'
+        f'{escape(i["name"])}</a>' for i in kind["items"])
+    return f'<div class="gal">{tiles}</div>'
+
+
+def _sitemap_html(project: dict, kind: dict) -> str:
+    """The site as its own URL hierarchy, not as an alphabetical list."""
+    port = project["port"]
+    rows = []
+    for n in artifacts.flatten(kind["tree"]):
+        pad = 18 * n["depth"]
+        kids = (f'<span class="kidcount">{len(n["kids"])}</span>'
+                if n["kids"] else "")
+        label = escape(n["url"])
+        if n["stub"]:
+            link = (f'<span class="stub">{label}</span>'
+                    f'<span class="kidcount">no page</span>')
+        else:
+            link = (f'<a href="http://127.0.0.1:{port}{n["url"]}" '
+                    f'target="_blank">{label}</a>')
+        rows.append(
+            f'<div class="row" style="padding-left:{pad}px">{link}{kids}'
+            f'<span class="t">{escape(n.get("title", ""))}</span></div>')
+    return f"""<div class="tree">{"".join(rows)}</div>
+<p class="empty" style="margin-top:16px;font-size:12.5px">
+  Links open in the live editor on port {port} — start it from the workspace
+  if it is not running. Amber rows are URL levels with no page of their own.
+</p>"""
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -1373,6 +1522,44 @@ class Handler(SimpleHTTPRequestHandler):
             except (OSError, json.JSONDecodeError):
                 pages = []
             self._json({"ok": True, "port": project["port"], "pages": pages})
+            return
+        if path.startswith("/collateral/"):
+            pid, _, kind = path[len("/collateral/"):].partition("/")
+            project = next((p for p in discover_projects()
+                            if p["id"] == pid), None)
+            if project is None:
+                self.send_error(404)
+                return
+            self._bytes(render_collateral(project, kind).encode("utf-8"),
+                        MIME[".html"])
+            return
+        if path.startswith("/api/artifacts/"):
+            pid = path[len("/api/artifacts/"):]
+            project = next((p for p in discover_projects()
+                            if p["id"] == pid), None)
+            if project is None:
+                self._json({"error": "no such project"}, 404)
+                return
+            self._json({"ok": True,
+                        **artifacts.summary(Path(project["dir"]).parent)})
+            return
+        if path.startswith("/art/"):
+            # Files inside one project directory. Same containment check as
+            # /dsu/ — resolve first, then prove the resolved path is still
+            # under the project, so `..` cannot walk out of it.
+            pid, _, rel = path[len("/art/"):].partition("/")
+            project = next((p for p in discover_projects()
+                            if p["id"] == pid), None)
+            root = (Path(project["dir"]).parent.resolve() if project
+                    else None)
+            target = (root / rel).resolve() if root else None
+            if (target and target.is_file() and root in target.parents
+                    and OUTPUTS.resolve() in root.parents):
+                self._bytes(target.read_bytes(),
+                            MIME.get(target.suffix,
+                                     "application/octet-stream"))
+            else:
+                self.send_error(404)
             return
         if path.startswith("/ds/"):
             rel = path[len("/ds/"):]
