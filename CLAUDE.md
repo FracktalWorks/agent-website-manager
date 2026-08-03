@@ -47,6 +47,8 @@ Reserve the LLM for judgment, content, and strategy. Use scripts for determinist
 | Website Analysis & Reporting | [.github/skills/website_analysis/SKILL.md](.github/skills/website_analysis/SKILL.md) |
 | Site Generator & Live Editor | [.github/skills/site_generator/SKILL.md](.github/skills/site_generator/SKILL.md) |
 | Design System Management | [.github/skills/design_system_management/SKILL.md](.github/skills/design_system_management/SKILL.md) |
+| Search Presence (SEO, GBP, Bing, favicon, maps) | [.github/skills/search_presence/SKILL.md](.github/skills/search_presence/SKILL.md) |
+| Brand Assets (favicon, GBP, WhatsApp, social) | [.github/skills/brand_assets/SKILL.md](.github/skills/brand_assets/SKILL.md) |
 
 Each skill's `scripts/` directory holds runnable Python. Run scripts with the repo's
 interpreter; shared utilities live on `PYTHONPATH` under `.tmp/scripts/`.
@@ -79,7 +81,10 @@ design, visual editing, version history and design systems all live here now:
 
 | Need | Use |
 |------|-----|
+| Take a **new brand** from nothing to live and findable | [agent-data/BRAND_LAUNCH_RUNBOOK.md](agent-data/BRAND_LAUNCH_RUNBOOK.md) — the ordered spine across skills, with the gate for each step |
 | See all projects + browse design systems | `python hub.py` at the repo root → http://127.0.0.1:8780 (the workspace landing page; live project thumbnails, one-click editor launch per site, 152 design systems with previews) |
+| See everything a brand owns, by kind | the **Collateral** button on a project card → `/collateral/<project>` — website (as a real sitemap tree), print collateral, brand assets, signage. Discovery lives in [artifacts.py](artifacts.py) |
+| Make something that gets **printed** (cards, fliers, standees) | [outputs/drvarada-site/print/](outputs/drvarada-site/print/AGENTS.md) — `press.py` is the engine: millimetres, bleed/trim/safe, Chrome→PDF, PDF read-back audit, and sign-off `Gate`s that refuse to write a press file |
 | Build a site from page data | [site_generator](.github/skills/site_generator/SKILL.md) — `python build.py` |
 | Edit a rendered page visually | `python editor.py` in the site directory → http://127.0.0.1:8789 (in VS Code: Run Task → "drvarada: live editor (preview in VS Code)" opens it in the Simple Browser pane; the ⛶ Screen button previews phone/tablet/laptop/desktop widths) |
 | Undo / redo / restore a past state | the editor's Versions panel, or `python versions.py list` then `restore <n>` |

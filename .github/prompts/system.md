@@ -91,6 +91,10 @@ its REST API to manage content, Elementor designs, plugins, themes, SEO, backups
 | `website_analysis` | `.github/skills/website_analysis/SKILL.md` | Decision-oriented site reports — health, SEO, linking/orphans, architecture, page opportunities |
 | `site_generator` | `.github/skills/site_generator/SKILL.md` | In-repo site generation — pages as data, validating builder, live browser editor that writes back to source |
 | `design_system_management` | `.github/skills/design_system_management/SKILL.md` | Choose/load/use/validate/create design systems from the 152-package corpus — token tiers, paste-the-`:root` rule, quality rubric |
+| `search_presence` | `.github/skills/search_presence/SKILL.md` | Be findable — root favicon, canonical host, sitemap, Search Console, Bing (the index behind ChatGPT search), IndexNow, LocalBusiness `geo`, Business Profile, keyless map embed |
+| `brand_assets` | `.github/skills/brand_assets/SKILL.md` | Platform artwork from the brand's SVGs — favicon, Business Profile logo/cover, WhatsApp profile + catalogue tiles, social cards; judged at the size the platform draws them |
+
+Launch sequence across skills: `agent-data/BRAND_LAUNCH_RUNBOOK.md`.
 
 ## Platform Tools (injected by CommandCenter)
 

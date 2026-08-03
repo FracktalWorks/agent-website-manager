@@ -5,6 +5,8 @@ Every asset must be listed here.
 
 | Path | Purpose | Usage |
 |------|---------|-------|
+| `BRAND_LAUNCH_RUNBOOK.md` | The order a brand goes live in — scaffold, design system, content, verify, deploy, search presence, platform assets, profiles — with the gate for each step | Read at the start of any new brand or site launch |
+| `design-systems/` | 152 vendored design systems + `_craft/` rulebooks | Start at `design-systems/INDEX.md` |
 | `templates/` | Document templates | Referenced by document generation scripts |
 | `images/` | Product images and renders | Embedded in outputs |
 | `specs/` | Technical specification PDFs | Parsed by research skills |

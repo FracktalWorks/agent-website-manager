@@ -24,6 +24,13 @@
 | Website Analysis & Reporting | `.github/skills/website_analysis/SKILL.md` | Decision-oriented site reports: health, SEO, linking/orphans, architecture, page opportunities |
 | Site Generator & Live Editor | `.github/skills/site_generator/SKILL.md` | In-repo site generation: pages as data, validating builder, live browser editor writing back to source |
 | Design System Management | `.github/skills/design_system_management/SKILL.md` | Choose/load/use/validate/create design systems from the 152-package corpus: token tiers, paste-the-`:root` rule, quality rubric, craft rules |
+| Search Presence | `.github/skills/search_presence/SKILL.md` | Be findable: root favicon, canonical host, sitemap, Search Console, Bing→ChatGPT, IndexNow, LocalBusiness `geo`, Business Profile, keyless map embed. `presence_check.py` measures the on-domain half |
+| Brand Assets | `.github/skills/brand_assets/SKILL.md` | Platform artwork from the brand's SVGs — favicon, GBP logo/cover, WhatsApp profile + catalogue tiles, social cards. Judged at consumption size by `asset_check.py` |
+
+**Launching a brand?** The skills above are the parts; `agent-data/BRAND_LAUNCH_RUNBOOK.md`
+is the order they go in — scaffold → design system → content → verify → deploy
+→ search presence → platform assets → profiles, with the gate for each step and
+the failure modes that repeat across brands.
 
 ## Platform Tools (injected by CommandCenter)
 
@@ -43,6 +50,9 @@
 - `outputs/` — Campaign results, generated website content, design page drafts
 - `tests/` — pytest suite — CI gate
 - `hub.py` — workspace shell at http://127.0.0.1:8780 (projects, pages, design systems)
+- `artifacts.py` — what a project owns *beyond* its website: artefact kinds
+  (website / print / brand / signage), discovered from the directory layout,
+  plus the sitemap tree the hub's Collateral view renders
 
 ## Directory contracts (read the local AGENTS.md before editing there)
 
@@ -53,6 +63,7 @@ work belongs, and which gate to run:
 | Directory | Contract covers |
 |---|---|
 | `outputs/drvarada-site/site/` | the site engine: placement table (content vs chrome vs engine), silent-failure invariants, test gates |
+| `outputs/drvarada-site/print/` | print collateral: the millimetre engine, bleed/trim/safe, sign-off gates, why nothing is retyped |
 | `agent-data/design-systems/` | `INDEX.md` — the 152-system corpus and its CLI |
 
 **Place before building:** name the kind of thing you are adding, find the
