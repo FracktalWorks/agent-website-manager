@@ -87,6 +87,30 @@ PHONE_LANDLINE_SHOW = "040 7964 5852"
 PRACTO_REVIEWS = ("https://www.practo.com/hyderabad/doctor/"
                   "dr-khagendra-varada-dermatologist-cosmetologist-1")
 
+# THE LISTING'S OWN STABLE IDENTIFIERS.
+#
+# Decoded on 2026-08-03 from the clinic's Maps share link
+# (maps.app.goo.gl/jupe1y2kiuCHtWn76), which resolves to a URL carrying
+# `!1s0x<hex>:0x<hex>` — the pair Google encodes a Place ID from — and
+# `!3d/!4d`, the verified pin. Both derived URLs were checked to return 200
+# before being written here.
+#
+# These matter because they are UNAMBIGUOUS. Every other way of pointing at
+# this business is a text query Google has to resolve, and a text query can
+# resolve to the WRONG listing: there are two for this practice, and the dead
+# one ("BNR Skin and Vitiligo Centre") sits about six metres away — still live
+# and still unclaimed as of 2026-08-04. An id cannot land on the corpse.
+GOOGLE_CID = "7996326770529110793"
+GOOGLE_PLACE_ID = "ChIJTWOK1MuQyzsRCYtV2dSo-G4"
+# Canonical, id-addressed URL for the listing. Goes in `sameAs`, where it is the
+# strongest single signal that this site and that listing are one business.
+GOOGLE_LISTING_URL = f"https://www.google.com/maps?cid={GOOGLE_CID}"
+# Where to send a patient who agrees to leave a review. Deep-links straight to
+# the review box on the CORRECT listing, skipping the search-and-hope step that
+# loses most people who meant to write one.
+GOOGLE_REVIEW_LINK = ("https://search.google.com/local/writereview"
+                      f"?placeid={GOOGLE_PLACE_ID}")
+
 # WHAT THE TWO MAP LINKS RESOLVE AGAINST.
 #
 # Both carry the SAME query, so a patient who taps "directions" and a patient
@@ -126,13 +150,19 @@ MAPS = ("https://www.google.com/maps/search/?api=1&query="
 # `z=16` shows the surrounding blocks: enough to recognise the Mancherial Road
 # and the Marredpally side, not so tight that the map is a featureless rectangle.
 #
-# TO PIN THIS EXACTLY: Google Maps → the listing → Share → Embed a map → copy
-# the `src` out of the iframe Google gives you, and replace this one value with
-# that string. It carries a `pb=` payload encoding the clinic's own verified
-# coordinates, which beats any text query. Nothing else in the block changes.
-MAP_EMBED = ("https://maps.google.com/maps?output=embed&z=16&q="
-             "Dr.+Varada%27s+Skin+%26+Hair+Center+BNR+Skin+%26+Vitiligo+Hospital"
-             "+Karkhana+Secunderabad")
+# ADDRESSED BY ID, NOT BY TEXT. `cid=` names the listing itself, so the embed
+# cannot resolve to the wrong one — which is the whole risk here, given a dead
+# near-duplicate sits six metres away under a nearly identical name.
+#
+# Verified by rendering all three candidates side by side in Chrome on
+# 2026-08-04, because an embed that silently fails is a blank rectangle on the
+# contact page:
+#   text query  -> renders, pin labelled with the business name
+#   cid         -> renders identically, and cannot drift          <- chosen
+#   lat,long as q -> renders a BARE pin with no business name     <- rejected
+# Coordinates alone lose the label, which is why the pin is not spelled out
+# here even though GEO_LAT/GEO_LNG exist: the id already implies them.
+MAP_EMBED = f"https://maps.google.com/maps?output=embed&z=16&cid={GOOGLE_CID}"
 
 
 def _check_map_pair() -> None:
@@ -146,9 +176,25 @@ def _check_map_pair() -> None:
     Skipped when MAP_EMBED has been replaced by Google's exact `pb=` embed:
     that form encodes coordinates rather than a query and is strictly better, so
     it is allowed to stop matching.
+
+    An `cid=` embed is likewise exempt from the TEXT comparison — there is no
+    query to compare — but it is not left unchecked. Two text queries drifting
+    apart is the failure this guard exists for; an embed pointing at the wrong
+    LISTING ID is the same failure wearing a different hat, and worse, because
+    the id it could drift to is a dead duplicate six metres away. So the cid is
+    asserted against GOOGLE_CID instead.
     """
     from urllib.parse import parse_qs, urlparse
     if "pb=" in MAP_EMBED:
+        return
+    embed_cid = parse_qs(urlparse(MAP_EMBED).query).get("cid", [""])[0]
+    if embed_cid:
+        if embed_cid != GOOGLE_CID:
+            raise ValueError(
+                f"MAP_EMBED points at listing cid {embed_cid!r}, but this "
+                f"clinic is {GOOGLE_CID!r}. There is a dead duplicate listing "
+                "for this practice ~6 m away; an embed on the wrong id shows "
+                "patients a closed clinic.")
         return
     want = parse_qs(urlparse(MAPS).query).get("query", [""])[0]
     got = parse_qs(urlparse(MAP_EMBED).query).get("q", [""])[0]
@@ -227,26 +273,8 @@ GEO_LAT = 17.454502
 GEO_LNG = 78.4991008
 GEO = {"@type": "GeoCoordinates", "latitude": GEO_LAT, "longitude": GEO_LNG}
 
-# The listing's own stable identifiers, decoded from that same share link.
-#
-# CID is the `0x...:0x<cid>` pair's second half; PLACE_ID is that pair encoded
-# the way Google's Places API names it. Both were verified to resolve (HTTP 200)
-# on 2026-08-03 before being written here.
-#
-# These are worth stating because they are unambiguous. Every other link to this
-# business is a text query that Google has to resolve, and a text query can
-# resolve to the WRONG listing — there are two for this practice, and the dead
-# one is described at GOOGLE_REVIEWS above. An id cannot land on the corpse.
-GOOGLE_CID = "7996326770529110793"
-GOOGLE_PLACE_ID = "ChIJTWOK1MuQyzsRCYtV2dSo-G4"
-# Canonical, id-addressed URL for the listing. Goes in `sameAs`, where it is the
-# strongest single signal that this site and that listing are one business.
-GOOGLE_LISTING_URL = f"https://www.google.com/maps?cid={GOOGLE_CID}"
-# Where to send a patient who agrees to leave a review. Deep-links straight to
-# the review box on the CORRECT listing, skipping the search-and-hope step that
-# loses most people who meant to write one.
-GOOGLE_REVIEW_LINK = ("https://search.google.com/local/writereview"
-                      f"?placeid={GOOGLE_PLACE_ID}")
+# The listing identifiers live further up, next to the map constants that are
+# now derived from them: see GOOGLE_CID and GOOGLE_PLACE_ID.
 SERVES = ("Karkhana, Vikrampuri Colony, Trimulgherry, West Marredpally, "
           "Bowenpally, Alwal and greater Secunderabad")
 
@@ -1953,10 +1981,17 @@ CLINICS = [
         "telephone": [PHONE_SHOW, PHONE_ALT_SHOW, "+91 40 7964 5852"],
         "geo": GEO,
         "hasMap": MAPS,
-        # The id-addressed listing URL alongside Practo. `sameAs` is how the
-        # site says "that listing and this site are the same business"; a CID
-        # link says it without Google having to resolve a name.
-        "sameAs": [PRACTO_REVIEWS, GOOGLE_LISTING_URL],
+        # `sameAs` says "that page and this entity are the same thing", so the
+        # CLINIC may only point at pages about the CLINIC.
+        #
+        # Practo is deliberately absent here and present on PHYSICIAN below.
+        # It is a doctor profile, and reading it on 2026-08-04 showed its
+        # bookable clinic is Vardhan Healthcare and Diagnostics in West
+        # Marredpally — a different business at a different address. Asserting
+        # that as the same entity as this clinic hands Google a contradiction
+        # on the one field local ranking turns on. The doctor is genuinely the
+        # same person, so the claim is true of him and false of the building.
+        "sameAs": [GOOGLE_LISTING_URL],
         # Currently the doctor's portrait, because it is the only photograph the
         # practice has supplied. A clinic exterior shot belongs here the moment
         # one exists — it is also the missing input for the Business Profile.
@@ -2110,7 +2145,8 @@ def schema(page: dict) -> str:
             "openingHours": HOURS_SCHEMA,
             "priceRange": f"{FEE_ONLINE_SHOW}–{FEE_CLINIC_SHOW}",
             "hasMap": MAPS,
-            "sameAs": [PRACTO_REVIEWS, GOOGLE_LISTING_URL],
+            # Clinic entity — listing only. See the note on CLINICS above.
+            "sameAs": [GOOGLE_LISTING_URL],
             # Appointments are taken in a WhatsApp conversation and nowhere else,
             # so that is what the machine-readable booking action has to say.
             "potentialAction": {
@@ -2147,7 +2183,8 @@ def schema(page: dict) -> str:
                      "width": 512, "height": 512},
             "telephone": PHONE_SHOW,
             "address": CLINICS[0]["address"],
-            "sameAs": [PRACTO_REVIEWS, GOOGLE_LISTING_URL],
+            # Organisation entity — the business, so the listing only.
+            "sameAs": [GOOGLE_LISTING_URL],
         })
     elif page.get("schema_type") == "Physician":
         graph.append(PHYSICIAN)
@@ -2219,7 +2256,8 @@ def schema(page: dict) -> str:
             "priceRange": f"{FEE_ONLINE_SHOW}–{FEE_CLINIC_SHOW}",
             "medicalSpecialty": ["Dermatology", "Dermatologic Surgery"],
             "hasMap": MAPS,
-            "sameAs": [PRACTO_REVIEWS, GOOGLE_LISTING_URL],
+            # Clinic entity — listing only. See the note on CLINICS above.
+            "sameAs": [GOOGLE_LISTING_URL],
         })
 
     if page.get("crumbs"):
