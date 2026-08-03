@@ -189,6 +189,38 @@ def lint_contrast() -> list[str]:
     return errors
 
 
+def _all_images(page: dict):
+    """Every image dict on a page, wherever it hangs.
+
+    Kept separate from `lint_images` because that function reports *where* a
+    problem is and therefore has to walk with addresses; this one only needs to
+    know an image exists. A check that quietly missed a whole class of image —
+    plates in a prose aside, say — would be worse than no check, so both walks
+    live next to each other and gain new slots together.
+    """
+    if page.get("photo"):
+        yield page["photo"]
+    for sec in page.get("sections") or []:
+        if sec.get("image"):
+            yield sec["image"]
+        for item in (sec.get("aside") or {}).get("items") or []:
+            if not isinstance(item, dict):
+                continue
+            for slot in ("photo", "mark"):
+                if item.get(slot):
+                    yield item[slot]
+        if sec.get("kind") == "ba":
+            for item in sec["items"]:
+                if not isinstance(item, dict):
+                    continue
+                for side in ("before", "after"):
+                    if item.get(side):
+                        yield item[side]
+                for shot in item.get("shots") or []:
+                    if isinstance(shot, dict):
+                        yield shot
+
+
 def lint_images(page: dict) -> list[str]:
     """Every image must be findable, described, and — if clinical — consented.
 
@@ -223,14 +255,33 @@ def lint_images(page: dict) -> list[str]:
     for i, sec in enumerate(page["sections"]):
         if sec.get("image"):
             check(sec["image"], f"sections.{i}.image")
+        # A credential emblem is not clinical, so it needs no consent — but it
+        # still needs alt text and it still has to exist.
+        for n, item in enumerate((sec.get("aside") or {}).get("items") or []):
+            if not isinstance(item, dict):
+                continue
+            for slot in ("photo", "mark"):
+                if item.get(slot):
+                    check(item[slot], f"sections.{i}.aside.items.{n}.{slot}")
         if sec["kind"] == "ba":
             for n, item in enumerate(sec["items"]):
                 if not isinstance(item, dict):
                     continue
-                for side in ("before", "after"):
-                    if item.get(side):
-                        check(item[side], f"sections.{i}.items.{n}.{side}",
-                              clinical=True)
+                # A patient signs one publication consent for their case, not
+                # one per photograph, so a `consent` on the case covers every
+                # frame in it. A shot may still carry its own — a case built up
+                # from separate visits can legitimately have separate consents,
+                # and the narrower record should win when it exists.
+                case_consent = (item.get("consent") or "").strip()
+                shots = [(f"{side}", item[side]) for side in ("before", "after")
+                         if item.get(side)]
+                shots += [(f"shots.{k}", shot)
+                          for k, shot in enumerate(item.get("shots") or [])
+                          if isinstance(shot, dict)]
+                for where, shot in shots:
+                    if case_consent and not (shot.get("consent") or "").strip():
+                        shot = {**shot, "consent": case_consent}
+                    check(shot, f"sections.{i}.items.{n}.{where}", clinical=True)
     return errors
 
 
@@ -498,6 +549,25 @@ def sitemap(pages: list[dict]) -> str:
 def main() -> int:
     links = "production" if "--links=production" in sys.argv else "preview"
     out = ROOT / ("dist-prod" if links == "production" else "dist")
+
+    # Mock-ups are for looking at, not for publishing. Anything under
+    # `img/placeholder/` exists to show what a slot will look like once the real
+    # asset arrives — the credential emblems, say, which are generic marks
+    # standing in for whatever the clinic settles on, and which carry no
+    # institution's crest or wordmark precisely so they cannot pass for one. The
+    # preview build renders them; the production build refuses to, so "I'll swap
+    # it out later" is enforced by the build rather than trusted to memory.
+    if links == "production":
+        stand_ins = sorted({im["src"] for p in PAGES for im in _all_images(p)
+                            if im.get("src", "").startswith("img/placeholder/")})
+        if stand_ins:
+            print(f"BUILD FAILED — {len(stand_ins)} placeholder image(s) cannot "
+                  f"go to production:\n")
+            for s in stand_ins:
+                print("  ·", s)
+            print("\n  These are mock-ups. Replace them with the real assets, "
+                  "or remove them, before publishing.")
+            return 1
 
     errors, warnings = validate(PAGES)
     if errors:

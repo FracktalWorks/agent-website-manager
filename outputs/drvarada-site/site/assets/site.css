@@ -18,6 +18,13 @@
   --on-dark-card:  rgba(255, 255, 255, .06);   /* quote cards on dark bands */
   --dock-scrim:    rgba(255, 255, 255, .92);   /* mobile booking dock */
   --photo-label:   rgba(255, 255, 255, .88);   /* before/after chip over a photo */
+  --dg-chip:       rgba(255, 255, 255, .93);   /* diagram label, legible over artwork */
+  --dg-lead:       rgba(18, 32, 47, .38);      /* --ink at 38%: label connector */
+  --dg-ring:       rgba(18, 32, 47, .62);      /* anchor ring — light enough to see through */
+  --dg-halo:       rgba(255, 255, 255, .7);    /* keeps the ring readable on dark artwork */
+  --shot-tag:      rgba(255, 255, 255, .88);   /* frame label over clinical photography */
+  --dg-stage:      #F8F5F3;                    /* --ground: the artwork's own field */
+  --pill-tint:     rgba(18, 32, 47, .06);      /* --ink at 6%: reads on any band */
 }
 
 * { box-sizing: border-box; }
@@ -193,6 +200,17 @@ section[id], div[id] { scroll-margin-top: 86px; }
 
 /* ── page head ──────────────────────────────────────────────────── */
 .phead .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 54px; align-items: start; }
+/* A portrait hero is the one case where `start` is wrong. The right column is
+ * a fixed 4:5 panel whose height comes from the column width, not from its
+ * content, so it almost never matches the text beside it: on the doctor page
+ * the panel runs ~200px BELOW the copy, leaving an L-shaped void under the
+ * buttons that reads as a layout fault. Centring the two against each other
+ * splits that difference instead of dumping all of it at the bottom.
+ *
+ * Scoped by `:has()` to wraps that actually contain a cut-out portrait —
+ * every other `.phead` pairs the copy with a glance panel or nothing, and
+ * those want their tops aligned. */
+.phead .wrap:has(> .has-cutout) { align-items: center; }
 .phead.solo .wrap { grid-template-columns: 1fr; max-width: 900px; }
 .phead h1 { margin-top: 16px; }
 .phead h1 em { font-style: normal; color: var(--mint-dp); }
@@ -320,21 +338,134 @@ section[id], div[id] { scroll-margin-top: 86px; }
   .quotes .set + .set { display: none; }
 }
 
-/* ── before/after strip (from home-v3; consented placeholders) ──── */
-.ba { display: grid; gap: 16px; margin-top: 34px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+/* ── patient case studies (consented clinical photography only) ─── */
+/* A case is a SERIES, not a pair: the frame count rides on `--shots` so one
+ * case can run baseline → week 12 → week 24 beside a neighbour that is a
+ * straight before/after. `minmax(0, 1fr)` rather than `1fr` because a grid
+ * track's default minimum is its content, and a five-frame case would then
+ * push the figure wider than its column instead of dividing it. */
+.ba { display: grid; gap: 28px; margin-top: 34px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 .ba figure { margin: 0; }
-.ba .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.ba .ph { aspect-ratio: 4/5; border-radius: var(--r-sm);
+/* THE STRIP IS THE FIXED SHAPE, NOT THE FRAME.
+ *
+ * Every frame used to be 4:5, which sounds like the way to make a row of cases
+ * match and is the reason it did not. The frames of a case divide the width of
+ * its card, so a three-frame series got three narrow frames — and at a fixed
+ * aspect ratio, narrower means shorter. A two-frame case beside a three-frame
+ * one showed pictures of visibly different sizes, and that reads as a broken
+ * layout rather than as "this case has three pictures".
+ *
+ * Fixing the ASPECT OF THE STRIP instead makes frame count a decision about
+ * width alone. Every case's photographs are then exactly the same height on
+ * every page, whether it carries two frames or five, which is what makes the
+ * grid read as one grid. */
+.ba .pair { display: grid; gap: 6px; aspect-ratio: 8/5;
+  grid-template-columns: repeat(var(--shots, 2), minmax(0, 1fr));
+  grid-template-rows: 1fr; }
+.ba .ph { height: 100%; border-radius: var(--r-sm);
   background: linear-gradient(170deg, var(--lil-sf), var(--mint-sf));
   display: grid; place-items: center; font-size: 12.5px; color: var(--ink-3);
-  position: relative; }
+  position: relative; overflow: hidden; }
 .ba .ph em { position: absolute; top: 10px; left: 12px; font-style: normal;
   font: 600 10.5px/1 var(--body); letter-spacing: .1em; text-transform: uppercase;
-  color: var(--ink-3); }
+  color: var(--ink-3); z-index: 1; }
+/* Over a photograph the label needs its own ground to stay legible; over an
+ * empty plate it must not, or the plate grows a floating chip. */
+.ba .ph.has-img em { background: var(--shot-tag); color: var(--ink);
+  padding: 4px 7px; border-radius: 5px; top: 8px; left: 8px; }
 .ba figcaption { margin-top: 12px; font-size: 13px; color: var(--ink-2); }
 .ba figcaption b { display: block; font-family: var(--display); font-size: 15px;
   color: var(--ink); }
+.case-meta { list-style: none; margin: 10px 0 0; padding: 0; display: flex;
+  flex-wrap: wrap; gap: 6px; }
+/* A TINT, NOT A COLOUR. These pills were filled with `--ground`, which is the
+ * home page band's own colour — so on the results page they read as pills and
+ * on the home page they vanished into the background as plain text. The same
+ * component looking like two different components across two pages is what
+ * makes a site feel assembled rather than designed. A translucent ink tint
+ * darkens whatever is behind it, so the pill reads the same on every surface
+ * the case block can land on. */
+.case-meta li { font-size: 11.5px; color: var(--ink-2); background: var(--pill-tint);
+  border-radius: var(--r-pill); padding: 4px 11px; }
+.case-body { margin: 10px 0 0; font-size: 13px; color: var(--ink-2);
+  line-height: 1.55; }
+.ba-more { margin-top: 30px; }
+/* Four frames at 300px of column is 70px each — too small to read a border
+ * off, which is the whole point of the photograph. Below that, a long series
+ * wraps to two per row instead of shrinking further. */
+@media (max-width: 720px) {
+  /* A long series wraps to two per row here, so the strip is no longer one row
+   * and a fixed strip aspect would squash it. Back to per-frame shape. */
+  .ba .pair { aspect-ratio: auto; grid-template-rows: auto;
+    grid-template-columns: repeat(min(var(--shots, 2), 2), minmax(0, 1fr)); }
+  .ba .ph { height: auto; aspect-ratio: 4/5; }
+}
+
+/* ── prose with a panel of plates beside it ─────────────────────── */
+.prose-split { display: grid; gap: 54px; align-items: start;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); }
+.prose-split .prose { margin-top: 22px; }
+.plates { margin-top: 22px; }
+.plates h3 { font: 600 11px/1 var(--body); letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-3); margin: 0 0 14px; }
+/* TWO UP, TO MATCH THE COPY BESIDE IT.
+ *
+ * Stacked one per row, five plates ran roughly 375px past the bottom of the
+ * prose in the other column, and a two-column section whose halves end that
+ * far apart reads as a layout fault rather than as a panel. Two up brings the
+ * panel to about the height of the copy, which is the only reason the aside
+ * exists — it is there to fill that column, so it should fill it and stop. */
+.plates ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* An odd last plate spans, so the panel ends on a straight edge instead of on
+ * a half-empty row. */
+.plates ol > li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+@media (max-width: 1080px) {
+  .plates ol { grid-template-columns: 1fr; }
+  .plates ol > li:last-child:nth-child(odd) { grid-column: auto; }
+}
+/* A BADGE, NOT A FACSIMILE.
+ *
+ * This panel used to draw a frame and a mat, so that a plate read as something
+ * hung on a wall. That was the wrong object. A framed rectangle beside a named
+ * qualification reads as a picture of the certificate, and the moment a reader
+ * takes it for one, an illustration has become a claim — they have no way to
+ * tell a drawn diploma from a scan of one.
+ *
+ * A round emblem does not have that problem. A badge stands FOR a
+ * qualification; a certificate purports to BE it. So the emblems here are
+ * deliberately generic — no crest, wordmark or seal belonging to Osmania, to
+ * Cardiff, to the AAAM, to the Army or to the IMA, because those are theirs.
+ * They are the shape of a credential mark, in this site's two colours, and the
+ * panel's foot line tells the reader exactly that. */
+.plate { background: var(--paper); border: 1px solid var(--line);
+  border-radius: var(--r-sm); box-shadow: var(--shadow); position: relative; }
+.plate-mat { display: flex; align-items: center; gap: 13px;
+  padding: 13px 14px; height: 100%; }
+/* The emblem's own field is the same porcelain the artwork was drawn on, so
+ * the disc reads as a struck badge rather than as a picture in a hole. */
+.plate-mark { flex: none; width: 52px; height: 52px; border-radius: 50%;
+  overflow: hidden; border: 1px solid var(--line); background: var(--dg-stage); }
+.plate-mark img { display: block; width: 100%; height: 100%;
+  object-fit: cover; }
+/* No emblem: a short double rule keeps the text on the same left edge as its
+ * neighbours instead of sliding into the badge column. */
+.plate-rule { flex: none; width: 30px; height: 4px;
+  border-top: 1px solid var(--ink-3); border-bottom: 1px solid var(--ink-3);
+  margin-inline: 14px; }
+.plate-txt { min-width: 0; }
+.plate b { display: block; font-family: var(--display); font-size: 15px;
+  color: var(--ink); line-height: 1.25; }
+.plate .plate-txt > span { display: block; font-size: 12px;
+  color: var(--ink-2); margin-top: 3px; line-height: 1.4; }
+.plate .plate-note { font-size: 11.5px; color: var(--ink-3); margin-top: 7px;
+  font-style: italic; }
+.plates-foot { margin: 14px 0 0; font-size: 12.5px; color: var(--ink-3);
+  line-height: 1.5; }
+@media (max-width: 900px) {
+  .prose-split { grid-template-columns: 1fr; gap: 8px; }
+}
 
 /* ── shared section furniture ───────────────────────────────────── */
 .head-block { max-width: 64ch; }
@@ -353,6 +484,21 @@ section[id], div[id] { scroll-margin-top: 86px; }
 .card li { font-size: 14.5px; padding: 7px 0; border-top: 1px solid var(--crumb-line);
   color: var(--ink-2); }
 .card li:first-child { border-top: 0; }
+
+/* ── consultation fees ──────────────────────────────────────────── */
+/* The number is set at display size because a fee is scanned for, not read.
+ * `+ GST` sits on the same line as the figure rather than in the note below —
+ * a tax line a reader has to go looking for is the shape of a price that is
+ * about to be higher than advertised. */
+.fees { align-items: start; }
+.fee .fee-price { margin-top: 12px; display: flex; align-items: baseline; gap: 8px; }
+.fee .fee-price b { font-family: var(--display); font-size: 34px; line-height: 1;
+  color: var(--ink); font-weight: 700; }
+.fee .fee-tax { font-size: 13px; color: var(--ink-3); }
+.fee .fee-price + p { margin-top: 12px; }
+.fee-note { margin: 16px 0 0; font-size: 13.5px; color: var(--ink-2);
+  line-height: 1.55; max-width: 76ch; }
+@media (max-width: 560px) { .fee .fee-price b { font-size: 29px; } }
 
 /* ── chips (symptom finder / quick links) ───────────────────────── */
 .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
@@ -389,6 +535,15 @@ section[id], div[id] { scroll-margin-top: 86px; }
 /* ── steps ──────────────────────────────────────────────────────── */
 .steps { counter-reset: s; display: grid; gap: 16px; margin-top: 34px;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+/* FIVE STEPS, NOT FOUR PLUS AN ORPHAN.
+ *
+ * At a 220px minimum a desktop row fits four, so a five-step flow lays out as
+ * a full row and one card marooned beneath it — which reads as a card that
+ * failed to load rather than as step five. Raising the minimum for exactly
+ * this case gives 3 + 2, which is a deliberate-looking shape at every width
+ * the site is checked at. Four-step blocks, which is most of them, are
+ * untouched. */
+.steps.five { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 .step { background: var(--paper); border: 1px solid var(--line);
   border-radius: var(--r); padding: 26px; }
 .band.paper .step { background: var(--ground); }
@@ -493,6 +648,199 @@ img.fill { width: 100%; height: 100%; object-fit: cover; display: block;
 .ba .ph.has-img em { z-index: 1; background: var(--photo-label);
   padding: 3px 7px; border-radius: 5px; }
 .media p { font-size: 13px; color: var(--ink-3); text-align: center; padding: 0 30px; max-width: 34ch; }
+
+/* ── labelled diagram ───────────────────────────────────────────────
+ * The stage gets its ratio from the image's own pixels (inline style), never
+ * from a fixed box, so the artwork is never cropped. That matters more here
+ * than for a photograph: an illustration composed with a margin for its labels
+ * loses exactly that margin to `object-fit: cover`.
+ *
+ * Labels are positioned in percentages of the stage, so they stay on their
+ * structure at every width with no runtime measurement. Below the phone
+ * breakpoint they would overlap into mush, so the words move to a numbered key
+ * and only the numbered dots stay on the artwork. */
+.diagram { margin: 30px 0 0; }
+/* A container so connector lengths can be given in cqw — percentages of the
+ * stage. A flex item cannot take a percentage width from an auto-width parent,
+ * and a px connector would be the wrong length at every viewport but one. */
+.dg-stage { position: relative; border-radius: var(--r); overflow: hidden;
+  background: var(--dg-stage); container-type: inline-size; }
+.dg-img { display: block; width: 100%; height: auto; }
+.dg-pins { list-style: none; margin: 0; padding: 0;
+  position: absolute; inset: 0; }
+/* `width: max-content` is load-bearing. An absolutely positioned box takes its
+ * available width from its offset to the containing block's edge, so a label
+ * anchored at left:90% gets 10% to lay out in and wraps its words one per line
+ * — even though `transform` then moves it somewhere with plenty of room.
+ * Sizing to content first, moving second, is what lets a label sit near either
+ * edge without being crushed. */
+.dg-pin { position: absolute; left: var(--x); top: var(--y);
+  display: flex; align-items: center; gap: 0; pointer-events: none;
+  width: max-content; }
+/* The ANCHOR is what sits at (x, y) — a hollow ring, so the structure it names
+ * stays visible through it. The white halo keeps it readable over dark artwork
+ * as well as pale.
+ *
+ * The pin is shifted by HALF THE RING, not half the pin, which is why a label
+ * can grow longer without dragging its own marker off the structure it points
+ * at. `--ring` is that width, declared once, because three rules depend on it
+ * being exactly right and they drifted apart when it was written out as a
+ * number: the ring is 9px under the sheet's `box-sizing: border-box` (the
+ * 1.5px border is inside the 9), so half of it is 4.5px. Shifting by 6px
+ * instead put every ring on the site 1.5px left of the structure it named —
+ * uniform, invisible on any single figure, and wrong on all 300 of them. */
+.dg-pin { --ring: 9px; --half-ring: calc(var(--ring) / 2); }
+.dg-r { transform: translate(calc(-1 * var(--half-ring)), -50%); }
+.dg-l { flex-direction: row-reverse;
+  transform: translate(calc(-100% + var(--half-ring)), -50%); }
+.dg-anchor { flex: none; width: var(--ring); height: var(--ring); border-radius: 50%;
+  border: 1.5px solid var(--dg-ring); background: none;
+  box-shadow: 0 0 0 1px var(--dg-halo); }
+.dg-n { flex: none; width: 22px; height: 22px; border-radius: var(--r-pill);
+  background: var(--ink); color: var(--paper); font: 600 12px/22px var(--body);
+  text-align: center; box-shadow: var(--shadow); }
+/* `--lead-eff` exists so the phone breakpoint can shorten every connector at
+ * once. `--lead` is set inline per label and a media query cannot override an
+ * inline custom property, so the inline value feeds a second variable that the
+ * breakpoint is free to replace. */
+.dg-pin { --lead-eff: var(--lead, 3cqw); }
+/* max() guards a column that sits left of a label's own anchor, which would
+ * otherwise compute a negative width. */
+.dg-lead { flex: none; width: max(0px, var(--lead-eff)); height: 1px;
+  background: var(--dg-lead); }
+.dg-t { background: var(--dg-chip); color: var(--ink); font-size: 13px;
+  font-weight: 600; line-height: 1.25; padding: 5px 10px;
+  border-radius: var(--r-sm); box-shadow: var(--shadow);
+  max-width: 22ch; }
+.diagram figcaption { margin-top: 14px; }
+.dg-cap { font-size: var(--t-small); color: var(--ink-2); max-width: 68ch;
+  margin: 0; }
+
+/* RAIL MODE — the labels leave the picture entirely.
+ *
+ * A drawing that fills its frame has neither a right-hand gutter for a label
+ * column nor an empty band inside it, and a chip laid over it hides exactly
+ * what it names — on a left-to-right sequence it lands on the NEXT stage
+ * along. So the words sit in a rail beneath the artwork and reach it with a
+ * hairline riser: a 1px leader crossing a drawing occludes almost nothing,
+ * which is why anatomy plates have always been labelled this way.
+ *
+ * The rail is a SIBLING of the stage, not a child, for two reasons: risers
+ * have to paint upward over the artwork, and the stage clips to its own
+ * rounded corners. The wrapper carries the container so a riser measured in
+ * stage-widths still measures in stage-widths out here. */
+.dg-wrap { position: relative; container-type: inline-size; }
+.dg-rings .dg-n { display: none; }        /* the number lives in the rail */
+/* Every child is positioned against the rail, so the `li` itself is only a
+ * carrier for the custom properties they inherit.
+ *
+ * `--rmid` is half the number's height. It has to be a variable because the
+ * disc shrinks on a narrow figure, and the leader's foot, the jog's height and
+ * the chip's own offset are all measured from the disc's centre.
+ *
+ * `--ry` is how far the ring stands above the rail's top edge — the one
+ * measurement CSS cannot derive, since it depends on the artwork's aspect.
+ * Everything else here is expressed from it. */
+.dg-rail { position: relative; list-style: none; margin: 14px 0 0; padding: 0;
+  --rmid: 11px; min-height: calc(var(--rows, 1) * 38px + 8px); }
+.dg-riser { position: absolute; left: var(--x); width: 1px;
+  top: calc(-1 * var(--ry));
+  height: calc(var(--ry) + var(--rtop, 0px) + var(--rmid));
+  background: var(--dg-lead); }
+/* The two extra segments of an elbow leader. They have no width or height in
+ * the wide layout — the riser reaches the disc on its own there — so they cost
+ * nothing until a narrow figure turns them on. */
+.dg-jog, .dg-drop { position: absolute; display: none;
+  background: var(--dg-lead); }
+/* Shifted by half the number so the disc is centred on `x` — the riser meets
+ * its middle rather than its left edge. */
+.dg-rlab { position: absolute; left: var(--x); top: var(--rtop, 0px);
+  transform: translateX(calc(-1 * var(--rmid))); display: flex;
+  align-items: center; gap: 8px; width: max-content; }
+/* A label whose structure sits near the right edge runs its words back the
+ * other way. Pulling the chip inward instead would put its own riser straight
+ * through its own text; reversing it leaves the disc under the riser and
+ * sends the words where there is room. */
+.dg-rl .dg-rlab { flex-direction: row-reverse;
+  transform: translateX(calc(-100% + var(--rmid))); }
+/* Out here there is no artwork to sit legibly on top of, so the chip drops its
+ * plate and is simply set text.
+ *
+ * `nowrap` is not a typographic preference — it is what makes the rendered
+ * chip the shape `diagram_rail.py` solved for. That tool measures every chip
+ * as a single line and assigns rows so no chip covers a neighbour's riser. A
+ * chip that then wrapped was 42px tall instead of 22, which broke the model
+ * twice over: it reached into the row below, and its own disc — centred
+ * against the taller text by `align-items` — sank 5px past the foot of the
+ * riser pointing at it. There is room to run sideways out here; that is the
+ * whole point of the rail. So chips run sideways, and one that runs too far
+ * is caught by `diagram_audit.py` as an escape and shortened. */
+.dg-rail .dg-t { background: none; box-shadow: none; padding: 0;
+  max-width: none; white-space: nowrap; }
+.dg-key { display: none; margin: 12px 0 0; padding-left: 1.3em;
+  font-size: var(--t-small); color: var(--ink-2); }
+.dg-key li { margin-top: 4px; }
+.dg-note { margin: 10px 0 0; font-size: 12.5px; color: var(--ink-3); }
+
+/* NARROW FIGURES — the words leave the picture and the numbers go with them.
+ *
+ * WHY A CONTAINER QUERY AND NOT A MEDIA QUERY
+ *   Whether a chip fits is a fact about the STAGE, not about the window. A
+ *   chip is sized in px (13px type, 10px padding) but positioned in `cqw`, so
+ *   as the stage narrows the chips converge while staying the same size —
+ *   they collide at some stage width, and which viewport produces that width
+ *   depends on the page's gutters, not on the phone. Asking the viewport was
+ *   off by a whole breakpoint: at 768px the stage is 708px and chips overlap
+ *   by up to 15px, but the old `max-width: 720px` media query had already
+ *   decided that was a desktop and left them on. Asking the stage cannot be
+ *   wrong that way, and it also holds if a diagram is ever dropped into a
+ *   narrower column.
+ *
+ *   860px is where the widest chip set on the site stops fitting, measured
+ *   rather than guessed — see `diagram_audit.py`, which fails the build if a
+ *   chip, number or rail label overlaps another at any width.
+ *
+ * WHAT CHANGES
+ *   The words go to the numbered key beneath, and the numbers go OUT of the
+ *   picture. A 330px stage is only ~190px tall, so markers left on the artwork
+ *   crowd it and hide the very structures they name — while the label gutter,
+ *   which the words have just vacated, sits empty. Extending each connector to
+ *   a shared column uses that space and clears the drawing in one move.
+ *
+ *   The length is computed per label: `(col − xn) × 1cqw`, which is why the
+ *   unitless `--xn` exists. `.dg-col` opts a figure in; a figure whose artwork
+ *   fills the frame, or whose labels are a row under a sequence, keeps short
+ *   connectors instead — see `_phone_columns()` in chrome.py, which decides
+ *   that from the label geometry rather than by hand. */
+figure.diagram { container-type: inline-size; }
+@container (max-width: 860px) {
+  .dg-t { display: none; }
+  .dg-pin { --lead-eff: 7cqw; }
+  .dg-col .dg-pin { --lead-eff: calc((var(--col) - var(--xn)) * 1cqw); }
+  /* A left-running label would head away from the column, so here every label
+   * runs right. */
+  .dg-l { flex-direction: row; transform: translate(calc(-1 * var(--half-ring)), -50%); }
+  .dg-n { width: 18px; height: 18px; line-height: 18px; font-size: 10.5px; }
+  .dg-key { display: block; }
+  /* A rail drops only its text, which the key beneath already carries. The
+   * discs and their leaders stay, so the number still leaves the picture —
+   * which is the whole point of the mode: nothing but a hairline and a ring
+   * ever touches the drawing.
+   *
+   * With the words gone the authored ROWS have nothing left to separate, so
+   * the rail collapses to one row of discs and each disc moves to `--dx`, the
+   * position `_rail_spread()` solved for. Where that moved a disc off its own
+   * riser, the leader becomes an elbow: down from the ring, across at a turn
+   * line that clears every disc, and down again onto the number. */
+  .dg-rail { --rmid: 9px; min-height: 26px; }
+  .dg-rail .dg-t { display: none; }
+  .dg-riser { height: calc(var(--ry) - var(--turn)); }
+  .dg-jog { display: block; left: var(--jl); width: var(--jw);
+    top: calc(-1 * var(--turn)); height: 1px; }
+  .dg-drop { display: block; left: var(--dx); width: 1px;
+    top: calc(-1 * var(--turn)); height: calc(var(--turn) + var(--rmid)); }
+  .dg-rlab { left: var(--dx); top: 0; }
+}
 .float { position: absolute; background: var(--paper); border-radius: 18px; padding: 14px 18px;
   box-shadow: var(--shadow); }
 .float .stat { font-size: 26px; }
@@ -782,4 +1130,50 @@ body > footer .btn-primary { display: inline-flex; width: auto; padding: 12px 20
 
 @media (max-width: 900px) {
   .refs ol { columns: 1; }
+}
+
+/* ── The clinic on a map ────────────────────────────────────────────────────
+ * Two columns that are NOT equal partners. The map is the larger one because
+ * it is the thing you scan; the address column is narrower and denser because
+ * it is the thing you read, and the thing that still has to work when the
+ * frame beside it comes up blank.
+ *
+ * `.map-canvas` carries a background and a border so the box holds its shape
+ * before the lazy iframe arrives — without it the block collapses to nothing
+ * and the page reflows under the reader's thumb as they scroll into it.
+ *
+ * The aspect ratio changes at the stack point on purpose. A 16:10 letterbox is
+ * right beside a column of text and wrong once it is full-bleed on a phone,
+ * where the useful information is north-south along the road, not east-west. */
+.mapblock { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr);
+  gap: 30px; align-items: stretch; }
+.map-canvas { position: relative; aspect-ratio: 16 / 10; overflow: hidden;
+  border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--mint-sf); }
+.map-canvas iframe { position: absolute; inset: 0; width: 100%; height: 100%;
+  border: 0; display: block; }
+.map-nap { font-style: normal; display: flex; flex-direction: column;
+  gap: 14px; padding: 26px; border: 1px solid var(--line);
+  border-radius: var(--r); background: var(--paper); }
+.map-name { margin: 0; font-family: var(--display); font-size: 19px;
+  line-height: 1.25; color: var(--ink); }
+.map-line { margin: 0; display: flex; gap: 12px; align-items: flex-start;
+  font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+.map-line .ic { width: 30px; height: 30px; flex: 0 0 30px;
+  background: var(--mint-sf); color: var(--mint-dp); border-radius: var(--r-sm); }
+.map-line .ic svg { width: 17px; height: 17px; }
+.map-line a { color: var(--ink-2); text-decoration: none;
+  border-bottom: 1px solid var(--line-2); }
+.map-line a:hover { color: var(--ink); border-bottom-color: var(--ink-3); }
+.map-acts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto;
+  padding-top: 6px; }
+.map-acts .btn { flex: 1 1 auto; text-align: center; }
+
+@media (max-width: 900px) {
+  .mapblock { grid-template-columns: 1fr; gap: 18px; }
+  .map-canvas { aspect-ratio: 4 / 3; }
+}
+@media (max-width: 560px) {
+  .map-nap { padding: 20px; }
+  .map-acts .btn { flex: 1 1 100%; }
 }

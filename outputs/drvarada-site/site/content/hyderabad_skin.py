@@ -80,6 +80,21 @@ PAGES = [
                  "combination creams are freely sold. They convert an ordinary treatable "
                  "fungal infection into an extensive, hard-to-treat one."},
 
+        {"kind": "diagram", "eyebrow": "What a hive is",
+         "h2": "Fluid, not a rash.",
+         "intro": "A wheal is not inflamed skin in the ordinary sense. One cell type releases its contents, nearby vessels widen and leak, and the fluid that collects lifts the skin. That is why a hive can appear in minutes and be gone in hours, leaving nothing behind.",
+         "caption": "It is also why antihistamines are the treatment and why they are taken regularly rather than when a hive appears — they work by stopping the release, not by clearing what has already formed.",
+         "labels": [
+             {"text": "The wheal, lifted by fluid", "x": 27, "y": 13, "lead": 29, "find": "artwork"},
+             {"text": "Flare around it", "x": 44, "y": 22, "lead": 12, "find": "artwork"},
+             {"text": "Mast cell, releasing granules", "x": 22, "y": 51, "lead": 34, "find": "artwork"},
+             {"text": "Vessels widen; fluid escapes", "x": 42, "y": 64, "lead": 14, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/C7-urticaria-wheal.webp", "w": 1820, "h": 1024,
+             "alt": "A block of brown skin in section. In the dermis a large lilac mast cell is spilling granules into the tissue around it. Two nearby blood vessels are drawn much wider than a normal narrow vessel deeper in the same block, and fluid escapes through their walls into the dermis, which is swollen and separated by it. The swelling pushes the skin surface above into one smooth raised dome, and the skin around the base of the dome is flushed a deeper tone."}},
+
         {"kind": "split", "eyebrow": "Chronic hives",
          "h2": "Hives for more than six weeks are a different problem.",
          "body": ["Acute hives usually have a trigger and settle. Chronic urticaria. Weals "
@@ -178,6 +193,21 @@ PAGES = [
              "the season.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "The barrier",
+         "h2": "What the barrier is, and what sits under it.",
+         "intro": "Skin is a layered structure, and the part that holds water in and keeps irritants out is the outermost few cells of it. Everything below is what that surface is protecting.",
+         "caption": "The barrier is the top of the epidermis — a few cell layers thick. In eczema it leaks water outward and lets irritants in, which is why emollient is treatment rather than comfort.",
+         "labels": [
+             {"text": "Epidermis — the barrier", "x": 52, "y": 31, "lead": 10, "find": "artwork"},
+             {"text": "Dermis", "x": 52, "y": 50, "lead": 9, "find": "artwork"},
+             {"text": "Hair follicle and oil gland", "x": 27, "y": 63, "lead": 34, "find": "artwork"},
+             {"text": "Fat", "x": 52, "y": 80, "lead": 9, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/A1-skin-cross-section.webp", "w": 1592, "h": 896,
+             "alt": "Cross-section of healthy skin. The epidermis sits on top as stacked cells with a darker pigmented layer at its base, over the dermis and a layer of fat. A hair follicle runs from the surface down to its bulb in the fat, with a sebaceous gland attached to it and a small arrector pili muscle reaching up to the epidermis. A separate coiled sweat gland sends its duct up to its own pore on the surface. An artery, a vein and a nerve run through the deep tissue and branch upward into the dermis."}},
+
         {"kind": "steps", "eyebrow": "The protocol", "h2": "How eczema is managed",
          "items": [
              {"title": "Emollient, generously, daily",
@@ -193,6 +223,38 @@ PAGES = [
               "body": "Nails short, cotton clothing, cool rooms at night, and treating the "
                       "itch specifically. Scratching is a driver, not just a symptom."},
          ]},
+
+        {"kind": "diagram", "eyebrow": "The barrier",
+         "h2": "What a leaky barrier actually looks like.",
+         "intro": "The outermost layer works like a brick wall: flattened cells set in a continuous lipid mortar. In eczema that mortar is thin and broken, so water escapes outward and irritants and allergens get in.",
+         "caption": "Emollient replaces the mortar. That is why it is the treatment rather than the comfort measure, and why it goes on skin that currently looks fine.",
+         "rail": True,
+"labels": [
+    {"text": "Continuous lipid seal", "x": 23, "y": 26, "find": "artwork"},
+    {"text": "Water escaping", "x": 70, "y": 24, "find": "artwork"},
+    {"text": "Irritants getting in", "x": 64, "y": 36, "row": 2, "find": "artwork"},
+    {"text": "Inflammation beneath", "x": 67, "y": 56, "row": 1, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B8-eczema-barrier.webp", "w": 1820, "h": 1024,
+             "alt": "Two panels at the same scale. On the left, healthy skin: the outermost layer is a tidy wall of flattened cells with every gap filled by continuous lipid. On the right, eczema: the lipid is thinned and broken so open channels run between the cells, water escapes upward through them, irritants and allergen grains pass downward, and the tissue beneath is inflamed with immune cells gathered in it."}},
+
+        {"kind": "diagram", "eyebrow": "Why it keeps going",
+         "h2": "The loop that keeps eczema going.",
+         "intro": "Eczema does not simply itch because it is inflamed. The scratching that relieves the itch damages the barrier, the damaged barrier drives more inflammation, and the inflammation makes the nerves more sensitive than they were. Each turn leaves the skin worse.",
+         "caption": "This is why controlling the itch is treatment rather than comfort, and why emollient goes on skin that currently looks fine. Breaking the loop anywhere slows all of it.",
+         "rail": True,
+"labels": [
+    {"text": "Nerves fire", "x": 38, "y": 17, "row": 2, "find": "artwork"},
+    {"text": "Scratched open", "x": 70, "y": 42, "find": "artwork"},
+    {"text": "Water escapes", "x": 52, "y": 82, "row": 1, "find": "artwork"},
+    {"text": "Inflammation builds", "x": 21, "y": 47, "row": 3, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B9-itch-scratch-cycle.webp", "w": 1820, "h": 1024,
+             "alt": "Four blocks of skin arranged in a ring and joined by a continuous lilac band. At the top, fine nerve fibres reach up through the dermis with swollen active tips. At the right, three parallel grooves have been gouged down through the outermost layer. At the bottom, the outer layer is thinned and interrupted and water escapes upward as rising droplets. At the left, inflammatory cells crowd the dermis beneath the broken surface and the nerve fibres beside them are thicker and more active than at the top."}},
 
         {"kind": "split", "eyebrow": "Steroid fear",
          "h2": "The bigger problem is under-treatment.",
@@ -298,6 +360,20 @@ PAGES = [
              "enough to remove expression. A face that cannot move does not read as younger. "
              "It reads as treated.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "The mechanism",
+         "h2": "One mechanism, and its honest limits.",
+         "intro": "The injection blocks the signal that tells a muscle to contract. The muscle relaxes, and the skin folded by that muscle stops folding. That is the whole of it.",
+         "caption": "It follows that lines present at rest, caused by lost volume or sun damage rather than movement, will not respond — and that promising otherwise is how people end up disappointed.",
+         "rail": True,
+"labels": [
+    {"text": "Signal crosses, muscle bunches", "x": 19, "y": 70, "find": "artwork"},
+    {"text": "Release blocked, muscle relaxes", "x": 64, "y": 50, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D9-botox.webp", "w": 1820, "h": 1024,
+             "alt": "Two panels showing where a nerve ending meets a muscle fibre. On the left, untreated: the nerve ending is releasing packets of signal across the gap and the muscle fibre below is contracted, short and bunched. On the right, treated: the packets are held back and none cross the gap, and the muscle fibre below is relaxed, long and smooth."}},
 
         {"kind": "table", "eyebrow": "Matching concern to treatment",
          "h2": "Is toxin actually the right answer?",
@@ -415,6 +491,22 @@ PAGES = [
              "the next day.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "Booster or filler",
+         "h2": "Two different jobs, often confused.",
+         "intro": "They are both injectable gels, and that is where the similarity ends. A booster is spread through the dermis in many small deposits to hold water. A filler is one placed volume, put deep, to change a contour.",
+         "caption": "If someone offers you a booster to lift a fold, or a filler to improve skin quality, they are selling the wrong thing. What you want changed decides which one is appropriate.",
+         "rail": True,
+"labels": [
+    {"text": "Contour unchanged", "x": 13, "y": 20, "row": 3, "find": "artwork"},
+    {"text": "Droplets in the dermis", "x": 35, "y": 45, "row": 2, "find": "artwork"},
+    {"text": "Surface lifted", "x": 60, "y": 16, "row": 1, "find": "artwork"},
+    {"text": "One bolus, deep", "x": 67, "y": 79, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D11-booster-vs-filler.webp", "w": 1820, "h": 1024,
+             "alt": "Two identical blocks of skin side by side. In the left block, many tiny separate droplets of clear gel are spread evenly through the dermis and the skin surface above is flat and unchanged. In the right block there are no droplets in the dermis; instead one large smooth bolus of gel sits deep beneath the fat layer, and the skin surface directly above it is pushed up into a raised contour."}},
+
         {"kind": "steps", "eyebrow": "The protocol", "h2": "How a course runs",
          "items": [
              {"title": "Assess what the skin actually needs",
@@ -528,6 +620,21 @@ PAGES = [
              "of it will do what surgery does. Where surgery is the appropriate answer, "
              "saying so is more useful than selling a course that cannot reach it.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "What actually changes",
+         "h2": "The result is built after you leave.",
+         "intro": "Radiofrequency heats the dermis to a temperature at which collagen contracts. That happens on the day. What follows over the next several months — new collagen laid down and organised — is where most of the change actually comes from.",
+         "caption": "This is why a single session judged at two weeks tells you almost nothing, and why anyone promising an immediate lift is describing swelling rather than remodelling.",
+         "label_col": 0,
+         "labels": [
+             {"text": "On the day", "x": 19, "y": 82, "lead": 2},
+             {"text": "Weeks later", "x": 46, "y": 82, "lead": 2},
+             {"text": "Months later", "x": 73, "y": 82, "lead": 2},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D12-rf-remodelling.webp", "w": 1820, "h": 1024,
+             "alt": "Three identical blocks of skin in a row showing the same skin at three times. In the first, warmth spreads through the dermis as soft concentric bands and the collagen fibres are long, thin and wavy with some beginning to coil. In the second the warmth has gone and the same fibres are shorter and thicker and more tightly coiled, with fine new fibres appearing between them. In the third the fibres form a dense orderly interwoven network filling a slightly deeper dermis, and the surface above is smoother than in the first."}},
 
         {"kind": "table", "eyebrow": "Suitability", "h2": "Who this genuinely suits",
          "head": ["Situation", "Suitable?", "Why"],
@@ -646,6 +753,20 @@ PAGES = [
              "worse if treated aggressively. It is managed as a long-term condition rather "
              "than removed.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "The mechanism",
+         "h2": "A peel is defined by how deep it goes.",
+         "intro": "Every peel removes a controlled thickness of skin and lets it heal back. How deep it reaches decides what it can treat, how long recovery takes, and how much risk it carries — particularly on brown skin.",
+         "caption": "Deeper is not better. Most of what a peel is used for here is achieved in the top two layers, and the complications almost all come from going deeper than the problem required.",
+         "labels": [
+             {"text": "Superficial", "x": 16, "y": 30, "lead": 43, "find": "artwork"},
+             {"text": "Medium", "x": 35, "y": 45, "lead": 24, "find": "artwork"},
+             {"text": "Deep", "x": 51, "y": 56, "lead": 8, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D8-peel-depths.webp", "w": 1820, "h": 1024,
+             "alt": "One block of skin showing the epidermis, dermis and fat in section, with three treated zones side by side reaching different depths. The first stops within the epidermis. The second passes through it into the upper dermis. The third reaches well down into the middle of the dermis. Each zone has a distinct flat floor showing where it stops."}},
 
         {"kind": "table", "eyebrow": "Matching peel to problem",
          "h2": "What a peel is being used for",
@@ -772,6 +893,20 @@ PAGES = [
              "respond. That is why a course is needed. Each session catches a different "
              "proportion of the follicles.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "The mechanism",
+         "h2": "The laser is aimed at pigment.",
+         "intro": "Laser energy is absorbed by the pigment in the hair, and the heat that follows damages the follicle that made it. Everything else about the treatment follows from that one fact.",
+         "caption": "It is why grey and very fine hair responds poorly, why courses are spaced over months, and why a single session can never be enough — only the follicles actively growing on the day are vulnerable.",
+         "labels": [
+             {"text": "The light falls on all three", "x": 48, "y": 16, "lead": 13, "find": "artwork"},
+             {"text": "Resting follicles pass it by", "x": 41, "y": 52, "lead": 20, "find": "artwork"},
+             {"text": "Pigment absorbs it, bulb destroyed", "x": 16, "y": 62, "lead": 45, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D7-laser-hair.webp", "w": 1820, "h": 1024,
+             "alt": "Three follicles in one block of skin, with a wide band of laser light falling equally across all of them. The first is deep and actively growing, its shaft and bulb densely pigmented; it has absorbed the light and heat is spreading through the collapsing bulb. The second is a pale resting follicle and the third is empty, and both are untouched."}},
 
         {"kind": "steps", "eyebrow": "The protocol", "h2": "What a course involves",
          "items": [
@@ -906,6 +1041,21 @@ PAGES = [
              "treatment is a reason to reconsider the diagnosis rather than to repeat the "
              "treatment.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "Three ways to remove",
+         "h2": "What each one leaves behind.",
+         "intro": "The same small lesion can be shaved off at the surface, cut out through the full thickness, or destroyed with a fine heated tip. They reach different depths, and depth is what decides both the scar and whether the specimen can be examined.",
+         "caption": "Only excision removes the whole thickness, and only excision reliably provides tissue for the laboratory. That is the reason a lesion is looked at properly before a method is chosen.",
+         "label_col": 0,
+         "labels": [
+             {"text": "Shaved off", "x": 18, "y": 77, "lead": 2},
+             {"text": "Cut out", "x": 46, "y": 77, "lead": 2},
+             {"text": "Cauterised", "x": 74, "y": 77, "lead": 2},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D18-removal-methods.webp", "w": 1820, "h": 1024,
+             "alt": "Three identical blocks of skin in a row, each carrying the same small raised lesion. In the first a flat blade passes horizontally through the base of the lesion at the level of the surface, leaving the tissue below undisturbed. In the second a narrow wedge has been cut around and under the whole lesion through the full thickness of the skin into the fat, and the gap is closed with fine stitches. In the third a fine pointed tip touches the lesion, which has been vaporised into a shallow crater lined with a thin rim of pale altered tissue."}},
 
         {"kind": "table", "eyebrow": "What is treated", "h2": "Common procedures",
          "head": ["Lesion", "Usual approach", "Notes"],

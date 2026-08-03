@@ -261,6 +261,26 @@ PAGES = [
              "end up back with the same rash a month later.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "The mechanism",
+         "h2": "An infection of the dead surface layer.",
+         "intro": "The fungus lives in the outermost dead layer of skin and spreads outward from where it started, which is why the edge is active and scaly while the middle looks calmer.",
+         "caption": "A steroid cream removes the redness without touching the fungus. The rash looks better within days and is meanwhile spreading further and deeper — which is why the tube matters more than the rash.",
+         "rail": True,
+    # "Active scaly border" was at y=19, six percent above the middle block's
+    # top face, so it named the background and its leader ran down THROUGH the
+    # annular lesion it was pointing at. Read off `diagram_grid.py`: the raised
+    # rim's left limb is at (34, 33). Label 1 was on the block's top edge
+    # rather than in the dead layer that carries the threads.
+ "labels": [
+     {"text": "Threads in the dead top layer", "x": 14, "y": 38, "row": 1, "find": "artwork"},
+     {"text": "Active scaly border", "x": 34, "y": 33, "find": "edge:pale|skin"},
+     {"text": "Calmer above, spreading below", "x": 70, "y": 45, "find": "artwork"},
+ ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/C3-fungal-infection.webp", "w": 1820, "h": 1024,
+             "alt": "Three panels. The first magnifies the outermost dead layer of skin with fine branching fungal threads growing sideways through it. The second shows the same infection from above as a ring with a raised scaly active border and a clearer centre. The third shows that ring after a steroid cream: the surface looks calm, but the threads beneath have spread much further and deeper than the visible edge."}},
+
         {"kind": "table", "eyebrow": "What is being treated", "h2": "Where it appears",
          "head": ["Site", "Usual name", "What treatment involves"],
          "rows": [
@@ -405,6 +425,20 @@ PAGES = [
              "is worth saying before any elective procedure, including a cosmetic one.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "The difference",
+         "h2": "A keloid outgrows its own wound.",
+         "intro": "An ordinary scar fills the injury and stops. A keloid keeps producing collagen after the wound has closed and spreads onto skin that was never injured — which is what makes it a different problem rather than a bad version of the same one.",
+         "caption": "Treatment aims to flatten and quieten, not to erase. A keloid that stops growing, stops itching and settles is the realistic result.",
+         "rail": True,
+"labels": [
+    {"text": "Collagen stays inside the wound", "x": 23, "y": 40, "find": "artwork"},
+    {"text": "Collagen grows past it", "x": 62, "y": 26, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/C5-keloid.webp", "w": 1820, "h": 1024,
+             "alt": "Two blocks of skin, each showing the same small original wound marked by a faint dotted outline. In the left block new collagen has filled the wound in orderly bundles and stayed inside that outline, leaving a flat surface. In the right block thick swirling collagen has grown well beyond the outline in every direction and pushed the surface into a raised mound."}},
+
         {"kind": "table", "eyebrow": "The options", "h2": "What is used, and what it does",
          "head": ["Approach", "What it achieves", "Notes"],
          "rows": [
@@ -545,6 +579,22 @@ PAGES = [
              "small notch exactly where it is most visible.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "What the repair involves",
+         "h2": "Four steps, under local anaesthetic.",
+         "intro": "A torn lobe does not close on its own, because the edges of the old tract have healed over with skin. That lining has to be removed before the two sides can knit — which is why the repair is a small operation and not a stitch.",
+         "caption": "The lobe is repierced only after it has fully healed, usually at six to eight weeks, and deliberately away from the repair line. Piercing back through the scar is the commonest reason a repaired lobe tears a second time.",
+         "label_col": 0,
+         "labels": [
+             {"text": "Torn through", "x": 15, "y": 83, "lead": 2},
+             {"text": "Tract excised", "x": 35, "y": 83, "lead": 2},
+             {"text": "Sutured", "x": 55, "y": 83, "lead": 2},
+             {"text": "Healed", "x": 76, "y": 83, "lead": 2},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D17-ear-lobe-repair.webp", "w": 1820, "h": 1024,
+             "alt": "Four stages of one ear in a row on brown skin. In the first, a piercing hole has torn all the way through the lower edge of the lobe, splitting it into two prongs lined with a thin pale border of healed skin. In the second that lining has been trimmed away as a narrow sliver, which lies beside the ear, leaving two fresh edges. In the third the edges are held together by a single row of fine stitches. In the fourth the lobe has healed to one smooth continuous edge with only a faint line where the repair was, and a small new piercing point marked higher up and away from it."}},
+
         {"kind": "steps", "eyebrow": "What happens", "h2": "A short list, done properly.",
          "items": [
              {"title": "Assessment and planning",
@@ -680,6 +730,22 @@ PAGES = [
              "rash are all reasons for an examination rather than a pedicure.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "The nail unit",
+         "h2": "The nail you see was made months ago.",
+         "intro": "A nail is produced by a growth zone tucked under the skin at its base and then slides forward over its bed. Damage there shows up at the fingertip months later, which is why nail treatment is slow and why the diagnosis matters before anything is prescribed.",
+         "caption": "Half of thickened nails are not fungal. Psoriasis, injury and a few other causes look similar at a glance, and antifungals do nothing for them.",
+         "rail": True,
+"labels": [
+    {"text": "Where the nail is made", "x": 16, "y": 33, "find": "artwork"},
+    {"text": "Fungal thickening", "x": 54, "y": 60, "row": 2, "find": "artwork"},
+    {"text": "Pitting, and lifting", "x": 65, "y": 70, "row": 1, "find": "artwork"},
+    {"text": "A single dark band", "x": 77, "y": 80, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/C6-nail-unit.webp", "w": 1820, "h": 1024,
+             "alt": "On the left, a fingertip in long section showing the growth zone under the skin at the base of the nail, the pale crescent, the nail plate lying over its bed, and the free edge. On the right, three nails seen from above: one thickened and crumbling from the free edge, one covered in small round pits with a patch lifting from its bed, and one crossed by a single dark band running lengthwise."}},
+
         {"kind": "table", "eyebrow": "What is treated", "h2": "Nail problems and their answers",
          "head": ["Problem", "Usual approach", "Notes"],
          "rows": [
@@ -808,6 +874,22 @@ PAGES = [
              "injecting the scalp is treating the wrong thing at some expense.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "The cycle",
+         "h2": "Every hair is somewhere in a cycle.",
+         "intro": "A follicle grows for years, winds down over weeks, rests for months, then lets the old hair go and starts again. Only the growing ones respond to treatment, which is why nothing is judged before three months.",
+         "caption": "At any moment most of your hair is growing and a smaller share is resting. Shedding is that balance shifting, not follicles disappearing.",
+         "label_col": 0,
+         "labels": [
+             {"text": "Growing", "x": 14, "y": 85, "lead": 2},
+             {"text": "Winding down", "x": 33, "y": 85, "lead": 2},
+             {"text": "Resting", "x": 52, "y": 85, "lead": 2},
+             {"text": "Shed, and starting again", "x": 71, "y": 85, "lead": 2},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/A4-hair-growth-cycle.webp", "w": 1820, "h": 1024,
+             "alt": "Four blocks of skin in a row showing one follicle at four points in its cycle. In the first the bulb sits deep in the fat with a thick dark hair. In the second it has climbed to the edge of the fat. In the third it rests high in the dermis as a blunt club, above the papilla it left behind. In the fourth the old hair lifts away while a new dark bulb grows down again."}},
+
         {"kind": "steps", "eyebrow": "How a course runs",
          "h2": "Diagnosis first, then sessions.",
          "items": [
@@ -848,6 +930,22 @@ PAGES = [
          "note": "The last two rows are the honest limit of the treatment. PRP acts on "
                  "follicles that still exist, where the scalp has been bald and smooth for "
                  "years, grafting is the conversation, not injections."},
+
+        {"kind": "diagram", "eyebrow": "The preparation",
+         "h2": "What is actually being injected.",
+         "intro": "Your own blood is spun so the platelets separate from the rest of it. The thin fraction that carries them is what goes back into the scalp, at the depth the follicle bulbs sit.",
+         "caption": "Nothing is added and nothing is manufactured — which is also why the effect is real but modest, and why it is a course rather than a single visit.",
+         "label_col": 0,
+         "labels": [
+             {"text": "Blood drawn", "x": 10, "y": 85, "lead": 2},
+             {"text": "Spun", "x": 29, "y": 85, "lead": 2},
+             {"text": "Separated", "x": 48, "y": 85, "lead": 2},
+             {"text": "Injected at bulb depth", "x": 72, "y": 85, "lead": 2},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D14-prp.webp", "w": 1820, "h": 1024,
+             "alt": "Four stages in a row. A tube of blood is drawn, spun in a small centrifuge, and comes to rest separated into three layers with a thin platelet-rich band across the middle. A fine syringe then delivers that middle fraction into scalp skin, its needle stopping at the depth of the hair bulbs."}},
 
         {"kind": "split", "eyebrow": "Microneedling and derma roller",
          "h2": "The induction step, and what it is for.",
@@ -951,6 +1049,22 @@ PAGES = [
              "goes wrong, an enzyme can remove it. Permanent fillers offer no such exit and "
              "are not used.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "The anatomy",
+         "h2": "Depth is the whole decision.",
+         "intro": "Filler does one thing: it replaces volume. Where it is placed decides what it does — a fine line under the skin, a soft cushion in the fat, or a firm support on the bone. Arteries run up through those same layers.",
+         "caption": "This is why who injects you matters more than which brand is used. The serious complications are vascular, and they are anatomy problems.",
+         "rail": True,
+"labels": [
+    {"text": "Just under the skin", "x": 32, "y": 27, "find": "artwork"},
+    {"text": "In the fat", "x": 23, "y": 55, "row": 1, "find": "artwork"},
+    {"text": "On the bone", "x": 20, "y": 72, "row": 2, "find": "artwork"},
+    {"text": "Arteries share those layers", "x": 72, "y": 45, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D10-filler-anatomy.webp", "w": 1820, "h": 1024,
+             "alt": "Two blocks of facial tissue at the same scale. The left block shows skin, fat, muscle and bone in section with three separate deposits of clear gel placed at three different depths, each lifting the surface above it by a different amount. The right block shows the same layers with the arteries drawn instead, branching upward through them."}},
 
         {"kind": "table", "eyebrow": "By area", "h2": "What each area realistically gives",
          "head": ["Area", "What it addresses", "Notes"],
@@ -1207,6 +1321,21 @@ PAGES = [
              "do.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "What the needles do",
+         "h2": "Depth is the whole technique.",
+         "intro": "Fine needles make controlled channels to a set depth in the upper dermis. The channels themselves close within hours; what matters is the repair response they provoke in the tissue at their tips.",
+         "caption": "Depth is set for the area being treated and is not a dial to turn up. Going deeper does not accelerate anything — it risks the structures below and, on brown skin, risks pigmentation that outlasts the benefit.",
+         "labels": [
+             {"text": "Needles of one length", "x": 28, "y": 8, "lead": 26, "find": "artwork"},
+             {"text": "Channels through the epidermis", "x": 31, "y": 40, "lead": 23, "find": "artwork"},
+             {"text": "Every tip stops at one depth", "x": 30, "y": 54, "lead": 24, "find": "artwork"},
+             {"text": "The fat is never reached", "x": 25, "y": 82, "lead": 29, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D13-microneedling-depth.webp", "w": 1820, "h": 1024,
+             "alt": "A block of brown skin in section with a flat head carrying a row of fine short needles above it. Several needles have entered the skin, each passing through the epidermis and stopping at the same depth in the upper dermis with their tips level along an even line, leaving narrow straight channels behind them. The fat layer below is clearly untouched. Small round repair cells and fine new collagen fibres gather around and below the tips."}},
+
         {"kind": "steps", "eyebrow": "What a session involves",
          "h2": "Short, repeated, and unremarkable.",
          "items": [
@@ -1347,6 +1476,20 @@ PAGES = [
              "started under those conditions is being sold rather than planned.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "The distinction",
+         "h2": "A mark is not a scar.",
+         "intro": "Most people who ask about acne scars have marks: flat brown patches left where a spot healed. A scar is a change in the skin's shape. The two need completely different treatment, and only one of them fades on its own.",
+         "caption": "Marks fade with time, sun protection and pigment-directed treatment. Scars do not — they need the collagen rebuilt. Telling them apart is most of the first consultation.",
+         "rail": True,
+"labels": [
+    {"text": "Extra pigment, surface still level", "x": 23, "y": 40, "find": "artwork"},
+    {"text": "Collagen lost, surface dented", "x": 64, "y": 30, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B11-mark-vs-scar.webp", "w": 1820, "h": 1024,
+             "alt": "Two blocks of skin side by side. In the left block the surface is completely smooth and level, and the only abnormality is a dense band of dark brown pigment sitting in the lower epidermis. In the right block the pigment is normal but the surface dips into a saucer-shaped depression because the collagen beneath it has been lost."}},
+
         {"kind": "table", "eyebrow": "Matching procedure to scar",
          "h2": "Different scars, different tools",
          "head": ["Scar type", "What it responds to", "Notes"],
@@ -1367,6 +1510,20 @@ PAGES = [
          "note": "Most faces carry more than one type, which is why single-modality courses "
                  "underperform. A plan usually combines two or three procedures in a "
                  "deliberate order."},
+
+        {"kind": "diagram", "eyebrow": "The shapes",
+         "h2": "Three scars, three different problems.",
+         "intro": "Scars are classified by shape because shape decides the tool. A narrow deep tract, a sharp-walled crater and a broad tethered dip do not respond to the same treatment, and most faces carry more than one kind.",
+         "caption": "This is why a single device rarely clears a face, and why a plan usually combines methods in a deliberate order.",
+         "labels": [
+             {"text": "Narrow and deep", "x": 16, "y": 42, "lead": 49, "find": "artwork"},
+             {"text": "Sharp-walled crater", "x": 36, "y": 27, "lead": 29, "find": "artwork"},
+             {"text": "Tethered from below", "x": 51, "y": 55, "lead": 14, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B12-acne-scar-types.webp", "w": 1820, "h": 1024,
+             "alt": "One block of skin containing three different scars. The first is a very narrow tract plunging steeply and deeply into the dermis. The second is a wider crater with a flat floor and sharp vertical walls. The third is a broad shallow undulation with fibrous strands beneath tethering the surface down to deeper tissue."}},
 
         {"kind": "steps", "eyebrow": "How a plan is built",
          "h2": "Order matters more than intensity.",

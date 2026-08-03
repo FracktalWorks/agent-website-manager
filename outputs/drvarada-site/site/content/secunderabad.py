@@ -18,7 +18,8 @@ WHY THESE ARE NOT COPIES OF THE HYDERABAD PAGES
   page per colony.
 """
 
-from chrome import ADDRESS, HOURS, MAPS, PHONE, PHONE_SHOW, WHATSAPP
+from chrome import (ADDRESS, GOOGLE_LISTING, HOURS, MAPS, PHONE, PHONE_SHOW,
+                    WHATSAPP)
 
 # The clinic sits in Karkhana. These are the localities within a realistic
 # repeat-visit radius, which is the only thing that matters for a course of
@@ -78,7 +79,7 @@ VISIT = {
         {"title": "Where", "icon": "pin",
          "body": ADDRESS + ".",
          "list": ["Off Wellington Road, Vikrampuri Colony",
-                  "Listed on Google as BNR Skin &amp; Vitiligo Hospital",
+                  "Listed on Google as " + GOOGLE_LISTING,
                   "Consulting " + HOURS.lower() + ", closed Sunday"]},
         {"title": "How to book", "icon": "chat",
          "body": "On WhatsApp: one number, answered by the clinic team, who "
@@ -138,6 +139,21 @@ PAGES = [
              "reservoir that light works by recruiting. Being told so at the start is more "
              "useful than six months of finding out.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "What you are waiting for",
+         "h2": "Colour returns two ways.",
+         "intro": "Knowing what regrowth looks like makes a long course easier to stay with. Pigment comes back as small islands spreading out from individual hairs, and as a band creeping in from the edge of the patch — both slow, both real.",
+         "caption": "This is also why we look closely at the hairs inside a patch at the first visit. Where they have turned white the reservoir is gone, and light and creams have much less to work with.",
+         "labels": [
+             {"text": "Island spreading from one hair", "x": 22, "y": 19, "lead": 39, "find": "spot:skin@pale"},
+             {"text": "A hair with no island yet", "x": 40, "y": 31, "lead": 21, "find": "artwork"},
+             {"text": "Pigment advancing from the edge", "x": 18, "y": 40, "lead": 43, "find": "edge:pale|skin"},
+             {"text": "The follicle beneath", "x": 19, "y": 69, "lead": 42, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B2-repigmentation-routes.webp", "w": 1820, "h": 1024,
+             "alt": "A pale vitiligo patch on brown skin seen from above, with pigment returning two ways: small round islands centred on individual hairs and spreading outward, and a band of pigment creeping inward from the patch border. Two hairs have no island yet, and a cut-away shows a follicle running down beneath the pale surface."}},
 
         {"kind": "steps", "eyebrow": "The protocol", "h2": "How a course actually runs",
          "items": [
@@ -250,6 +266,22 @@ PAGES = [
              "early symptoms are routinely dismissed as unrelated aches.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "Where you enter",
+         "h2": "Treatment is a sequence, not a menu.",
+         "intro": "Creams, then light, then tablets, then the targeted injections. Where you start depends on how much skin is involved and what it is doing to your life — not on what is newest.",
+         "caption": "The wedge beneath the steps is the monitoring each rung asks of you, and it thickens the whole way up. Nobody starts at the top, and nobody should be left at the bottom for years if it is not working.",
+         "rail": True,
+  "labels": [
+      {"text": "Creams", "x": 18, "y": 54, "find": "artwork"},
+      {"text": "Light", "x": 36, "y": 27, "find": "artwork"},
+      {"text": "Tablets", "x": 50, "y": 33, "find": "artwork"},
+      {"text": "Targeted injections", "x": 66, "y": 21, "find": "artwork"},
+  ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D5-treatment-ladder.webp", "w": 1820, "h": 1024,
+             "alt": "A staircase of four ascending steps. On the first sits a tube of cream, on the second a small light panel, on the third a blister sheet of tablets, and on the highest a syringe. Beneath the staircase a wedge grows steadily thicker from left to right."}},
+
         {"kind": "checklist", "eyebrow": "Bring with you",
          "h2": "What makes a first psoriasis visit count.",
          "items": [
@@ -349,6 +381,21 @@ PAGES = [
              "It is also the reason nothing is quoted before you are examined. What a plan "
              "costs depends on what the diagnosis turns out to be.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "What thinning is",
+         "h2": "The follicle shrinks before it stops.",
+         "intro": "Pattern hair loss is not follicles disappearing. Each affected follicle grows a little smaller and a little finer each cycle, so the shaft it makes gets thinner and shorter until it barely reaches the surface.",
+         "caption": "Treatment works by holding follicles at the stage they are currently at, which is why starting earlier gets more. It also explains the wait: change at the root takes months to become visible above the scalp.",
+         "labels": [
+             {"text": "Full thickness", "x": 13, "y": 80, "lead": 2},
+             {"text": "Finer", "x": 36, "y": 80, "lead": 2},
+             {"text": "Finer still", "x": 58, "y": 80, "lead": 2},
+             {"text": "Barely reaches", "x": 79, "y": 80, "lead": 2},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/C1-miniaturisation.webp", "w": 1820, "h": 1024,
+             "alt": "The same hair follicle drawn at four stages across the frame, each shallower than the last, with the bulb smaller and the shaft it produces progressively thinner and shorter until the final one barely reaches the surface."}},
 
         {"kind": "cards", "eyebrow": "What it might be", "h2": "The four common patterns",
          "items": [

@@ -39,6 +39,19 @@ leak into engine files.
   touch — a file outside it survives rollbacks half-changed.
 - Port-in-use is detected by **connect probe**, never bind failure (Windows
   SO_REUSEADDR lets a double bind succeed).
+- Every constant named in `siteconf.EDITABLE_CONSTANTS` / `EDITABLE_URLS`
+  must hold a **literal**. `datapatch.set_constant` runs
+  `ast.literal_eval` on the value, so an f-string or a reference to another
+  constant raises `PatchError` and the field silently stops being editable
+  from the live editor. When two such constants must agree (e.g. a maps
+  link and its embed URL), **duplicate the literal and add an import-time
+  check that compares them** — a derived value reads better and breaks the
+  editor.
+- Copy that describes **external state** — a listing name, opening hours, a
+  partner, "formerly X" — goes stale with nothing failing. When the outside
+  world changes, grep `content/` for the old wording before saying it is
+  done; three passages had quietly become false when the Google listing was
+  renamed.
 
 ## User feedback — read `.feedback/` FIRST when asked to improve the site
 

@@ -35,6 +35,26 @@ BRAND_PLAIN = "Dr. Varada's Skin & Hair Center"
 FORMER = "BNR Skin &amp; Vitiligo Hospital"
 FORMER_PLAIN = "BNR Skin & Vitiligo Hospital"
 
+# THE TITLE THE GOOGLE LISTING CARRIES. Renamed by the clinic 2026-08-02, and
+# this is the string Google shows from that date.
+#
+# The rename went the right way: the listing now LEADS with the trading name and
+# keeps the old one after the pipe. So the site and the listing finally agree
+# about what this practice is called, and the earlier scaffolding here — which
+# existed only to state the disagreement honestly while the rename was blocked
+# on the new signage — is gone.
+#
+# DERIVED, not typed. The listing title is exactly the trading name, a pipe, and
+# the former name, so composing it from the two constants above means the three
+# can never drift apart: rename the practice in one place and the listing string,
+# the schema `alternateName` and the page copy all follow. Typing it out again
+# would create a fourth name to keep in sync by hand.
+#
+# Google's own pipe form is a display convention, not a second brand. Nothing
+# here changes what the site is branded: that stays `BRAND_PLAIN` throughout.
+GOOGLE_LISTING_PLAIN = f"{BRAND_PLAIN} | {FORMER_PLAIN}"
+GOOGLE_LISTING = f"{BRAND} | {FORMER}"
+
 # WhatsApp is the only booking path. Every CTA on every page terminates here.
 #
 # This replaced Practo on 2026-07-30 at the clinic's instruction. Practo is still
@@ -67,10 +87,80 @@ PHONE_LANDLINE_SHOW = "040 7964 5852"
 PRACTO_REVIEWS = ("https://www.practo.com/hyderabad/doctor/"
                   "dr-khagendra-varada-dermatologist-cosmetologist-1")
 
+# WHAT THE TWO MAP LINKS RESOLVE AGAINST.
+#
+# Both carry the SAME query, so a patient who taps "directions" and a patient
+# who reads the map on the page are looking at the same pin.
+#
+# WRITTEN OUT IN FULL, TWICE, RATHER THAN DERIVED FROM ONE CONSTANT. That looks
+# like duplication and is a deliberate concession: `MAPS` is listed in
+# siteconf.EDITABLE_URLS, so the live editor's site-details form can retarget
+# it, and `datapatch.set_constant` can only rewrite a constant that holds a
+# literal — it refuses an f-string with "MAPS mirrors another constant". Deriving
+# these from a shared query string reads better and breaks the editor. If you
+# change one, change the other.
+#
+# The query names the CLINIC AND THE LOCALITY, not the plot. Wellington Road
+# numbering is not reliably in Google's data, so a plot-level query degrades to
+# a guess somewhere along the road; the listing is the precisely placed object,
+# and querying it lands on the pin the clinic has verified.
+#
+# It uses the POST-RENAME listing title, which matters for more than tidiness:
+# there are two listings for this practice, and the dead one is called "BNR Skin
+# and Vitiligo Centre" (see GOOGLE_REVIEWS below). Querying the former name
+# alone risks resolving to the corpse. The new title is unique to the live one.
+
 # Directions. A maps query rather than a share link, because a share link is
 # opaque and expires; this one is legible and reconstructible.
 MAPS = ("https://www.google.com/maps/search/?api=1&query="
-        "BNR+Skin+%26+Vitiligo+Hospital+Karkhana+Secunderabad")
+        "Dr.+Varada%27s+Skin+%26+Hair+Center+BNR+Skin+%26+Vitiligo+Hospital"
+        "+Karkhana+Secunderabad")
+
+# The embedded map, for `blk_map`.
+#
+# The keyless embed endpoint, deliberately. The official Maps Embed API would
+# need a billable API key committed to a public repo and rotated forever, to
+# render a single static pin — the keyless form renders the same map with no
+# key, no quota and nothing to leak.
+#
+# `z=16` shows the surrounding blocks: enough to recognise the Mancherial Road
+# and the Marredpally side, not so tight that the map is a featureless rectangle.
+#
+# TO PIN THIS EXACTLY: Google Maps → the listing → Share → Embed a map → copy
+# the `src` out of the iframe Google gives you, and replace this one value with
+# that string. It carries a `pb=` payload encoding the clinic's own verified
+# coordinates, which beats any text query. Nothing else in the block changes.
+MAP_EMBED = ("https://maps.google.com/maps?output=embed&z=16&q="
+             "Dr.+Varada%27s+Skin+%26+Hair+Center+BNR+Skin+%26+Vitiligo+Hospital"
+             "+Karkhana+Secunderabad")
+
+
+def _check_map_pair() -> None:
+    """The price of writing the query twice: prove the two copies still agree.
+
+    Two map links that disagree is a silent failure of exactly the kind nobody
+    reports — the page shows one place, the directions button opens another, and
+    it looks fine to whoever changed one of them. This fires at import, so it is
+    impossible to build the site with them out of step.
+
+    Skipped when MAP_EMBED has been replaced by Google's exact `pb=` embed:
+    that form encodes coordinates rather than a query and is strictly better, so
+    it is allowed to stop matching.
+    """
+    from urllib.parse import parse_qs, urlparse
+    if "pb=" in MAP_EMBED:
+        return
+    want = parse_qs(urlparse(MAPS).query).get("query", [""])[0]
+    got = parse_qs(urlparse(MAP_EMBED).query).get("q", [""])[0]
+    if want != got:
+        raise ValueError(
+            "MAPS and MAP_EMBED point at different places — the directions "
+            f"button would open {want!r} while the map on the page shows "
+            f"{got!r}. Change both, or paste Google's exact embed src into "
+            "MAP_EMBED.")
+
+
+_check_map_pair()
 
 # The second review platform, deep-linked to the reviews panel.
 #
@@ -138,6 +228,35 @@ HOURS_SCHEMA = "Mo-Sa 11:30-17:00"
 PATIENTS = "10,000+"
 REVIEWS = "65"
 RATING = "5.0"
+
+# Consultation fees, supplied by the clinic 2026-08-02. Held as integers and
+# formatted here so the site cannot drift: the difference between the two is
+# DERIVED, never typed. That matters because the difference is a promise — an
+# online consult that turns out to need a visit is charged only the gap — and a
+# promise typed as a literal is a promise that goes stale the first time either
+# fee moves and nobody remembers the third number exists.
+#
+# NOTE ON PUBLISHING THESE AT ALL: the cost pages argue, at length, that rupee
+# figures for TREATMENT are withheld deliberately, because a number without a
+# diagnosis attached is an advertisement rather than information. The
+# consultation fee is the exact opposite case — it is fixed, it is knowable
+# before anyone examines anything, and it is the one number a patient needs in
+# order to decide whether to start. Publishing it is the same principle as
+# withholding the others, not an exception to it.
+FEE_ONLINE = 699
+FEE_CLINIC = 1199
+FEE_TAX = "+ GST"
+
+
+def rupees(n: int) -> str:
+    """Indian digit grouping: 1199 -> ₹1,199. Fees do not reach a lakh, so the
+    2-2-3 grouping never comes up and a plain thousands separator is correct."""
+    return "₹" + f"{n:,}"
+
+
+FEE_ONLINE_SHOW = rupees(FEE_ONLINE)
+FEE_CLINIC_SHOW = rupees(FEE_CLINIC)
+FEE_DIFF_SHOW = rupees(FEE_CLINIC - FEE_ONLINE)
 
 REVIEWER = "Dr. (Lt Col) Khagendra Varada, MBBS, Dip. Practical Dermatology (Cardiff)"
 
@@ -842,8 +961,46 @@ def _para(items, links: str = "production", a: str = "") -> str:
 
 
 def blk_prose(s, links, a=''):
-    return (_headblock(s, links, a)
-            + f'<div class="prose">{_para(s["body"], links, f"{a}.body")}</div>')
+    """Body copy, optionally with a panel of plates in the right-hand column.
+
+    A PLATE IS A CREDENTIAL, NOT A DOCUMENT
+      Each plate states one qualification and where it was taken, and carries a
+      small round emblem beside it. What it deliberately is NOT is a picture of
+      the certificate. An invented diploma on a named doctor's page is a forged
+      credential whatever the intent, because a reader has no way to tell an
+      illustration of a document from a scan of one — and the emblem sidesteps
+      that entirely: a badge claims to stand for the qualification, where a
+      drawn certificate claims to BE it.
+
+      `mark` is optional. Without one the plate is typographic, which is the
+      right empty state — an unfilled plate should read as a statement of the
+      qualification, not as a photograph that failed to load.
+    """
+    head = _headblock(s, links, a)
+    body = f'<div class="prose">{_para(s["body"], links, f"{a}.body")}</div>'
+    aside = s.get("aside")
+    if not aside:
+        return head + body
+
+    plates = ""
+    for n, item in enumerate(aside.get("items") or []):
+        w = f"{a}.aside.items.{n}"
+        mark = item.get("mark")
+        badge = (f'<div class="plate-mark">{img(mark, links, "", f"{w}.mark")}</div>'
+                 if mark else '<div class="plate-rule"></div>')
+        note = (f'<span class="plate-note"{at(f"{w}.note", links)}>{e(item["note"])}</span>'
+                if item.get("note") else "")
+        plates += (f'<li class="plate"><div class="plate-mat">{badge}'
+                   f'<div class="plate-txt">'
+                   f'<b{at(f"{w}.award", links)}>{e(item["award"])}</b>'
+                   f'<span{at(f"{w}.where", links)}>{e(item["where"])}</span>'
+                   f'{note}</div></div></li>')
+    foot = (f'<p class="plates-foot"{at(f"{a}.aside.foot", links)}>'
+            f'{e(aside["foot"])}</p>' if aside.get("foot") else "")
+    panel = (f'<aside class="plates">'
+             f'<h3{at(f"{a}.aside.title", links)}>{e(aside.get("title", ""))}</h3>'
+             f'<ol>{plates}</ol>{foot}</aside>')
+    return head + f'<div class="prose-split">{body}{panel}</div>'
 
 
 def blk_cards(s, links, a=''):
@@ -865,13 +1022,57 @@ def blk_cards(s, links, a=''):
     return _headblock(s, links, a) + f'<div class="cols">{"".join(cards)}</div>'
 
 
+def blk_fees(s, links, a=''):
+    """Consultation fees: the price set as a price, not buried in a sentence.
+
+    This is its own block rather than `cards` with a rupee figure in the body
+    for one reason. A fee is the thing a patient scans for and the thing they
+    are most likely to feel misled about later, so it has to be findable in one
+    look and unambiguous when found — the number large, the tax stated beside it
+    rather than in a footnote, and what the fee does and does not include listed
+    underneath. A price mentioned mid-paragraph reads as a price someone would
+    rather you did not compare.
+
+    `note` carries the conditions that apply across both fees — advance payment,
+    the difference-only rule — because they belong to the pair, not to either
+    card.
+    """
+    cards = []
+    for n, it in enumerate(s["items"]):
+        w = f"{a}.items.{n}"
+        eb = (f'<div class="eyebrow"{at(f"{w}.eyebrow", links)}>{e(it["eyebrow"])}</div>'
+              if it.get("eyebrow") else "")
+        tax = (f'<span class="fee-tax"{at(f"{w}.tax", links)}>{e(it["tax"])}</span>'
+               if it.get("tax") else "")
+        body = f'<p{at(f"{w}.body", links)}>{e(it["body"])}</p>' if it.get("body") else ""
+        lis = ""
+        if it.get("list"):
+            lis = "<ul>" + "".join(f'<li{at(f"{w}.list.{j}", links)}>{e(x)}</li>'
+                                   for j, x in enumerate(it["list"])) + "</ul>"
+        # `card` is the design system's; `fee` only adds the price typography.
+        # Inventing a parallel surface here would drift from every other card on
+        # the site the first time the kit is restyled.
+        cards.append(
+            f'<article class="card fee">{eb}'
+            f'<h3{at(f"{w}.title", links)}>{e(it["title"])}</h3>'
+            f'<p class="fee-price"><b{at(f"{w}.price", links)}>{e(it["price"])}</b>{tax}</p>'
+            f'{body}{lis}</article>')
+    note = (f'<p class="fee-note"{at(f"{a}.note", links)}>{e(s["note"])}</p>'
+            if s.get("note") else "")
+    return (_headblock(s, links, a)
+            + f'<div class="cols two fees">{"".join(cards)}</div>{note}')
+
+
 def blk_steps(s, links, a=''):
     steps = "".join(
         f'<div class="step"><h3{at(f"{a}.items.{n}.title", links)}>{e(i["title"])}</h3>'
         f'<p{at(f"{a}.items.{n}.body", links)}>{e(i["body"])}</p></div>'
         for n, i in enumerate(s["items"])
     )
-    return _headblock(s, links, a) + f'<div class="steps">{steps}</div>'
+    # Five is the one count the default track size lays out badly; see the
+    # `.steps.five` note in the stylesheet.
+    wide = " five" if len(s["items"]) == 5 else ""
+    return _headblock(s, links, a) + f'<div class="steps{wide}">{steps}</div>'
 
 
 def blk_table(s, links, a=''):
@@ -962,6 +1163,317 @@ def blk_media(s, links, a=''):
         inner = slot(links, f"{a}.image", s["body"], cls="media wide",
                      style="margin-top:30px")
     return _headblock(s, links, a) + inner
+
+
+RAIL_ROW = 38          # px between rail rows — enough for a chip that wraps to two
+RAIL_GAP = 14          # px between the artwork's foot and the rail
+RAIL_MID = 11          # px from a chip's top to the centre of its number
+
+
+NARROW_STEP = 26       # px between disc centres once the rail is discs only
+NARROW_TURN = 12       # px above the rail where a displaced leader turns
+NARROW_TIER = 4        # px between two turn lines, so jogs do not superimpose
+
+
+def _rail_spread(labels):
+    """Where each rail disc sits once the words are gone, as a percent of stage.
+
+    WHY THE AUTHORED ROWS ARE THE WRONG ANSWER HERE
+      `diagram_rail.py` stacks the rail into rows so that one chip's WORDS
+      never cover a neighbour's riser. That is the correct constraint while the
+      words are on screen. Below the breakpoint they are not: the key beneath
+      carries them and the rail keeps only its discs. So a figure whose text
+      forced it onto three rows still renders three rows of discs on a phone —
+      sprawling the figure, and scrambling the reading order into 2, 1, 5, 3, 4
+      — to solve a collision that is no longer happening.
+
+      Discs alone need one row and a disc's width of separation. So the narrow
+      layout is computed here, from the anchors, and the rows are ignored.
+
+    THE DISPLACEMENT IS THE MINIMUM ONE
+      A disc stays directly under its own ring unless a neighbour forces it
+      along, because the whole reason the ring and the number are joined by a
+      line is that the eye should not have to search for the pairing. Only the
+      crowded ones move, and only as far as they must: two anchors 2% apart on
+      a 330px stage are 6.6px apart, and an 18px disc cannot fit twice in 6.6px
+      at any label placement — that is arithmetic, not a layout preference.
+    """
+    step = NARROW_STEP / PHONE_STAGE * 100
+    half = (PHONE_DISC / 2) / PHONE_STAGE * 100
+    order = sorted(range(len(labels)), key=lambda i: labels[i]["x"])
+
+    out = [0.0] * len(labels)
+    edge = -1e9
+    for i in order:
+        edge = out[i] = max(labels[i]["x"], edge + step)
+    # Pushing rightward can run the last disc off the edge; slide the whole run
+    # back by the overshoot, then off the left edge if that is where it lands.
+    # Sliding the run keeps the spacing that was just solved for.
+    shift = min(0.0, 100 - half - out[order[-1]])
+    shift += max(0.0, half - (out[order[0]] + shift))
+    return [round(v + shift, 2) for v in out]
+
+
+def _rail_pin(lab, n, im, w, links, dx):
+    """One label in the rail beneath a diagram: a leader, a disc, a chip.
+
+    Only Python knows how far the leader has to climb. The stage is `100cqw`
+    wide and therefore `100·h/w` tall, so an anchor at `y` stands `(100−y)·h/w`
+    cqw above the artwork's foot; add the gap down to the rail and that is
+    `--ry`, the ring's height above the rail's top edge. Both layouts are
+    expressed from it, which is why it is emitted rather than a finished length
+    — the wide rail then adds its row offset in CSS, and the narrow one does
+    not have rows to add.
+
+    THE LEADER IS AN ELBOW, NOT ALWAYS A LINE
+      When `_rail_spread` has had to push a disc sideways, a straight line from
+      ring to disc would be a diagonal, and a diagonal's angle depends on the
+      container's width — which CSS cannot compute from a percentage and a
+      pixel offset in the same expression. So the leader turns instead: it
+      drops from the ring, runs across at a turn line above the rail, and drops
+      again onto the disc. Every segment stays axis-aligned and therefore
+      resolves correctly at any width.
+
+      The turn line sits ABOVE every disc on purpose. A jog running across at
+      disc height would pass through whichever discs lay between its two ends,
+      which is the defect it exists to remove.
+
+    `side: "left"` runs the words back the other way from the disc. It is what
+    a label near the right edge needs: dragging such a chip inward instead
+    would leave its own riser coming down through the middle of its own text.
+    Reversing it keeps the disc under the riser where it belongs and sends the
+    words into the space that is actually free.
+    """
+    x, row = lab["x"], lab.get("row", 0)
+    climb = (100 - lab["y"]) * im["h"] / im["w"]
+    jog = round(abs(dx - x), 2)
+    # A disc that has not moved needs no turn: its drop simply continues its
+    # riser down the same line, and a turn there would be a kink in a straight
+    # leader. Ones that HAVE moved get their own turn height so that two jogs
+    # never lie on top of each other and read as a single line.
+    turn = 0 if jog < 0.05 else NARROW_TURN + (n % 3) * NARROW_TIER
+    style = (f'--x:{x}%;--dx:{dx}%;--rtop:{row * RAIL_ROW}px;'
+             f'--ry:calc({climb:.2f}cqw + {RAIL_GAP}px);'
+             f'--jl:{min(x, dx)}%;--jw:{jog}%;--turn:{turn}px')
+    side = " dg-rl" if lab.get("side") == "left" else ""
+    return (f'<li class="dg-rpin{side}" style="{style}">'
+            f'<i class="dg-riser"></i><i class="dg-jog"></i><i class="dg-drop"></i>'
+            f'<span class="dg-rlab"><b class="dg-n">{n + 1}</b>'
+            f'<span class="dg-t"{at(f"{w}.text", links)}>{e(lab["text"])}</span>'
+            f'</span></li>')
+
+
+# The narrow-figure geometry, which is what decides whether a numbered key
+# column can work at all. 330px is the stage on a 390px phone — the narrowest
+# the site ever renders — and 18px is `.dg-n` below the diagram breakpoint.
+PHONE_STAGE = 330
+PHONE_DISC = 18
+PHONE_GAP = 4      # px of daylight required between two discs in one column
+COL_STEP = 8       # percent of stage width between adjacent columns
+MAX_COLS = 3
+
+
+def _phone_columns(labels, im, base):
+    """Which column each number falls into once the words leave the picture.
+
+    WHY THIS IS DERIVED AND NOT AUTHORED
+      On a narrow figure the words move to the key beneath and every number
+      slides out to a shared column in the margin. That only works if the
+      numbers can be told apart once they are stacked — and whether they can is
+      pure geometry: `y` is a percentage of the stage's HEIGHT, the stage's
+      height comes from the artwork's aspect, and a disc is a fixed 18px. Two
+      labels closer in `y` than a disc is tall land on top of each other no
+      matter what the author intended.
+
+      Left to a hand-set `label_col`, that produced exactly the failure you
+      would predict. `C1-miniaturisation` is a left-to-right sequence with all
+      four labels at y=80; on the page that remembered `label_col: 0` it read
+      correctly, and on the page that copied the figure without it all four
+      numbers were sent to the same point in the margin and rendered as one
+      disc. The information was in the label coordinates the whole time.
+
+    RETURNS
+      A column position per label, in percent of the stage's width, or None
+      when no column works and the labels should stay beside their anchors.
+    """
+    if not labels or not im or not base:
+        return None
+    stage_h = PHONE_STAGE * im["h"] / im["w"]
+    min_dy = (PHONE_DISC + PHONE_GAP) / stage_h * 100
+
+    cols: list[float] = []          # the last y placed in each column
+    out: list[int] = [0] * len(labels)
+    for i in sorted(range(len(labels)), key=lambda i: labels[i]["y"]):
+        y = labels[i]["y"]
+        for c, last in enumerate(cols):
+            if y - last >= min_dy:
+                cols[c], out[i] = y, c
+                break
+        else:
+            cols.append(y)
+            out[i] = len(cols) - 1
+
+    # More than three columns means the labels are a ROW, not a column: a
+    # sequence read left to right has every marker at the same height, so no
+    # column can separate them and the attempt stacks them on one point.
+    if len(cols) > MAX_COLS:
+        return None
+    positions = [base - c * COL_STEP for c in out]
+    # A label already to the right of its column cannot reach it — the
+    # connector would have to run backwards, and the `max(0px, …)` that guards
+    # against a negative width would drop the number back onto the drawing.
+    if any(p <= labels[i]["x"] + 1 for i, p in enumerate(positions)):
+        return None
+    return positions
+
+
+def blk_diagram(s, links, a=''):
+    """A labelled illustration: artwork the browser may never crop, plus HTML labels.
+
+    WHY NOT `media`
+      That block is a fixed 16/9 box with `object-fit: cover`, which is right
+      for photography and wrong for a diagram. `cover` silently eats whatever
+      does not fit, and on an illustration what does not fit is the margin the
+      drawing deliberately left for annotation — the crop removes exactly the
+      part the labels need. Here the stage takes its ratio from the image's own
+      `w`/`h`, so the artwork is whole at every width by construction, and a
+      diagram authored at one shape cannot be quietly reframed into another.
+
+    WHY THE LABELS ARE HTML
+      Baking words into the artwork would garble them, freeze them in English
+      on a site with Telugu and Hindi pages, put them outside the live editor's
+      reach, and hide them from search and screen readers. As HTML they are
+      typed in the site's own face, translatable, editable in place, and
+      selectable. One drawing can therefore serve several pages that need to
+      point at different parts of it.
+
+    POSITIONING
+      Each label carries `x`/`y` as percentages of the image box, so a label
+      stays on its structure at every width without any measurement at runtime.
+      `side` decides which way the text runs from its dot ("right" by default,
+      "left" when the structure sits in the right half), and `lead` is the
+      length of the connector between them.
+
+    NARROW SCREENS
+      Positioned labels over a phone-width image overlap into mush, so below
+      the breakpoint they collapse: the numbered dots stay on the artwork and
+      the words move into a numbered key beneath it. The numbering is the join,
+      which is why the dots are numbered even when the words sit beside them.
+
+    RAIL MODE (`rail: True`)
+      The third placement mode, and the only one that puts no chip on the
+      artwork at all. Some drawings fill their frame — a staircase of four
+      rungs runs corner to corner and leaves neither a right-hand gutter for a
+      label column nor an empty band inside the picture. Overlaying chips there
+      is the worst of the three options: a solid chip hides the very object it
+      is naming, and on a sequence it lands on the NEXT step along.
+
+      So the words move out of the picture into a rail beneath it, and each one
+      is joined to its structure by a hairline riser. A 1px leader crossing the
+      drawing occludes almost nothing; an opaque chip occludes whatever it
+      covers. That is the whole trade, and it is why plates in real anatomy
+      atlases are labelled this way.
+
+      The riser's length is computed here rather than in CSS because the stage's
+      height is only knowable from the artwork's own aspect: at width `100cqw`
+      the stage is `100·h/w` tall, so an anchor at `y` sits `(100−y)·h/w` above
+      its foot. `rx` moves a chip along the rail away from its riser when
+      neighbours would collide, and a hook then joins the two.
+    """
+    im = s.get("image")
+    labels = s.get("labels") or []
+    # A rail needs the artwork's proportions to know how far a riser must climb.
+    rail_mode = bool(s.get("rail")) and bool(im)
+    # Where each number goes once the figure is too narrow for chips. `0` opts
+    # the figure out by hand; otherwise the geometry decides, and may decide
+    # that no column works — see `_phone_columns`.
+    base_col = 0 if rail_mode else s.get("label_col", 86)
+    cols = None if rail_mode else _phone_columns(labels, im, base_col)
+    # The narrow rail's disc positions, which owe nothing to the authored rows.
+    spread = _rail_spread(labels) if rail_mode and labels else []
+
+    pins, key, rails = [], [], []
+    for n, lab in enumerate(labels):
+        w = f"{a}.labels.{n}"
+        key.append(f'<li{at(f"{w}.text", links)}>{e(lab["text"])}</li>')
+        if rail_mode:
+            pins.append(
+                f'<li class="dg-pin dg-r" style="--x:{lab["x"]}%;--y:{lab["y"]}%">'
+                f'<i class="dg-anchor"></i><b class="dg-n">{n + 1}</b></li>')
+            rails.append(_rail_pin(lab, n, im, w, links, spread[n]))
+            continue
+        side = "dg-l" if lab.get("side") == "left" else "dg-r"
+        # `lead` is a percentage of the stage's width, resolved as cqw so a
+        # connector drawn to reach the artwork's empty margin still reaches it
+        # on a phone and on a 1440 display.
+        #
+        # `--xn` is the same number as `--x` without its unit. The phone rule
+        # computes each connector's length from it — `(col - xn)` — so every
+        # number lands in one aligned column out in the margin instead of
+        # sitting on the drawing. CSS cannot strip the unit off a percentage,
+        # so it has to be emitted twice.
+        lead = lab.get("lead", 3)
+        style = (f'--x:{lab["x"]}%;--xn:{lab["x"]};'
+                 f'--y:{lab["y"]}%;--lead:{lead}cqw')
+        # Where this number waits once the words leave the picture. A phone
+        # stage is only ~190px tall, so two markers 6% apart in `y` collide the
+        # moment they share a column; sending one of them to a shorter column
+        # is cheaper than moving a ring off the structure it points at.
+        # `_phone_columns` works that out from the coordinates, and an explicit
+        # `col` on the label still overrides it.
+        if cols:
+            style += f';--col:{lab.get("col", cols[n])}'
+        # The marker at (x, y) is a hollow ring, and the NUMBER sits at the far
+        # end of the connector. A filled numbered disc on the anchor point hides
+        # the structure it is naming — worst exactly on a phone, where the
+        # words are gone and the disc is all that is left.
+        pins.append(
+            f'<li class="dg-pin {side}" style="{style}">'
+            f'<i class="dg-anchor"></i><i class="dg-lead"></i>'
+            f'<b class="dg-n">{n + 1}</b>'
+            f'<span class="dg-t"{at(f"{w}.text", links)}>{e(lab["text"])}</span>'
+            f'</li>')
+
+    if im:
+        # `.dg-col` is what switches the narrow layout from short connectors to
+        # a numbered column out in the margin. Each pin already carries its own
+        # `--col`, so the list only has to say which mode this figure is in.
+        pin_cls = "dg-pins dg-rings" if rail_mode else (
+            "dg-pins dg-col" if cols else "dg-pins")
+        stage = (f'<div class="dg-stage" style="aspect-ratio:{int(im["w"])}/{int(im["h"])}">'
+                 f'{img(im, links, "dg-img", f"{a}.image")}'
+                 + (f'<ol class="{pin_cls}">{"".join(pins)}</ol>' if pins else "")
+                 + '</div>')
+        if rails:
+            # The rail is a sibling of the stage, not a child: its risers have
+            # to reach UP over the artwork, and the stage clips to its own
+            # rounded corners. The wrapper is what `cqw` resolves against, so a
+            # riser measured in stage-widths is still measured in stage-widths
+            # out here.
+            # The row count is a variable rather than a finished height because
+            # the narrow rail collapses to a single row of discs and has to be
+            # able to say so — an inline `min-height` would outrank the rule
+            # that shortens it and leave two rows of blank space behind.
+            rows = max(lab.get("row", 0) for lab in labels) + 1
+            stage = (f'<div class="dg-wrap">{stage}'
+                     f'<ol class="dg-rail" style="--rows:{rows}">'
+                     f'{"".join(rails)}</ol></div>')
+    else:
+        # An unshot diagram still has to hold its space and say what it is.
+        stage = slot(links, f"{a}.image", s.get("body", "[ diagram ]"),
+                     cls="media wide", style="margin-top:0")
+
+    cap = ""
+    if s.get("caption"):
+        cap = f'<p class="dg-cap"{at(f"{a}.caption", links)}>{e(s["caption"])}</p>'
+    keylist = f'<ol class="dg-key">{"".join(key)}</ol>' if key else ""
+    # Every illustration says so. A drawing of a treatment result sitting
+    # unlabelled next to real before/after photography is the one way this
+    # block could mislead, so the disclaimer is not optional.
+    note = f'<p class="dg-note">{e(s.get("note", "Illustration, not a photograph."))}</p>'
+    figcap = f'<figcaption>{cap}{keylist}{note}</figcaption>'
+
+    return _headblock(s, links, a) + f'<figure class="diagram">{stage}{figcap}</figure>'
 
 
 PILLAR_ACCENTS = {"mint": ("mint-sf", "mint-dp"), "apricot": ("apr-sf", "apr-dp"),
@@ -1056,38 +1568,150 @@ def blk_quotes(s, links, a=''):
     </div>"""
 
 
-def blk_ba(s, links, a=''):
-    """Before/after strip — consented clinical photography, never stock.
+def _case_shots(item):
+    """The frames a case shows, normalised to `(label, image_or_None)` pairs.
 
-    An item is either a `(title, caption)` tuple (nothing shot yet) or a dict
-    that adds `before`/`after` image dicts and a `consent` record. The consent
-    field is not decoration: `build.py` refuses a patient photograph that does
-    not carry one, because publishing a treatment result without written
-    consent is a medical-ethics breach, not a content bug.
+    THREE WAYS TO WRITE A CASE, ALL THE SAME THING UNDERNEATH
+      `before`/`after`   the two-frame shorthand, and the original form.
+      `shots: [...]`     a series of any length. An entry is either an image
+                         dict carrying its own `label`, or a bare string, which
+                         is a label with no photograph behind it yet.
+      neither            two empty frames captioned Before and After.
+
+    A SERIES IS NOT A LONGER BEFORE/AFTER
+      A pair says "it changed". A chronic condition is judged on whether the
+      change held, which is a question only a sequence can answer — baseline,
+      eight weeks, six months — and repigmentation in particular is read from
+      how a border moved between reviews, not from its endpoints. Some cases
+      also need several frames because several sites were treated. Both are
+      series, so the block takes a series, and a pair is the length-two case
+      rather than a separate concept.
+    """
+    if item.get("shots"):
+        out = []
+        for shot in item["shots"]:
+            if isinstance(shot, str):
+                out.append((shot, None))
+            else:
+                out.append((shot.get("label", ""), shot))
+        return out
+    return [("Before", item.get("before")), ("After", item.get("after"))]
+
+
+def blk_ba(s, links, a=''):
+    """Patient case studies — consented clinical photography, never stock.
+
+    An item is either a `(title, caption)` tuple, which stages a case whose
+    photographs have not arrived yet, or a dict:
+
+        {"title": "Vitiligo: repigmentation, left hand",
+         "cap":   "Excimer phototherapy · 24 weeks",
+         "meta":  ["Segmental vitiligo", "Twice weekly", "Reviewed 6-weekly"],
+         "body":  "Two short sentences of clinical narrative, optional.",
+         "consent": "Written publication consent, 2026-07-14",
+         "shots": [ {"label": "Baseline", "src": …, "alt": …},
+                    {"label": "Week 12",  "src": …, "alt": …},
+                    {"label": "Week 24",  "src": …, "alt": …} ]}
+
+    CONSENT IS STRUCTURAL, NOT EDITORIAL
+      `build.py` refuses to build a page whose clinical photograph carries no
+      consent record, because publishing a treatment result without written
+      consent is a medical-ethics breach rather than a content mistake. A
+      `consent` on the case covers every shot in it — a patient signs once for
+      the case, not once per frame — and a shot may carry its own to override.
+      There is deliberately no way to turn the check off.
     """
     figs = []
     for n, item in enumerate(s["items"]):
         if isinstance(item, dict):
-            title, cap = item["title"], item["cap"]
-            before, after = item.get("before"), item.get("after")
+            title, cap = item["title"], item.get("cap", "")
+            shots = _case_shots(item)
+            meta, body = item.get("meta") or [], item.get("body")
         else:
             title, cap = item
-            before = after = None
-        pair = ""
-        for side, im in (("before", before), ("after", after)):
-            addr = f"{a}.items.{n}.{side}"
+            shots, meta, body = [("Before", None), ("After", None)], [], None
+
+        frames = ""
+        for k, (label, im) in enumerate(shots):
+            addr = f"{a}.items.{n}.shots.{k}"
             if im:
-                pair += (f'<div class="ph has-img"><em>{side.title()}</em>'
-                         f'{img(im, links, "fill", addr)}</div>')
+                frames += (f'<div class="ph has-img"><em>{e(label)}</em>'
+                           f'{img(im, links, "fill", addr)}</div>')
             else:
-                pair += (f'<div class="ph"{at(addr, links, "od-img")}>'
-                         f'<em>{side.title()}</em>[ photo ]</div>')
+                frames += (f'<div class="ph"{at(addr, links, "od-img")}>'
+                           f'<em>{e(label)}</em>[ photo ]</div>')
+        # The frame count rides on the element so one case can show two and its
+        # neighbour five without either being told about the other. It sets
+        # width only — the strip's height is fixed in the stylesheet, so every
+        # case's photographs are the same size however many it carries.
+        strip = f'<div class="pair" style="--shots:{len(shots)}">{frames}</div>'
+
+        facts = ""
+        if meta:
+            facts = ('<ul class="case-meta">'
+                     + "".join(f'<li{at(f"{a}.items.{n}.meta.{i}", links)}>{e(m)}</li>'
+                               for i, m in enumerate(meta))
+                     + '</ul>')
+        note = (f'<p class="case-body"{at(f"{a}.items.{n}.body", links)}>{e(body)}</p>'
+                if body else "")
         figs.append(
-            f'<figure><div class="pair">{pair}</div>'
+            f'<figure>{strip}'
             f'<figcaption><b{at(f"{a}.items.{n}.title", links)}>{e(title)}</b>'
             f'<span{at(f"{a}.items.{n}.cap", links)}>{e(cap)}</span>'
-            f'</figcaption></figure>')
-    return _headblock(s, links, a) + f'<div class="ba">{"".join(figs)}</div>'
+            f'{facts}{note}</figcaption></figure>')
+    # A short set of cases is a sample, and a sample has to say where the rest
+    # are or it reads as all there is.
+    cta = ""
+    if s.get("cta"):
+        label, link = s["cta"]
+        cta = (f'<a class="btn btn-secondary ba-more" href="{href(link, links)}"'
+               f'{at(f"{a}.cta", links, "od-link")}>{e(label)} →</a>')
+    return (_headblock(s, links, a)
+            + f'<div class="ba">{"".join(figs)}</div>{cta}')
+
+
+def blk_map(s, links, a=''):
+    """The clinic on a map, with the address in words beside it.
+
+    THE ADDRESS IS NOT DECORATION AROUND THE MAP — IT IS THE FALLBACK
+      A map is the one block on this site that can arrive blank: an iframe is a
+      third-party document, and it fails independently of the page around it.
+      Offline, behind a corporate proxy, on a browser blocking third-party
+      frames, or on the day Google changes the endpoint, the frame is empty and
+      the block still has to answer "where is this clinic and when is it open".
+      So the address, hours, phone and directions link are real page content,
+      not a caption — everything a patient needs survives the map failing.
+
+    NO JAVASCRIPT
+      This site ships none, and a map is a poor reason to start. `loading="lazy"`
+      is the native equivalent of the click-to-load pattern: the frame is well
+      below the fold on every page that uses it, so Google is not contacted at
+      all until a reader scrolls toward it, and never for a reader who doesn't.
+      A scripted facade would buy a little more privacy at the cost of the site's
+      only hard architectural property.
+
+    The aspect ratio is set in CSS rather than by width/height attributes,
+    because the frame is fluid and a 4:3 box on a phone wastes most of a screen
+    on rooftops. See `.map-canvas` in site.css.
+    """
+    title = s.get("map_title", f"Map showing the clinic in {CITY}")
+    return (_headblock(s, links, a) + f"""<div class="mapblock">
+  <div class="map-canvas">
+    <iframe src="{MAP_EMBED}" title="{e(title)}" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
+  </div>
+  <address class="map-nap">
+    <p class="map-name">{BRAND}</p>
+    <p class="map-line">{icon("pin")}<span>{ADDRESS}</span></p>
+    <p class="map-line">{icon("clock")}<span>{HOURS}. Closed Sunday.</span></p>
+    <p class="map-line">{icon("phone")}<a href="{PHONE}">{PHONE_SHOW}</a></p>
+    <div class="map-acts">
+      <a class="btn btn-primary" href="{MAPS}" rel="noopener">Get directions</a>
+      <a class="btn btn-secondary" href="{WHATSAPP}" rel="noopener">Book on WhatsApp</a>
+    </div>
+  </address>
+</div>""")
 
 
 BLOCKS = {
@@ -1095,6 +1719,7 @@ BLOCKS = {
     "checklist": blk_checklist, "callout": blk_callout, "quote": blk_quote,
     "stats": blk_stats, "chips": blk_chips, "media": blk_media,
     "quotes": blk_quotes, "ba": blk_ba, "pillars": blk_pillars,
+    "diagram": blk_diagram, "fees": blk_fees, "map": blk_map,
 }
 
 TICKER_ITEMS = ("Vitiligo", "Psoriasis", "Eczema", "Acne", "Hair loss", "Alopecia",
@@ -1276,7 +1901,11 @@ CLINICS = [
     {
         "@type": "MedicalClinic",
         "name": BRAND_PLAIN,
-        "alternateName": [FORMER_PLAIN, "BNR Skin and Vitiligo Centre"],
+        # Live listing title first: it is the string Google itself currently
+        # shows for this clinic, and the one a reader is most likely to be
+        # holding when they land here.
+        "alternateName": [GOOGLE_LISTING_PLAIN, FORMER_PLAIN,
+                          "BNR Skin and Vitiligo Centre"],
         "url": SITE + "/locations/secunderabad/",
         "address": {"@type": "PostalAddress", "streetAddress": STREET,
                     "addressLocality": CITY, "postalCode": PINCODE,
@@ -1285,6 +1914,25 @@ CLINICS = [
         "telephone": [PHONE_SHOW, PHONE_ALT_SHOW, "+91 40 7964 5852"],
         "hasMap": MAPS,
         "openingHours": HOURS_SCHEMA,
+        # The consultation fee band, machine-readable. Google shows priceRange
+        # in the local panel, and an absent one gets filled in by guesswork from
+        # reviews. Stating it is the same decision as printing it on the page.
+        "priceRange": f"{FEE_ONLINE_SHOW}–{FEE_CLINIC_SHOW}",
+        "currenciesAccepted": "INR",
+        "makesOffer": [
+            {"@type": "Offer",
+             "itemOffered": {"@type": "Service",
+                             "name": "Online video dermatology consultation"},
+             "price": str(FEE_ONLINE), "priceCurrency": "INR",
+             "description": "Fee excludes GST. Paid in advance; the patient then "
+                            "selects a date from the available slots."},
+            {"@type": "Offer",
+             "itemOffered": {"@type": "Service",
+                             "name": "In-person dermatology consultation"},
+             "price": str(FEE_CLINIC), "priceCurrency": "INR",
+             "description": "Fee excludes GST. Where an online consultation requires "
+                            "an in-person examination, only the difference is charged."},
+        ],
         # The catchment, stated rather than inferred. Secunderabad and Hyderabad
         # are separate names in local search — someone in Trimulgherry does not
         # search "Hyderabad" — and the colonies are what "near me" resolves

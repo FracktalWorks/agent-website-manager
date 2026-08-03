@@ -22,7 +22,9 @@ WHY THESE THREE
                                  decided to come, and need to know how.
 """
 
-from chrome import PHONE, PHONE_SHOW, WHATSAPP
+from chrome import (FEE_CLINIC_SHOW, FEE_DIFF_SHOW, FEE_ONLINE_SHOW, FEE_TAX,
+                    PHONE, PHONE_SHOW, WHATSAPP)
+from content.fees import FEE_FAQS, fees_block
 
 CRED = ["45 years in dermatology", "Dermatologist &amp; dermatosurgeon",
         "Consults across India by video", "Booking on WhatsApp"]
@@ -44,11 +46,13 @@ PAGES = [
     "acts": [("Book on WhatsApp", WHATSAPP), ("Call the clinic", PHONE)],
     "creds": CRED,
     "glance": [
+        ("Fee", f"{FEE_ONLINE_SHOW} {FEE_TAX}, paid in advance"),
         ("Booking", "WhatsApp. " + PHONE_SHOW),
         ("Language", "English, Telugu, Hindi"),
         ("Good for", "Diagnosis, second opinions, plan reviews"),
         ("Not for", "Wood's lamp, dermatoscopy, any procedure"),
         ("You'll need", "Daylight photographs, prescriptions, recent bloods"),
+        ("If you must visit", f"Only the {FEE_DIFF_SHOW} {FEE_TAX} difference"),
         ("Follow-up", "On the same WhatsApp thread"),
     ],
     "sections": [
@@ -91,7 +95,13 @@ PAGES = [
                  "do the procedure, but to find out whether it is the right one before you "
                  "arrange travel for it."},
 
-        {"kind": "steps", "eyebrow": "How it runs", "h2": "Four steps, from wherever you are",
+        fees_block(
+            intro="Both fees are fixed. The one that matters most on this page is the "
+                  "third line of the note: being told a video consultation cannot "
+                  "settle your problem is a legitimate outcome, and you are not "
+                  "charged twice for finding that out."),
+
+        {"kind": "steps", "eyebrow": "How it runs", "h2": "Five steps, from wherever you are",
          "items": [
              {"title": "Message on WhatsApp",
               "body": "Say what you are seeing and roughly how long it has been there. "
@@ -99,8 +109,12 @@ PAGES = [
              {"title": "Send photographs",
               "body": "Daylight, no filter, one wide and one close for each affected area. "
                       "Add previous prescriptions and any reports."},
+             {"title": "Pay, then pick a date",
+              "body": f"The fee is {FEE_ONLINE_SHOW} {FEE_TAX}, settled in advance. You then "
+                      f"choose a date from the slots that are open — paying is what holds "
+                      f"the slot rather than joining a callback queue."},
              {"title": "Take the consultation",
-              "body": "A time is agreed and the video link comes back on the same thread. "
+              "body": "The video link comes back on the same thread, at the time you chose. "
                       "In English, Telugu or Hindi."},
              {"title": "Get it in writing",
               "body": "Diagnosis, plan, what to expect and when to review. Sent back to you, so "
@@ -135,9 +149,10 @@ PAGES = [
     "faq_h2": "Consulting online",
     "faqs": [
         ("How do I book an online consultation?",
-         "Message the clinic on WhatsApp at " + PHONE_SHOW + ". Say what you are seeing, "
-         "attach photographs if you have them, and the team confirm a time and send the "
-         "video link back on the same thread."),
+         "Message the clinic on WhatsApp at " + PHONE_SHOW + ". Say what you are seeing and "
+         "attach photographs. Once your history is in and the fee is settled, you choose a "
+         "date from the open slots and the video link comes back on the same thread."),
+        *FEE_FAQS,
         ("Which conditions can be handled over video?",
          "Vitiligo, psoriasis, eczema, acne, skin allergies and hair loss are all commonly "
          "managed this way, for diagnosis, for a plan, and for second opinions. Anything "
@@ -153,9 +168,10 @@ PAGES = [
          "ongoing supervised therapy is better arranged with a dermatologist you can "
          "physically reach."),
         ("What if the video consultation says I need to come in?",
-         "Then you have saved yourself the risk of coming in for the wrong thing. You will "
-         "be told what the visit is for, what it involves and roughly what it costs before "
-         "you arrange anything."),
+         f"Then you have saved yourself the risk of coming in for the wrong thing. You will "
+         f"be told what the visit is for and what it involves before you arrange anything, "
+         f"and only the {FEE_DIFF_SHOW} {FEE_TAX} difference between the two fees is "
+         f"charged — not a second consultation."),
     ],
     "related": [
         ("vitiligo-online-consultation", "Online vitiligo consultation",
@@ -208,6 +224,23 @@ PAGES = [
              "disease at greater extent, not different diseases, but they behave less "
              "predictably and they are harder to treat.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "What is happening at the root",
+         "h2": "The follicle is surrounded, not destroyed.",
+         "intro": "In alopecia areata the immune system gathers around the growing bulb of an otherwise intact follicle and shuts it down. The structure survives, which is the whole reason regrowth remains possible however long a patch has been bare.",
+         "caption": "The tapered hair at the edge of a patch is the sign a dermatologist looks for: it means the process is still active there, and it is what treatment is aimed at.",
+         "labels": [
+             # These three pointed at blank epidermis and at dermis beside the
+             # immune swarm. The same artwork is labelled correctly on
+             # `alopecia-treatment-hyderabad`; these are its coordinates.
+             {"text": "An exclamation-mark hair", "x": 33, "y": 25, "lead": 25, "find": "artwork"},
+             {"text": "The follicle is intact", "x": 19, "y": 38, "lead": 39, "find": "artwork"},
+             {"text": "Immune cells at the bulb", "x": 19, "y": 63, "lead": 39, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/C2-alopecia-areata.webp", "w": 1820, "h": 1024,
+             "alt": "A hair follicle in section with a cluster of immune cells swarming around its bulb deep in the tissue. The follicle itself is intact. At the edge of the bare patch a short hair tapers sharply toward the scalp, narrower at its base than at its tip."}},
 
         {"kind": "table", "eyebrow": "By extent",
          "h2": "What is usually tried, and when",

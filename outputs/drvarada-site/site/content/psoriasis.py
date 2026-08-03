@@ -9,7 +9,9 @@ irreversible and joint symptoms are routinely dismissed as unrelated, so every
 relevant page carries the warning rather than hiding it on one.
 """
 
-from chrome import PHONE, WHATSAPP
+from chrome import (FEE_CLINIC_SHOW, FEE_DIFF_SHOW, FEE_ONLINE_SHOW, FEE_TAX,
+                    PHONE, WHATSAPP)
+from content.fees import FEE_FAQS, NOTE_COST, fees_block
 
 CROSS = ("psoriasis-treatment-hyderabad", "Psoriasis treatment in Hyderabad",
          "If you can reach the clinic: phototherapy, systemics and regular review.")
@@ -67,7 +69,39 @@ PAGES = [
              "incomplete consultation.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "What a plaque is",
+         "h2": "Normal skin, and skin in a hurry.",
+         "intro": "Side by side, the difference is structural rather than cosmetic: the epidermis thickens, drives deep ridges down into the layer beneath, and sheds immature cells as scale, while blood vessels crowd up close to the surface. That last detail is why a scratched plaque bleeds in pinpoints.",
+         "caption": "Nothing here is caused by hygiene and none of it is catching. The acceleration is driven by immune signalling, which is exactly what the newer treatments block.",
+         "rail": True,
+"labels": [
+    {"text": "Scale", "x": 66, "y": 17, "find": "artwork"},
+    {"text": "Normal skin", "x": 20, "y": 33, "find": "artwork"},
+    {"text": "Thickened epidermis", "x": 54, "y": 37, "row": 1, "find": "artwork"},
+    {"text": "Deep ridges", "x": 52, "y": 52, "row": 2, "find": "artwork"},
+    {"text": "Crowded vessels", "x": 79, "y": 65, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B5-psoriasis-plaque.webp", "w": 1820, "h": 1024,
+             "alt": "Two blocks of skin side by side at the same scale. The left block is normal: a thin, evenly stacked epidermis over the dermis with a gently wavy boundary. The right block is a psoriasis plaque: the epidermis is far thicker and sends deep finger-like ridges down into the dermis, widened blood vessels loop up into the thinned areas between those ridges, and the surface carries thick, loose, silvery-white scale lifting away in flakes."}},
+
         ARTHRITIS,
+
+        {"kind": "diagram", "eyebrow": "More than the skin",
+         "h2": "Why the consultation looks past the plaques.",
+         "intro": "Psoriasis carries recognised associations with joint disease, with metabolic syndrome and fatty liver, and with cardiovascular risk. They are associations rather than certainties, but they are common enough that not asking about them is a gap in care.",
+         "caption": "This is why blood pressure, sugar, lipids and a question about joints belong in a psoriasis review. A consultation that only looks at the plaques is an incomplete consultation.",
+         "labels": [
+             {"text": "Heart and vessels", "x": 30, "y": 25, "lead": 15, "find": "artwork"},
+             {"text": "Fatty liver", "x": 28, "y": 37, "lead": 17, "find": "artwork"},
+             {"text": "A swollen finger joint", "x": 40, "y": 57, "lead": 4, "find": "artwork"},
+             {"text": "The plaques you can see", "x": 26, "y": 70, "lead": 19, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B14-psoriasis-systemic.webp", "w": 1820, "h": 1024,
+             "alt": "A standing figure of ordinary build in plain fitted clothing, with scaled psoriasis patches on both elbows and both knees. The torso is drawn as if softly transparent: a heart sits in the upper chest with two large vessels leaving it, one visibly thickened and narrowed, and a plump pale liver speckled with fine droplets fills the upper right abdomen. One index finger is swollen along its whole length with an inflamed joint at its base."}},
 
         {"kind": "cards", "eyebrow": "The shapes it takes", "h2": "Types you may be told you have",
          "accent": "chronic",
@@ -215,6 +249,23 @@ PAGES = [
         ("Erythrodermic / pustular", "Urgent: needs same-day care"),
     ],
     "sections": [
+        {"kind": "diagram", "eyebrow": "The five patterns",
+         "h2": "Where it appears is part of the diagnosis.",
+         "intro": "Psoriasis is one disease with several distributions, and the distribution is most of what separates them. Getting it right matters because the treatment that suits one pattern can be wrong for another.",
+         "caption": "Inverse psoriasis in the folds carries no scale and is routinely mistaken for a fungal infection. Erythrodermic and generalised pustular disease are the two that can need urgent care.",
+         "rail": True,
+"labels": [
+    {"text": "Plaque", "x": 12, "y": 45, "find": "artwork"},
+    {"text": "Guttate", "x": 29, "y": 45, "find": "artwork"},
+    {"text": "Inverse", "x": 46, "y": 45, "find": "artwork"},
+    {"text": "Pustular", "x": 62, "y": 45, "find": "artwork"},
+    {"text": "Erythrodermic", "x": 79, "y": 45, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B6-psoriasis-types.webp", "w": 1820, "h": 1024,
+             "alt": "Five simplified featureless human figures in a row on brown skin. The first has a few large scaled patches at the elbows, knees, lower back and scalp. The second has many small drop-sized spots scattered over the trunk and upper arms. The third has smooth patches without scale confined to the armpits and groin creases. The fourth has patches studded with tiny pale dots on the palms and soles. The fifth has almost the entire body surface involved."}},
+
         {"kind": "cards", "eyebrow": "The common ones", "h2": "What you are most likely to have",
          "accent": "chronic",
          "items": [
@@ -259,6 +310,21 @@ PAGES = [
          "note": "The last two rows are the reason this page names them. Both are "
                  "uncommon, both can follow abrupt withdrawal of oral steroids, and both "
                  "need urgent care rather than a routine appointment."},
+
+        {"kind": "diagram", "eyebrow": "Beyond the skin",
+         "h2": "Why the joints are part of this.",
+         "intro": "Psoriasis is an immune condition that happens to show on the skin. The same process can inflame joints and the places where tendons anchor into bone — most often in the fingers, and most often alongside nail changes.",
+         "caption": "Joint damage is not always reversible, so this is asked about at every review. Stiffness that is worse in the morning is the symptom that matters.",
+         "labels": [
+             {"text": "Scaly plaque on the skin", "x": 25, "y": 28, "lead": 45, "find": "artwork"},
+             {"text": "Nail pitting", "x": 58, "y": 42, "lead": 5, "find": "artwork"},
+             {"text": "Inflamed joint", "x": 51, "y": 47, "lead": 19, "find": "artwork"},
+             {"text": "Where the tendon anchors", "x": 55, "y": 57, "lead": 15, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B7-psoriatic-arthritis.webp", "w": 1820, "h": 1024,
+             "alt": "A finger drawn in side view and cut away along its length so the bones, the joint spaces and the tendon are visible. The last joint before the fingertip is swollen and inflamed, as is the point where the tendon anchors into the bone beside it. The nail above that joint is pitted and lifting at its free edge, and a small scaly plaque sits over the knuckle further back."}},
 
         {"kind": "split", "eyebrow": "Getting it right",
          "h2": "Why the wrong label leads to the wrong cream.",
@@ -334,6 +400,23 @@ PAGES = [
         ("Review", "6–8 weeks"),
     ],
     "sections": [
+        {"kind": "diagram", "eyebrow": "Telling them apart",
+         "h2": "Two different things on the same scalp.",
+         "intro": "They flake in the same place and are treated completely differently. Psoriasis thickens the epidermis and drives deep ridges into the layer beneath, shedding dry silvery scale. Seborrhoeic dermatitis is an oil-and-yeast problem, and its scale is greasy and yellower.",
+         "caption": "The distinction decides the treatment: a descaling and anti-inflammatory routine for one, an antifungal shampoo held in the routine for the other. Getting it wrong is the commonest reason a scalp does not settle.",
+         "rail": True,
+  "labels": [
+      {"text": "Scale", "x": 66, "y": 17, "find": "artwork"},
+      {"text": "Normal skin", "x": 20, "y": 33, "find": "artwork"},
+      {"text": "Thickened epidermis", "x": 54, "y": 37, "row": 1, "find": "artwork"},
+      {"text": "Deep ridges", "x": 52, "y": 52, "row": 2, "find": "artwork"},
+      {"text": "Crowded vessels", "x": 79, "y": 65, "find": "artwork"},
+  ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B5-psoriasis-plaque.webp", "w": 1820, "h": 1024,
+             "alt": "Two blocks of skin side by side at the same scale. The left is normal: a thin evenly stacked epidermis over the dermis. The right is a psoriasis plaque: the epidermis is far thicker and sends deep finger-like ridges down into the dermis, widened vessels loop up between those ridges, and thick silvery-white scale lifts from the surface."}},
+
         {"kind": "table", "eyebrow": "Telling them apart",
          "h2": "Scalp psoriasis or dandruff?",
          "intro": "These are treated differently, and the distinction is usually visible "
@@ -349,6 +432,21 @@ PAGES = [
          ],
          "note": "The two can coexist. 'Sebopsoriasis' is a genuine overlap. Where it is "
                  "unclear, the elbows, knees and nails usually settle it."},
+
+        {"kind": "diagram", "eyebrow": "The other cause",
+         "h2": "What dandruff actually is.",
+         "intro": "For comparison: in seborrhoeic dermatitis the sebaceous glands are over-active, a yeast that lives on every scalp feeds on the oil, and the scalp reacts to that. The flaking is the reaction rather than the cause.",
+         "caption": "Nothing here removes the glands or the yeast, which is why medicated shampoo stays in the routine after the scalp clears rather than stopping with the symptoms.",
+         "labels": [
+             {"text": "Greasy scale", "x": 48, "y": 15, "lead": 15, "find": "artwork"},
+             {"text": "Yeast living in the oil", "x": 38, "y": 21, "lead": 25, "find": "artwork"},
+             {"text": "Inflammation underneath", "x": 45, "y": 42, "lead": 18, "find": "artwork"},
+             {"text": "Oil gland, working overtime", "x": 18, "y": 57, "lead": 45, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/C4-seborrhoeic-dermatitis.webp", "w": 1820, "h": 1024,
+             "alt": "A block of scalp in section. Two hair follicles run down from the surface, each with a much-enlarged sebaceous gland attached to its canal. Oil flows along the canals onto the surface as a glistening film with small round yeast bodies sitting in it, loose greasy yellow flakes lift between the hairs, and inflammatory cells scatter in the dermis beneath."}},
 
         {"kind": "steps", "eyebrow": "The sequence", "h2": "Descale first, then treat",
          "items": [
@@ -473,6 +571,26 @@ PAGES = [
          "note": "Never stop a prescribed medicine because it appears on this list. The "
                  "psoriasis is managed around it, or the prescriber is consulted."},
 
+        {"kind": "diagram", "eyebrow": "What a trigger does",
+         "h2": "Skin cells in a hurry.",
+         "intro": "Whatever sets off a flare — an infection, a stress, a stopped steroid — the end result is the same acceleration. A journey that normally takes around four weeks is completed in a few days, and cells reach the surface before they have matured.",
+         "caption": "No food causes that acceleration and no diet reverses it. What the evidence does support is weight, alcohol and smoking, all of which change how the disease behaves and how well treatment works.",
+         "rail": True,
+      # y=12 sat above the artwork entirely — both blocks start at y≈25 — so
+      # the two surface labels pointed at background. Re-read off
+      # `diagram_grid.py`: the matured cell is at the left block's surface and
+      # the still-nucleated one is up in the right block's scale.
+   "labels": [
+       {"text": "About four weeks", "x": 25, "y": 45, "row": 1, "find": "artwork"},
+       {"text": "Mature at the surface", "x": 30, "y": 30, "find": "artwork"},
+       {"text": "A few days", "x": 62, "y": 62, "row": 1, "find": "artwork"},
+       {"text": "Still nucleated", "x": 66, "y": 22, "find": "artwork"},
+   ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/A5-epidermal-turnover.webp", "w": 1820, "h": 1024,
+             "alt": "Two panels at the same scale showing the journey of a skin cell from the base of the epidermis to the surface. In the first the cell travels slowly through evenly stacked layers and is flat and without a nucleus by the time it reaches the top. In the second the same journey is compressed: the layers are thicker and disordered and the cells at the surface still carry their nuclei."}},
+
         {"kind": "prose", "eyebrow": "Diet", "h2": "What the evidence actually supports.",
          "body": [
              "There is no psoriasis diet. No food causes it, no elimination clears it, and "
@@ -591,6 +709,21 @@ PAGES = [
              "for two to three months, and courses abandoned halfway are the commonest "
              "reason phototherapy is judged not to have worked.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "What the light reaches",
+         "h2": "Immune suppression that stops at the skin.",
+         "intro": "Narrowband UVB penetrates to a set depth — through the epidermis and into the upper dermis, which is exactly where the inflammatory cells driving a plaque are sitting. It does not reach the rest of you, and that is the entire argument for it.",
+         "caption": "This is why phototherapy carries none of the systemic monitoring that tablets do, and why it remains a first choice for extensive disease in people who can attend regularly.",
+         "labels": [
+             {"text": "Light enters here", "x": 30, "y": 22, "lead": 26, "find": "artwork"},
+             {"text": "It stops in the upper dermis", "x": 33, "y": 46, "lead": 23, "find": "artwork"},
+             {"text": "The cells it acts on", "x": 28, "y": 58, "lead": 28, "find": "artwork"},
+             {"text": "Nothing deeper is reached", "x": 26, "y": 80, "lead": 30, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D1-phototherapy.webp", "w": 1820, "h": 1024,
+             "alt": "A block of brown skin in section with narrowband ultraviolet light entering from above. The light penetrates through the epidermis and into the upper dermis and no further, reaching the inflammatory cells gathered there, while the deeper tissue and fat below are untouched."}},
 
         {"kind": "steps", "eyebrow": "A course", "h2": "What to expect",
          "items": [
@@ -718,6 +851,22 @@ PAGES = [
              "the honest answer is to stay on the lower rungs.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "The ladder",
+         "h2": "You enter the ladder where your disease is.",
+         "intro": "Treatment is a sequence, not a menu. Creams, then light, then tablets, then the targeted injections — each rung asks more of you in monitoring than the one below it, and none of them is skipped for convenience.",
+         "caption": "The wedge under the steps is the monitoring each rung asks of you — it thickens the whole way up. Nobody starts at the top, and nobody should be left at the bottom for years if it is not working. Where you enter depends on how much skin is involved and what it is doing to your life.",
+         "rail": True,
+"labels": [
+    {"text": "Creams", "x": 18, "y": 54, "find": "artwork"},
+    {"text": "Light", "x": 36, "y": 27, "find": "artwork"},
+    {"text": "Tablets", "x": 50, "y": 33, "find": "artwork"},
+    {"text": "Targeted injections", "x": 66, "y": 21, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D5-treatment-ladder.webp", "w": 1820, "h": 1024,
+             "alt": "A staircase of four ascending steps. On the first sits a tube of cream, on the second a small light panel, on the third a blister sheet of tablets, and on the highest a single syringe. Beneath the staircase a wedge grows steadily thicker from left to right, showing that monitoring increases as the steps rise."}},
+
         {"kind": "table", "eyebrow": "The conventional systemics",
          "h2": "What each is, and what it demands",
          "head": ["Drug", "Suits", "Requires"],
@@ -734,6 +883,22 @@ PAGES = [
          "note": "Choice depends on your other conditions as much as on the psoriasis: liver, "
                  "kidneys, blood pressure, alcohol use and pregnancy plans all narrow the list "
                  "before anything else is considered."},
+
+        {"kind": "diagram", "eyebrow": "How a biologic works",
+         "h2": "One signal, intercepted.",
+         "intro": "Conventional systemics damp the immune system broadly. A biologic is an antibody built to catch one specific inflammatory signal before it reaches the cell it was sent to — which is why it acts so precisely, and why the drugs are named after the signal they block.",
+         "caption": "Blocking one signal is also why screening matters: the same signal has a job in fighting infection. That is what the tuberculosis and hepatitis tests before starting are for.",
+         "rail": True,
+"labels": [
+    {"text": "Signal sent", "x": 11, "y": 38, "find": "artwork"},
+    {"text": "Antibody catches it", "x": 31, "y": 41, "row": 2, "find": "artwork"},
+    {"text": "Receptor left empty", "x": 44, "y": 38, "row": 1, "find": "artwork"},
+    {"text": "This one got through", "x": 56, "y": 38, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D6-cytokine-blockade.webp", "w": 1820, "h": 1024,
+             "alt": "An immune cell at the left releases small rounded signalling molecules that travel rightward. A Y-shaped antibody in their path has caught one in its fork. Beyond it stands a block of skin split down the middle: the left half has an empty receptor at its surface and its cells are calm and pale, while the right half has a signalling molecule seated in its receptor and its cells are swollen and inflamed."}},
 
         {"kind": "cards", "eyebrow": "Biologics", "h2": "Targeted, and how they differ",
          "accent": "chronic",
@@ -836,7 +1001,8 @@ PAGES = [
         ("Methotrexate", "Low drug cost; monitoring adds"),
         ("Biologics", "The largest cost by a wide margin"),
         ("Monitoring", "Recurring: quote it separately"),
-        ("Quoted", "After examination, in writing"),
+        ("Consultation", f"{FEE_ONLINE_SHOW} online · {FEE_CLINIC_SHOW} in person, {FEE_TAX}"),
+        ("Treatment", "Quoted after examination, in writing"),
     ],
     "sections": [
         {"kind": "prose", "eyebrow": "How pricing works",
@@ -856,12 +1022,22 @@ PAGES = [
              "written rather than after.",
          ]},
 
+        fees_block(note=NOTE_COST,
+                   h2="The one figure that can be published",
+                   intro="A consultation fee is fixed before anybody examines "
+                         "anything, so it is stated here. Everything below it "
+                         "depends on how much skin is involved and whether your "
+                         "joints are affected, which is why the rest of this page "
+                         "describes structure rather than prices."),
+
         {"kind": "table", "eyebrow": "The structure", "h2": "What you are charged for",
          "intro": "Figures are confirmed at consultation. The structure below is what lets "
                   "you compare one clinic's quote against another's meaningfully.",
          "head": ["Item", "Charged", "What drives the total"],
          "rows": [
-             ["Consultation", "Per visit", "First visit and periodic reviews"],
+             ["Consultation",
+              f"{FEE_ONLINE_SHOW} online · {FEE_CLINIC_SHOW} in person, {FEE_TAX}",
+              "Fixed; reviews charged the same way"],
              ["Topical treatment", "Monthly at the pharmacy",
               "Body surface treated; which agents"],
              ["Medicated shampoos", "Monthly", "Scalp involvement"],
@@ -872,8 +1048,9 @@ PAGES = [
              ["Biologics", "Per dose, ongoing", "Which agent; biosimilar availability"],
              ["Pre-biologic screening", "One-off", "TB and hepatitis screening"],
          ],
-         "note": "Rupee figures are quoted after examination and deliberately not published "
-                 "here. The right treatment depends on how much skin is involved and whether "
+         "note": "The consultation fee is fixed and is stated above. Every other rupee "
+                 "figure is quoted after examination and deliberately not published here: "
+                 "the right treatment depends on how much skin is involved and whether "
                  "your joints are affected, and so therefore does the cost."},
 
         {"kind": "checklist", "eyebrow": "Before you commit",
@@ -954,6 +1131,7 @@ PAGES = [
     "acts": [("Book a video consultation", WHATSAPP), ("Call the clinic", PHONE)],
     "sources": ["niams-psoriasis", "nice-psoriasis", "dermnet-psa"],
     "glance": [
+        ("Fee", f"{FEE_ONLINE_SHOW} {FEE_TAX}, paid in advance"),
         ("Booking", "WhatsApp: video link sent back"),
         ("Good for", "Second opinions, flare plans, systemic reviews"),
         ("Not for", "Phototherapy, procedures, joint examination"),
@@ -962,6 +1140,11 @@ PAGES = [
         ("Outcome", "A written plan you can run locally"),
     ],
     "sections": [
+        fees_block(
+            intro="Both fees are fixed and are the same for every condition. "
+                  "Consult online first and, if an examination in person turns "
+                  "out to be necessary, only the difference is charged."),
+
         {"kind": "prose", "eyebrow": "Why this works",
          "h2": "Psoriasis is a management problem, not a procedural one.",
          "body": [
@@ -978,6 +1161,23 @@ PAGES = [
              "plan and no review. Controlled just enough not to complain, and heading for a "
              "rebound.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "What can be judged remotely",
+         "h2": "What a plaque is, and what a photograph shows.",
+         "intro": "Most of what a psoriasis review decides can be judged from good photographs and a careful history, because the structure of a plaque is characteristic and does not need to be touched to be recognised.",
+         "caption": "What a camera cannot do is examine a scalp under magnification, check nails properly, or assess a joint. Those are the things that bring people in rather than online.",
+         "rail": True,
+  "labels": [
+      {"text": "Scale", "x": 66, "y": 17, "find": "artwork"},
+      {"text": "Normal skin", "x": 20, "y": 33, "find": "artwork"},
+      {"text": "Thickened epidermis", "x": 54, "y": 37, "row": 1, "find": "artwork"},
+      {"text": "Deep ridges", "x": 52, "y": 52, "row": 2, "find": "artwork"},
+      {"text": "Crowded vessels", "x": 79, "y": 65, "find": "artwork"},
+  ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B5-psoriasis-plaque.webp", "w": 1820, "h": 1024,
+             "alt": "Two blocks of skin side by side at the same scale. The left is normal: a thin evenly stacked epidermis over the dermis. The right is a psoriasis plaque: the epidermis is far thicker and sends deep finger-like ridges down into the dermis, widened vessels loop up between those ridges, and thick silvery-white scale lifts from the surface."}},
 
         {"kind": "cards", "eyebrow": "Scope", "h2": "What a video consultation can settle",
          "accent": "chronic",
@@ -1039,6 +1239,7 @@ PAGES = [
     ],
     "faq_h2": "Online consultation",
     "faqs": [
+        *FEE_FAQS,
         ("Can psoriasis really be treated over video?",
          "Managed, yes: psoriasis care is mostly decisions rather than procedures. What cannot "
          "be done remotely is phototherapy, joint examination, and biopsy of an unclear rash."),

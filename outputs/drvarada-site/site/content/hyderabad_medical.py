@@ -76,6 +76,20 @@ PAGES = [
              "is a clinical answer, not a scheduling one.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "The mechanism",
+         "h2": "An immune attack on one cell type.",
+         "intro": "Vitiligo is not skin that has faded. It is the loss of the cells that make pigment, destroyed by the immune system. Where they have gone, the skin above them has no supply and turns white.",
+         "caption": "That is why treatment is about stopping the attack and then bringing cells back — and why nothing works while the disease is still active.",
+         "labels": [
+             {"text": "Pigment cells at work", "x": 19, "y": 42, "lead": 41, "find": "artwork"},
+             {"text": "Colour lost above", "x": 46, "y": 25, "lead": 14, "find": "artwork"},
+             {"text": "Immune cells closing in", "x": 45, "y": 58, "lead": 15, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B1-vitiligo-immune-attack.webp", "w": 1820, "h": 1024,
+             "alt": "A magnified view of the base of the epidermis. On the left, star-shaped pigment cells are intact and passing dark granules into the surrounding skin cells, and the skin above is warm brown. Toward the right, immune cells have gathered and closed in: one pigment cell is shrunken, another is breaking apart, and the skin above has lost its colour and turned pale."}},
+
         {"kind": "steps", "eyebrow": "The protocol", "h2": "What treatment looks like here",
          "items": [
              {"title": "Assess activity",
@@ -195,6 +209,21 @@ PAGES = [
              "every visit here.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "The mechanism",
+         "h2": "Skin cells made faster than they can mature.",
+         "intro": "A skin cell normally takes about four weeks to reach the surface and shed. In psoriasis it takes a few days. The cells arrive immature and pile up, and that pile is the silvery scale.",
+         "caption": "The acceleration is driven by immune signalling, which is precisely what the newer treatments block. It is not an infection and it cannot be caught.",
+         "rail": True,
+"labels": [
+    {"text": "About four weeks", "x": 25, "y": 45, "find": "artwork"},
+    {"text": "Arrives still immature", "x": 65, "y": 20, "find": "artwork"},
+    {"text": "A few days", "x": 62, "y": 62, "row": 1, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/A5-epidermal-turnover.webp", "w": 1820, "h": 1024,
+             "alt": "Two blocks of epidermis side by side at the same scale. In the left block a single highlighted cell is shown at four positions rising through many orderly rows, flattening and losing its nucleus, reaching the top as a thin dead flake. In the right block the epidermis is far thicker and the highlighted cell rises through only a few rows, arriving at the surface still plump and still carrying its nucleus, joining a thick pile of immature cells heaped on top."}},
+
         {"kind": "steps", "eyebrow": "The protocol", "h2": "How a course runs",
          "items": [
              {"title": "Diagnose properly",
@@ -210,6 +239,21 @@ PAGES = [
               "body": "Methotrexate or other systemics for extensive or disabling disease; "
                       "biologics where those fail, after TB and hepatitis screening."},
          ]},
+
+        {"kind": "diagram", "eyebrow": "What else is checked",
+         "h2": "The parts of this you cannot see.",
+         "intro": "A psoriasis review here covers more than the skin, because the disease does. Joints, blood pressure, sugar, lipids and liver all carry recognised associations, and all of them are easier to act on early than late.",
+         "caption": "None of this is a reason to be alarmed. It is a reason for the review to be a proper one rather than a look at the worst plaque and a repeat prescription.",
+         "labels": [
+             {"text": "Heart and vessels", "x": 30, "y": 25, "lead": 15, "find": "artwork"},
+             {"text": "Fatty liver", "x": 28, "y": 37, "lead": 17, "find": "artwork"},
+             {"text": "A swollen finger joint", "x": 40, "y": 57, "lead": 4, "find": "artwork"},
+             {"text": "The plaques you can see", "x": 26, "y": 70, "lead": 19, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B14-psoriasis-systemic.webp", "w": 1820, "h": 1024,
+             "alt": "A standing figure of ordinary build in plain fitted clothing, with scaled psoriasis patches on both elbows and both knees. The torso is drawn as if softly transparent: a heart sits in the upper chest with two large vessels leaving it, one visibly thickened and narrowed, and a plump pale liver speckled with fine droplets fills the upper right abdomen. One index finger is swollen along its whole length with an inflamed joint at its base."}},
 
         {"kind": "split", "eyebrow": "The part usually missed",
          "h2": "Your joints are part of this consultation.",
@@ -314,6 +358,24 @@ PAGES = [
              "trichoscope, and takes about ten minutes.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "The unit being treated",
+         "h2": "Every hair problem is a problem with this.",
+         "intro": "A follicle is an organ, not a hole. It has a blood supply feeding a growth centre at its base, an oil gland attached to its side, and a muscle anchoring it to the surface. Which part is affected is what separates shedding from thinning from patchy loss.",
+         "caption": "Treatment acts on the base, where the hair is actually made — which is why results are judged at three to six months. That is how long it takes for a change there to become visible up here.",
+         "labels": [
+             # Kept to one line on purpose: the chip below it sits 6% down the
+             # frame, which is 33px on a laptop, and a chip that wraps to two
+             # lines is 42px tall. See `diagram_audit.py`.
+             {"text": "Muscle that raises it", "x": 42, "y": 36, "lead": 19, "find": "artwork"},
+             {"text": "Oil gland", "x": 35, "y": 42, "lead": 25, "col": 70, "find": "artwork"},
+             {"text": "Growth centre — where the hair is made", "x": 27, "y": 75, "lead": 34, "find": "artwork"},
+             {"text": "Blood supply", "x": 48, "y": 85, "lead": 13, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/A3-hair-follicle.webp", "w": 1820, "h": 1024,
+             "alt": "A single hair follicle shown in section through a block of skin. The hair shaft emerges at the surface and runs down inside a canal built of concentric sheaths to a rounded bulb at the base, where a pale dermal papilla pushes up into it and a small blood vessel enters. An oil gland is attached to the side of the canal, and a slender muscle runs from the follicle up to the underside of the epidermis."}},
+
         {"kind": "table", "eyebrow": "Causes", "h2": "What is actually causing it",
          "head": ["Pattern", "Likely cause", "What it needs"],
          "rows": [
@@ -335,6 +397,22 @@ PAGES = [
          "note": "The last row is the one that cannot wait. Scarring alopecias destroy "
                  "follicles permanently, and the difference between early and late "
                  "treatment is the difference between keeping hair and not."},
+
+        {"kind": "diagram", "eyebrow": "Pattern hair loss",
+         "h2": "Follicles shrink before they stop.",
+         "intro": "In pattern hair loss the follicle does not die. It gets smaller and shallower with each cycle, and the hair it makes gets finer and paler until it is barely visible. That is why treatment works and why it has to be continuous.",
+         "caption": "A shrunken follicle can be pushed back. An empty one cannot, which is what sets the window for medical treatment and where surgery starts.",
+         "label_col": 0,
+         "labels": [
+             {"text": "Full follicle", "x": 13, "y": 80, "lead": 2},
+             {"text": "Thinner, shallower", "x": 33, "y": 80, "lead": 2},
+             {"text": "Bulb out of the fat", "x": 54, "y": 80, "lead": 2},
+             {"text": "Barely a hair left", "x": 74, "y": 80, "lead": 2},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/C1-miniaturisation.webp", "w": 1820, "h": 1024,
+             "alt": "Four blocks of skin in a row showing the same follicle over years. It starts deep with a large bulb in the fat and a thick dark hair, then becomes progressively shallower with a smaller bulb and a finer, paler hair, until the last is a tiny follicle just under the surface with a barely visible colourless wisp."}},
 
         {"kind": "steps", "eyebrow": "The protocol", "h2": "What the first appointment does",
          "items": [
@@ -449,6 +527,20 @@ PAGES = [
              "thyroid disease is the commonest association, and vitiligo occurs more often "
              "in people with alopecia areata than in the general population.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "The mechanism",
+         "h2": "The follicle is switched off, not destroyed.",
+         "intro": "In alopecia areata the immune system surrounds the base of the follicle and stops it working. The follicle itself stays intact and alive — which is why regrowth is possible even after months of a bare patch.",
+         "caption": "It also explains the honest answer to the commonest question: nobody can predict when it will regrow, because the follicle is waiting rather than gone.",
+         "labels": [
+             {"text": "The follicle is intact", "x": 19, "y": 38, "lead": 39, "find": "artwork"},
+             {"text": "Hair pinched and broken off", "x": 33, "y": 25, "lead": 25, "find": "artwork"},
+             {"text": "Immune cells around the base", "x": 19, "y": 63, "lead": 39, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/C2-alopecia-areata.webp", "w": 1820, "h": 1024,
+             "alt": "A magnified follicle in section. The follicle, its bulb and its papilla are all intact, but a dense swarm of small immune cells has gathered around the base and is pressing in on it. The hair inside is pinched to a narrow waist just above the bulb and emerges above the skin as a short broken stub. Neighbouring follicles are empty but structurally complete."}},
 
         {"kind": "table", "eyebrow": "Treatment", "h2": "What is used, and for what",
          "head": ["Treatment", "Suits", "Notes"],
@@ -571,6 +663,20 @@ PAGES = [
              "treat medically first and reassess in a year. Some never need surgery at all.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "Why coverage has a ceiling",
+         "h2": "A fixed supply, moved around.",
+         "intro": "Transplanting does not create hair. It relocates follicles from the band at the back and sides — which is genetically resistant to thinning — into the area that has lost them. That band is finite, and every graft taken from it is one that cannot be taken twice.",
+         "caption": "This is the arithmetic behind an honest consultation. A large thinning area and a modest donor band cannot both be satisfied, and being told so plainly is more useful than being sold a second session later.",
+         "labels": [
+             {"text": "Thinning area, few left", "x": 27, "y": 15, "lead": 25, "find": "artwork"},
+             {"text": "Where they were taken", "x": 35, "y": 47, "lead": 17, "find": "artwork"},
+             {"text": "The donor band, and its limit", "x": 33, "y": 58, "lead": 19, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D16-donor-supply.webp", "w": 1820, "h": 1024,
+             "alt": "A simplified featureless head in profile. The back and lower sides of the scalp form a distinct deeper-shaded band densely packed with small clusters of hairs, and the band has a clear boundary beyond which there are none. The top and front are sparse, with only a few widely separated clusters. Several round gaps are visible in the dense band where clusters have been taken."}},
+
         {"kind": "steps", "eyebrow": "The pathway", "h2": "How a case is assessed",
          "items": [
              {"title": "Establish the cause",
@@ -587,6 +693,22 @@ PAGES = [
               "body": "A hairline designed for a forty-year-old should still look right at "
                       "sixty. Overly low, overly dense hairlines age badly."},
          ]},
+
+        {"kind": "diagram", "eyebrow": "Two ways to harvest",
+         "h2": "One line, or many small openings.",
+         "intro": "Both methods end with the same thing: small grafts of two or three follicles, placed one at a time. They differ only in how those grafts leave the donor area, and therefore in what the donor area looks like afterwards.",
+         "caption": "A strip leaves one fine line that longer hair covers completely; punch extraction leaves many tiny round marks and allows very short hair. Neither is better in the abstract — it depends on how you intend to wear your hair.",
+         "rail": True,
+"labels": [
+    {"text": "One strip, edges closed", "x": 24, "y": 28, "find": "artwork"},
+    {"text": "Punched one at a time", "x": 66, "y": 12, "row": 1, "find": "artwork"},
+    {"text": "Small round openings", "x": 57, "y": 30, "row": 2, "find": "artwork"},
+    {"text": "Identical grafts", "x": 74, "y": 84, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D15-fue-vs-fut.webp", "w": 1820, "h": 1024,
+             "alt": "Two blocks of scalp side by side, each shown partly from above and partly in section. In the left block a long narrow horizontal strip has been removed from the donor area and the edges drawn together into a single fine closed line. In the right block a small cylindrical punch stands above the surface having removed one graft, and many tiny separate round openings are spread across the donor area. Below each block lies a row of identical small grafts of two or three follicles."}},
 
         {"kind": "table", "eyebrow": "Techniques",
          "h2": "FUE, FUT, and the smaller grafts",
@@ -713,6 +835,22 @@ PAGES = [
              "proportion of people who believe they have acne scars have pigmentation that "
              "will resolve with sun protection and time.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "The mechanism",
+         "h2": "How a spot actually forms.",
+         "intro": "The follicle's lining thickens and blocks the canal, oil backs up behind it, bacteria multiply in what is trapped, and the wall eventually gives way. Treatment works at whichever of those steps it can reach.",
+         "caption": "The deeper the process goes before it is stopped, the more likely it is to leave a scar. That is the entire argument for treating acne early.",
+         "label_col": 0,
+         "labels": [
+             {"text": "Normal follicle", "x": 13, "y": 80, "lead": 2},
+             {"text": "Blocked and filling", "x": 32, "y": 80, "lead": 2},
+             {"text": "Inflamed", "x": 52, "y": 80, "lead": 2},
+             {"text": "Burst deep down", "x": 74, "y": 80, "lead": 2},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B10-acne-lesion.webp", "w": 1820, "h": 1024,
+             "alt": "Four follicles in a row. The first is normal. In the second the lining has thickened and oil has backed up into a closed plug. In the third the plugged canal is inflamed with bacteria multiplying inside and the surface raised into a bump. In the fourth the follicle wall has burst deep in the dermis, spilling its contents and inflaming a much wider area."}},
 
         {"kind": "steps", "eyebrow": "The protocol", "h2": "How acne is treated here",
          "items": [
@@ -843,6 +981,21 @@ PAGES = [
              "scalp psoriasis and needs different treatment.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "What is actually happening",
+         "h2": "Oil, yeast, and the flaking.",
+         "intro": "Dandruff is not dryness and it is not poor washing. Sebaceous glands produce more oil than usual, a yeast that lives on everyone's scalp feeds on it, and the scalp reacts to the products of that. The flaking is the reaction, not the cause.",
+         "caption": "This is why an ordinary moisturiser does nothing and why medicated shampoo has to stay in the routine after it clears. Nothing here removes the glands or the yeast — treatment holds the balance.",
+         "labels": [
+             {"text": "Greasy scale", "x": 48, "y": 15, "lead": 15, "find": "artwork"},
+             {"text": "Yeast living in the oil", "x": 38, "y": 21, "lead": 25, "find": "artwork"},
+             {"text": "Inflammation underneath", "x": 45, "y": 42, "lead": 18, "find": "artwork"},
+             {"text": "Oil gland, working overtime", "x": 18, "y": 57, "lead": 45, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/C4-seborrhoeic-dermatitis.webp", "w": 1820, "h": 1024,
+             "alt": "A block of scalp in section. Two hair follicles run down from the surface, each with a much-enlarged sebaceous gland attached to the side of its canal, swollen with oil. Oil flows from the glands along the canals and out onto the surface as a glistening film, and small round yeast bodies sit in that film where it is thickest. Loose greasy yellow flakes lift from the surface between the hairs, and inflammatory cells are scattered in the dermis beneath."}},
+
         {"kind": "steps", "eyebrow": "The protocol", "h2": "Clear it, then hold it",
          "items": [
              {"title": "Confirm what it is",
@@ -960,6 +1113,21 @@ PAGES = [
              "the hair that remains. Saying so is not defeatism; it is the alternative to "
              "selling a course of treatment for a genetic trait.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "Why hair goes white",
+         "h2": "The same cell, in the follicle.",
+         "intro": "Hair takes its colour from pigment cells sitting in the bulb, which hand pigment into the shaft as it is built. Greying is those cells winding down. The hair keeps growing; it is simply built without colour.",
+         "caption": "Nothing applied to the scalp restarts a pigment cell that has stopped. Where a treatable cause is found — thyroid, B12, iron — correcting it is worth doing on its own merits.",
+         "labels": [
+             {"text": "Pigment cap over each nucleus", "x": 40, "y": 33, "lead": 21, "find": "artwork"},
+             {"text": "Packets travelling along the arm", "x": 34, "y": 47, "lead": 27, "find": "artwork"},
+             {"text": "Arms reaching between cells", "x": 46, "y": 57, "lead": 15, "find": "artwork"},
+             {"text": "Melanocyte", "x": 31, "y": 74, "lead": 30, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/A2-melanocyte.webp", "w": 1820, "h": 1024,
+             "alt": "A melanocyte at the base of the epidermis, drawn as a star-shaped cell with long arms reaching up between the surrounding skin cells. Dark brown pigment granules are made inside it, travel along its arms and are handed into neighbouring cells, where they gather into a cap above each nucleus."}},
 
         {"kind": "table", "eyebrow": "Assessment", "h2": "What is worth testing",
          "head": ["Test", "Why", "If abnormal"],

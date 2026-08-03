@@ -7,9 +7,51 @@ number attributable. "45 years in practice" is verifiable. "Thousands of happy
 patients" is not, so it does not appear.
 """
 
-from chrome import (ADDRESS, HOURS, MAPS, PATIENTS, PHONE, PHONE_ALT_SHOW,
-                    PHONE_LANDLINE_SHOW, PHONE_SHOW, PRACTO_REVIEWS, RATING,
-                    REVIEWS, WHATSAPP)
+from chrome import (ADDRESS, FEE_CLINIC_SHOW, FEE_ONLINE_SHOW, FEE_TAX,
+                    GOOGLE_LISTING, GOOGLE_LISTING_PLAIN, HOURS,
+                    MAPS, PATIENTS, PHONE, PHONE_ALT_SHOW, PHONE_LANDLINE_SHOW,
+                    PHONE_SHOW, PRACTO_REVIEWS, RATING, REVIEWS, WHATSAPP)
+from content.cases import cases
+from content.fees import FEE_FAQS, fees_block
+
+# What the case-study blocks show while a case waits on its consent record.
+# These are labelled empty frames, not stock photography — the results page
+# says as much on the page itself, and that should stay true.
+HOME_PLACEHOLDERS = [
+    {"title": "Vitiligo: repigmentation",
+     "cap": "Excimer phototherapy · duration on file",
+     "meta": ["Excimer", "Reviewed 6-weekly"],
+     "shots": ["Baseline", "Mid-course", "Latest"]},
+    {"title": "Plaque psoriasis: clearance",
+     "cap": "Topical and phototherapy protocol",
+     "meta": ["Topical + NB-UVB"],
+     "shots": ["Baseline", "Latest"]},
+    {"title": "Acne: active lesion control",
+     "cap": "Medical protocol and peels",
+     "meta": ["Medical", "Peels"],
+     "shots": ["Baseline", "Latest"]},
+]
+
+RESULTS_PLACEHOLDERS = [
+    {"title": "Vitiligo: repigmentation",
+     "cap": "Excimer phototherapy · duration on file",
+     "meta": ["Segmental", "Excimer", "Reviewed 6-weekly"],
+     "body": "Judged on where the border moved between reviews and on whether "
+             "islands appeared around individual hairs, not on the area alone.",
+     "shots": ["Baseline", "Week 8", "Week 16", "Week 24"]},
+    {"title": "Plaque psoriasis: clearance",
+     "cap": "Topical and phototherapy protocol",
+     "meta": ["Plaque", "Topical + NB-UVB"],
+     "body": "Measured by involved surface area alongside itch and sleep, which "
+             "photographs cannot show and the notes record separately.",
+     "shots": ["Baseline", "Week 6", "Week 12"]},
+    {"title": "Acne: active lesion control",
+     "cap": "Medical protocol and peels",
+     "meta": ["Inflammatory", "Medical + peels"],
+     "body": "Counted rather than eyeballed: inflammatory lesions at each review, "
+             "with marks and scarring assessed separately once active acne settles.",
+     "shots": ["Baseline", "Week 12"]},
+]
 
 CREDS = [
     "MBBS · Osmania Medical College",
@@ -62,6 +104,36 @@ PAGES = [
              ("Unwanted hair", "laser-hair-reduction-hyderabad", "apricot"),
              ("A mole or skin tag", "dermatosurgery-hyderabad", "apricot"),
          ]},
+
+        # Placed immediately after "pick what you're seeing", because the answer
+        # to picking something is that someone then looks at it properly, and
+        # that is the whole claim in the H1. It is also the first picture on the
+        # page after the portrait: everything between here and the footer used
+        # to be text in boxes.
+        {"kind": "diagram", "eyebrow": "Before anything is prescribed",
+         "h2": "Someone looks at it first.",
+         "intro": "A patch of skin tells you more under a lens than it does across a desk. "
+                  "The dermatoscope shows the pigment network — where it is intact, where it "
+                  "has gone, and whether the border is advancing — which is what decides "
+                  "the diagnosis and, after it, the plan.",
+         "caption": "This is what the first appointment is: an examination, a name for what "
+                    "you have, and a timeline you are told before anything starts.",
+         "rail": True,
+        "labels": [
+            {"text": "The patch", "x": 26, "y": 58, "row": 1, "find": "pale"},
+            {"text": "The dermatoscope", "x": 31, "y": 53, "find": "metal"},
+            {"text": "Where pigment stops", "x": 66, "y": 16, "row": 1,
+             "find": "edge:pale|skin"},
+            {"text": "Pigment network", "x": 75, "y": 25, "find": "skin"},
+        ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/E1-examination.webp", "w": 1820, "h": 1024,
+             "alt": "A dermatologist's hands examining a patient's forearm. One hand steadies "
+                    "the skin while the other rests a handheld dermatoscope on a pale patch. "
+                    "A magnified circle above shows the view through the lens: brown skin "
+                    "with a fine honeycomb network of pigment on one side, and plain pale "
+                    "skin where that network has gone on the other."}},
 
         {"kind": "pillars", "anchor": "treatments", "eyebrow": "What we treat",
          "h2": "Three practices, one dermatologist.",
@@ -127,18 +199,94 @@ PAGES = [
                       "systemic therapy, phototherapy, and the triggers worth changing."},
          ]},
 
+        # Directly under the claim it is evidence for. The paragraph above says
+        # surgical repigmentation is offered here and at few other centres in
+        # India; a reader has no way to picture what that means, and "melanocyte
+        # transplant" is not a phrase that explains itself. Four panels do.
+        {"kind": "diagram", "eyebrow": "The surgery few centres do",
+         "h2": "What a melanocyte transplant actually is.",
+         "intro": "Not a graft of skin onto skin. A very thin shaving is taken from the "
+                  "patient's own pigmented skin, the colour-making cells are separated out "
+                  "of it, and that suspension is laid onto the patch once its surface has "
+                  "been prepared. The cells are the patient's own, which is why there is "
+                  "nothing to reject.",
+         "caption": "Offered only where the disease has been stable for a defined period, "
+                    "which is a clinical judgement made at the first visit. Being told the "
+                    "surgery is not appropriate yet is a common and correct outcome.",
+         "label_col": 0,
+         "labels": [
+             {"text": "Donor skin shaved", "x": 9, "y": 82, "lead": 2},
+             {"text": "Cells separated out", "x": 30, "y": 82, "lead": 2},
+             {"text": "Patch surface prepared", "x": 48, "y": 82, "lead": 2},
+             {"text": "Colour returns", "x": 71, "y": 82, "lead": 2},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D3-melanocyte-transplant.webp", "w": 1820, "h": 1024,
+             "alt": "Four stages of a melanocyte transplant shown left to right: a thin "
+                    "sheet of pigmented skin lifted from a donor site, the pigment cells "
+                    "separated into a suspension in a dish, the depigmented patch prepared, "
+                    "and colour returning across it."}},
+
+        # Reads INTO the case studies below: what a dermatologist looks at when
+        # judging one of those series is the border, not the size, and a reader
+        # who knows that gets more out of the photographs than one who does not.
+        {"kind": "diagram", "eyebrow": "Judging progress",
+         "h2": "What we actually look at.",
+         "intro": "Whether a patch is spreading or has stopped is read from its edge, not "
+                  "from its size. A border that fades gradually into normal skin belongs to "
+                  "active disease. A border you could draw around means it has settled, and "
+                  "that is the point at which repigmentation, and surgery, become worth "
+                  "discussing.",
+         "caption": "This is the judgement the first appointment exists to make. Photographs "
+                    "of real treated patients, taken under standardised lighting and "
+                    "published only with written consent, are on the results page.",
+         "rail": True,
+       "labels": [
+           {"text": "Border fades out", "x": 15, "y": 44, "row": 2, "find": "edge:pale|skin"},
+           {"text": "Confetti spots", "x": 33, "y": 30, "find": "spot:pale@skin"},
+           {"text": "A scratch line", "x": 23, "y": 66, "row": 1, "find": "spot:pale@skin"},
+           {"text": "A border you can draw", "x": 56, "y": 45, "row": 1, "find": "edge:pale|skin"},
+           {"text": "Pigment at each hair", "x": 69, "y": 32, "find": "spot:skin@pale"},
+       ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B4-active-vs-stable.webp", "w": 1820, "h": 1024,
+             "alt": "Two areas of brown skin seen from above. The left patch has a soft "
+                    "ill-defined border fading gradually into the surrounding skin, with "
+                    "scattered small pale spots and a pale line along an old scratch. The "
+                    "right patch has a sharp border and small islands of returning colour "
+                    "around individual hairs."}},
+
+        # PLACEHOLDERS UNTIL THE CLINIC SENDS THE PHOTOGRAPHS — that is the
+        # intended state, not an unfinished one, and the intro says so on the
+        # page rather than leaving a reader to guess. `shots` names the frames
+        # each case will have, so the series is staged before the images exist
+        # and dropping them in is a one-line change per frame.
+        #
+        # Nothing here may be filled with a stock photograph or an illustration.
+        # `build.py` refuses to build a clinical image without a consent record,
+        # which is the only reason that rule is reliable.
         {"kind": "ba", "anchor": "results", "eyebrow": "Results",
          "h2": "Progress, documented.",
-         "intro": "Photographs taken in clinic under the same lighting, shared with patient "
-                  "consent. Results differ between individuals. These are examples, not "
-                  "promises.",
-         "items": [
-             ("Vitiligo: repigmentation", "Excimer phototherapy · duration on file"),
-             ("Plaque psoriasis: clearance", "Topical and phototherapy protocol"),
-             ("Acne: active lesion control", "Medical protocol and peels"),
-         ]},
+         "intro": "Real patients, photographed at the clinic, published with their "
+                  "written consent. Results differ from person to person: these are "
+                  "what happened to these patients, not a promise about you.",
+         "cta": ("See all case studies", "results"),
+         # Three headline cases, chosen by title rather than by index so that
+         # inserting a case in cases.py cannot silently change which three the
+         # home page shows. `frames=2` keeps every picture on the row the same
+         # size — the three-frame alopecia series runs in full on the results
+         # page, where there is room for it.
+         "items": cases("Alopecia totalis", "Psoriasis: a thick plaque",
+                        "Vitiligo: colour back",
+                        frames=2) or HOME_PLACEHOLDERS},
 
-        {"kind": "steps", "eyebrow": "How it works", "h2": "Four steps, no surprises.",
+        # Five, not four: the fee step was added 2026-08-02 and the heading has
+        # to be counted, not assumed. A page that says "four" above five boxes
+        # is exactly the kind of small wrongness that costs a reader's trust in
+        # everything else on it.
+        {"kind": "steps", "eyebrow": "How it works", "h2": "Five steps, no surprises.",
          "items": [
              {"title": "Message on WhatsApp",
               "body": "One number, answered by the clinic team. Say what you're seeing and "
@@ -146,6 +294,10 @@ PAGES = [
              {"title": "Bring your history",
               "body": "Old prescriptions, photographs of a flare, anything you've already "
                       "tried. It shortens the diagnosis."},
+             {"title": "Know the fee first",
+              "body": f"{FEE_ONLINE_SHOW} {FEE_TAX} for a video consultation, "
+                      f"{FEE_CLINIC_SHOW} {FEE_TAX} in person. Consult online first and "
+                      f"only the difference is charged if you then need to come in."},
              {"title": "Get a plan, not a package",
               "body": "What it is, how long it takes, and what it will cost, before anything "
                       "begins."},
@@ -163,6 +315,15 @@ PAGES = [
                    ("25", "in the Army Medical Corps", "medal"),
                    (PATIENTS, "patients treated", "chat"),
                    ("5.0", "rating on Practo", "star")]},
+
+        # Sits directly under the doctor's figures because it is the argument
+        # those figures are evidence FOR — the numbers say how long he has
+        # practised, this says what he practises. It also states the site's
+        # whole premise, which the H1 only gestures at.
+        {"kind": "quote",
+         "text": "A patient who understands what is happening to their skin will follow the "
+                 "plan. A patient who has only been sold a package will stop at the first "
+                 "month that looks like nothing is changing."},
 
         {"kind": "cards", "anchor": "visit", "eyebrow": "Visit",
          "h2": "One clinic, in Secunderabad.",
@@ -244,8 +405,8 @@ PAGES = [
           "recently. It is the same doctor at the same clinic in Secunderabad, with the "
           "same patient records. Only the name on the door has changed.",
           "If you were treated here before, nothing about your file or your treatment plan "
-          "has moved. The Google listing you may have found us through still carries the "
-          "old name while the change works its way through."]),
+          "has moved. The Google listing carries both names, so searching for either one "
+          "finds the same clinic."]),
         ("Do you treat patients from outside Hyderabad?",
          "Yes. Particularly for vitiligo surgery, where patients travel from across Telangana "
          "and beyond. Send photographs before travelling so we can tell you whether the "
@@ -282,7 +443,16 @@ PAGES = [
             "uniform, where you treat whatever walks in and you learn to be certain before you "
             "act.",
     "acts": [("Book on WhatsApp", WHATSAPP), ("Read patient stories", "patient-stories")],
-    "portrait": [("45", "years in practice"), (PATIENTS, "patients treated")],
+    # The page whose own meta description lists these qualifications was the one
+    # page not showing them. They also fill the column beside the portrait,
+    # which was carrying two figures against a full-height photograph.
+    "creds": CREDS,
+    # The rating sits at `b` rather than `c` deliberately: `c` is hidden on a
+    # phone to keep the chips off the portrait's face, and the rating is the one
+    # figure a patient checking a doctor actually looks for.
+    "portrait": [("45", "years in practice"),
+                 (RATING, "rated on Practo", "stars"),
+                 (PATIENTS, "patients treated")],
     "photo": {"src": "img/dr-varada-hero.webp", "w": 880, "h": 1100,
               "cutout": True,
               "alt": "Dr. (Lt Col) Khagendra Varada, dermatologist and dermatosurgeon, at the clinic in Karkhana, Secunderabad"},
@@ -301,7 +471,63 @@ PAGES = [
              "Vitiligo Hospital, adding formal training in practical dermatology at Cardiff "
              "University and in aesthetic dermatology through the AAAM. The clinic in "
              "Secunderabad is the same one, under the name Dr. Varada's Skin & Hair Center.",
-         ]},
+         ],
+         # Fills the empty right-hand column beside the background copy. Each
+         # plate is the qualification itself with an emblem beside it — NOT a
+         # picture of the certificate, because an invented certificate on a
+         # named doctor's page is a forged credential however it is captioned;
+         # a reader cannot tell an illustration of a diploma from a scan of one.
+         "aside": {
+             # NOT "Qualifications" — the section immediately below this one is
+             # eyebrowed "Qualifications" and headed "Credentials", and the same
+             # word twice in a column is what made this read as two halves of
+             # one section that had come apart.
+             "title": "Certifications",
+             # INDICATIVE EMBLEMS — published deliberately (user's decision,
+             # 2026-08-02), still to be replaced with whatever the clinic
+             # settles on. None of them is Osmania's, Cardiff's, the AAAM's, the
+             # Army's or the IMA's mark: those belong to those bodies and are
+             # theirs to grant. These are generic credential badges in the
+             # site's own two colours, carrying no lettering of any kind, and
+             # the foot line below says so on the page — which is the thing that
+             # makes publishing them honest rather than merely defensible.
+             "items": [
+                 {"award": "MBBS",
+                  "where": "Osmania Medical College, Hyderabad",
+                  "mark": {"src": "img/emblems/M1-emblem-medicine.webp",
+                           "w": 746, "h": 743,
+                           "alt": "Indicative emblem: a staff and serpent within "
+                                  "a laurel wreath"}},
+                 {"award": "Diploma in Practical Dermatology",
+                  "where": "Cardiff University, United Kingdom",
+                  "mark": {"src": "img/emblems/M2-emblem-university.webp",
+                           "w": 872, "h": 872,
+                           "alt": "Indicative emblem: a plain shield above an "
+                                  "open book"}},
+                 {"award": "Diploma in Dermatology",
+                  "where": "American Academy of Aesthetic Medicine",
+                  "mark": {"src": "img/emblems/M3-emblem-academy.webp",
+                           "w": 874, "h": 874,
+                           "alt": "Indicative emblem: a starburst within a "
+                                  "guilloche ring"}},
+                 {"award": "Lieutenant Colonel",
+                  "where": "Indian Army Medical Corps",
+                  "note": "25 years as a serving medical officer",
+                  "mark": {"src": "img/emblems/M4-emblem-service.webp",
+                           "w": 772, "h": 772,
+                           "alt": "Indicative emblem: a star and chevrons "
+                                  "between laurel sprays"}},
+                 {"award": "Member",
+                  "where": "Indian Medical Association",
+                  "mark": {"src": "img/emblems/M5-emblem-association.webp",
+                           "w": 748, "h": 751,
+                           "alt": "Indicative emblem: a rosette within a "
+                                  "hexagon and rope ring"}},
+             ],
+             "foot": "The emblems above are indicative marks, not the badges of the "
+                     "institutions named. The qualifications themselves are on record, "
+                     "and the certificates hang at the clinic.",
+         }},
 
         {"kind": "cards", "eyebrow": "Qualifications", "h2": "Credentials",
          "items": [
@@ -407,6 +633,7 @@ PAGES = [
     "glance": [
         ("Address", ADDRESS),
         ("Hours", HOURS),
+        ("Consultation", f"{FEE_CLINIC_SHOW} {FEE_TAX} in person"),
         ("Formerly", "BNR Skin & Vitiligo Hospital"),
         ("Booking", "WhatsApp. " + PHONE_SHOW),
         ("Serves", "Karkhana, Trimulgherry, West Marredpally, Bowenpally, Alwal"),
@@ -414,10 +641,10 @@ PAGES = [
     ],
     "sections": [
         {"kind": "callout", "title": "You may know this clinic as BNR Skin & Vitiligo Hospital.",
-         "body": "That is the name it traded under until recently, and it is still the name "
-                 "on the Google listing. Nothing else changed: the same doctor, the same "
-                 "rooms in Secunderabad, the same patient files. If you were treated here "
-                 "before, your history is already on record."},
+         "body": "That is the name it traded under until recently, and the Google listing "
+                 "still carries it alongside the new one. Nothing else changed: the same "
+                 "doctor, the same rooms in Secunderabad, the same patient files. If you "
+                 "were treated here before, your history is already on record."},
 
         {"kind": "prose", "eyebrow": "What runs here",
          "h2": "Everything in one place, deliberately.",
@@ -434,6 +661,59 @@ PAGES = [
              "record against which everything later is compared.",
          ]},
 
+        # The prose above argues that a clinic which sends you elsewhere for the
+        # procedure it just recommended wastes a visit. This is that argument in
+        # one line of sight: the four things that would otherwise be four
+        # addresses, standing together.
+        {"kind": "diagram", "eyebrow": "Under one roof",
+         "h2": "What is actually in the building.",
+         "intro": "A phototherapy cabinet for whole-body treatment, a laser for one patch at "
+                  "a time, the lens a diagnosis is made with, and the instruments for the "
+                  "surgical list. All at the address above, which is why a consultation here "
+                  "often ends with something being done the same day.",
+         "caption": "Drawn to scale against each other. Not a photograph of these rooms — "
+                    "the equipment, not the premises, is what this shows.",
+         "rail": True,
+        "labels": [
+            {"text": "Phototherapy cabinet", "x": 10, "y": 45, "row": 3, "find": "artwork"},
+            {"text": "Excimer and laser", "x": 42, "y": 62, "row": 2, "find": "artwork"},
+            {"text": "Dermatoscope", "x": 60, "y": 58, "row": 1, "find": "artwork"},
+            {"text": "Dermatosurgery", "x": 77, "y": 80, "find": "artwork"},
+        ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/E2-clinic-equipment.webp", "w": 1820, "h": 1024,
+             "alt": "Four pieces of dermatology equipment drawn side by side to scale: a "
+                    "full-height upright phototherapy cabinet with its doors open and its "
+                    "tubes lit, a wheeled trolley carrying a handheld laser, a dermatoscope "
+                    "standing on a block, and a shallow tray of clean surgical instruments."}},
+
+        # "Phototherapy runs here" is a claim about equipment, and a list of
+        # equipment is the least persuasive form a claim can take. What the
+        # cabinet does — and how shallowly it works, which is why it is safe to
+        # run for months — is the part a patient is actually weighing up.
+        {"kind": "diagram", "eyebrow": "In the light room",
+         "h2": "What phototherapy reaches, and what it doesn't.",
+         "intro": "Narrowband ultraviolet is not a heat treatment and it does not act on "
+                  "the whole body. It penetrates the epidermis and the top of the dermis "
+                  "and stops there, which is both why it can be given twice a week for "
+                  "months and why it does nothing for anything deeper.",
+         "caption": "Sessions are a few minutes each and are given at the clinic, so a "
+                    "course does not require a second address. Vitiligo and psoriasis are "
+                    "the two conditions it is used most for here.",
+         "labels": [
+             {"text": "Ultraviolet enters here", "x": 47, "y": 23, "lead": 10, "find": "artwork"},
+             {"text": "Pigment cells reactivated", "x": 29, "y": 40, "lead": 29, "find": "artwork"},
+             {"text": "Immune cells suppressed, and no deeper", "x": 38, "y": 52, "lead": 20, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D1-phototherapy.webp", "w": 1820, "h": 1024,
+             "alt": "A block of skin with a band of fine parallel light rays entering from "
+                    "above. The rays penetrate the epidermis and the upper dermis, where "
+                    "pigment cells and immune cells are drawn, and stop before the fat "
+                    "layer beneath."}},
+
         {"kind": "cards", "eyebrow": "Available here", "h2": "What you can book",
          "items": [
              {"eyebrow": "Chronic", "title": "Medical dermatology", "list": [
@@ -448,6 +728,13 @@ PAGES = [
                  "Hair grafting surgery", "Dandruff and scalp disease"]},
          ]},
 
+        fees_block(online_first=False,
+                   h2="What an appointment costs",
+                   intro="The consultation fee is fixed and is the same for everyone. "
+                         "What treatment costs is not, and is quoted after the "
+                         "examination — those are two different questions and only "
+                         "one of them can honestly be answered in advance."),
+
         {"kind": "steps", "eyebrow": "Your visit", "h2": "What to expect",
          "items": [
              {"title": "Message on WhatsApp",
@@ -457,8 +744,9 @@ PAGES = [
               "body": "Previous prescriptions, biopsy or blood reports, and photographs of "
                       "the condition at its worst."},
              {"title": "Get examined, then quoted",
-              "body": "Costs are given after the examination, when there is something real "
-                      "to cost. Not before."},
+              "body": f"The consultation is {FEE_CLINIC_SHOW} {FEE_TAX}, known in advance. "
+                      f"What treatment costs is given after the examination, when there is "
+                      f"something real to cost."},
              {"title": "Leave with a written plan",
               "body": "What was diagnosed, what it needs, and when you're next expected."},
          ]},
@@ -469,17 +757,23 @@ PAGES = [
              "<b>Karkhana, Secunderabad</b>: off Wellington Road",
              "<b>Plot D13B</b>, Vikrampuri Colony, on Wellington Road",
              "<b>Karkhana</b>, a short way from Trimulgherry and Marredpally",
-             "<b>Listed on Google</b> as BNR Skin &amp; Vitiligo Hospital",
+             f"<b>Listed on Google</b> as {GOOGLE_LISTING}",
              "<b>Parking</b>: TODO, to be confirmed by the clinic",
              "<b>Message first</b> if you are travelling any distance",
          ]},
+
+        {"kind": "map", "eyebrow": "On the map",
+         "h2": "Where the clinic is.",
+         "intro": "Karkhana, off Wellington Road. The pin is the clinic's own Google "
+                  "listing, so the directions you get here are the directions the "
+                  "clinic gives on the phone."},
     ],
     "faq_h2": "Visiting the clinic",
     "faqs": [
         ("Is this the same place as BNR Skin & Vitiligo Hospital?",
          "Yes. BNR Skin & Vitiligo Hospital is the former name of this practice. Same "
-         "doctor, same address in Secunderabad, same records. The Google listing still shows "
-         "the old name while the change works through."),
+         "doctor, same address in Secunderabad, same records. The Google listing carries "
+         "both names, so either one finds the clinic."),
         ("Where exactly is the clinic?",
          "Plot No D13B, Wellington Rd, Vikrampuri Colony, Karkhana, Secunderabad, Telangana "
          "500009. Off Wellington Road, a short way from Trimulgherry and West Marredpally."),
@@ -515,13 +809,14 @@ PAGES = [
     "eyebrow": "Contact",
     "h1": "One number. One conversation.",
     "lede": "Appointments are arranged on WhatsApp: message the clinic, say what you're seeing, "
-            "and the team comes back with a time. There is no form to fill in and no app to "
-            "install.",
+            "and the team comes back with a time. One conversation, and the fee is on this "
+            "page before you start it.",
     "acts": [("Book on WhatsApp", WHATSAPP), ("Call the clinic", PHONE)],
     "glance": [
         ("WhatsApp", PHONE_SHOW),
         ("Phone", PHONE_SHOW + " · " + PHONE_ALT_SHOW),
         ("Landline", PHONE_LANDLINE_SHOW),
+        ("Consultation", f"{FEE_ONLINE_SHOW} online · {FEE_CLINIC_SHOW} in person, {FEE_TAX}"),
         ("Address", ADDRESS),
         ("Hours", HOURS),
         ("Formerly", "BNR Skin & Vitiligo Hospital"),
@@ -552,6 +847,12 @@ PAGES = [
                        "More on the Google listing"]},
          ]},
 
+        fees_block(
+            h2="What it costs before you message",
+            intro="Two fees, both fixed. Knowing them before you start a conversation "
+                  "is the point — nobody should have to ask what a consultation costs "
+                  "after they have already described their problem to a stranger."),
+
         {"kind": "cards", "eyebrow": "The clinic", "h2": "Karkhana, Secunderabad",
          "intro": "One consulting location. The address the practice has held for years, under "
                   "the name BNR Skin & Vitiligo Hospital until recently.",
@@ -559,7 +860,7 @@ PAGES = [
              {"title": "Where to come", "icon": "pin",
               "body": ADDRESS + ".",
               "list": ["On Wellington Road, Vikrampuri Colony",
-                       "Listed on Google as BNR Skin & Vitiligo Hospital",
+                       "Listed on Google as " + GOOGLE_LISTING_PLAIN,
                        "Serves Trimulgherry, West Marredpally, Bowenpally, Alwal"]},
              {"title": "When", "icon": "clock",
               "body": HOURS + ". Closed on Sunday.",
@@ -567,6 +868,11 @@ PAGES = [
                        "Walk-ins seen only if there is a gap",
                        "Video consultation if you are out of the city"]},
          ]},
+
+        {"kind": "map", "eyebrow": "Finding us",
+         "h2": "The clinic on a map.",
+         "intro": "Off Wellington Road in Karkhana. Tap through for turn-by-turn "
+                  "directions, or message on WhatsApp if you are close and lost."},
 
         {"kind": "callout", "warn": True, "title": "This is not an emergency service",
          "body": "For a rapidly spreading rash with fever, blistering across large areas, "
@@ -590,6 +896,7 @@ PAGES = [
          "Message the clinic on WhatsApp at " + PHONE_SHOW + ". Say what you're seeing, "
          "attach a photograph if you have one, and the team replies with a time. That is "
          "the whole process."),
+        *FEE_FAQS,
         ("Why is there no booking form on this website?",
          "Because a form is a second queue, and a second queue is where appointments get lost. "
          "One WhatsApp conversation holds the booking, the photographs, the reschedule and the "
@@ -632,8 +939,8 @@ PAGES = [
     "eyebrow": "Results",
     "h1": "What change actually looks like.",
     "lede": "Every image on this page is a real patient who signed a consent form for it to be "
-            "published. Where no consented image exists, there is no image. A placeholder is "
-            "more honest than a stock photograph.",
+            "published. Where no consented image exists, there is no image — nothing here is "
+            "stock photography and nothing here is an illustration.",
     "acts": [("Book on WhatsApp", WHATSAPP), ("Read patient stories", "patient-stories")],
     "glance": [
         ("Images", "Consent-documented only"),
@@ -656,15 +963,49 @@ PAGES = [
              "That means this page fills in slowly. It also means everything on it is real.",
          ]},
 
+        # The full case studies. A case is a SERIES, not a pair — a chronic
+        # condition is judged on whether a change held, which only a sequence
+        # can show. The photographs are real, from the clinic; the frames are
+        # cropped and matched but never retouched or relit. See content/cases.py.
         {"kind": "ba", "eyebrow": "Documented in clinic",
          "h2": "Progress, photographed at fixed intervals",
-         "intro": "Placeholders until each consented series is supplied. A placeholder is more "
-                  "honest than a stock photograph.",
-         "items": [
-             ("Vitiligo: repigmentation", "Excimer phototherapy · duration on file"),
-             ("Plaque psoriasis: clearance", "Topical and phototherapy protocol"),
-             ("Acne: active lesion control", "Medical protocol and peels"),
-         ]},
+         "intro": "Every case the clinic has consent to show. Each one is photographed "
+                  "in the same position at every visit, so the two pictures can be "
+                  "compared honestly. Results differ from person to person, and a few "
+                  "cases have no starting photograph — those say so.",
+         # Falls back to labelled empty frames while a case waits on its consent
+         # record, because a placeholder is more honest than a stock photograph
+         # — which is what this page says about itself either way.
+         "items": cases() or RESULTS_PLACEHOLDERS},
+
+        # The page's argument is that measurement, not photography, is what
+        # tells you whether treatment is working — but until here it asserts
+        # that in prose while the only visual on the page is an empty frame. A
+        # Wood's lamp is the plainest possible demonstration: the same skin,
+        # twice, with the second showing what the first could not.
+        {"kind": "diagram", "eyebrow": "Measuring, not photographing",
+         "h2": "The extent is often larger than it looks.",
+         "intro": "A vitiligo patch does not end where the eye says it ends. Under a Wood's "
+                  "lamp the affected skin fluoresces and the true border appears, along with "
+                  "patches that ordinary light does not show at all. That is the baseline "
+                  "everything later is compared against.",
+         "caption": "Which is also why a course judged by photographs alone can look like it "
+                    "is doing nothing while it is working, or the reverse. The lamp is used "
+                    "at the first visit and at reviews.",
+         "rail": True,
+       "labels": [
+           {"text": "Two faint patches", "x": 20, "y": 42, "find": "artwork"},
+           {"text": "Under the lamp", "x": 66, "y": 12, "row": 1, "find": "artwork"},
+           {"text": "The same two, sharp", "x": 56, "y": 49, "row": 2, "find": "artwork"},
+           {"text": "Three more", "x": 74, "y": 34, "find": "artwork"},
+       ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B13-woods-lamp.webp", "w": 1820, "h": 1024,
+             "alt": "The same patch of brown forearm skin shown twice. In ordinary daylight "
+                    "two pale patches are faint and low in contrast. Under the violet light "
+                    "of a Wood's lamp the same two patches glow with sharp borders, and "
+                    "three further patches appear that were not visible before."}},
 
         {"kind": "cards", "eyebrow": "How progress is measured",
          "h2": "What is being tracked, condition by condition",

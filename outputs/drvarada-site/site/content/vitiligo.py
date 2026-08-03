@@ -9,7 +9,9 @@ may imply otherwise.** The vocabulary is repigmentation, stability, control and
 spread. It is also the correct clinical vocabulary, so this costs nothing.
 """
 
-from chrome import PHONE, WHATSAPP
+from chrome import (FEE_CLINIC_SHOW, FEE_DIFF_SHOW, FEE_ONLINE_SHOW, FEE_TAX,
+                    PHONE, WHATSAPP)
+from content.fees import FEE_FAQS, NOTE_COST, fees_block
 
 CROSS = ("vitiligo-treatment-hyderabad", "Vitiligo treatment in Hyderabad",
          "If you can reach the clinic: phototherapy, excimer and the grafting list.")
@@ -58,6 +60,21 @@ PAGES = [
              "from that one answer.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "How pigment works",
+         "h2": "What the immune system is destroying.",
+         "intro": "Pigment is made by one cell type and given away. A melanocyte sits at the base of the epidermis and passes packets of pigment out along its arms into the surrounding skin cells, which carry them upward. Lose the melanocyte and the skin above it has no supply.",
+         "caption": "One melanocyte supplies roughly thirty-six surrounding cells. That is why losing a small number of them clears the colour from a visible patch of skin, and why treatment aims to bring cells back rather than add dye.",
+         "labels": [
+             {"text": "Pigment cap over each nucleus", "x": 40, "y": 33, "lead": 21, "find": "artwork"},
+             {"text": "Packets travelling along the arm", "x": 34, "y": 47, "lead": 27, "find": "artwork"},
+             {"text": "Arms reaching between cells", "x": 46, "y": 57, "lead": 15, "find": "artwork"},
+             {"text": "Melanocyte", "x": 31, "y": 74, "lead": 30, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/A2-melanocyte.webp", "w": 1820, "h": 1024,
+             "alt": "A melanocyte at the base of the epidermis, drawn as a star-shaped cell with long arms reaching up between the surrounding skin cells. Dark brown pigment granules are made inside the melanocyte, travel along its arms, and are handed into neighbouring cells, where they gather into a cap sitting above each cell nucleus. Higher rows of cells flatten and pale toward the skin surface."}},
+
         {"kind": "cards", "eyebrow": "The two questions", "h2": "What the first visit settles",
          "accent": "chronic",
          "items": [
@@ -82,6 +99,21 @@ PAGES = [
                  "each hair. If the hairs inside a patch have turned white too, that reservoir "
                  "is depleted, which is why those patches respond poorly to creams and light, "
                  "and why surgery exists."},
+
+        {"kind": "diagram", "eyebrow": "Repigmentation",
+         "h2": "Colour comes back two ways, and one of them needs hair.",
+         "intro": "Pigment returns as small islands spreading outward from each hair follicle, and as a band creeping in from the edge of the patch. That is the whole reason lips and fingertips are difficult: almost no follicles, almost no reservoir to repopulate from.",
+         "caption": "Pigment cells survive inside hair follicles after they have gone from the skin around them. Light and creams work by waking that reservoir, which is why a patch whose hairs have turned white responds so poorly to both.",
+         "labels": [
+             {"text": "Island spreading from one hair", "x": 22, "y": 19, "lead": 39, "find": "spot:skin@pale"},
+             {"text": "A hair with no island yet", "x": 40, "y": 31, "lead": 21, "col": 71, "find": "artwork"},
+             {"text": "Pigment advancing from the edge", "x": 18, "y": 40, "lead": 43, "find": "edge:pale|skin"},
+             {"text": "The follicle beneath", "x": 19, "y": 69, "lead": 42, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B2-repigmentation-routes.webp", "w": 1820, "h": 1024,
+             "alt": "A pale vitiligo patch on brown skin, seen from above, with pigment returning in two ways. Small round islands of brown pigment have appeared inside the patch, each one centred on a hair and spreading outward from it, while a band of pigment creeps inward from the patch border. Two hairs in the patch have no island around them yet. A cut-away at the corner shows a hair follicle running down beneath the pale surface."}},
 
         {"kind": "table", "eyebrow": "Treatments",
          "h2": "What each treatment does, and who it suits",
@@ -221,6 +253,22 @@ PAGES = [
         ("Why it matters", "It picks the treatment"),
     ],
     "sections": [
+        {"kind": "diagram", "eyebrow": "The two patterns",
+         "h2": "One side, or both sides.",
+         "intro": "This is the first thing a dermatologist decides, and it changes almost everything that follows. Segmental disease keeps to one side of the body and stops at the midline. Non-segmental appears in matched pairs — the same site on both sides.",
+         "caption": "Segmental disease usually becomes stable within a year and is the pattern that responds best to surgical repigmentation. Non-segmental is the immune-driven form, and controlling the immune attack comes before anything else.",
+         "rail": True,
+"labels": [
+    {"text": "One side only", "x": 22, "y": 32, "row": 1, "find": "artwork"},
+    {"text": "Stops at the midline", "x": 25, "y": 52, "find": "edge:pale|skin"},
+    {"text": "Matched on both sides", "x": 72, "y": 63, "find": "pale"},
+    {"text": "Hands, face, knees", "x": 57, "y": 82, "row": 1, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B3-vitiligo-patterns.webp", "w": 1820, "h": 1024,
+             "alt": "Two simplified featureless human figures side by side on brown skin. The left figure has pale depigmented patches gathered into a single band running down one side of the face, trunk and arm, stopping abruptly at the midline so the other half is unaffected. The right figure has smaller patches arranged symmetrically — a matching patch at each eye, each elbow, each hand and each knee."}},
+
         {"kind": "cards", "eyebrow": "By pattern", "h2": "Segmental or non-segmental",
          "accent": "chronic",
          "intro": "These behave so differently that they are almost two conditions sharing "
@@ -247,6 +295,23 @@ PAGES = [
                  "phototherapy, so recognising it early saves patients months of light "
                  "treatment that was never going to work."},
 
+        {"kind": "diagram", "eyebrow": "Reading the edge",
+         "h2": "The border tells you what it is doing.",
+         "intro": "Whether the disease is currently spreading is read from the margin of the patch, not from how large it is. An advancing edge fades; a settled one is drawn.",
+         "caption": "This is why the twelve-month wait before surgery is not caution for its own sake. Grafting into active disease means the same immune process destroys the transplanted cells.",
+         "rail": True,
+"labels": [
+    {"text": "Border fades out", "x": 15, "y": 44, "row": 2, "find": "edge:pale|skin"},
+    {"text": "Confetti spots", "x": 33, "y": 30, "find": "spot:pale@skin"},
+    {"text": "A scratch line", "x": 23, "y": 66, "row": 1, "find": "spot:pale@skin"},
+    {"text": "A border you can draw", "x": 56, "y": 45, "row": 1, "find": "edge:pale|skin"},
+    {"text": "Pigment at each hair", "x": 69, "y": 32, "find": "spot:skin@pale"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B4-active-vs-stable.webp", "w": 1820, "h": 1024,
+             "alt": "Two areas of brown skin seen from above. The left patch has a soft ill-defined border fading gradually into the surrounding skin, with tiny separate pale dots scattered outside it and one straight pale streak crossing the skin nearby. The right patch has a single crisp border, no scattered dots, and several small round islands of returning brown pigment inside it, each centred on a hair."}},
+
         {"kind": "prose", "eyebrow": "By activity", "h2": "Active or stable: the real question",
          "body": [
              "Every treatment decision hangs on this. Active disease must be quietened "
@@ -256,6 +321,22 @@ PAGES = [
              "history, the appearance of the patch margins, and, most reliably, photographs "
              "taken at intervals and compared properly.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "What the lamp shows",
+         "h2": "More patches than you can see.",
+         "intro": "A Wood's lamp is a handheld ultraviolet light. Under it, skin that has lost pigment fluoresces bright chalk-white with a sharp border, while normal skin stays dark — so patches that are invisible in ordinary light, and edges that look vague, both become obvious.",
+         "caption": "This is how the true extent of the disease is judged, and how a vague-looking border is confirmed as genuinely advancing. It is also the examination most often skipped.",
+         "rail": True,
+  "labels": [
+      {"text": "Two faint patches", "x": 20, "y": 42, "find": "artwork"},
+      {"text": "Under the lamp", "x": 66, "y": 12, "row": 1, "find": "artwork"},
+      {"text": "The same two, sharp", "x": 56, "y": 49, "row": 2, "find": "artwork"},
+      {"text": "Three more", "x": 74, "y": 34, "find": "artwork"},
+  ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B13-woods-lamp.webp", "w": 1820, "h": 1024,
+             "alt": "The same patch of brown forearm skin shown twice. In ordinary daylight two pale patches are faint and low in contrast with soft edges. Under a handheld lamp casting a violet glow, the same two patches stand out as sharp-edged chalk-white areas — and three more patches are visible that could not be seen at all in daylight."}},
 
         {"kind": "table", "eyebrow": "Telling them apart",
          "h2": "What suggests active disease",
@@ -378,6 +459,20 @@ PAGES = [
              "have themselves gone white has lost its reservoir. Those are the patches that "
              "need surgery rather than more light.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "The mechanism",
+         "h2": "Light that reaches exactly far enough.",
+         "intro": "Narrowband ultraviolet penetrates the epidermis and the top of the dermis and stops there. In that zone it does two useful things at once: it calms the immune cells attacking pigment, and it stimulates the pigment cells that survive.",
+         "caption": "It is not sunbathing and it is not a tanning bed. The wavelength is narrow, the dose is measured, and the depth it reaches is why it is safe to repeat.",
+         "labels": [
+             {"text": "Ultraviolet enters here", "x": 47, "y": 23, "lead": 10, "find": "artwork"},
+             {"text": "Pigment cells reactivated", "x": 29, "y": 40, "lead": 29, "find": "artwork"},
+             {"text": "Immune cells suppressed, and no deeper", "x": 38, "y": 52, "lead": 20, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D1-phototherapy.webp", "w": 1820, "h": 1024,
+             "alt": "A block of skin with a band of fine parallel light rays entering from above. The rays penetrate the epidermis and stop in the upper dermis, forming a clearly bounded lit zone that does not reach the fat. Inside that zone immune cells are breaking apart while the star-shaped pigment cells at the base of the epidermis are enlarged and active, releasing dark granules upward."}},
 
         {"kind": "steps", "eyebrow": "A course", "h2": "What the schedule looks like",
          "items": [
@@ -521,6 +616,22 @@ PAGES = [
              "for the general disease, excimer for the two patches that won't shift.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "Two ways to deliver light",
+         "h2": "A beam, or a room.",
+         "intro": "Both use ultraviolet light to stimulate pigment cells. The difference is what else gets treated. A targeted handpiece doses one patch at a higher intensity; a cabinet doses everything at once.",
+         "caption": "Targeted light suits a few small patches and spares the normal skin between them. Once the disease is widespread, treating each patch separately stops being practical and the cabinet is the sensible tool.",
+         "rail": True,
+"labels": [
+    {"text": "Skin beside it is spared", "x": 13, "y": 48, "row": 1, "find": "artwork"},
+    {"text": "One patch, one beam", "x": 24, "y": 25, "find": "artwork"},
+    {"text": "The whole body at once", "x": 63, "y": 30, "row": 1, "find": "artwork"},
+    {"text": "Normal skin too", "x": 75, "y": 68, "find": "artwork"},
+],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D2-excimer-vs-cabinet.webp", "w": 1820, "h": 1024,
+             "alt": "Two panels. On the left a handheld treatment head is held above a block of brown skin and sends a narrow cone of pale light down onto one small depigmented patch, leaving the skin around it unlit. On the right a tall three-sided cabinet lined with vertical light tubes holds a plain featureless mannequin in simple clothing; light fills the whole cabinet and reaches its arms, legs and head evenly, with several pale patches lit along with all the surface around them."}},
+
         {"kind": "table", "eyebrow": "Side by side", "h2": "Excimer or NB-UVB?",
          "head": ["", "Excimer laser", "Narrowband UVB"],
          "rows": [
@@ -638,6 +749,38 @@ PAGES = [
              "are destroyed, while the donor site may develop a patch of its own. That is "
              "why the assessment is more important than the operation.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "The operation",
+         "h2": "What a melanocyte transplant actually involves.",
+         "intro": "A thin shaving of your own pigmented skin is taken from the thigh, separated into a suspension of individual pigment cells, and applied to the patch after its surface has been prepared. A small donor area can cover a much larger one.",
+         "caption": "The colour that grows in is your own, because the cells are your own. It matures over weeks to months. None of this is worth doing while the disease is still active — the same immune system would destroy the new cells too.",
+         "label_col": 0,
+         "labels": [
+             {"text": "Donor skin shaved", "x": 9, "y": 82, "lead": 2},
+             {"text": "Cells separated out", "x": 30, "y": 82, "lead": 2},
+             {"text": "Patch surface prepared", "x": 48, "y": 82, "lead": 2},
+             {"text": "Colour returns", "x": 71, "y": 82, "lead": 2},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D3-melanocyte-transplant.webp", "w": 1820, "h": 1024,
+             "alt": "Four stages of a melanocyte transplant shown left to right. First, a very thin sheet of pigmented skin is lifted from a donor site with a fine blade. Second, that sheet is separated in a dish of fluid into a suspension of individual brown pigment cells. Third, the pale depigmented patch has its surface abraded by a small rotating burr. Fourth, the same patch has healed to the same brown as the skin around it, with only a faint outline showing where it was."}},
+
+        {"kind": "diagram", "eyebrow": "The four operations",
+         "h2": "Four ways to move the same thing.",
+         "intro": "All four take pigmented skin from a donor site and put its pigment cells onto the patch. They differ in how much area one donor site can cover, and in how fine the result is.",
+         "caption": "Cell suspension covers the largest area from the smallest donor site, which is why it suits extensive patches. Punch grafting is simplest but can leave a cobblestoned surface. The choice follows the site and the size, not preference.",
+         "label_col": 0,
+         "labels": [
+             {"text": "Mini-punch", "x": 14, "y": 80, "lead": 2},
+             {"text": "Blister roof", "x": 34, "y": 80, "lead": 2},
+             {"text": "Thin sheet", "x": 55, "y": 80, "lead": 2},
+             {"text": "Cell suspension", "x": 76, "y": 80, "lead": 2},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/D4-graft-techniques.webp", "w": 1820, "h": 1024,
+             "alt": "Four techniques in columns, each with a block of brown donor skin above and the pale recipient patch receiving it below. First, small round plugs of skin are lifted out of the donor block and set into matching holes in the patch. Second, a dome-shaped blister is raised on the donor and its thin roof laid over the patch. Third, a thin wide sheet is shaved off the donor with a blade and laid over the patch. Fourth, donor skin in a shallow dish has become a suspension of separate pigment cells, spread as a film across the patch."}},
 
         {"kind": "cards", "eyebrow": "The techniques", "h2": "Four operations, different jobs",
          "accent": "chronic",
@@ -798,6 +941,21 @@ PAGES = [
              "address both or it has only done half the job.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "What is affected",
+         "h2": "The cell a child has lost.",
+         "intro": "It helps to know what is actually missing. Colour is made by one cell type sitting at the base of the epidermis, which hands packets of pigment out to the skin cells around it. Vitiligo is the loss of those cells — nothing the child ate, did, or caught.",
+         "caption": "Children repigment better than adults, and the face and neck respond best of all. That is worth saying early, because the first question a parent asks is almost always whether the colour will come back.",
+         "labels": [
+             {"text": "Pigment cap over each nucleus", "x": 40, "y": 33, "lead": 21, "find": "artwork"},
+             {"text": "Packets travelling along the arm", "x": 34, "y": 47, "lead": 27, "find": "artwork"},
+             {"text": "Arms reaching between cells", "x": 46, "y": 57, "lead": 15, "find": "artwork"},
+             {"text": "Melanocyte", "x": 31, "y": 74, "lead": 30, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/A2-melanocyte.webp", "w": 1820, "h": 1024,
+             "alt": "A melanocyte at the base of the epidermis, drawn as a star-shaped cell with long arms reaching up between the surrounding skin cells. Dark brown pigment granules are made inside it, travel along its arms and are handed into neighbouring cells, where they gather into a cap above each nucleus."}},
+
         {"kind": "table", "eyebrow": "Treatment", "h2": "What is used, and at what age",
          "head": ["Treatment", "Use in children", "Notes"],
          "rows": [
@@ -928,6 +1086,21 @@ PAGES = [
              "correcting them repigments skin.",
          ]},
 
+        {"kind": "diagram", "eyebrow": "Where colour comes from",
+         "h2": "Pigment is made, not eaten.",
+         "intro": "Every diet claim runs aground on this picture. Colour is manufactured inside a cell in your skin and handed to its neighbours. No food supplies it, no food destroys it, and no combination of foods rebuilds a cell that the immune system has removed.",
+         "caption": "What food can do is support general health, which matters. What it cannot do is repigment a patch. Anyone selling a diet that reverses vitiligo is selling you the thing this picture rules out.",
+         "labels": [
+             {"text": "Pigment cap over each nucleus", "x": 40, "y": 33, "lead": 21, "find": "artwork"},
+             {"text": "Packets travelling along the arm", "x": 34, "y": 47, "lead": 27, "find": "artwork"},
+             {"text": "Arms reaching between cells", "x": 46, "y": 57, "lead": 15, "find": "artwork"},
+             {"text": "Melanocyte", "x": 31, "y": 74, "lead": 30, "find": "artwork"},
+         ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/A2-melanocyte.webp", "w": 1820, "h": 1024,
+             "alt": "A melanocyte at the base of the epidermis, drawn as a star-shaped cell with long arms reaching up between the surrounding skin cells. Dark brown pigment granules are made inside it, travel along its arms and are handed into neighbouring cells, where they gather into a cap above each nucleus."}},
+
         {"kind": "table", "eyebrow": "Myth by myth", "h2": "What patients are told, and what is true",
          "head": ["The claim", "The reality"],
          "rows": [
@@ -1034,7 +1207,8 @@ PAGES = [
         ("Phototherapy", "Per session; courses run months"),
         ("Excimer", "Per session, by area treated"),
         ("Surgery", "Per procedure, by area and technique"),
-        ("Quoted", "After examination, in writing"),
+        ("Consultation", f"{FEE_ONLINE_SHOW} online · {FEE_CLINIC_SHOW} in person, {FEE_TAX}"),
+        ("Treatment", "Quoted after examination, in writing"),
         ("Packages", "Ask what happens if it doesn't work"),
     ],
     "sections": [
@@ -1055,12 +1229,20 @@ PAGES = [
              "the treatment itself.",
          ]},
 
+        fees_block(note=NOTE_COST,
+                   h2="The one figure that can be published",
+                   intro="A consultation fee is fixed before anybody examines anything, "
+                         "so it is stated here. Everything below it depends on what is "
+                         "found, which is why the rest of this page describes structure "
+                         "rather than prices."),
+
         {"kind": "table", "eyebrow": "The structure", "h2": "What you are charged for",
          "intro": "Current figures are confirmed at consultation. What does not change is the "
                   "structure, which is what lets you compare one clinic with another.",
          "head": ["Item", "Charged", "What drives the total"],
          "rows": [
-             ["Consultation", "Per visit", "First visit and reviews"],
+             ["Consultation", f"{FEE_ONLINE_SHOW} online · {FEE_CLINIC_SHOW} in person, {FEE_TAX}",
+              "Fixed; reviews charged the same way"],
              ["Topical medication", "At the pharmacy, monthly",
               "Which agent; area being treated"],
              ["NB-UVB phototherapy", "Per session", "2–3 sessions/week over 6–12 months"],
@@ -1070,9 +1252,10 @@ PAGES = [
               "Number of grafts; number of sittings"],
              ["Review visits", "Per visit", "Every 6–8 weeks while active"],
          ],
-         "note": "Actual rupee figures are quoted by the clinic after examination and are "
-                 "deliberately not published here. A number without your diagnosis attached to "
-                 "it is not information, it is an advertisement."},
+         "note": "The consultation fee is fixed and is stated above. Every other rupee figure "
+                 "is quoted by the clinic after examination and is deliberately not published "
+                 "here: a number without your diagnosis attached to it is not information, it "
+                 "is an advertisement."},
 
         {"kind": "checklist", "eyebrow": "Before you pay",
          "h2": "Six questions worth asking any clinic.",
@@ -1112,10 +1295,12 @@ PAGES = [
     ],
     "faq_h2": "Cost questions",
     "faqs": [
-        ("Why aren't prices listed on this page?",
-         "Because a price without a diagnosis attached is meaningless. The number of "
-         "sessions your patches need depends on their site, size, duration and activity. "
-         "Costs are quoted in writing after examination, including for online consultations."),
+        ("Why aren't treatment prices listed on this page?",
+         f"The consultation fee is listed, because it is fixed: {FEE_ONLINE_SHOW} {FEE_TAX} "
+         f"online, {FEE_CLINIC_SHOW} {FEE_TAX} in person. Treatment prices are not, because "
+         f"a price without a diagnosis attached is meaningless — the number of sessions your "
+         f"patches need depends on their site, size, duration and activity. Those are quoted "
+         f"in writing after examination."),
         ("Is vitiligo treatment covered by insurance in India?",
          "Generally not. Most policies treat it as a chronic dermatological condition rather "
          "than an admissible one, and surgical repigmentation is often classed as cosmetic. "
@@ -1154,6 +1339,7 @@ PAGES = [
     "acts": [("Book a video consultation", WHATSAPP), ("Call the clinic", PHONE)],
     "sources": ["niams-vitiligo", "aad-vitiligo-tx", "dermnet-vitiligo"],
     "glance": [
+        ("Fee", f"{FEE_ONLINE_SHOW} {FEE_TAX}, paid in advance"),
         ("Booking", "WhatsApp: video link sent back"),
         ("Good for", "Diagnosis review, plan, second opinion"),
         ("Not for", "Procedures, grafting assessment in isolation"),
@@ -1162,6 +1348,11 @@ PAGES = [
         ("Outcome", "A written plan you can act on locally"),
     ],
     "sections": [
+        fees_block(
+            intro="Both fees are fixed and are the same for every condition. "
+                  "Consult online first and, if an examination in person turns "
+                  "out to be necessary, only the difference is charged."),
+
         {"kind": "prose", "eyebrow": "Why this exists",
          "h2": "Most of vitiligo care is decisions, not procedures.",
          "body": [
@@ -1177,6 +1368,22 @@ PAGES = [
              "thousand-kilometre trip, and, when travel is genuinely warranted, to arrive "
              "knowing exactly what for.",
          ]},
+
+        {"kind": "diagram", "eyebrow": "The limit of a photograph",
+         "h2": "What a camera cannot do.",
+         "intro": "Photographs settle a great deal — the pattern, the distribution, the change since last time. What they cannot do is fluoresce. A Wood's lamp reveals patches and borders that no camera in ordinary light will record.",
+         "caption": "This is the honest boundary of an online consultation for vitiligo. Plans, drugs and expectations can be settled remotely; a full assessment of extent needs the lamp, and the lamp needs you in the room.",
+         "rail": True,
+  "labels": [
+      {"text": "Two faint patches", "x": 20, "y": 42, "find": "artwork"},
+      {"text": "Under the lamp", "x": 66, "y": 12, "row": 1, "find": "artwork"},
+      {"text": "The same two, sharp", "x": 56, "y": 49, "row": 2, "find": "artwork"},
+      {"text": "Three more", "x": 74, "y": 34, "find": "artwork"},
+  ],
+         "body": "[ diagram ]",
+         "image": {
+             "src": "img/diagrams/B13-woods-lamp.webp", "w": 1820, "h": 1024,
+             "alt": "The same patch of brown forearm skin shown twice. In ordinary daylight two pale patches are faint and low in contrast with soft edges. Under a handheld lamp casting a violet glow, the same two patches stand out as sharp-edged chalk-white areas — and three more patches are visible that could not be seen at all in daylight."}},
 
         {"kind": "cards", "eyebrow": "Scope", "h2": "What it can and can't settle",
          "accent": "chronic",
@@ -1243,6 +1450,7 @@ PAGES = [
     ],
     "faq_h2": "Online consultation",
     "faqs": [
+        *FEE_FAQS,
         ("How do I book an online vitiligo consultation?",
          "Message the clinic on WhatsApp and ask for a video consultation. The team confirm a "
          "time and send the link back on the same thread. One conversation, so nothing is lost "
