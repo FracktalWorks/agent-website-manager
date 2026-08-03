@@ -73,8 +73,14 @@ contract rather than an orphan file.
 
 ## Quick Start
 
+**Opening the folder in VS Code does steps 1 and 2 for you** — `setup.ps1` /
+`setup.sh` run on `folderOpen`, and the workspace hub opens in a Simple Browser
+pane at the same time. Setup is fingerprinted against `requirements.txt`, so
+only the first open after a change actually installs anything (~0.7s otherwise).
+
 1. Copy `.env.example` → `.env` and fill in your Hostinger & WordPress credentials
-2. `pip install -r requirements.txt`
+2. `pip install -r requirements.txt` (optional heavy ML extras:
+   `pip install -r requirements-ml.txt` — only needed for media auto-tagging)
 3. Tell the agent what you want to do:
    - "Set up a new WordPress site on Hostinger for my business"
    - "Create a landing page with Elementor for my product launch"

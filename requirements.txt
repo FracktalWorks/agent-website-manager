@@ -20,9 +20,8 @@ lxml
 # Image processing (for media optimization)
 Pillow
 
-# Local zero-shot image classification (media folder auto-organization)
-torch
-open_clip_torch
+# QR codes for print collateral (pure Python, no system deps)
+segno
 
 # SEO analysis
 lxml_html_clean

@@ -88,12 +88,24 @@
       }
     },
     {
+      // Opens on folder open. `dependsOn` starts the server first, and the
+      // server task's `endsPattern` matches "already serving" as well as a
+      // fresh start, so reopening the window attaches to the running hub
+      // instead of failing on the port.
+      //
+      // This does NOT wait for "Setup Agent Environment". It does not need
+      // to: hub.py and artifacts.py are pure standard library, so the
+      // workspace opens instantly while pip is still working in the other
+      // terminal.
       "label": "workspace hub (preview in VS Code)",
       "dependsOn": [
         "workspace hub server"
       ],
       "command": "${input:odOpenHub}",
       "problemMatcher": [],
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
       "presentation": {
         "reveal": "never",
         "close": true

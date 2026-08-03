@@ -1,0 +1,12 @@
+# Optional: local zero-shot image classification for media folder
+# auto-organization (media_cleanup skill).
+#
+# SPLIT OUT OF requirements.txt ON PURPOSE. torch is ~2.5GB and was being
+# attempted on every VS Code folder open by setup.ps1 -- which ran pip with
+# --quiet and never checked the exit code, so the failure was invisible and
+# neither package was ever actually installed. Everything else in the repo
+# works without these.
+#
+#   pip install -r requirements-ml.txt
+torch
+open_clip_torch
