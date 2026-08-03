@@ -45,6 +45,19 @@ PAPER = "#F8F5F3"        # porcelain, and the illustrations' own background —
 INK = "#1E3A63"          # so artwork meets card with no visible seam
 SITE = "drvarada.com"
 
+# IN THESE FILENAMES "light" AND "dark" NAME THE BACKGROUND, NOT THE INK.
+#
+# `logo-mark-light.svg` is filled #1E3A63 — it is the navy mark FOR a light
+# background. Reading it as "the light-coloured one" and putting it on the navy
+# band gives navy on navy: only the anti-aliased edges survive, which does not
+# look like a missing logo, it looks like a broken one.
+#
+# The footer mark is the MONO white rather than the multi-tone `-dark` variant
+# on purpose. At 40px the six tints in that file collapse into mush; one flat
+# colour holds its shape.
+FOOT_MARK = "logo-mark-mono-light.svg"     # white — for the navy band
+ART_MARK = "logo-mark-flat-navy.svg"       # navy  — for the porcelain panel
+
 # Each card is a headline and one supporting line. The POST body — the longer
 # text a reader sees under the image — is `body`, and it is not drawn on the
 # card: text baked into an image cannot be read by a screen reader, cannot be
@@ -143,8 +156,7 @@ def card_html(p: dict) -> str:
     if p["art"]:
         art = (f'<img src="../site/assets/img/diagrams/{p["art"]}" alt="">')
     else:
-        art = ('<img class="mark" '
-               'src="../brand/logo-mark-flat-navy.svg" alt="">')
+        art = f'<img class="mark" src="../brand/{ART_MARK}" alt="">'
     head = p["head"].replace("\n", "<br>")
     return f"""<meta charset="utf-8">
 <style>
@@ -189,7 +201,10 @@ def card_html(p: dict) -> str:
   .foot {{ margin-top: auto; padding-top: 22px; display: flex;
            align-items: center; gap: 15px;
            border-top: 1px solid rgba(255,255,255,.22); }}
-  .foot img {{ width: 38px; height: 38px; }}
+  /* Height only. The mark's viewBox is 473x662 — portrait, not square — so
+     pinning both axes to 38px squashed it horizontally by nearly a third.
+     Let width follow. */
+  .foot img {{ height: 42px; width: auto; }}
   .foot span {{ font-family: Manrope, sans-serif; font-weight: 700;
                 font-size: 25px; letter-spacing: .2px; }}
 </style>
@@ -199,7 +214,7 @@ def card_html(p: dict) -> str:
     <h1>{head}</h1>
     <p>{p["sub"]}</p>
     <div class="foot">
-      <img src="../brand/logo-mark-light.svg" alt="">
+      <img src="../brand/{FOOT_MARK}" alt="">
       <span>{SITE}</span>
     </div>
   </div>
@@ -270,6 +285,21 @@ def main() -> int:
                if p["art"] and not (DIAGRAMS / p["art"]).exists()]
     if missing:
         raise SystemExit(f"missing illustration(s): {', '.join(missing)}")
+
+    # Gate: each mark must be inked to CONTRAST with the panel it sits on.
+    # The filenames say "light"/"dark" meaning the background, and reading them
+    # the other way puts navy on navy — which renders as a broken-looking
+    # logo, not an absent one, so the footer pixel check still passes.
+    for name, panel, want in ((FOOT_MARK, "navy band", "#FFFFFF"),
+                              (ART_MARK, "porcelain panel", "#1E3A63")):
+        svg = BRAND / name
+        if not svg.exists():
+            raise SystemExit(f"missing brand mark: {svg}")
+        if want not in svg.read_text(encoding="utf-8"):
+            raise SystemExit(
+                f"{name} carries no {want} fill, so it will not read on the "
+                f"{panel}. In these filenames 'light'/'dark' name the "
+                "BACKGROUND, not the ink.")
 
     exe = chrome()
     print(f"\n  rendering {len(POSTS)} card(s) at {W}x{H} @{SCALE}x")
