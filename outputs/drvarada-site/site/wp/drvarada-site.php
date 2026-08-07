@@ -180,6 +180,29 @@ add_action('template_redirect', function () {
                 $seen = true;
                 return $m[0];
             }, $head);
+
+        // Exactly one <meta name="viewport">, and a known one.
+        //
+        // The live head carried TWO: the theme's `initial-scale=1` at the top,
+        // and `initial-scale=1.0, viewport-fit=cover` from Astra/Elementor just
+        // before </head>. Browsers honour the FIRST, so which one applied was
+        // decided by emitter order — i.e. by luck.
+        //
+        // The one we want to win is the one WITHOUT viewport-fit. These pages
+        // use no `env(safe-area-inset-*)` anywhere, so `viewport-fit=cover`
+        // extends the layout under the notch and the home indicator with
+        // nothing compensating for it — it would put the sticky booking bar
+        // under the indicator on exactly the phones most patients use. If safe
+        // area padding is ever added to the bar, revisit this and not before.
+        $seen_vp = false;
+        $head = preg_replace_callback(
+            '#<meta\s+name=(["\'])viewport\1[^>]*>#i',
+            function ($m) use (&$seen_vp) {
+                if ($seen_vp) { return ''; }
+                $seen_vp = true;
+                return '<meta name="viewport" '
+                     . 'content="width=device-width, initial-scale=1">';
+            }, $head);
         return $head . $rest;
     });
 }, 0);
