@@ -339,17 +339,53 @@ def _scope_css(css: str, scope: str = ".od-embed") -> str:
             i += 1
             continue
         brace = css.find("{", i)
-        semi = css.find(";", i)
-        if brace == -1:
-            break
-        if semi != -1 and semi < brace:  # statement at-rule, e.g. @import ...;
+        # Statement terminator for at-rules like `@import url(...);` — the first
+        # `;` at paren/quote depth 0. NOT `css.find(";")`: that matched the `;`
+        # inside a Google-Fonts url() (`wght@400;500;...`) and shredded the
+        # @import into invalid fragments a downstream CSS optimizer then dropped.
+        limit = brace if brace != -1 else n
+        semi, depth, quote, j = -1, 0, None, i
+        while j < limit:
+            c = css[j]
+            if quote:
+                if c == quote:
+                    quote = None
+            elif c in "\"'":
+                quote = c
+            elif c == "(":
+                depth += 1
+            elif c == ")":
+                depth = max(0, depth - 1)
+            elif c == ";" and depth == 0:
+                semi = j
+                break
+            j += 1
+        if semi != -1:                   # a statement at-rule ended before `{`
             out.append(css[i:semi + 1].strip())
             i = semi + 1
             continue
+        if brace == -1:
+            break
         prelude = css[i:brace].strip()
         inner, after = read_block(brace)
         if prelude.startswith("@"):
-            kw = prelude.split(None, 1)[0].lower()
+            # Read the at-rule NAME, not the first whitespace-delimited token.
+            #
+            # `split()` returned the WHOLE prelude for minified CSS, because
+            # `@media(max-width:1000px)` has no space after the keyword. That
+            # failed the membership test below, so the block fell through to
+            # "keep verbatim" and every selector inside it went UNSCOPED,
+            # while the base rules around it were scoped to `.od-embed`.
+            #
+            # It is invisible until you resize. `.od-embed .grid-4` is
+            # specificity (0,2,0); the unscoped `.grid-4` inside the media
+            # query is (0,1,0). Media queries add NO specificity, so the
+            # desktop rule outranks every responsive override at every width
+            # and the page never collapses its grids. That is exactly how
+            # fracktal.in came to sit at four columns on a phone while the
+            # local build — which has no `.od-embed` wrapper, so both rules
+            # tie and source order wins — verified clean at all five widths.
+            kw = re.match(r"@[\w-]+", prelude).group(0).lower()
             if kw in ("@media", "@supports", "@container", "@layer", "@-moz-document"):
                 out.append(f"{prelude} {{\n{_scope_css(inner, scope)}\n}}")
             else:  # @keyframes, @font-face, @page — keep verbatim
@@ -360,7 +396,8 @@ def _scope_css(css: str, scope: str = ".od-embed") -> str:
     return "\n".join(out)
 
 
-def build_canvas_content(html_path: Path, scope_css: bool = False) -> str:
+def build_canvas_content(html_path: Path, scope_css: bool = False,
+                         keep_scripts: bool = False) -> str:
     """Build post_content for a direct-HTML (non-Elementor) page.
 
     Hoists every <style> into one block and wraps the design's <body> markup in
@@ -372,7 +409,13 @@ def build_canvas_content(html_path: Path, scope_css: bool = False) -> str:
 
     When `scope_css` is True (header/footer templates), every CSS selector is
     prefixed with `.od-embed` so the design's generic rules don't restyle the
-    theme's header/footer chrome."""
+    theme's header/footer chrome.
+
+    When `keep_scripts` is True, the page's own INLINE <script>s (carousels,
+    sliders — anything that makes the design interactive) are preserved too, each
+    marked data-no-optimize so LiteSpeed can't defer/combine them into breakage.
+    Off by default: a static page has no business shipping JS, so it must be
+    opted into per page (external-src scripts are never kept)."""
     from bs4 import BeautifulSoup
     soup = BeautifulSoup(html_path.read_text(encoding="utf-8"), "html.parser")
     css = "\n".join(s.get_text() for s in soup.find_all("style"))
@@ -381,6 +424,13 @@ def build_canvas_content(html_path: Path, scope_css: bool = False) -> str:
     # (Re-emitted inside the block; Google reads JSON-LD anywhere in the document.)
     ld_scripts = [s.decode() for s in soup.find_all(
         "script", attrs={"type": "application/ld+json"})]
+    keep_js = []
+    if keep_scripts:
+        for s in soup.find_all("script"):
+            if (s.get("type") or "").lower() == "application/ld+json" or s.get("src"):
+                continue
+            s.attrs["data-no-optimize"] = "1"
+            keep_js.append(s.decode())
     for s in soup.find_all(["style", "script"]):
         s.decompose()
     body = soup.find("body")
@@ -388,14 +438,19 @@ def build_canvas_content(html_path: Path, scope_css: bool = False) -> str:
     if scope_css:
         css = _scope_css(css, ".od-embed")
     ld_block = ("\n" + "\n".join(ld_scripts)) if ld_scripts else ""
-    inner = (f'<div class="od-embed">\n<style>\n{css}\n</style>\n'
+    ld_block += ("\n" + "\n".join(keep_js)) if keep_js else ""
+    # data-no-optimize keeps LiteSpeed (and Autoptimize) from combining/UCSS-ing
+    # this block into the site bundle — where a design page's inline CSS gets
+    # dropped as "unused" and the page renders unstyled. Belt to the braces of
+    # valid CSS: the block stays inline and untouched.
+    inner = (f'<div class="od-embed">\n<style data-no-optimize="1">\n{css}\n</style>\n'
              f'{body_html}\n</div>{ld_block}')
     return f'<!-- wp:html -->\n{inner}\n<!-- /wp:html -->'
 
 
 def cmd_deploy_canvas(html_path: str, title: str, slug: str = None,
                       page_id: int = None, status: str = "draft",
-                      header_footer: bool = False):
+                      header_footer: bool = False, keep_scripts: bool = False):
     """Deploy an Open Design HTML page DIRECTLY (no Elementor) as a Custom HTML
     block. This is the preferred path for design-system pages — highest fidelity,
     one REST write, no conversion or CSS-regeneration steps.
@@ -413,7 +468,8 @@ def cmd_deploy_canvas(html_path: str, title: str, slug: str = None,
         slug = re.sub(r'[^a-z0-9-]', '-', title.lower()).strip('-')
 
     template = "elementor_header_footer" if header_footer else "elementor_canvas"
-    content = build_canvas_content(html_file, scope_css=header_footer)
+    content = build_canvas_content(html_file, scope_css=header_footer,
+                                   keep_scripts=keep_scripts)
     meta_desc = extract_meta_description(html_file)
     payload = {
         "title": title,
@@ -589,6 +645,9 @@ Examples:
                           help="Keep the site's Elementor header/footer (uses "
                                "elementor_header_footer template + scopes the "
                                "design CSS under .od-embed)")
+    canvas_p.add_argument("--keep-scripts", action="store_true",
+                          help="Preserve the page's own inline <script>s "
+                               "(carousels/sliders), each data-no-optimize")
 
     # deploy-elementor
     elem_p = sub.add_parser("deploy-elementor", help="Deploy HTML as Elementor page")
@@ -608,7 +667,7 @@ Examples:
         cmd_deploy(args.html, args.title, args.slug, args.type, args.id, args.status, args.parent)
     elif args.command == "deploy-canvas":
         cmd_deploy_canvas(args.html, args.title, args.slug, args.id, args.status,
-                          args.header_footer)
+                          args.header_footer, args.keep_scripts)
     elif args.command == "deploy-elementor":
         cmd_deploy_elementor(args.html, args.title, args.slug, args.id, args.status)
     else:
