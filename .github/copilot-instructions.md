@@ -10,6 +10,8 @@ on Hostinger using the DOE Framework (Directive, Orchestration, Execution).
 - `.github/skills/wordpress_management/SKILL.md` — WordPress content, plugins, themes, SEO
 - `.github/skills/hostinger_management/SKILL.md` — Hostinger hosting, domains, email, SSL
 - `.github/skills/elementor_builder/SKILL.md` — Elementor page builder, templates, kits
+- `.github/skills/design_taste/SKILL.md` — anti-slop design judgment (vendored tasteskill.dev + 74 brand DESIGN.md corpora); load before designing any page
+- `.github/skills/design_concepting/SKILL.md` — mockup-first flow: compare 2-4 design directions in the hub before building anything
 - `.github/skills/*/scripts/` — Deterministic execution scripts
 - `.tmp/scripts/` — Shared utilities on PYTHONPATH
 

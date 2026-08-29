@@ -93,6 +93,9 @@ its REST API to manage content, Elementor designs, plugins, themes, SEO, backups
 | `design_system_management` | `.github/skills/design_system_management/SKILL.md` | Choose/load/use/validate/create design systems from the 152-package corpus — token tiers, paste-the-`:root` rule, quality rubric |
 | `search_presence` | `.github/skills/search_presence/SKILL.md` | Be findable — root favicon, canonical host, sitemap, Search Console, Bing (the index behind ChatGPT search), IndexNow, LocalBusiness `geo`, Business Profile, keyless map embed |
 | `brand_assets` | `.github/skills/brand_assets/SKILL.md` | Platform artwork from the brand's SVGs — favicon, Business Profile logo/cover, WhatsApp profile + catalogue tiles, social cards; judged at the size the platform draws them |
+| `design_taste` | `.github/skills/design_taste/SKILL.md` | Anti-slop design judgment — the design read, three dials, AI-tells ban list, pre-flight; load before designing any page. Corpora: `agent-data/design-taste/` + `agent-data/design-md/` (74 brand references) |
+| `design_concepting` | `.github/skills/design_concepting/SKILL.md` | Mockup-first flow — interview the user on look & feel, author 2-4 distinct HTML direction mockups, compare live in the hub (Design concepts artefact kind), record the decision BEFORE building |
+| `img2threejs` | `.github/skills/img2threejs/SKILL.md` | Vendored image→procedural-Three.js pipeline for 3D product moments; read its `REPO-NOTES.md` first |
 
 Launch sequence across skills: `agent-data/BRAND_LAUNCH_RUNBOOK.md`.
 
@@ -149,6 +152,9 @@ You have access to these tools automatically — do NOT re-implement them:
 
 ### Design and Publish a New Page (fewest steps)
 See `html_deploy/SKILL.md` for the full instructions — summary:
+0. If the look & feel is not already settled, run a `design_concepting` round
+   first (mockup directions → hub compare → recorded decision), with
+   `design_taste` loaded for every mockup and page.
 1. Generate the page HTML **in this repo** — `site_generator` builds it from page
    data against a design system from `agent-data/design-systems/`. Save to
    `outputs/design_pages/[slug].html`. (Open Design is retired; do not start it.)

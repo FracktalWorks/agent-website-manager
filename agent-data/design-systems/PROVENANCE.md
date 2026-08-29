@@ -124,6 +124,35 @@ not as a design system you can build against directly.
   Python in `.tmp/scripts/design_systems.py`; the porting gaps are documented in
   the SKILL.md's "Not ported" section.
 
+## `fracktal-works` — re-verified against the Open Design workspace (2026-08-04)
+
+When the Fracktal work was moved out of Open Design, this package was checked
+against **both** Open Design copies, file by file, by SHA-256:
+
+| Compared against | Result |
+|---|---|
+| `open-design/design-systems/fracktal-works` (the bundled catalog this was vendored from) | identical across all 77 files **except `DESIGN.md`**, where the copy here is the richer one — 10,384 B vs 8,237 B, with the frontmatter block and the measured palette table |
+| `open-design/.od/design-systems/fracktal-in` (the user's workspace copy) | 74 files; its `DESIGN.md` is the oldest of the three (5,588 B, 2026-07-02) |
+
+**Nothing needed to be brought across.** Three apparent gaps were each checked
+and dismissed:
+
+- **`metadata.json`** — an Open Design workspace registration record, not design
+  content. The equivalent lives at
+  `outputs/fracktal-site/design-system/kit/metadata.json`.
+- **Five `ui_kits/app/components/*.jsx`** (`Sidebar`, `ChatArea`, `InputBar`,
+  `MessageBubble`, `AssistantsList`) — these are **Open Design's own app chrome**:
+  a "Design System / Design Files / Preview" sidebar in Ant Design green
+  (`#00b96b`), unreferenced by `ui_kits/app/index.html`. Not Fracktal work; the
+  omission here is correct.
+- **`system/kit.html` / `kit.dark.html`** — differ only in the alert-component
+  demo (entity glyphs vs inline SVG). Generator drift between Open Design
+  versions; the copy here is the newer output.
+
+The brand now also owns an **editable** copy of this system at
+`outputs/fracktal-site/design-system/`, which is what the hub lists and what the
+live editor's tokens panel writes. This tree stays read-only reference.
+
 ## Keeping it fresh
 
 This is a snapshot, not a submodule. To re-sync:

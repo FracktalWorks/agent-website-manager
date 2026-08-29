@@ -26,11 +26,14 @@
 | Design System Management | `.github/skills/design_system_management/SKILL.md` | Choose/load/use/validate/create design systems from the 152-package corpus: token tiers, paste-the-`:root` rule, quality rubric, craft rules |
 | Search Presence | `.github/skills/search_presence/SKILL.md` | Be findable: root favicon, canonical host, sitemap, Search Console, Bing→ChatGPT, IndexNow, LocalBusiness `geo`, Business Profile, keyless map embed. `presence_check.py` measures the on-domain half |
 | Brand Assets | `.github/skills/brand_assets/SKILL.md` | Platform artwork from the brand's SVGs — favicon, GBP logo/cover, WhatsApp profile + catalogue tiles, social cards. Judged at consumption size by `asset_check.py` |
+| Design Taste | `.github/skills/design_taste/SKILL.md` | Anti-slop design judgment: the design read, the three dials, AI-tells ban list, pre-flight — vendored tasteskill.dev corpus (`agent-data/design-taste/`) + 74 brand DESIGN.md references (`agent-data/design-md/`), adapted to the static pipeline |
+| Design Concepting | `.github/skills/design_concepting/SKILL.md` | Mockup-first flow: interview → 2-4 distinct single-file HTML directions → compare page (phone→desktop toggle) → recorded decision. Nothing real is built until a direction is chosen; the hub shows the round as the **Design concepts** artefact kind |
+| img2threejs | `.github/skills/img2threejs/SKILL.md` | Vendored image→procedural-Three.js reconstruction pipeline (staged forge + review gates) for 3D product moments. Read its `REPO-NOTES.md` for the house rules |
 
 **Launching a brand?** The skills above are the parts; `agent-data/BRAND_LAUNCH_RUNBOOK.md`
-is the order they go in — scaffold → design system → content → verify → deploy
-→ search presence → platform assets → profiles, with the gate for each step and
-the failure modes that repeat across brands.
+is the order they go in — scaffold → concept round → design system → content →
+verify → deploy → search presence → platform assets → profiles, with the gate
+for each step and the failure modes that repeat across brands.
 
 ## Platform Tools (injected by CommandCenter)
 
@@ -49,10 +52,19 @@ the failure modes that repeat across brands.
 - `inputs/` — User-provided files: design briefs, content drafts, media assets
 - `outputs/` — Campaign results, generated website content, design page drafts
 - `tests/` — pytest suite — CI gate
-- `hub.py` — workspace shell at http://127.0.0.1:8780 (projects, pages, design systems)
+- `hub.py` — workspace shell at http://127.0.0.1:8780 (projects, pages, design
+  systems). Icons are Lucide v1.28.0 path data vendored in `hub.LUCIDE` and
+  shipped to the shell's JS as data — add an icon there, never via a CDN
+  `<script>`; the hub has to draw itself with no network. Sitemap links point
+  at `<slug>.html`, not the public URL: the editor serves the built files flat
 - `artifacts.py` — what a project owns *beyond* its website: artefact kinds
-  (website / print / brand / signage), discovered from the directory layout,
-  plus the sitemap tree the hub's Collateral view renders
+  (website / concepts / print / brand / signage), discovered from the
+  directory layout.
+  Also decides the groupings the hub renders — pages as a sitemap tree
+  (`tree`) or by authoring module (`sections`), press by family and language,
+  brand assets by folder — and which files are scaffolding rather than
+  artefacts (anything with a `_`-prefixed path segment). Gate:
+  `python -m pytest tests/test_artifacts.py`
 
 ## Directory contracts (read the local AGENTS.md before editing there)
 
@@ -64,7 +76,11 @@ work belongs, and which gate to run:
 |---|---|
 | `outputs/drvarada-site/site/` | the site engine: placement table (content vs chrome vs engine), silent-failure invariants, test gates |
 | `outputs/drvarada-site/print/` | print collateral: the millimetre engine, bleed/trim/safe, sign-off gates, why nothing is retyped |
+| `outputs/fracktal-site/` | Fracktal Works: page bodies for the live WordPress site, the material database that drives ten of them, and what the Open Design port changed |
 | `agent-data/design-systems/` | `INDEX.md` — the 152-system corpus and its CLI |
+| `agent-data/design-taste/` | `PROVENANCE.md` — vendored tasteskill.dev rulebooks; read-only, orchestrated by the `design_taste` skill |
+| `agent-data/design-md/` | `INDEX.md` + `PROVENANCE.md` — 74 brand design-language references; read-only, direction calibration only |
+| `outputs/<project>/concepts/` | design-direction mockup rounds — see `design_concepting` SKILL.md; `compare.html` is generated, `DECISION.md` is the gate |
 
 **Place before building:** name the kind of thing you are adding, find the
 directory that owns that kind in the table above, and put it there — never in

@@ -360,6 +360,14 @@ replace, in order.
 
 Then:
 
+0. **Concept round first** (new brands, and any build where the look is not
+   already decided). Walk the user through look & feel and compare 2-4
+   mockup directions before authoring anything — see
+   [design_concepting](../design_concepting/SKILL.md). The gate is
+   `outputs/<name>/concepts/DECISION.md`; the chosen direction names the
+   design system for step 1. Load
+   [design_taste](../design_taste/SKILL.md) before designing any page,
+   concept or real.
 1. **Design system first.** Either pick one from the 152-package corpus or
    author one — see [design_system_management](../design_system_management/SKILL.md)
    (`python .tmp/scripts/design_systems.py search "<brief>"`, then `show <id>

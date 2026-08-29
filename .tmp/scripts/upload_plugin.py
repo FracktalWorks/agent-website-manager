@@ -2,6 +2,7 @@
 Upload and activate a WordPress plugin zip via admin upload endpoint.
 Uses Basic Auth (application password) which works for both REST API and admin.
 """
+import os
 import requests
 import sys
 import re
@@ -11,7 +12,7 @@ from requests.auth import HTTPBasicAuth
 # ── Config ──────────────────────────────────────────────────────
 SITE_URL = "https://fracktal.in"
 USERNAME = "vjvarada"
-APP_PASSWORD = "eBZmsn9ovjOvcvtW14bZPbsx"
+APP_PASSWORD = os.environ.get("WORDPRESS_APP_PASSWORD", "")  # never hardcode; rotated 2026-08-05
 ZIP_PATH = Path(__file__).parent.parent.parent / "outputs" / "fracktal" / "fracktal-media-folders.zip"
 
 session = requests.Session()

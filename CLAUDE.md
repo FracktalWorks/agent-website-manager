@@ -49,6 +49,9 @@ Reserve the LLM for judgment, content, and strategy. Use scripts for determinist
 | Design System Management | [.github/skills/design_system_management/SKILL.md](.github/skills/design_system_management/SKILL.md) |
 | Search Presence (SEO, GBP, Bing, favicon, maps) | [.github/skills/search_presence/SKILL.md](.github/skills/search_presence/SKILL.md) |
 | Brand Assets (favicon, GBP, WhatsApp, social) | [.github/skills/brand_assets/SKILL.md](.github/skills/brand_assets/SKILL.md) |
+| Design Taste (anti-slop judgment, vendored tasteskill.dev + 74 brand DESIGN.md) | [.github/skills/design_taste/SKILL.md](.github/skills/design_taste/SKILL.md) |
+| Design Concepting (mockup directions BEFORE building) | [.github/skills/design_concepting/SKILL.md](.github/skills/design_concepting/SKILL.md) |
+| img2threejs (reference photo → procedural Three.js product moment) | [.github/skills/img2threejs/SKILL.md](.github/skills/img2threejs/SKILL.md) |
 
 Each skill's `scripts/` directory holds runnable Python. Run scripts with the repo's
 interpreter; shared utilities live on `PYTHONPATH` under `.tmp/scripts/`.
@@ -83,8 +86,12 @@ design, visual editing, version history and design systems all live here now:
 |------|-----|
 | Take a **new brand** from nothing to live and findable | [agent-data/BRAND_LAUNCH_RUNBOOK.md](agent-data/BRAND_LAUNCH_RUNBOOK.md) — the ordered spine across skills, with the gate for each step |
 | See all projects + browse design systems | `python hub.py` at the repo root → http://127.0.0.1:8780 (the workspace landing page; live project thumbnails, one-click editor launch per site, 152 design systems with previews) |
-| See everything a brand owns, by kind | the **Collateral** button on a project card → `/collateral/<project>` — website (as a real sitemap tree), print collateral, brand assets, signage. Discovery lives in [artifacts.py](artifacts.py) |
+| See everything a brand owns, by kind | open the project in the hub — the sidebar's **Artefacts** switcher carries website / print / brand / signage, and each opens in the same tab. Pages read as a **Sitemap** (URL hierarchy, collapsible) or as **Sections** (the content module that authored them); print groups by family with its language variants; brand assets group by folder. Standalone view: `/collateral/<project>/<kind>`. Discovery and grouping live in [artifacts.py](artifacts.py) |
 | Make something that gets **printed** (cards, fliers, standees) | [outputs/drvarada-site/print/](outputs/drvarada-site/print/AGENTS.md) — `press.py` is the engine: millimetres, bleed/trim/safe, Chrome→PDF, PDF read-back audit, and sign-off `Gate`s that refuse to write a press file |
+| **Choose the look & feel BEFORE building** — walk the user through it, then compare 2-4 mockup directions | [design_concepting](.github/skills/design_concepting/SKILL.md) — `concepts.py new/compare/decide`; the round shows up in the hub's Artefacts switcher as **Design concepts** |
+| Make any page taste-checked and modern (anti-slop rules, dials, AI-tells ban list) | [design_taste](.github/skills/design_taste/SKILL.md) — load before designing anything; corpora at `agent-data/design-taste/` + `agent-data/design-md/` |
+| Calibrate a vibe word ("Linear-clean", "Apple-y") to measured tokens | `agent-data/design-md/INDEX.md` → that brand's `DESIGN.md` |
+| A 3D product moment (orbitable machine, rotating hero object) from a photo | [img2threejs](.github/skills/img2threejs/SKILL.md) — read `REPO-NOTES.md` there first |
 | Build a site from page data | [site_generator](.github/skills/site_generator/SKILL.md) — `python build.py` |
 | Edit a rendered page visually | `python editor.py` in the site directory → http://127.0.0.1:8789 (in VS Code: Run Task → "drvarada: live editor (preview in VS Code)" opens it in the Simple Browser pane; the ⛶ Screen button previews phone/tablet/laptop/desktop widths) |
 | Undo / redo / restore a past state | the editor's Versions panel, or `python versions.py list` then `restore <n>` |

@@ -94,19 +94,40 @@ def discover_projects() -> list[dict]:
         try:
             m = json.loads(manifest.read_text(encoding="utf-8"))
             pages = len(m.get("pages", []))
+            # Prefer a brand the build STATED. Everything below is a fallback
+            # for manifests written before `brand` existed.
+            title = (m.get("brand") or "").strip() or title
             first = (m.get("pages") or [{}])[0].get("title", "")
-            # "Dermatologist in Hyderabad … | Dr. Varada's" → the brand half
-            if "|" in first:
-                title = first.rsplit("|", 1)[1].strip() or title
+            # "Dermatologist in Hyderabad … | Dr. Varada's" → the brand half.
+            # Em and en dashes count too: Fracktal's material pages separate
+            # with "—", and knowing only "|" made a whole project display as
+            # the title-cased folder name ("Fracktal Site").
+            #
+            # This heuristic is only ever right by luck: it recovers the brand
+            # from a tag written for Google. Shortening Atlas Wild
+            # Experiences' title suffix to fit 60 characters renamed the whole
+            # project here. Sites should set `brand` in their manifest.
+            if not m.get("brand"):
+                for sep in ("|", "—", "–"):
+                    if sep in first:
+                        title = first.rsplit(sep, 1)[1].strip() or title
+                        break
             site_url = m.get("site", "")
+            # Which file to open. A site whose pages are all deployed onto an
+            # existing WordPress install has no index.html, and opening `/`
+            # then serves the directory listing instead of the site.
+            entry = m.get("entry") or "index.html"
+            if not (site / "dist" / entry).exists():
+                entry = ""
         except (OSError, json.JSONDecodeError):
             site_url = ""
+            entry = ""
         # Which artefact kinds this brand owns, beyond the website. Cheap —
         # a directory existence check per kind, not a walk.
         kinds = [k for k, _, rel in artifacts.KINDS
                  if (site.parent / rel).is_dir()]
         out.append({"id": pid, "dir": str(site), "title": title,
-                    "kinds": kinds,
+                    "kinds": kinds, "entry": entry,
                     "pages": pages, "port": port, "site": site_url,
                     "mtime": manifest.stat().st_mtime
                     if manifest.exists() else 0.0})
@@ -129,9 +150,11 @@ _spawned: dict[str, subprocess.Popen] = {}
 
 
 def start_editor(project: dict) -> dict:
+    # `entry` is "" for a site whose dist/ has an index.html, so the URL is
+    # unchanged for those; it names a real file for one that has none.
+    base = f"http://127.0.0.1:{project['port']}/{project.get('entry', '')}"
     if port_alive(project["port"]):
-        return {"ok": True, "url": f"http://127.0.0.1:{project['port']}/",
-                "already": True}
+        return {"ok": True, "url": base, "already": True}
     proc = subprocess.Popen(
         [sys.executable, "editor.py", "--no-open", "--port",
          str(project["port"])],
@@ -142,7 +165,7 @@ def start_editor(project: dict) -> dict:
     # server exists; the page itself shows "building…" until the build lands.
     for _ in range(40):
         if port_alive(project["port"]):
-            return {"ok": True, "url": f"http://127.0.0.1:{project['port']}/"}
+            return {"ok": True, "url": base}
         if proc.poll() is not None:
             break
         threading.Event().wait(0.15)
@@ -401,14 +424,19 @@ def render_home(projects: list[dict]) -> str:
     cards = []
     for p in projects:
         running = port_alive(p["port"])
-        url = f"http://127.0.0.1:{p['port']}/"
+        # `entry` is "" for a site whose dist/ has an index.html, so this is
+        # unchanged for those. For one that has none — Fracktal's pages are
+        # bodies deployed onto an existing WordPress site — `/` is a directory
+        # listing, and that is what the card thumbnail showed.
+        url = f"http://127.0.0.1:{p['port']}/{p.get('entry', '')}"
         thumb = (
             f'<div class="thumb"><iframe src="{url}" loading="lazy" '
             'tabindex="-1"></iframe></div>' if running else
             '<div class="thumb empty"><span>editor not running</span></div>')
         cards.append(
             f'<article class="proj" data-id="{escape(p["id"])}" '
-            f'data-port="{p["port"]}" data-title="{escape(p["title"])}">'
+            f'data-port="{p["port"]}" data-title="{escape(p["title"])}" '
+            f'data-entry="{escape(p.get("entry", ""))}">'
             + thumb +
             '<div class="meta">'
             f'<h3>{escape(p["title"])}</h3>'
@@ -478,7 +506,9 @@ def render_home(projects: list[dict]) -> str:
         .replace("{{DS}}", "".join(ds_cards)) \
         .replace("{{DS_COUNT}}", count) \
         .replace("{{CATS}}", options) \
-        .replace("{{DSDATA}}", json.dumps(ds_data).replace("</", "<\\/"))
+        .replace("{{DSDATA}}", json.dumps(ds_data).replace("</", "<\\/")) \
+        .replace("{{ICONS}}", json.dumps({"paths": LUCIDE, "kind": KIND_ICON})
+                 .replace("</", "<\\/"))
 
 
 HOME_TMPL = r"""<!doctype html>
@@ -597,6 +627,45 @@ h2 .h2btn { margin-left:10px; text-transform:none; letter-spacing:0;
   padding:7px 9px; border-radius:7px; border:1px solid var(--line);
   background:#0e1116; color:var(--fg) }
 #side .hint { margin:8px 6px; font-size:11px; color:var(--mut) }
+/* ── the page tree ── */
+.segs { display:flex; gap:2px; margin:4px 0 6px; padding:2px;
+  background:#0e1116; border:1px solid var(--line); border-radius:8px }
+.segs button { flex:1; border:0; border-radius:6px; background:none;
+  color:var(--mut); font:600 11.5px system-ui; padding:5px 0; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:5px }
+.segs button.on { background:#242a36; color:var(--fg) }
+.sitem.page { padding-top:3px; padding-bottom:3px }
+/* The twisty is the accordion's whole affordance — give it a real hit area
+   and an icon big enough to aim at, not a 9px character. */
+.sitem .tw, .sitem .ico { flex:0 0 18px; height:18px; display:grid;
+  place-items:center; color:var(--mut); border-radius:5px }
+.sitem .tw { cursor:pointer }
+.sitem .tw:hover { color:var(--fg); background:#2b3240 }
+.sitem .tw.leaf { color:#5a6474; cursor:inherit }
+.sitem.on .tw, .sitem.on .ico { color:#dfe8ff }
+.sitem .ic { display:block }
+.sitem.kind { padding-top:6px; padding-bottom:6px }
+.sitem span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+.sitem.stub { color:#f2b544 }
+.sitem.stub small { color:#f2b544; opacity:.7 }
+.sitem.sec { margin-top:6px; font-size:11px; text-transform:uppercase;
+  letter-spacing:.06em; color:var(--mut) }
+.treeacts { display:flex; gap:10px; margin:0 6px 5px }
+.treeacts button { border:0; background:none; padding:2px 0; cursor:pointer;
+  color:var(--mut); font:500 10.5px system-ui; display:flex;
+  align-items:center; gap:4px }
+.treeacts button:hover { color:var(--fg) }
+/* hover preview — one iframe at 1280x800, scaled, reused for every row */
+#pv { position:fixed; z-index:40; width:340px; height:239px; border-radius:10px;
+  border:1px solid var(--line); background:#fff; overflow:hidden;
+  box-shadow:0 18px 44px rgba(0,0,0,.55); pointer-events:none }
+#pv[hidden] { display:none }
+#pv iframe { width:1280px; height:800px; border:0; display:block;
+  transform:scale(.265625); transform-origin:0 0 }
+#pv b { position:absolute; left:0; right:0; bottom:0; padding:5px 9px;
+  background:var(--panel); color:var(--mut); font:400 11px/1.4
+  ui-monospace,monospace; border-top:1px solid var(--line);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
 
 #content { flex:1; position:relative; min-width:0 }
 .view { position:absolute; inset:0; display:none }
@@ -671,6 +740,7 @@ h2 { font-size:13px; text-transform:uppercase; letter-spacing:.08em;
   <button id="qs-btn" title="Jump anywhere (Ctrl+P)">⌕</button>
 </nav>
 <div id="modal" hidden><div id="modal-box"></div></div>
+<div id="pv" hidden><iframe title="page preview"></iframe><b></b></div>
 <div id="qs" hidden><div id="qs-box">
   <input id="qs-in" placeholder="Jump to a page, project or design system…">
   <div id="qs-list"></div>
@@ -694,9 +764,20 @@ h2 { font-size:13px; text-transform:uppercase; letter-spacing:.08em;
 </div>
 
 <script id="dsdata" type="application/json">{{DSDATA}}</script>
+<script id="icondata" type="application/json">{{ICONS}}</script>
 <script>
 "use strict";
 const DS = JSON.parse(document.getElementById('dsdata').textContent);
+const IC = JSON.parse(document.getElementById('icondata').textContent);
+
+/* Lucide, drawn from the table the server shipped — same paths the Python
+   side uses, so the two never drift. */
+function icon(name, size) {
+  return '<svg class="ic" width="' + (size || 16) + '" height="' +
+    (size || 16) + '" viewBox="0 0 24 24" fill="none" stroke="currentColor"' +
+    ' stroke-width="2" stroke-linecap="round" stroke-linejoin="round"' +
+    ' aria-hidden="true">' + (IC.paths[name] || '') + '</svg>';
+}
 const $ = s => document.querySelector(s);
 const content = $('#content'), side = $('#side'), tabsBox = $('#tabs');
 
@@ -707,7 +788,12 @@ let active = 'home';
 
 function projectMeta(id) {
   const card = document.querySelector('.proj[data-id="' + id + '"]');
-  return card ? { title: card.dataset.title, port: +card.dataset.port } : null;
+  // `entry` has to be read here. `openProject` composes its URL from
+  // `m.entry`, and this returning only {title, port} made that `undefined`
+  // every time — so the fallback fired always and the tab opened the server
+  // root. It looked like the entry logic was wrong; the entry never arrived.
+  return card ? { title: card.dataset.title, port: +card.dataset.port,
+                  entry: card.dataset.entry || '' } : null;
 }
 
 function makeTabBtn(t) {
@@ -777,6 +863,9 @@ function activate(key) {
   if (t && !t.frame) {           // lazy — a restored tab boots on first focus
     t.frame = document.createElement('iframe');
     t.frame.className = 'view';
+    // Let embedded media (YouTube heroes, product demo videos) autoplay in
+    // the preview — a nested iframe otherwise cannot without this delegation.
+    t.frame.allow = 'autoplay; fullscreen; encrypted-media; picture-in-picture';
     t.frame.src = t.url;
     content.appendChild(t.frame);
   }
@@ -819,6 +908,33 @@ function persist() {
   localStorage.setItem('awmActive', active);
 }
 
+/* ── hover preview ──────────────────────────────────────────────────────────
+   A page name tells you a page exists; it does not tell you what is on it.
+   One iframe, reused, loaded only once the pointer has settled — sixty-one
+   live previews at once would be sixty-one editors' worth of work for one
+   glance. */
+const pvEl = $('#pv'), pvFrame = pvEl.querySelector('iframe');
+let pvTimer = null;
+
+function previewOn(row, url, label) {
+  row.onmouseenter = () => {
+    clearTimeout(pvTimer);
+    pvTimer = setTimeout(() => {
+      if (pvFrame.dataset.at !== url) {
+        pvFrame.src = url;
+        pvFrame.dataset.at = url;
+      }
+      pvEl.querySelector('b').textContent = label;
+      const r = row.getBoundingClientRect();
+      pvEl.style.left = (side.getBoundingClientRect().right + 10) + 'px';
+      pvEl.style.top = Math.max(46, Math.min(r.top - 8,
+                                             innerHeight - 249)) + 'px';
+      pvEl.hidden = false;
+    }, 280);
+  };
+  row.onmouseleave = () => { clearTimeout(pvTimer); pvEl.hidden = true; };
+}
+
 /* ── contextual sidebar ── */
 function item(label, small, cls) {
   const b = document.createElement('button');
@@ -855,39 +971,232 @@ function renderSide() {
   else renderDsSide(t);
 }
 
+/* A project is a brand, not only a site. The sidebar is therefore a KIND
+   switcher first — website, print, brand, signage — and only then a page
+   list, because a business card filed under sixty-one page rows is a business
+   card nobody scrolls to.
+
+   Pages themselves read two ways: the URL hierarchy (Sitemap) and the module
+   that authored them (Sections). Sixty-one rows in one flat alphabetical
+   column is a list, not a structure — and neither reading is the only true
+   one. `/vitiligo/cost/` belongs under `/vitiligo/`; `/acne-treatment-
+   hyderabad/` has no parent at all and is still edited beside the seven
+   siblings it was written with in `hyderabad_medical.py`. */
 function renderProjectSide(t) {
   side.insertAdjacentHTML('beforeend', '<h5>' + t.title + '</h5>');
-  const nw = item('↗ Open in new window');
+  const nw = item('Open in new window');
+  nw.insertAdjacentHTML('afterbegin',
+    '<b class="ico">' + icon('external-link', 14) + '</b>');
   nw.onclick = () => window.open(t.url, '_blank');
   side.appendChild(nw);
-  side.insertAdjacentHTML('beforeend', '<h5>Pages</h5>');
-  const box = document.createElement('div');
-  side.appendChild(box);
-  const paint = () => {
-    box.innerHTML = '';
-    const f = (filter.value || '').toLowerCase();
-    (t.pages || []).forEach(pg => {
-      if (f && !(pg.slug + ' ' + pg.title).toLowerCase().includes(f)) return;
-      const row = item(pg.slug, pg.template, 'mono');
-      row.title = pg.title;
-      if (pg.slug === t.current) row.classList.add('on');
-      row.onclick = () => {
-        t.frame.src = 'http://127.0.0.1:' + t.port + '/' + pg.file;
-        t.current = pg.slug;
+  if (!t.closed) t.closed = new Set();
+  if (!t.mode) t.mode = 'tree';
+  if (!t.view) t.view = 'website';
+
+  side.insertAdjacentHTML('beforeend', '<h5>Artefacts</h5>');
+  const kindsBox = document.createElement('div');
+  const body = document.createElement('div');
+  side.append(kindsBox, body);
+
+  /* ── the website kind: pages ── */
+  const openPage = pg => {
+    t.frame.src = 'http://127.0.0.1:' + t.port + '/' + pg.file;
+    t.current = pg.url || pg.slug;
+    t.view = 'website';
+    paint();
+  };
+  const toggle = key => {
+    t.closed.has(key) ? t.closed.delete(key) : t.closed.add(key);
+    paint();
+  };
+  /* One page row. `depth` indents it under its parent; a node with children
+     carries the twisty, and a URL level with no page of its own stays visible
+     as a stub — "there is no /about/ page" is a fact about the site. */
+  const pageRow = (n, depth) => {
+    const kids = (n.kids || []).length;
+    const seg = n.url === '/' ? 'index'
+      : n.url.replace(/\/$/, '').split('/').pop();
+    const note = [n.stub ? 'no page' : n.template, kids || '']
+      .filter(Boolean).join(' ');
+    const row = item(seg, note || ' ', 'mono page');
+    row.style.paddingLeft = (8 + depth * 11) + 'px';
+    row.title = (n.title || '') + '  ' + n.url;
+    if (n.stub) {
+      row.classList.add('stub');
+      row.onclick = () => toggle(n.url);
+    } else {
+      if (t.view === 'website' && n.url === t.current) row.classList.add('on');
+      row.onclick = () => openPage(n);
+      previewOn(row, 'http://127.0.0.1:' + t.port + '/' + n.file, n.url);
+    }
+    if (kids) {
+      const tw = document.createElement('b');
+      tw.className = 'tw';
+      tw.innerHTML = icon(t.closed.has(n.url) ? 'chevron-right'
+                                              : 'chevron-down', 15);
+      tw.title = t.closed.has(n.url) ? 'Expand' : 'Collapse';
+      tw.onclick = e => { e.stopPropagation(); toggle(n.url); };
+      row.insertBefore(tw, row.firstChild);
+    } else {
+      // A leaf still needs the twisty's width, and a page icon says more in
+      // that space than an empty gutter does.
+      row.insertAdjacentHTML('afterbegin',
+        '<b class="tw leaf">' + icon('file-text', 13) + '</b>');
+    }
+    return row;
+  };
+  const walk = (nodes, depth, into) => nodes.forEach(n => {
+    into.appendChild(pageRow(n, depth));
+    if (!t.closed.has(n.url)) walk(n.kids || [], depth + 1, into);
+  });
+  /* Every key that can be rolled up: a URL with children, plus — in Sections
+     mode — the section headers themselves. Collapse all in Sitemap mode must
+     not silently also shut sections the user cannot see. */
+  const collapsible = () => {
+    const keys = [];
+    const scan = ns => ns.forEach(n => {
+      if ((n.kids || []).length) { keys.push(n.url); scan(n.kids); }
+    });
+    if (t.mode === 'sections') {
+      (t.sections || []).forEach(s => { keys.push('§' + s.id); scan(s.tree); });
+    } else scan(t.tree || []);
+    return keys;
+  };
+
+  const paintPages = () => {
+    const modes = document.createElement('div');
+    modes.className = 'segs';
+    [['tree', 'Sitemap', 'network'],
+     ['sections', 'Sections', 'layers']].forEach(([m, label, ico]) => {
+      const b = document.createElement('button');
+      b.innerHTML = icon(ico, 14) + '<span></span>';
+      b.querySelector('span').textContent = label;
+      b.className = t.mode === m ? 'on' : '';
+      b.onclick = () => { t.mode = m; paint(); };
+      modes.appendChild(b);
+    });
+    const filter = document.createElement('input');
+    filter.placeholder = 'Filter ' + ((t.pages || []).length || '') + ' pages…';
+    filter.value = t.q || '';
+    // Repainting replaces this input, so put the caret back where it was —
+    // otherwise the second keystroke of a filter lands nowhere.
+    filter.oninput = () => {
+      const at = filter.selectionStart;
+      t.q = filter.value;
+      paint();
+      const now = body.querySelector('input');
+      if (now) { now.focus(); now.setSelectionRange(at, at); }
+    };
+    const box = document.createElement('div');
+    const acts = document.createElement('div');
+    acts.className = 'treeacts';
+    [['Expand all', false, 'chevrons-up-down'],
+     ['Collapse all', true, 'chevrons-down-up']].forEach(([label, shut, i]) => {
+      const b = document.createElement('button');
+      b.innerHTML = icon(i, 13) + '<span></span>';
+      b.querySelector('span').textContent = label;
+      b.onclick = () => {
+        t.closed = new Set();
+        if (shut) collapsible().forEach(k => t.closed.add(k));
         paint();
       };
-      box.appendChild(row);
+      acts.appendChild(b);
     });
+    body.append(modes, filter, acts, box);
+
+    const f = (t.q || '').trim().toLowerCase();
+    if (f) {
+      // A filtered list is a search result, not a hierarchy — show the whole
+      // URL so two pages both called `cost` stay tellable apart.
+      const hits = (t.pages || []).filter(pg =>
+        (pg.slug + ' ' + pg.title + ' ' + (pg.url || '')).toLowerCase()
+          .includes(f));
+      hits.forEach(pg => {
+        const row = item(pg.url || pg.slug, pg.template, 'mono page');
+        row.title = pg.title;
+        if (t.view === 'website' && pg.url === t.current)
+          row.classList.add('on');
+        row.onclick = () => openPage(pg);
+        previewOn(row, 'http://127.0.0.1:' + t.port + '/' + pg.file, pg.url);
+        box.appendChild(row);
+      });
+      if (!hits.length)
+        box.insertAdjacentHTML('beforeend',
+          '<p class="hint">No page matches “' + f + '”.</p>');
+    } else if (t.mode === 'sections') {
+      (t.sections || []).forEach(s => {
+        const key = '§' + s.id;
+        const head = item(s.label, s.count + '', 'sec');
+        head.insertAdjacentHTML('afterbegin', '<b class="tw">' +
+          icon(t.closed.has(key) ? 'chevron-right' : 'chevron-down', 15) +
+          '</b>');
+        head.onclick = () => toggle(key);
+        box.appendChild(head);
+        if (!t.closed.has(key)) walk(s.tree, 1, box);
+      });
+    } else {
+      // The home page parents every other page, so drawing it as a branch
+      // would indent the whole site one level to say nothing. It gets a row
+      // of its own and its children start at the left margin.
+      const roots = t.tree || [];
+      const home = roots.length === 1 && roots[0].url === '/' ? roots[0] : null;
+      if (home) {
+        box.appendChild(pageRow({ ...home, kids: [] }, 0));
+        walk(home.kids || [], 0, box);
+      } else walk(roots, 0, box);
+    }
   };
-  const filter = document.createElement('input');
-  filter.placeholder = 'Filter ' + ((t.pages || []).length || '') + ' pages…';
-  filter.oninput = paint;
-  side.insertBefore(filter, box);
+
+  /* ── every other kind: its groups, as jump links into the collateral view ── */
+  const paintKind = k => {
+    const url = '/collateral/' + t.id + '/' + k.id;
+    body.insertAdjacentHTML('beforeend',
+      '<p class="hint">' + (k.note || '') + '</p>');
+    (t.groups[k.id] || []).forEach(g => {
+      const row = item(g.label, g.count + '');
+      row.onclick = () => { t.frame.src = url + '?embed=1#g-' + g.id; };
+      body.appendChild(row);
+    });
+    const open = item('Open on its own');
+    open.insertAdjacentHTML('afterbegin',
+      '<b class="ico">' + icon('external-link', 14) + '</b>');
+    open.onclick = () => window.open(url, '_blank');
+    body.appendChild(open);
+  };
+
+  const paint = () => {
+    kindsBox.innerHTML = '';
+    body.innerHTML = '';
+    (t.kinds || []).forEach(k => {
+      const row = item(k.label, k.count + '', 'kind');
+      row.insertAdjacentHTML('afterbegin',
+        '<b class="ico">' + icon(IC.kind[k.id] || 'file-text', 15) + '</b>');
+      row.title = k.note || '';
+      if (t.view === k.id) row.classList.add('on');
+      row.onclick = () => {
+        t.view = k.id;
+        t.frame.src = k.id === 'website'
+          ? 'http://127.0.0.1:' + t.port + '/'
+          : '/collateral/' + t.id + '/' + k.id + '?embed=1';
+        if (k.id === 'website') t.current = '/';
+        paint();
+      };
+      kindsBox.appendChild(row);
+    });
+    if (!t.kinds) return;
+    const kind = t.kinds.find(k => k.id === t.view);
+    if (!kind || kind.id === 'website') paintPages();
+    else paintKind(kind);
+  };
+
   if (t.pages) { paint(); return; }
   fetch('/api/pages/' + t.id).then(r => r.json()).then(res => {
     t.pages = res.pages || [];
+    t.tree = res.tree || [];
+    t.sections = res.sections || [];
+    t.kinds = res.kinds || [];
+    t.groups = res.groups || {};
     t.port = res.port;
-    filter.placeholder = 'Filter ' + t.pages.length + ' pages…';
     if (active === t.key) paint();
   });
 }
@@ -949,7 +1258,8 @@ function openProject(id) {
   const running = card && card.querySelector('.dot').classList.contains('on');
   if (running && m) {
     return Promise.resolve(
-      openTab('project', id, title, 'http://127.0.0.1:' + m.port + '/'));
+      openTab('project', id, title,
+              'http://127.0.0.1:' + m.port + '/' + (m.entry || '')));
   }
   return api('/api/open', { id }).then(res => {
     if (!res.url) { alert(res.error || 'failed'); return null; }
@@ -1319,8 +1629,16 @@ setInterval(async () => {
 
 /* ── restore ── */
 try {
-  (JSON.parse(localStorage.getItem('awmTabs') || '[]')).forEach(t =>
-    openTab(t.kind, t.id, t.title, t.url, false));
+  /* Drop tabs whose project no longer exists. Renaming a project directory
+     leaves its tab in localStorage pointing at a dead id, and it restores
+     looking perfectly normal until it is clicked and 404s. The server just
+     rendered one `.proj` card per live project, so the DOM is the authority
+     on what exists. */
+  const live = new Set(
+    [...document.querySelectorAll('.proj')].map(c => c.dataset.id));
+  (JSON.parse(localStorage.getItem('awmTabs') || '[]'))
+    .filter(t => t.kind !== 'project' || live.has(t.id))
+    .forEach(t => openTab(t.kind, t.id, t.title, t.url, false));
   const last = localStorage.getItem('awmActive');
   if (location.hash && location.hash !== '#/home') applyHash();
   else if (last && last !== 'home' && tabs.has(last)) activate(last);
@@ -1333,11 +1651,74 @@ try {
 
 # ── server ───────────────────────────────────────────────────────────────────
 
+# ── icons ────────────────────────────────────────────────────────────────────
+# Lucide v1.28.0 (ISC), vendored as raw path data rather than pulled from a
+# CDN: the hub is a loopback tool that has to draw its own chrome with no
+# network, and a 12-icon <script src> is a dependency for nothing. Both the
+# Python-rendered pages and the shell's JS draw from this one table, so a
+# chevron in the sidebar is the same chevron in the sitemap.
+LUCIDE = {
+    "chevron-down": '<path d="m6 9 6 6 6-6"/>',
+    "chevron-right": '<path d="m9 18 6-6-6-6"/>',
+    "chevrons-up-down": '<path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/>',
+    "chevrons-down-up": '<path d="m7 20 5-5 5 5"/><path d="m7 4 5 5 5-5"/>',
+    "globe": '<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0'
+             ' 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+    "printer": '<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2'
+               ' 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0'
+               ' 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/>',
+    "palette": '<path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5'
+               ' 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4'
+               ' 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>'
+               '<circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>'
+               '<circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>'
+               '<circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>',
+    "signpost": '<path d="M12 13v8"/><path d="M12 3v3"/><path d="M2.354'
+                ' 10.354a1.207 1.207 0 0 1 0-1.708l2.06-2.06A2 2 0 0 1 5.828'
+                ' 6h12.344a2 2 0 0 1 1.414.586l2.06 2.06a1.207 1.207 0 0 1 0'
+                ' 1.708l-2.06 2.06a2 2 0 0 1-1.414.586H5.828a2 2 0 0'
+                ' 1-1.414-.586z"/>',
+    "external-link": '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18'
+                     ' 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1'
+                     ' 2-2h6"/>',
+    "file-text": '<path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1'
+                 ' 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2'
+                 ' 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/>'
+                 '<path d="M16 13H8"/><path d="M16 17H8"/>',
+    "network": '<rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2"'
+               ' y="16" width="6" height="6" rx="1"/><rect x="9" y="2"'
+               ' width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1'
+               ' 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/>',
+    "image": '<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>'
+             '<circle cx="9" cy="9" r="2"/>'
+             '<path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>',
+    "megaphone": '<path d="m3 11 18-5v12L3 14v-3z"/>'
+                 '<path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>',
+    "layers": '<path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0'
+              ' 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/>'
+              '<path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58'
+              '-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6'
+              ' 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/>',
+}
+# Which icon stands for which artefact kind, keyed by `artifacts.KINDS` id.
+KIND_ICON = {"website": "globe", "concepts": "layers", "media": "image",
+             "print": "printer", "social": "megaphone", "brand": "palette",
+             "signage": "signpost"}
+
+
+def icon(name: str, size: int = 16, cls: str = "") -> str:
+    return (f'<svg class="ic{" " + cls if cls else ""}" width="{size}" '
+            f'height="{size}" viewBox="0 0 24 24" fill="none" '
+            f'stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+            f'stroke-linejoin="round" aria-hidden="true">{LUCIDE[name]}</svg>')
+
+
 MIME = {".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8",
         ".js": "text/javascript; charset=utf-8", ".json": "application/json",
         ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg",
         ".webp": "image/webp", ".woff2": "font/woff2", ".woff": "font/woff",
         ".md": "text/plain; charset=utf-8", ".jpeg": "image/jpeg",
+        ".ico": "image/x-icon",
         # Without this a press PDF is served as octet-stream and downloads
         # instead of opening, which is the wrong default for a proof.
         ".pdf": "application/pdf"}
@@ -1359,12 +1740,26 @@ nav a { padding:9px 14px; border:1px solid transparent; border-bottom:0;
 nav a.on { background:var(--panel); border-color:var(--line); color:var(--fg) }
 nav a b { color:var(--mut); font-weight:400; margin-left:6px; font-size:12px }
 main { padding:22px 28px 60px }
+main.embed { padding-top:14px }
+iframe.concepts { width:100%; border:1px solid var(--line); border-radius:10px;
+  height:calc(100vh - 210px); background:var(--panel) }
+main.embed iframe.concepts { height:calc(100vh - 50px) }
+main h3 { display:flex; align-items:baseline; gap:10px; margin:26px 0 11px;
+  font-size:12px; text-transform:uppercase; letter-spacing:.07em;
+  color:var(--fg); font-weight:700 }
+main h3:first-child { margin-top:4px }
+main h3 em { font-style:normal; font-size:11.5px; letter-spacing:0;
+  text-transform:none; color:var(--mut); font-weight:400 }
+main h3::after { content:''; flex:1; height:1px; background:var(--line) }
+.pill.lang { background:#242a36; color:var(--mut) }
 .grid { display:grid; gap:14px;
   grid-template-columns:repeat(auto-fill,minmax(230px,1fr)) }
 .card { background:var(--panel); border:1px solid var(--line); border-radius:10px;
   overflow:hidden; text-decoration:none; color:inherit; display:block }
-.card .shot { height:170px; background:#fff center/contain no-repeat;
-  border-bottom:1px solid var(--line) }
+.card .shot { display:block; width:100%; height:auto; max-height:420px;
+  object-fit:contain; background:#fff; border-bottom:1px solid var(--line) }
+.card .shot.none { height:120px; display:grid; place-items:center;
+  background:#0e1116; color:var(--mut); font-size:11.5px }
 .card .m { padding:9px 11px; display:flex; justify-content:space-between;
   align-items:center; gap:8px }
 .card .m span { font-size:12.5px; overflow:hidden; text-overflow:ellipsis;
@@ -1382,6 +1777,36 @@ main { padding:22px 28px 60px }
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
 .tree .stub { color:var(--wait) }
 .tree .kidcount { color:var(--mut); font-size:11.5px }
+/* the accordion: one level of nesting per URL level */
+.tree .kids { margin-left:11px; padding-left:11px;
+  border-left:1px solid var(--line) }
+.tree .node.shut > .kids { display:none }
+.tree .tw { flex:0 0 22px; height:22px; display:grid; place-items:center;
+  color:var(--mut); cursor:pointer; border-radius:6px; align-self:center }
+.tree .tw:hover { color:var(--fg); background:#232936 }
+.tree .tw.leaf { color:#4d5666; cursor:default }
+.tree .tw.leaf:hover { background:none; color:#4d5666 }
+/* one <b> holds both chevrons; `shut` decides which of them is drawn */
+.tree .tw .shutico, .tree .node.shut > .row > .tw .ic { display:none }
+.tree .node.shut > .row > .tw .shutico { display:block }
+.tree .ic { display:block }
+.treebar { display:flex; gap:8px; align-items:center; margin-bottom:10px }
+.treebar button { font:600 11.5px system-ui; padding:6px 10px; cursor:pointer;
+  border:1px solid var(--line); border-radius:7px; background:#1d222c;
+  color:var(--fg); display:flex; align-items:center; gap:6px }
+.treebar button:hover { filter:brightness(1.2) }
+.treebar span { color:var(--mut); font-size:11.5px }
+/* hover preview: one iframe laid out at 1280x800 and scaled down */
+#pv { position:fixed; right:22px; width:340px; z-index:9; border-radius:10px;
+  border:1px solid var(--line); background:#fff; overflow:hidden;
+  box-shadow:0 18px 44px rgba(0,0,0,.55) }
+#pv[hidden] { display:none }
+#pv iframe { width:1280px; height:800px; border:0; display:block;
+  transform:scale(.265625); transform-origin:0 0; pointer-events:none }
+#pv { height:calc(800px * .265625 + 26px) }
+#pv b { position:absolute; left:0; right:0; bottom:0; padding:5px 9px;
+  background:var(--panel); color:var(--mut); font:400 11px/1.4
+  ui-monospace,monospace; border-top:1px solid var(--line) }
 .gal { display:grid; gap:10px;
   grid-template-columns:repeat(auto-fill,minmax(130px,1fr)) }
 .gal a { background:var(--panel); border:1px solid var(--line); border-radius:8px;
@@ -1389,11 +1814,15 @@ main { padding:22px 28px 60px }
   font-size:11px; overflow:hidden }
 .gal img { width:100%; height:96px; object-fit:contain; background:#fff;
   border-radius:4px; margin-bottom:6px }
+body.dk .gal img { background:#10141b }
+.bg { float:right; font-size:11.5px; color:var(--mut); margin-top:-2px;
+  display:flex; align-items:center; gap:6px; cursor:pointer }
 .empty { color:var(--mut) }
 """
 
 
-def render_collateral(project: dict, kind_id: str = "") -> str:
+def render_collateral(project: dict, kind_id: str = "",
+                      embed: bool = False) -> str:
     """Every artefact a project owns, grouped by kind.
 
     The hub's home page answers "which projects are there"; this answers "what
@@ -1409,71 +1838,266 @@ def render_collateral(project: dict, kind_id: str = "") -> str:
         kind_id = kind_id if any(k["id"] == kind_id for k in ks) else ks[0]["id"]
         kind = next(k for k in ks if k["id"] == kind_id)
         body = _collateral_body(project, kind)
+        if kind["kind"] == "gallery" and kind["id"] != "capture":
+            # A white mark on a white tile is indistinguishable from a broken
+            # file, and half a brand's assets are drawn for dark backgrounds.
+            # (The capture gallery carries its own dark-tiles toggle + search.)
+            body = ('<label class="bg"><input type="checkbox" '
+                    'onchange="document.body.classList.toggle(\'dk\')"> '
+                    'Dark tiles</label>' + body)
+    q = "?embed=1" if embed else ""
     tabs = "".join(
         f'<a class="{"on" if k["id"] == kind_id else ""}" '
-        f'href="/collateral/{project["id"]}/{k["id"]}">{escape(k["label"])}'
+        f'href="/collateral/{project["id"]}/{k["id"]}{q}">{escape(k["label"])}'
         f'<b>{k["count"]}</b></a>' for k in ks)
-    return f"""<!doctype html><html><meta charset="utf-8">
-<title>{escape(project["title"])} — collateral</title>
-<style>{COLLATERAL_CSS}</style>
-<header>
+    # Framed inside the workspace shell the tab already carries the project
+    # name and the sidebar already carries the kinds — repeating both is two
+    # navigations for one page.
+    head = "" if embed else f"""<header>
   <a class="back" href="/">&larr; workspace</a>
   <h1>{escape(project["title"])}</h1>
   <p>{escape(str(root))}</p>
 </header>
-<nav>{tabs}</nav>
-<main>{body}</main>
+<nav>{tabs}</nav>"""
+    return f"""<!doctype html><html><meta charset="utf-8">
+<title>{escape(project["title"])} — collateral</title>
+<style>{COLLATERAL_CSS}</style>
+{head}
+<main{' class="embed"' if embed else ''}>{body}</main>
 </html>"""
 
 
 def _collateral_body(project: dict, kind: dict) -> str:
+    """One kind, in the groups that kind actually has.
+
+    Sixteen press tiles in one grid is a pile; the same sixteen under Fliers /
+    Standees / Leaflets / Business card is a production status, and the empty
+    `press-ready` count on a family is the thing worth seeing first.
+    """
     pid = project["id"]
     if kind["kind"] == "pages":
         return _sitemap_html(project, kind)
-    if kind["kind"] == "press":
-        cards = []
-        for i in kind["items"]:
-            shot = (f'background-image:url(/art/{pid}/{i["proof"]})'
-                    if i.get("proof") else "")
-            badge = ('<i class="pill ok">press-ready</i>' if i["ready"]
-                     else '<i class="pill wait">proof only</i>')
-            href = f'/art/{pid}/{i["pdf"] or i["proof"]}'
-            cards.append(
-                f'<a class="card" href="{href}" target="_blank">'
-                f'<div class="shot" style="{shot}"></div>'
-                f'<div class="m"><span>{escape(i["name"])}</span>{badge}</div>'
-                f'</a>')
-        return f'<div class="grid">{"".join(cards)}</div>'
-    tiles = "".join(
-        f'<a href="/art/{pid}/{i["rel"]}" target="_blank">'
+    if kind["kind"] == "concepts":
+        return _concepts_html(pid, kind)
+    if kind["id"] == "capture":
+        return _capture_gallery_html(pid, kind)
+    out = []
+    for g in kind["groups"]:
+        if kind["kind"] == "press":
+            note = f'{g["ready"]}/{g["count"]} press-ready'
+            body = f'<div class="grid">{_press_cards(pid, g["items"])}</div>'
+        else:
+            note = f'{g["count"]} file{"s" * (g["count"] != 1)}'
+            body = f'<div class="gal">{_gallery_tiles(pid, g["items"])}</div>'
+        out.append(f'<h3 id="g-{escape(g["id"])}">{escape(g["label"])}'
+                   f'<em>{escape(note)}</em></h3>{body}')
+    return "".join(out)
+
+
+def _concepts_html(pid: str, kind: dict) -> str:
+    """The concept round, framed whole.
+
+    `concepts/compare.html` is the review surface (live iframes of every
+    direction, phone→desktop width toggle, chosen badge). The hub frames it
+    rather than re-implementing it, so the page a user opens from disk and
+    the page the hub shows can never drift apart.
+    """
+    if kind.get("compare"):
+        return (f'<iframe class="concepts" title="Design concepts" '
+                f'src="/art/{pid}/{escape(kind["compare"])}"></iframe>')
+    rows = "".join(
+        f'<li><a href="/art/{pid}/{escape(i["rel"])}" target="_blank">'
+        f'{escape(i["title"])}</a>'
+        f'{" — chosen" if i.get("chosen") else ""}</li>'
+        for i in kind["items"])
+    return ('<p class="empty">No compare page yet — run <code>python '
+            '.github/skills/design_concepting/scripts/concepts.py compare '
+            f'{escape(pid)}</code></p><ul>{rows}</ul>')
+
+
+def _press_cards(pid: str, items: list[dict]) -> str:
+    cards = []
+    for i in items:
+        # An <img> rather than a background, so the proof keeps its own
+        # proportions — a standee reads as a standee and a card as a card,
+        # instead of every artefact becoming a stamp in a fixed-height box.
+        dims = (f' width="{i["w"]}" height="{i["h"]}"'
+                if i.get("w") and i.get("h") else "")
+        shot = (f'<img class="shot" src="/art/{pid}/{i["proof"]}"{dims} '
+                f'loading="lazy" alt="">' if i.get("proof")
+                else '<div class="shot none">no proof</div>')
+        badge = ('<i class="pill ok">press-ready</i>' if i["ready"]
+                 else '<i class="pill wait">proof only</i>')
+        lang = (f'<i class="pill lang">{escape(i["lang"].upper())}</i>'
+                if i.get("lang") else "")
+        href = f'/art/{pid}/{i["pdf"] or i["proof"]}'
+        size = f' · {i["w"]}×{i["h"]}' if i.get("w") else ""
+        cards.append(
+            f'<a class="card" href="{href}" target="_blank" '
+            f'title="{escape(i["name"])}{size}">{shot}'
+            f'<div class="m"><span>{escape(i.get("subject") or i["name"])}'
+            f'</span>{lang}{badge}</div></a>')
+    return "".join(cards)
+
+
+def _capture_gallery_html(pid: str, kind: dict) -> str:
+    """The captured-media kind, as a searchable, chunked gallery.
+
+    A flat 1,300-tile grid renders every tile up front and locks the browser.
+    This embeds the item metadata and paints tiles in batches as you scroll
+    (IntersectionObserver), and adds a search box + category filter — so you
+    find "the extruder cutaway" by caption instead of scrolling past a thousand
+    thumbnails. Thumbs load lazily from /art/; a click opens the full original.
+    """
+    slim = [{"n": i["name"], "r": i["rel"], "o": i.get("orig", i["rel"]),
+             "c": i.get("cat", ""), "k": i.get("kb", 0),
+             "p": i.get("cap", "")} for i in kind["items"]]
+    cats = "".join(f'<option value="{escape(g["label"])}">{escape(g["label"])}'
+                   f' ({g["count"]})</option>' for g in kind["groups"])
+    data = json.dumps(slim, ensure_ascii=False)
+    return f"""<div class="capg">
+<div class="capg-bar">
+  <input id="capq" placeholder="Search filename or caption…" autocomplete="off">
+  <select id="capcat"><option value="">All categories</option>{cats}</select>
+  <select id="capsort"><option value="cat">Sort: category</option>
+    <option value="name">name</option><option value="big">largest</option></select>
+  <label class="capchk"><input type="checkbox" id="capdk"> Dark tiles</label>
+  <span id="capcnt"></span>
+</div>
+<div id="capgrid" class="capgrid"></div><div id="capmore"></div></div>
+<style>
+.capg-bar{{position:sticky;top:0;z-index:3;display:flex;gap:8px;flex-wrap:wrap;
+  align-items:center;padding:10px 2px;background:var(--bg,#fff);
+  border-bottom:1px solid #e4e4e7;margin-bottom:12px}}
+.capg-bar input#capq{{flex:1;min-width:200px;padding:7px 10px;border:1px solid #d4d4d8;
+  border-radius:8px;font:inherit}}
+.capg-bar select,.capg-bar .capchk{{padding:6px 8px;border:1px solid #d4d4d8;
+  border-radius:8px;font:inherit;background:#fff}}
+.capg-bar .capchk{{display:inline-flex;gap:5px;align-items:center;color:#52525b}}
+#capcnt{{color:#71717a;font-size:12px}}
+.capgrid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}}
+.capgrid a{{display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  border:1px solid #e4e4e7;border-radius:10px;overflow:hidden;background:#fff}}
+.capgrid .th{{aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  padding:8px;background-color:#f2f4f8;
+  background-image:linear-gradient(45deg,#dce0e8 25%,transparent 25%),linear-gradient(-45deg,#dce0e8 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#dce0e8 75%),linear-gradient(-45deg,transparent 75%,#dce0e8 75%);
+  background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0}}
+body.capdark .capgrid .th{{background-color:#1b1d24;
+  background-image:linear-gradient(45deg,#2a2d3a 25%,transparent 25%),linear-gradient(-45deg,#2a2d3a 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#2a2d3a 75%),linear-gradient(-45deg,transparent 75%,#2a2d3a 75%)}}
+.capgrid .th img{{max-width:100%;max-height:100%;object-fit:contain}}
+.capgrid .m{{padding:6px 8px;border-top:1px solid #eee}}
+.capgrid .m .ct{{color:#e11d2a;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}}
+.capgrid .m .nm{{font-size:11px;font-weight:600;word-break:break-word;line-height:1.3}}
+.capgrid .m .cp{{color:#71717a;font-size:10.5px;margin-top:2px}}
+</style>
+<script>
+(function(){{
+const D={data}, PID={json.dumps(pid)}, B=90;
+const $=s=>document.querySelector(s), grid=$('#capgrid');
+function esc(s){{return (s||'').replace(/[&<>"]/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}}[c]));}}
+function tile(x){{return '<a href="/art/'+PID+'/'+encodeURI(x.o)+'" target="_blank" title="'+esc(x.p||x.n)+' · '+x.k+' KB">'
+  +'<span class="th"><img loading="lazy" src="/art/'+PID+'/'+encodeURI(x.r)+'" alt=""></span>'
+  +'<span class="m"><span class="ct">'+esc(x.c)+'</span><span class="nm">'+esc(x.n)+'</span>'
+  +(x.p?'<span class="cp">'+esc(x.p)+'</span>':'')+'</span></a>';}}
+let cur=[], shown=0;
+const sent=$('#capmore');
+function more(){{const s=cur.slice(shown,shown+B);grid.insertAdjacentHTML('beforeend',s.map(tile).join(''));shown+=s.length;}}
+new IntersectionObserver(e=>{{if(e[0].isIntersecting&&shown<cur.length)more();}},{{rootMargin:'700px'}}).observe(sent);
+function render(){{
+  const q=$('#capq').value.toLowerCase().trim(), c=$('#capcat').value, so=$('#capsort').value;
+  cur=D.filter(x=>(!c||x.c===c)&&(!q||(x.n+' '+x.p).toLowerCase().includes(q)));
+  if(so==='name')cur.sort((a,b)=>a.n.localeCompare(b.n));
+  else if(so==='big')cur.sort((a,b)=>b.k-a.k);
+  else cur.sort((a,b)=>(a.c+a.n).localeCompare(b.c+b.n));
+  grid.innerHTML='';shown=0;more();
+  $('#capcnt').textContent=cur.length+' / '+D.length;
+}}
+['capq','capcat','capsort'].forEach(id=>$('#'+id).addEventListener('input',render));
+$('#capdk').addEventListener('change',e=>document.body.classList.toggle('capdark',e.target.checked));
+render();
+}})();
+</script>"""
+
+
+def _gallery_tiles(pid: str, items: list[dict]) -> str:
+    # The tile shows the thumbnail (i["rel"]) but links to the full original
+    # (i["orig"], for the captured-media kind) so a click opens the real file,
+    # not the shrunk preview. Older kinds carry no "orig"/"cap" and fall back
+    # to the thumbnail path and filename — unchanged.
+    return "".join(
+        f'<a href="/art/{pid}/{i.get("orig", i["rel"])}" target="_blank" '
+        f'title="{escape(i.get("cap") or i["rel"])} · {i["kb"]} KB">'
         f'<img src="/art/{pid}/{i["rel"]}" loading="lazy" alt="">'
-        f'{escape(i["name"])}</a>' for i in kind["items"])
-    return f'<div class="gal">{tiles}</div>'
+        f'{escape(i["name"])}</a>' for i in items)
 
 
 def _sitemap_html(project: dict, kind: dict) -> str:
-    """The site as its own URL hierarchy, not as an alphabetical list."""
+    """The site as its own URL hierarchy — nested, collapsible, previewable.
+
+    The links point at `<slug>.html`, NOT at the page's public URL. The editor
+    serves the built files flat, so `/vitiligo/cost/` is a 404 there while
+    `/vitiligo-cost.html` is the page — the pretty URL only exists once the
+    site is deployed. A sitemap whose every link 404s is worse than no sitemap.
+    """
     port = project["port"]
-    rows = []
-    for n in artifacts.flatten(kind["tree"]):
-        pad = 18 * n["depth"]
-        kids = (f'<span class="kidcount">{len(n["kids"])}</span>'
-                if n["kids"] else "")
+
+    def node(n: dict) -> str:
+        kids = "".join(node(k) for k in n["kids"])
         label = escape(n["url"])
+        twisty = (f'<b class="tw" title="Collapse">{icon("chevron-down", 17)}'
+                  f'{icon("chevron-right", 17, "shutico")}</b>'
+                  if n["kids"] else
+                  f'<b class="tw leaf">{icon("file-text", 14)}</b>')
+        count = (f'<span class="kidcount">{len(n["kids"])}</span>'
+                 if n["kids"] else "")
         if n["stub"]:
             link = (f'<span class="stub">{label}</span>'
                     f'<span class="kidcount">no page</span>')
         else:
-            link = (f'<a href="http://127.0.0.1:{port}{n["url"]}" '
-                    f'target="_blank">{label}</a>')
-        rows.append(
-            f'<div class="row" style="padding-left:{pad}px">{link}{kids}'
-            f'<span class="t">{escape(n.get("title", ""))}</span></div>')
-    return f"""<div class="tree">{"".join(rows)}</div>
-<p class="empty" style="margin-top:16px;font-size:12.5px">
-  Links open in the live editor on port {port} — start it from the workspace
-  if it is not running. Amber rows are URL levels with no page of their own.
-</p>"""
+            href = f'http://127.0.0.1:{port}/{n.get("file", "")}'
+            link = (f'<a href="{href}" target="_blank" data-pv="{href}">'
+                    f'{label}</a>')
+        return (f'<div class="node">'
+                f'<div class="row">{twisty}{link}{count}'
+                f'<span class="t">{escape(n.get("title", ""))}</span></div>'
+                f'<div class="kids">{kids}</div></div>')
+
+    body = "".join(node(n) for n in kind["tree"])
+    return f"""<div class="treebar">
+  <button data-all="open">{icon("chevrons-up-down", 14)}Expand all</button>
+  <button data-all="shut">{icon("chevrons-down-up", 14)}Collapse all</button>
+  <span>Hover a page to preview it · click to open it in the editor
+  (port {port})</span>
+</div>
+<div class="tree">{body}</div>
+<div id="pv" hidden><iframe title="preview"></iframe><b></b></div>
+<script>
+document.querySelectorAll('.tw').forEach(t => t.onclick = () =>
+  t.closest('.node').classList.toggle('shut'));
+document.querySelectorAll('.treebar button').forEach(b => b.onclick = () =>
+  document.querySelectorAll('.node').forEach(n =>
+    n.classList.toggle('shut', b.dataset.all === 'shut' && !!n.querySelector('.kids > .node'))));
+/* One reused iframe, loaded only after the pointer settles — 61 live
+   previews at once would be 61 editors' worth of work for one glance. */
+const pv = document.getElementById('pv'), fr = pv.querySelector('iframe');
+let timer = null;
+document.querySelectorAll('a[data-pv]').forEach(a => {{
+  a.onmouseenter = () => {{
+    clearTimeout(timer);
+    timer = setTimeout(() => {{
+      if (fr.dataset.at !== a.dataset.pv)
+        {{ fr.src = a.dataset.pv; fr.dataset.at = a.dataset.pv; }}
+      pv.querySelector('b').textContent = a.textContent;
+      const r = a.getBoundingClientRect();
+      pv.style.top = Math.min(r.top, innerHeight - 250) + 'px';
+      pv.hidden = false;
+    }}, 260);
+  }};
+  a.onmouseleave = () => clearTimeout(timer);
+}});
+document.querySelector('.tree').onmouseleave = () =>
+  {{ clearTimeout(timer); pv.hidden = true; }};
+</script>"""
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -1511,17 +2135,24 @@ class Handler(SimpleHTTPRequestHandler):
             if project is None:
                 self._json({"error": "no such project"}, 404)
                 return
-            manifest = Path(project["dir"]) / "dist" / "site-manifest.json"
-            try:
-                m = json.loads(manifest.read_text(encoding="utf-8"))
-                pages = [{"slug": pg.get("slug"), "file": pg.get("file"),
-                          "title": pg.get("title", ""),
-                          "template": pg.get("template", ""),
-                          "module": pg.get("module", "")}
-                         for pg in m.get("pages", [])]
-            except (OSError, json.JSONDecodeError):
-                pages = []
-            self._json({"ok": True, "port": project["port"], "pages": pages})
+            # Both readings of the same pages: the URL hierarchy and the
+            # authoring sections. The sidebar switches between them without a
+            # second round trip, and the flat list still feeds the switcher.
+            pages = artifacts.pages_of(Path(project["dir"]))
+            detail = artifacts.kinds(Path(project["dir"]).parent)
+            self._json({"ok": True, "port": project["port"], "pages": pages,
+                        "tree": artifacts.tree(pages),
+                        "sections": artifacts.sections(pages),
+                        "kinds": [{k: v for k, v in kind.items()
+                                   if k in artifacts.LIGHT}
+                                  for kind in detail],
+                        # group headings only — the items themselves are the
+                        # collateral page's job, not the sidebar's.
+                        "groups": {kind["id"]: [
+                            {"id": g["id"], "label": g["label"],
+                             "count": g["count"]}
+                            for g in kind.get("groups", [])]
+                            for kind in detail}})
             return
         if path.startswith("/collateral/"):
             pid, _, kind = path[len("/collateral/"):].partition("/")
@@ -1530,8 +2161,9 @@ class Handler(SimpleHTTPRequestHandler):
             if project is None:
                 self.send_error(404)
                 return
-            self._bytes(render_collateral(project, kind).encode("utf-8"),
-                        MIME[".html"])
+            embed = "embed=1" in self.path.split("?", 1)[-1]
+            self._bytes(render_collateral(project, kind, embed)
+                        .encode("utf-8"), MIME[".html"])
             return
         if path.startswith("/api/artifacts/"):
             pid = path[len("/api/artifacts/"):]

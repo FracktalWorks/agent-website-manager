@@ -102,5 +102,5 @@ def test_real_home_css_has_no_unscoped_grid_rule() -> None:
         pytest.skip("fracktal-site/site/assets/home.css not present")
     out = _scope_css(css_path.read_text(encoding="utf-8"), SCOPE)
     # every selector mentioning a grid class must carry the scope
-    for sel in re.findall(r"([^{}]*\.grid-[34][^{}]*)\{", out):
+    for sel in re.findall(r"([^{}]*\.(?:grid-[34]|prod-grid)[^{}]*)\{", out):
         assert SCOPE in sel, f"unscoped grid selector survived: {sel.strip()!r}"

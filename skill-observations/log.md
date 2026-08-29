@@ -176,3 +176,105 @@ push-vs-pull framing for any future "browser tool → chat agent" bridge.
 where they exist (push), MCP tools plus a user-carried prompt where they
 don't (pull) — and never rely on clipboard or modals inside embedded
 webviews.
+
+### Observation 8: Verify the served sitemap before starting any SEO overhaul on a live site
+
+**Date:** 2026-08-04
+**Session context:** Starting the fracktal.in SEO/website overhaul ("many pages broken, rank higher"). Before touching content, crawled the live sitemap and found the public `*sitemap*.xml` is hijacked: a PHP handler returns a fake 182KB urlset of 1075 spam `/shopdetail/` 404s to anyone (incl. Googlebot) whenever the query string is empty; `?x=1` bypasses it to the real Yoast sitemap. The user's "broken pages" symptom was largely Google having indexed the injected junk.
+**Skill:** search_presence (also website_analysis)
+**Type:** open-source
+**Phase/Area:** Pre-flight / discovery before SEO work
+
+**Issue:** The engagement was framed as content optimization, but the dominant ranking problem was a security compromise masquerading as "broken pages." Had I gone straight to title/meta rewrites and page deploys per the plan, I'd have optimized on top of a site that's feeding Google 1000+ spam 404s — wasted effort and a missed incident.
+
+**Suggested improvement:** Add a mandatory pre-flight step to the search_presence / website_analysis skill: (1) fetch robots.txt and the sitemap it points to; (2) assert the sitemap contains only expected hosts/paths and a sane URL count vs. the WP post/page count; (3) re-fetch key sitemap URLs with a cache-busting query string and diff — a difference is a red flag for a query-gated injector; (4) spot-check a few real pages human-vs-Googlebot UA for cloaking. Only proceed to optimization once the sitemap is verified clean.
+
+**Principle:** On a live site you don't control end-to-end, verify the ground truth (what the site actually serves to crawlers) before acting on the brief. Reported symptoms ("pages broken") can have a root cause (compromise) that no amount of the requested work (content edits) would fix — and that the requested work would paper over.
+
+### Observation 9: A free malware scan can miss a custom wp-config remote-eval loader — read the server config directly
+
+**Date:** 2026-08-04
+**Session context:** Cleaning the fracktal.in compromise. Wordfence free scan came back essentially clean (no signatures), but the actual malware was a remote-eval loader injected at the top of wp-config.php (fetch remote URL -> eval on every request) plus a fake-Monarx RCE backdoor in the web root. Found only by reading wp-config.php / .htaccess / mu-plugins / drop-ins directly over FTP.
+**Skill:** security_hardening (also search_presence)
+**Type:** open-source
+**Phase/Area:** Compromise triage / malware hunt
+
+**Issue:** Relying on a signature scanner (Wordfence community) gave a false all-clear. The injector lived in wp-config.php — a file scanners often treat as config, not a scan target — and used a remote eval so no static payload signature existed locally. The decisive artifacts were wp-config.php (top-of-file prepend before the legit `<?php define('WP_CACHE'...`), object-cache.php / advanced-cache.php drop-ins, mu-plugins, and .htaccess.
+
+**Suggested improvement:** In the security_hardening skill, add a "manual triage checklist" that runs regardless of scanner output: read wp-config.php (look for any code ABOVE the WordPress header / any eval/curl/base64), wp-content/{object-cache,advanced-cache}.php, all mu-plugins, .htaccess + .user.ini, and grep the tree for eval\+base64_decode/gzinflate/remote-fetch and known bad IPs. Treat a wp-config.php whose byte-0 is not the WP banner as compromised until proven otherwise. Note that host File Managers (Filester) and Yoast's editor block .htaccess/dotfiles, so SFTP/SSH is required to read them.
+
+**Principle:** A clean signature scan is not proof of a clean site. Loaders that eval remote code leave no local signature, so triage must include reading the always-executed entry points (wp-config, drop-ins, mu-plugins, .htaccess) by eye — the scanner and the human look for different things, and the human catches the bespoke ones.
+
+### Observation 10: Full-page screenshots of pages with vh-sized heroes need a clamped copy
+
+**Status:** OPEN
+**Date:** 2026-08-24
+**Session context:** Building the fracktal.in alternative home page (home-v2) and reviewing it visually with headless Chrome
+**Skill:** website_analysis / site_generator (visual review step)
+**Type:** internal
+**Phase/Area:** Headless screenshot capture for design review
+
+**Issue:** To review a full page visually, the whole page was captured in one
+headless-Chrome shot by setting `--window-size` to the page height (e.g.
+1440x16300). Any hero sized in `vh` units then balloons to the window height —
+the hero alone consumed ~10 of 16 thousand pixels, the real sections were
+squeezed into the tail, and two of the review tiles were just blurred video
+frames. The page itself was fine; the capture method distorted it.
+
+**Suggested improvement:** When capturing a full-page shot for review, write a
+throwaway copy of the built HTML that clamps the vh-sized bands (e.g.
+`<style>.hero-video{min-height:820px!important;max-height:820px;overflow:hidden}</style>`
+before `</head>`), screenshot that copy, and delete it. Verify the REAL hero
+separately at true viewport sizes (1440x900, 390x844). Windows headless Chrome
+also refuses widths under ~500px, so phone captures must use the 390px-iframe
+wrapper `mobile.py` already documents.
+
+**Principle:** A full-page screenshot is an instrument, and viewport-relative
+CSS couples the instrument to the measurement: any unit tied to the viewport
+distorts exactly when the viewport is stretched to fit the page. Decouple the
+two — clamp viewport-relative bands in a disposable copy for the panorama, and
+judge those bands only at real viewport sizes.
+
+### Observation 11: New-page publish path is broken on WordPress-body sites
+
+**Date:** 2026-08-24
+**Session context:** Adding a drone-manufacturing SEO landing page to the Fracktal site (page bodies deployed onto live WordPress)
+**Skill:** site_generator / html_deploy (repo skills)
+**Type:** internal
+**Phase/Area:** Deployment — creating a page that does not exist on WordPress yet
+
+**Issue:** The repo can build and verify a brand-new page end to end (build.py, seo.py, verify.py, pytest all pass), but there is no working path to CREATE the page on fracktal.in. `pushpages.py` only applies bodies to ids already in `.deploy/pagemap.json` and prints SKIP for unmapped slugs; `deploy.py create` exists but uses application-password REST, which Wordfence deliberately blocks on this site. So "add a page" completes in-repo and then dead-ends at publish.
+
+**Suggested improvement:** Extend the token-gated mu-plugin flow (`fracktal-pages.php` + `pushpages.py`) with a create-if-missing step: for slugs in the repo inventory but not in the pagemap, the mu-plugin creates a draft page (slug, parent, `elementor_canvas` template), returns the id, and pushpages writes it back into `pagemap.json` before the normal apply pass. Document it in the html_deploy SKILL.md.
+
+**Principle:** A deploy pipeline that can only update what already exists silently caps the system at its current page count; the gap only surfaces the day someone adds a page, which is exactly when they expect the pipeline to work.
+
+### Observation 12: External skill corpora integrate best as read-only vendor + thin house adapter
+
+**Status:** OPEN
+**Date:** 2026-08-29
+**Session context:** Vendoring tasteskill.dev, awesome-design-md and img2threejs into the agent, and building the design_concepting mockup-first flow
+**Skill:** design_taste (new), design_concepting (new)
+**Type:** internal
+**Phase/Area:** skill ingestion pattern
+
+**Issue:** Third-party skill content (React/Tailwind-idiom taste rules) partly conflicted with house rules (no auto image generation, static Python pipeline, slop.py copy discipline). Copying upstream text into a house skill would have created a fork that drifts; following it verbatim would have violated house gates.
+
+**Suggested improvement:** Keep the repeatable pattern: vendor upstream verbatim under agent-data/ (or the skill dir) with a PROVENANCE.md in the design-systems format, then write ONE thin .github/skills/<name>/SKILL.md that routes into the corpus and carries an explicit adapter table (upstream idiom → house equivalent) plus a precedence ladder (house gates > client brand > vendored rules > references).
+
+**Principle:** Never edit vendored material and never obey it blindly — orchestrate it. An adapter with an explicit precedence ladder is what lets two rule systems coexist without silent conflicts.
+
+### Observation 13: New scripts keep re-hitting the cp1252 console trap
+
+**Status:** OPEN
+**Date:** 2026-08-29
+**Session context:** concepts.py `list` crashed on ●/○ under Windows cp1252 stdout; an em-dash in another print rendered as �
+**Skill:** site_generator / any skill authoring new scripts
+**Type:** internal
+**Phase/Area:** script authoring conventions
+
+**Issue:** The UTF-8 subprocess trap is already recorded in memory (fracktal deploy), yet a freshly written script reintroduced non-ASCII console output and crashed on first run.
+
+**Suggested improvement:** Make it a stated convention in the script-authoring sections of the relevant SKILL.mds: console output from repo scripts is ASCII-only (markers like [x]/[ ], hyphens not em-dashes); non-ASCII is fine in files written with encoding="utf-8".
+
+**Principle:** A lesson stored as memory prevents re-debugging but not re-introduction; conventions that recur at authoring time belong in the skill that governs authoring.

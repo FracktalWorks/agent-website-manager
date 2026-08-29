@@ -126,6 +126,133 @@
         "reveal": "never",
         "close": true
       }
+    },
+    {
+      // Serves the faithful static mirror of the live fracktal.in homepage
+      // (outputs/fracktal-site/mirror/). serve.py exits 0 with "already
+      // serving" when the port is taken, so this task is safe to re-run.
+      "label": "fracktal: faithful mirror server",
+      "type": "shell",
+      "command": "python serve.py",
+      "options": {
+        "cwd": "${workspaceFolder}/outputs/fracktal-site/mirror"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^__never_matches__$",
+          "file": 1,
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "faithful mirror at http|already serving"
+        }
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated"
+      }
+    },
+    {
+      // One click: mirror server up + the real homepage open in VS Code's own
+      // browser pane. This is a pixel-faithful clone of the LIVE site, not the
+      // data-driven repo build — the surface we improve on before deploying.
+      "label": "fracktal: faithful mirror (preview in VS Code)",
+      "dependsOn": [
+        "fracktal: faithful mirror server"
+      ],
+      "command": "${input:fkOpenMirror}",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never",
+        "close": true
+      }
+    },
+    {
+      // Serves the clean, Elementor-free homepage clone
+      // (outputs/fracktal-site/home-clone/). Idempotent; safe to re-run.
+      "label": "fracktal: home clone server",
+      "type": "shell",
+      "command": "python serve.py",
+      "options": {
+        "cwd": "${workspaceFolder}/outputs/fracktal-site/home-clone"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^__never_matches__$",
+          "file": 1,
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "home clone at http|already serving"
+        }
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated"
+      }
+    },
+    {
+      // One click: the faithful Elementor-free homepage rebuild, open in VS
+      // Code's browser pane. Hand-written HTML/CSS, real WordPress images.
+      "label": "fracktal: home clone (preview in VS Code)",
+      "dependsOn": [
+        "fracktal: home clone server"
+      ],
+      "command": "${input:fkOpenClone}",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never",
+        "close": true
+      }
+    },
+    {
+      // Serves the captured-media gallery (all 1360 images pulled from the live
+      // fracktal.in, searchable by caption/folder/category). Idempotent; safe
+      // to re-run. Rebuild the page itself with `python build_gallery.py`.
+      "label": "fracktal: media gallery server",
+      "type": "shell",
+      "command": "python serve_gallery.py",
+      "options": {
+        "cwd": "${workspaceFolder}/outputs/fracktal-site/_capture-2026-08-17"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^__never_matches__$",
+          "file": 1,
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "media gallery at http|already serving"
+        }
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated"
+      }
+    },
+    {
+      // One click: gallery server up + the searchable media gallery open in VS
+      // Code's browser pane. Every captured image, with its live-site folder,
+      // category, transparency and AI caption — pick images to embed by sight.
+      "label": "fracktal: media gallery (preview in VS Code)",
+      "dependsOn": [
+        "fracktal: media gallery server"
+      ],
+      "command": "${input:fkOpenGallery}",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never",
+        "close": true
+      }
     }
   ],
   "inputs": [
@@ -138,11 +265,35 @@
       ]
     },
     {
+      "id": "fkOpenMirror",
+      "type": "command",
+      "command": "simpleBrowser.show",
+      "args": [
+        "http://127.0.0.1:8796/"
+      ]
+    },
+    {
+      "id": "fkOpenClone",
+      "type": "command",
+      "command": "simpleBrowser.show",
+      "args": [
+        "http://127.0.0.1:8797/"
+      ]
+    },
+    {
       "id": "odOpenHub",
       "type": "command",
       "command": "simpleBrowser.show",
       "args": [
         "http://127.0.0.1:8780/"
+      ]
+    },
+    {
+      "id": "fkOpenGallery",
+      "type": "command",
+      "command": "simpleBrowser.show",
+      "args": [
+        "http://127.0.0.1:8798/gallery.html"
       ]
     }
   ]
