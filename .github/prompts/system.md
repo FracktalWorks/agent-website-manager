@@ -96,6 +96,7 @@ its REST API to manage content, Elementor designs, plugins, themes, SEO, backups
 | `design_taste` | `.github/skills/design_taste/SKILL.md` | Anti-slop design judgment — the design read, three dials, AI-tells ban list, pre-flight; load before designing any page. Corpora: `agent-data/design-taste/` + `agent-data/design-md/` (74 brand references) |
 | `design_concepting` | `.github/skills/design_concepting/SKILL.md` | Mockup-first flow — interview the user on look & feel, author 2-4 distinct HTML direction mockups, compare live in the hub (Design concepts artefact kind), record the decision BEFORE building |
 | `img2threejs` | `.github/skills/img2threejs/SKILL.md` | Vendored image→procedural-Three.js pipeline for 3D product moments; read its `REPO-NOTES.md` first |
+| `link_authority` | `.github/skills/link_authority/SKILL.md` | Earn links, mentions and AI citations — audit + per-article gate, preserve-and-claim inventory, linkable assets, Discover-eligible newsroom, journalist/academic/open-source channels, LinkedIn canonical-first; prospect libraries per vertical. Answers every "Google News backlink" scheme in one line |
 
 Launch sequence across skills: `agent-data/BRAND_LAUNCH_RUNBOOK.md`.
 

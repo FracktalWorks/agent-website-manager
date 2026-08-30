@@ -12,6 +12,7 @@ on Hostinger using the DOE Framework (Directive, Orchestration, Execution).
 - `.github/skills/elementor_builder/SKILL.md` — Elementor page builder, templates, kits
 - `.github/skills/design_taste/SKILL.md` — anti-slop design judgment (vendored tasteskill.dev + 74 brand DESIGN.md corpora); load before designing any page
 - `.github/skills/design_concepting/SKILL.md` — mockup-first flow: compare 2-4 design directions in the hub before building anything
+- `.github/skills/link_authority/SKILL.md` — earn links, mentions and AI citations: `authority_audit.py` + `post_gate.py`, claim-what's-ours inventory, Discover-eligible newsroom, LinkedIn canonical-first; prospect libraries per vertical
 - `.github/skills/*/scripts/` — Deterministic execution scripts
 - `.tmp/scripts/` — Shared utilities on PYTHONPATH
 

@@ -29,6 +29,7 @@
 | Design Taste | `.github/skills/design_taste/SKILL.md` | Anti-slop design judgment: the design read, the three dials, AI-tells ban list, pre-flight — vendored tasteskill.dev corpus (`agent-data/design-taste/`) + 74 brand DESIGN.md references (`agent-data/design-md/`), adapted to the static pipeline |
 | Design Concepting | `.github/skills/design_concepting/SKILL.md` | Mockup-first flow: interview → 2-4 distinct single-file HTML directions → compare page (phone→desktop toggle) → recorded decision. Nothing real is built until a direction is chosen; the hub shows the round as the **Design concepts** artefact kind |
 | img2threejs | `.github/skills/img2threejs/SKILL.md` | Vendored image→procedural-Three.js reconstruction pipeline (staged forge + review gates) for 3D product moments. Read its `REPO-NOTES.md` for the house rules |
+| Link Authority | `.github/skills/link_authority/SKILL.md` | Earn links, mentions and citations: baseline audit (`authority_audit.py` — entity, feed, AI crawlers fetched as themselves, legacy 301s), preserve-and-claim inventory, linkable assets, Discover-eligible newsroom gate (`post_gate.py`), journalist/academic/open-source channels, LinkedIn canonical-first, AI-citation track; prospect libraries per vertical |
 
 **Launching a brand?** The skills above are the parts; `agent-data/BRAND_LAUNCH_RUNBOOK.md`
 is the order they go in — scaffold → concept round → design system → content →

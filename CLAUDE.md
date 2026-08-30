@@ -52,6 +52,7 @@ Reserve the LLM for judgment, content, and strategy. Use scripts for determinist
 | Design Taste (anti-slop judgment, vendored tasteskill.dev + 74 brand DESIGN.md) | [.github/skills/design_taste/SKILL.md](.github/skills/design_taste/SKILL.md) |
 | Design Concepting (mockup directions BEFORE building) | [.github/skills/design_concepting/SKILL.md](.github/skills/design_concepting/SKILL.md) |
 | img2threejs (reference photo → procedural Three.js product moment) | [.github/skills/img2threejs/SKILL.md](.github/skills/img2threejs/SKILL.md) |
+| Link Authority (backlinks, newsroom, LinkedIn, AI citations — any site) | [.github/skills/link_authority/SKILL.md](.github/skills/link_authority/SKILL.md) |
 
 Each skill's `scripts/` directory holds runnable Python. Run scripts with the repo's
 interpreter; shared utilities live on `PYTHONPATH` under `.tmp/scripts/`.

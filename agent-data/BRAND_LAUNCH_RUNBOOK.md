@@ -131,6 +131,25 @@ Skill: [memory_management](../.github/skills/memory_management/SKILL.md)
 
 ---
 
+## 11. Authority: links, newsroom, citations
+
+Once the site is indexable and registered, earn what other sites say about
+it. Preserve every URL that ever carried a link (redirects first), claim the
+links that already have a reason to exist (investors, incubators, partners,
+registries, product databases, event listings), build two or three assets
+worth citing, run a dated, bylined newsroom that Discover and journalists can
+pick up, and treat LinkedIn as demand and relationships, not links. No
+application exists for Google News; no link is ever bought.
+
+Skill: [link_authority](../.github/skills/link_authority/SKILL.md)
+
+**Gate:**
+`python .github/skills/link_authority/scripts/authority_audit.py <url> --posts 8 --legacy outputs/<site>/legacy-urls.txt`
+exits 0, every article passes `post_gate.py` before and after publish, and
+`outputs/<site>/link-prospects.csv` shows what was asked and what went live.
+
+---
+
 ## Failure modes that repeat across brands
 
 | Symptom | Cause | Where it is handled |
@@ -144,3 +163,6 @@ Skill: [memory_management](../.github/skills/memory_management/SKILL.md)
 | A site built on a look the client never chose | no concept round; the first aesthetic became the site | step 2 |
 | Page renders against missing images | pages pushed before assets | step 6 |
 | "It looks broken" after a correct fix | index caches refresh on their own cadence | step 7 |
+| Invisible to ChatGPT while robots.txt invites it | the server answers the crawler 429; the file said Allow | step 11 |
+| Links earned before a rebuild land on 404 | old URLs missing from the legacy list; no 301 | step 11 |
+| A newsroom nothing surfaces | no machine-readable date, no named byline page, hero under 1200 px | step 11 |

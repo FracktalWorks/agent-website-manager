@@ -278,3 +278,18 @@ judge those bands only at real viewport sizes.
 **Suggested improvement:** Make it a stated convention in the script-authoring sections of the relevant SKILL.mds: console output from repo scripts is ASCII-only (markers like [x]/[ ], hyphens not em-dashes); non-ASCII is fine in files written with encoding="utf-8".
 
 **Principle:** A lesson stored as memory prevents re-debugging but not re-introduction; conventions that recur at authoring time belong in the skill that governs authoring.
+
+### Observation 14: Syncing an agent into a scoped export is an allow-list job, never a mirror
+
+**Status:** OPEN
+**Date:** 2026-08-29
+**Session context:** Bringing the E:\agent-website-manager-atlaswild handover copy up to the master agent's new skills
+**Skill:** New skill candidate: workspace_export (scoped copies + updates of the agent)
+**Type:** internal
+**Phase/Area:** export / sync procedure
+
+**Issue:** A robocopy list-only dry run showed that a naive tree copy would have re-imported 55 credential-carrying scripts the export had deliberately pruned, plus .env, client_secret_*.json, three token files and a ps1 with a hardcoded API key, and would have overwritten the export's scoped-copy CLAUDE.md banner and its .gitignore (where the project IS tracked).
+
+**Suggested improvement:** Codify the export/update procedure as a skill or runbook section: (1) list-only dry run first, (2) copy by explicit allow-list of agent paths, (3) edit — never overwrite — files the export customised (CLAUDE.md, HANDOVER.md, .gitignore, repointed tests), (4) run the export's own test suite, (5) append a dated HANDOVER section and commit in the export's repo, (6) share from a dedicated folder, not the drive root.
+
+**Principle:** A scoped copy diverges from its source on purpose; every later sync must respect those divergences explicitly, so the safe primitive is "add these named files" rather than "make it look like the master".
