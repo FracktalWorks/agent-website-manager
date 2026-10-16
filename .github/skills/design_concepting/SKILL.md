@@ -66,6 +66,10 @@ the brief left genuinely open — typically:
 - **Reference feel** — offer 3-4 *named* brand references relevant to the
   sector, calibrated from `agent-data/design-md/INDEX.md` ("Linear-clean",
   "Apple-quiet", "Nike-loud"), plus "none of these"
+- **The feeling** — what a visitor should think or feel about the person or
+  brand when they leave ("so cultured", "so much done so young", "I trust
+  them with my child"). Every element is later tested against these
+  (design_taste → *The purpose test*), so get them in the user's words.
 
 Write the answers into `concepts/BRIEF.md`. Do not ask what can be inferred:
 audience, sector constraints, and existing brand assets come from the brief,

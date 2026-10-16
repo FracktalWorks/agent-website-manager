@@ -47,6 +47,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 import artifacts
+import notebook
 
 ROOT = Path(__file__).parent
 OUTPUTS = ROOT / "outputs"
@@ -71,6 +72,14 @@ except Exception:                                     # noqa: BLE001
 
 # ── projects ─────────────────────────────────────────────────────────────────
 
+# Counting up in name order is only stable until a project sorts in ahead of
+# existing ones: adding constellation-site (2026-09-26) shifted fracktal and
+# vjvarada up a port while their old editors still held the old ones, so the
+# hub reported fracktal's editor as Constellation's. A new project that sorts
+# before an existing one gets pinned here instead.
+PINNED_PORTS = {"drvarada-site": 8789, "constellation-site": 8795}
+
+
 def discover_projects() -> list[dict]:
     """Every site in outputs/, with a stable port each.
 
@@ -84,8 +93,8 @@ def discover_projects() -> list[dict]:
     for b in sites:
         site = b.parent
         pid = site.parent.name
-        if pid == "drvarada-site":
-            port = 8789
+        if pid in PINNED_PORTS:
+            port = PINNED_PORTS[pid]
         else:
             port = nxt
             nxt += 1
@@ -1751,6 +1760,80 @@ main h3:first-child { margin-top:4px }
 main h3 em { font-style:normal; font-size:11.5px; letter-spacing:0;
   text-transform:none; color:var(--mut); font-weight:400 }
 main h3::after { content:''; flex:1; height:1px; background:var(--line) }
+/* ---- the notebook: a document list, a reading pane, and one scratchpad ---
+   The reading pane carries long prose, so it gets a measure (68ch) and real
+   type scale rather than the 13px UI sizing the rest of this page uses. A
+   note you cannot comfortably read is a note you stop writing. */
+.nb { display:grid; grid-template-columns:266px minmax(0,1fr); gap:20px;
+  align-items:start }
+.nlist { position:sticky; top:14px; display:flex; flex-direction:column; gap:2px }
+.nlist h3 { margin:0 0 8px }
+.nrow { display:grid; gap:2px; text-align:left; width:100%; cursor:pointer;
+  background:transparent; border:1px solid transparent; border-radius:8px;
+  padding:9px 11px; color:var(--fg); font:inherit }
+.nrow:hover { background:#161a22 }
+.nrow.on { background:var(--panel); border-color:var(--line) }
+.nrow .nt { font-size:13px; font-weight:600; line-height:1.35 }
+.nrow .nm { font-size:11.5px; color:var(--mut) }
+.nrow .pill, .nrow .nwords { justify-self:start; margin-top:3px }
+.nrow .nwords { font-size:11px; color:var(--mut) }
+.nmain { min-width:0 }
+.ndoc { display:none }
+.ndoc.on { display:block }
+.scratch { background:var(--panel); border:1px solid var(--line);
+  border-radius:10px; padding:4px 18px 16px; margin-bottom:26px }
+.scratch h3 { margin:14px 0 6px }
+.nbtn { margin-left:6px; background:#1b202a; color:var(--fg); cursor:pointer;
+  border:1px solid var(--line); border-radius:6px; padding:5px 12px;
+  font:600 12px/1 system-ui,sans-serif }
+.nbtn:hover { border-color:var(--blue) }
+.nbtn.primary { background:var(--blue); border-color:var(--blue); color:#fff }
+.nbtn[disabled] { opacity:.5; cursor:default }
+.nsaved { font-size:11.5px; color:var(--mut); font-weight:400;
+  text-transform:none; letter-spacing:0 }
+#sedit { width:100%; min-height:340px; resize:vertical; margin-top:8px;
+  background:#0c0f14; color:var(--fg); border:1px solid var(--line);
+  border-radius:8px; padding:13px 15px; tab-size:2;
+  font:13px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace }
+#sedit:focus { outline:2px solid var(--blue); outline-offset:-1px }
+
+/* rendered markdown */
+.md { font-size:15px; line-height:1.68; color:var(--fg); max-width:68ch }
+.md > :first-child { margin-top:0 }
+.md h1 { font-size:26px; line-height:1.2; margin:26px 0 12px; font-weight:700 }
+.md h2 { font-size:15px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--mut); margin:34px 0 12px; padding-bottom:7px;
+  border-bottom:1px solid var(--line); font-weight:700 }
+.md h3 { font-size:17px; margin:24px 0 8px; font-weight:650;
+  text-transform:none; letter-spacing:0; color:var(--fg); display:block }
+.md h3::after { content:none }
+.md h4 { font-size:14px; margin:18px 0 6px; color:var(--mut) }
+.md p { margin:0 0 13px }
+.md ul, .md ol { margin:0 0 13px; padding-left:22px }
+.md li { margin-bottom:5px }
+.md a { color:var(--blue) }
+.md strong { font-weight:650 }
+.md hr { border:0; border-top:1px solid var(--line); margin:26px 0 }
+.md blockquote { margin:0 0 13px; padding:2px 0 2px 15px;
+  border-left:3px solid var(--line); color:var(--mut) }
+.md code { background:#0c0f14; border:1px solid var(--line); border-radius:4px;
+  padding:1px 5px; font:12.5px ui-monospace,SFMono-Regular,Consolas,monospace }
+.md pre { background:#0c0f14; border:1px solid var(--line); border-radius:8px;
+  padding:12px 14px; overflow-x:auto; margin:0 0 15px }
+.md pre code { background:none; border:0; padding:0; font-size:12.5px;
+  line-height:1.65 }
+/* Tables can be wider than the measure, so they scroll in their own box
+   rather than pushing the page sideways. */
+.md .tw { overflow-x:auto; margin:0 0 15px; max-width:100% }
+.md table { border-collapse:collapse; font-size:13.5px; min-width:100% }
+.md th, .md td { border:1px solid var(--line); padding:7px 11px;
+  text-align:left; vertical-align:top }
+.md th { background:#181d26; font-weight:650; white-space:nowrap }
+@media (max-width:820px) {
+  .nb { grid-template-columns:1fr }
+  .nlist { position:static }
+}
+
 .pill.lang { background:#242a36; color:var(--mut) }
 .grid { display:grid; gap:14px;
   grid-template-columns:repeat(auto-fill,minmax(230px,1fr)) }
@@ -1881,6 +1964,8 @@ def _collateral_body(project: dict, kind: dict) -> str:
         return _concepts_html(pid, kind)
     if kind["id"] == "capture":
         return _capture_gallery_html(pid, kind)
+    if kind["kind"] == "notes":
+        return _notes_html(project, kind)
     out = []
     for g in kind["groups"]:
         if kind["kind"] == "press":
@@ -1893,6 +1978,132 @@ def _collateral_body(project: dict, kind: dict) -> str:
                    f'<em>{escape(note)}</em></h3>{body}')
     return "".join(out)
 
+
+
+def _notes_html(project: dict, kind: dict) -> str:
+    """The project notebook: one editable scratchpad, and every doc it owns.
+
+    Two panes rather than a file list, because a list of filenames is exactly
+    the thing this replaces — you already had that, in the folder. The reading
+    pane is the feature; the list is navigation for it.
+
+    Every document is rendered server-side into the page rather than fetched on
+    click. They are markdown files of a few tens of KB, switching is instant,
+    and the alternative is a spinner between you and a note you wrote to save
+    yourself time.
+    """
+    pid = project["id"]
+    items = kind["items"]
+    scratch = next((d for d in items if d["scratch"]), None)
+    raw = scratch["text"] if scratch else notebook.TEMPLATE
+    first = items[0]["id"] if items else ""
+
+    rows = []
+    panes = []
+    for d in items:
+        chip = ('<span class="pill ok">scratchpad</span>' if d["scratch"]
+                else f'<span class="nwords">{d["words"]:,} words</span>')
+        rows.append(
+            f'<button class="nrow{" on" if d["id"] == first else ""}" '
+            f'data-doc="{escape(d["id"], True)}">'
+            f'<span class="nt">{escape(d["title"])}</span>'
+            f'<span class="nm">{escape(d["name"])} · {escape(d["when"])}</span>'
+            f'{chip}</button>')
+        panes.append(
+            f'<article class="ndoc{" on" if d["id"] == first else ""}" '
+            f'id="doc-{escape(d["id"], True)}">'
+            f'<div class="md">{notebook.render(d["text"])}</div></article>')
+
+    if not items:
+        rows.append('<p class="empty">No notes yet — start the scratchpad.</p>')
+        panes.append('<article class="ndoc on"><div class="md">'
+                     '<p class="empty">Nothing written down for this project '
+                     'yet. The scratchpad below is the place to start.</p>'
+                     '</div></article>')
+
+    return f'''<div class="nb">
+  <aside class="nlist">
+    <h3>Documents<em>{len(items)}</em></h3>
+    {"".join(rows)}
+  </aside>
+  <div class="nmain">
+    <section class="scratch" id="scratch">
+      <h3>Scratchpad<em>{escape(kind["note"])}</em>
+        <button class="nbtn" id="nedit">Edit</button>
+        <button class="nbtn primary" id="nsave" hidden>Save</button>
+        <button class="nbtn" id="ncancel" hidden>Cancel</button>
+        <span class="nsaved" id="nsaved"></span>
+      </h3>
+      <div class="md" id="sview">{notebook.render(raw)}</div>
+      <textarea id="sedit" spellcheck="true" hidden></textarea>
+    </section>
+    {"".join(panes)}
+  </div>
+</div>
+<script>
+(function () {{
+  var PID = {json.dumps(pid)};
+  var initial = {json.dumps(raw)};
+  var ta = document.getElementById('sedit');
+  var view = document.getElementById('sview');
+  var saved = document.getElementById('nsaved');
+  var bEdit = document.getElementById('nedit');
+  var bSave = document.getElementById('nsave');
+  var bCancel = document.getElementById('ncancel');
+
+  function editing(on) {{
+    ta.hidden = !on; view.hidden = on;
+    bEdit.hidden = on; bSave.hidden = !on; bCancel.hidden = !on;
+    if (on) {{ ta.value = initial; ta.focus(); }}
+  }}
+  bEdit.addEventListener('click', function () {{ editing(true); }});
+  bCancel.addEventListener('click', function () {{ editing(false); }});
+
+  bSave.addEventListener('click', async function () {{
+    bSave.disabled = true;
+    saved.textContent = 'saving…';
+    try {{
+      var r = await fetch('/api/note', {{
+        method: 'POST', headers: {{ 'Content-Type': 'application/json' }},
+        body: JSON.stringify({{ project: PID, text: ta.value }})
+      }});
+      var j = await r.json();
+      if (j.error) throw new Error(j.error);
+      initial = ta.value;
+      saved.textContent = 'saved ' + j.when;
+      /* Re-render through the same renderer the rest of the page uses, by
+         reloading it. Rendering markdown twice — once in Python, once in
+         JavaScript — is two renderers that disagree. */
+      location.reload();
+    }} catch (e) {{
+      saved.textContent = 'not saved: ' + e.message;
+      bSave.disabled = false;
+    }}
+  }});
+
+  /* ctrl/cmd-S saves, because this is a notepad and that is what hands do. */
+  document.addEventListener('keydown', function (e) {{
+    if ((e.ctrlKey || e.metaKey) && e.key === 's' && !ta.hidden) {{
+      e.preventDefault(); bSave.click();
+    }}
+  }});
+
+  var rows = document.querySelectorAll('.nrow');
+  for (var i = 0; i < rows.length; i++) {{
+    rows[i].addEventListener('click', function () {{
+      var id = this.getAttribute('data-doc');
+      var all = document.querySelectorAll('.nrow');
+      for (var j = 0; j < all.length; j++) all[j].classList.remove('on');
+      this.classList.add('on');
+      var docs = document.querySelectorAll('.ndoc');
+      for (var k = 0; k < docs.length; k++) docs[k].classList.remove('on');
+      var el = document.getElementById('doc-' + id);
+      if (el) el.classList.add('on');
+      document.querySelector('.nmain').scrollTop = 0;
+    }});
+  }}
+}})();
+</script>'''
 
 def _concepts_html(pid: str, kind: dict) -> str:
     """The concept round, framed whole.
@@ -2237,6 +2448,32 @@ class Handler(SimpleHTTPRequestHandler):
             self._json({"error": "bad json"}, 400)
             return
         route = self.path.split("?", 1)[0]
+        if route == "/api/note":
+            # The one mutating route the notebook has. Guarded the same way
+            # every other POST here is (`_authorised`: Host must be the hub,
+            # Origin must match), and containment-checked besides — the file
+            # written is always <project>/NOTES.md, derived from a project id
+            # that has to match a discovered project, so a crafted `project`
+            # cannot walk anywhere.
+            pid = str(req.get("project", ""))
+            project = next((p for p in discover_projects()
+                            if p["id"] == pid), None)
+            if project is None:
+                self._json({"error": "no such project"}, 404)
+                return
+            text = req.get("text")
+            if not isinstance(text, str):
+                self._json({"error": "no text"}, 400)
+                return
+            if len(text) > 2_000_000:
+                self._json({"error": "note too large"}, 413)
+                return
+            try:
+                self._json(notebook.write_scratch(
+                    Path(project["dir"]).parent, text))
+            except OSError as e:
+                self._json({"error": f"could not write: {e}"}, 500)
+            return
         if route == "/api/new-project":
             self._json(create_project(req))
             return

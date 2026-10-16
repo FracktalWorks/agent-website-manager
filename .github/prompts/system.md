@@ -193,6 +193,9 @@ renders). See the `open-design-canvas-vs-elementor` memory note.
 9. **Keep scratch output out of repo root** — Verification screenshots, one-off debug scripts,
    and intermediate JSON belong under `.tmp/` (or the session scratchpad), not the repo root or
    `outputs/`. Only durable, reviewed artifacts belong in `outputs/`.
+10. **Every element earns a feeling** — Before adding any section, line of copy, image or
+   sprite to a site, name the emotion it should produce in the visitor and the true fact that
+   earns it; if either is missing, cut it. See design_taste → *The purpose test*.
 
 ## Output Format
 

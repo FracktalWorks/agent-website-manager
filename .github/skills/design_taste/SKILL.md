@@ -54,8 +54,50 @@ Provenance and licenses: `agent-data/design-taste/PROVENANCE.md`,
 4. **Design under the hard rules** (core.md §4): hero fits the viewport,
    eyebrow rationing, no zigzag runs, section-layout families don't repeat,
    color/shape/theme locks, content density caps.
-5. **Pre-flight** (core.md §14) before calling any page done — plus this
+5. **Purpose test, element by element** (below). Before a section, caption,
+   image, icon or sprite goes on a page, and again before the page is called
+   done.
+6. **Pre-flight** (core.md §14) before calling any page done — plus this
    repo's own gates (below), which run *after* it and win on conflict.
+
+## The purpose test — every element earns an emotion
+
+Rule from the user (2026-10-12, binding for every site and every artifact we
+build): *every element has a purpose, and that purpose is a feeling in the
+person looking at it.* For a personal site that is "what a cultured / layered /
+interesting person" or "he has done so much, so young"; for a clinic it may be
+"I am safe here"; for a manufacturer "these people can actually make it". The
+design read names the feelings the site is for; every element must serve one.
+
+For each section, line of copy, caption, image, icon and sprite, write down
+(in your head or in the page's comments):
+
+1. **The feeling** it should produce, in the visitor's words.
+2. **The fact that earns it** — a specific, true thing (a date, a number, a
+   name, a photograph of the real object). No fact, no feeling: cut it.
+
+Cut on sight, because they read as AI-generated and dilute the subject:
+
+- **Signposting** that describes the page instead of the work ("What each one
+  makes, and what I do there.", "Where to check the claims on this site.",
+  "This is the record behind my advisory work.").
+- **Synthesis sections** that restate the rows above them in consultant
+  language ("How they fit together." in three tidy columns).
+- **Filler leads and captions** that say nothing a reader did not already see
+  ("The talk was recorded and is published by TED.", "Me, in pixels, taking
+  notes. The places below have the rest.").
+- **Decoration without a sentence to belong to.** A sprite, icon or picture
+  illustrates a specific line next to it (the writing sprite beside "I publish
+  build logs as I go"), never stands alone as a section.
+- **Duplicates.** The same quote, photo, video or paragraph on several pages:
+  keep it once, where it matters most, and link to it.
+- **Marketing register** ("multiplies what a business can do", "AI-native
+  operating system") where a plain fact would do.
+- **Generic sign-offs repeated on every page.** A close says why to write
+  from *this* page.
+
+`slop.py` catches rhythm tells, not purposelessness. The only check for this is
+reading the rendered page section by section and asking the two questions.
 
 ## Adapter — upstream idiom → this repo
 

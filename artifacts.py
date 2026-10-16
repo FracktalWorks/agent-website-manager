@@ -51,6 +51,8 @@ import json
 import pathlib
 import re
 
+import notebook
+
 IMAGE = {".png", ".jpg", ".jpeg", ".webp", ".svg", ".ico"}
 DOC = {".pdf"}
 SKIP_DIRS = {"__pycache__", "node_modules", ".git"}
@@ -356,7 +358,13 @@ def _gallery(items: list[dict], prefix: str,
 # `concepts` is what exists BEFORE the website does: a round of direction
 # mockups from the design_concepting skill, kept so the record of what was
 # considered and chosen stays browsable next to what got built.
+# `notes` is first on purpose. Everything else here answers "what has this
+# brand got"; the notebook answers "where did we leave off", and that is the
+# question somebody reopening a project after three weeks actually has. Being
+# first also makes it the default tab, which is the whole point of writing the
+# note in the first place.
 KINDS = [
+    ("notes", "Notes & docs", "."),
     ("website", "Website", "site"),
     ("concepts", "Design concepts", "concepts"),
     ("media", "Website images", "site/assets/img"),
@@ -489,7 +497,11 @@ def kinds(project_dir: pathlib.Path) -> list[dict]:
         root = project_dir / rel
         if not root.is_dir():
             continue
-        if kid == "website":
+        if kid == "notes":
+            k = notebook.kind(project_dir)
+            if k:
+                out.append(k)
+        elif kid == "website":
             pages = pages_of(root)
             if not pages:
                 continue
@@ -550,6 +562,10 @@ if __name__ == "__main__":                       # quick look from the CLI
             print(f"      … {len(k['pages'])} pages total")
             for s in k["sections"]:
                 print(f"      {s['label']:<22} {s['count']:>3} pages")
+        elif k["kind"] == "notes":
+            for d in k["items"]:
+                flag = "scratchpad" if d["scratch"] else f"{d['words']} words"
+                print(f"      {d['rel']:<34} {flag:>12}  {d['when']}")
         else:
             for g in k["groups"]:
                 print(f"      {g['label']:<22} {g['count']:>3}  "

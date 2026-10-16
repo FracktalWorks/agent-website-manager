@@ -5,7 +5,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/feedback_context.py"
+            "command": "d=\"${CLAUDE_PROJECT_DIR:-}\"; [ -f \"$d/.claude/hooks/feedback_context.py\" ] || d=\"$(git rev-parse --show-toplevel 2>/dev/null)\"; [ -f \"$d/.claude/hooks/feedback_context.py\" ] && python \"$d/.claude/hooks/feedback_context.py\" || true",
+            "timeout": 10
           }
         ]
       }

@@ -119,6 +119,8 @@ OPEN_FAMILIES = {
     "Rubik":            {"axes": "wght@300..900", "class": "sans-rounded",   "licence": "OFL-1.1"},
     "Nunito":           {"axes": "wght@200..1000", "class": "sans-rounded",  "licence": "OFL-1.1"},
     "Gabarito":         {"axes": "wght@400..900", "class": "sans-display",   "licence": "OFL-1.1"},
+    # Constellation Aerospace's display face (2026-09-26). Static weights only.
+    "Chakra Petch":     {"axes": "wght@500;600;700", "class": "sans-display", "licence": "OFL-1.1"},
 
     # ── humanist sans ─────────────────────────────────────────────────────
     "IBM Plex Sans":    {"axes": "wght@100..700", "class": "sans-humanist",  "licence": "OFL-1.1"},

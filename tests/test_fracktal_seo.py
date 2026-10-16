@@ -350,10 +350,24 @@ def _redirects():
 
 def test_every_redirect_lands_on_a_page_this_site_builds(chrome):
     """A 301 into a 404 is worse than the 404 it replaced: it spends the
-    crawler's budget and still loses the ranking."""
-    paths = set(chrome.URLS.values())
+    crawler's budget and still loses the ranking.
+
+    Since the blog and KB passes (2026-08-30), redirect targets legitimately
+    include WordPress-owned URLs the build never produces: blog posts are in
+    seo.py's OFF_BUILD allowlist (each verified live when added), and KB docs
+    live under /kb/ on the docs CPT. For /kb/ targets the check is the prefix
+    plus not-self — the doc slugs exist only in WordPress, and each of those
+    301s was read back live when the KB was restructured."""
+    import importlib.util
+    import sys
+    spec = importlib.util.spec_from_file_location("fk_seo", SITE / "seo.py")
+    seo = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = seo
+    spec.loader.exec_module(seo)
+    valid = set(chrome.URLS.values()) | seo.OFF_BUILD
     dead = {old: new for old, new in _redirects().REDIRECTS.items()
-            if new not in paths}
+            if new not in valid
+            and not (new.startswith("/kb/") and new != old)}
     assert not dead, f"redirect target is not a page: {dead}"
 
 

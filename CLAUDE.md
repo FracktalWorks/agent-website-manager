@@ -87,6 +87,7 @@ design, visual editing, version history and design systems all live here now:
 |------|-----|
 | Take a **new brand** from nothing to live and findable | [agent-data/BRAND_LAUNCH_RUNBOOK.md](agent-data/BRAND_LAUNCH_RUNBOOK.md) — the ordered spine across skills, with the gate for each step |
 | See all projects + browse design systems | `python hub.py` at the repo root → http://127.0.0.1:8780 (the workspace landing page; live project thumbnails, one-click editor launch per site, 152 design systems with previews) |
+| **Pick a project back up** — what was done, what's next, what we're waiting on | open the project in the hub → **Notes & docs** (the first tab). One editable **scratchpad** per project (`<project>/NOTES.md`, saved from the page) plus a rendered preview of every `.md` the project owns — root level and `notes/`. **Write the scratchpad before you stop working on something.** Engine: [notebook.py](notebook.py), gate `tests/test_notebook.py` |
 | See everything a brand owns, by kind | open the project in the hub — the sidebar's **Artefacts** switcher carries website / print / brand / signage, and each opens in the same tab. Pages read as a **Sitemap** (URL hierarchy, collapsible) or as **Sections** (the content module that authored them); print groups by family with its language variants; brand assets group by folder. Standalone view: `/collateral/<project>/<kind>`. Discovery and grouping live in [artifacts.py](artifacts.py) |
 | Make something that gets **printed** (cards, fliers, standees) | [outputs/drvarada-site/print/](outputs/drvarada-site/print/AGENTS.md) — `press.py` is the engine: millimetres, bleed/trim/safe, Chrome→PDF, PDF read-back audit, and sign-off `Gate`s that refuse to write a press file |
 | **Choose the look & feel BEFORE building** — walk the user through it, then compare 2-4 mockup directions | [design_concepting](.github/skills/design_concepting/SKILL.md) — `concepts.py new/compare/decide`; the round shows up in the hub's Artefacts switcher as **Design concepts** |
@@ -134,6 +135,11 @@ Never commit or echo secrets.
 6. **Respect rate limits** — batch operations where possible.
 7. **Self-anneal** — when something breaks: fix it, update the tool, test, update the
    directive, and store the lesson in memory. The system gets stronger each time.
+8. **Every element earns a feeling** — for any site or artifact we build, each section,
+   line of copy, image, icon or sprite must name the emotion it should produce in the
+   visitor and the true fact that earns it, or be cut. No signposting, filler captions,
+   restating sections, duplicates or orphan decoration. See
+   [design_taste → The purpose test](.github/skills/design_taste/SKILL.md).
 
 ## Output format
 

@@ -401,7 +401,7 @@ def test_no_placed_cutout_carries_a_pale_wash(imghalo):
 
 
 @pytest.mark.parametrize("src", [
-    "snowflake/printer-blue.png",       # floor shadow under a desktop machine
+    "snowflake/printer-blue.webp",       # floor shadow under a desktop machine
     "snowflake/heated-bed-flame.png",   # shadow under the bed
     "dryer/dryer-hero.webp",            # shadow under the dryer
     "home/svc-vacuum.png",              # the darkest shadow on the site
